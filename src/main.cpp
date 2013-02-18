@@ -4,6 +4,8 @@
  
 #include "lua.hpp"
 
+#include "configlib.h"
+
 int main( const int argc, const char * argv[] ){
     assert( argc > 1 && "Invalid number of arguments" );
 
@@ -13,6 +15,7 @@ int main( const int argc, const char * argv[] ){
     // Lua Initialization
     lua_gc(L, LUA_GCSTOP, 0);
     luaL_openlibs( L );
+    Config::openlib( L );
     lua_gc(L, LUA_GCRESTART, 0);
     
     auto ret = luaL_dofile( L, argv[1] );
