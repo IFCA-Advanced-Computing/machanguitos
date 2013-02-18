@@ -30,3 +30,4 @@ set(LUA_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/lua-5.2/src")
 set(LUA_LIBRARIES lua)
 
 add_subdirectory(lua-5.2)
+add_subdirectory(src)
