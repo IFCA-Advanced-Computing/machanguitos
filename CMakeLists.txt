@@ -3,4 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
 set(MACHANGUITOS_VERSION_MINOR 1)
 
+set(LUA_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/lua-5.2/src")
+set(LUA_LIBRARIES lua)
+
 add_subdirectory(lua-5.2)
