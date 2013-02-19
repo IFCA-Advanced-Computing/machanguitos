@@ -19,7 +19,7 @@ int main( const int argc, const char * argv[] ){
     lua_gc(L, LUA_GCRESTART, 0);
     
     auto ret = luaL_dofile( L, argv[1] );
-    if( ret != LUA_OK ){
+    if( ret != 0 ){
         auto msg = lua_tostring(L, -1);
         if( msg == nullptr ){
             std::cout << "Error : (error object is not a string)\n";

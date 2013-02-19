@@ -34,11 +34,10 @@ namespace Config{
     };
 
     int openlib( lua_State *L ){
-        luaL_newlib( L, configlib );
-        /* HOW to set constants
-        lua_pushnumber( L, PI );
-        lua_setfield( L, -2, "pi" );*/
-        lua_setglobal(L, "config");
+        // set functions
+        luaL_register( L, "config", configlib );
+        // removes table
+        lua_pop( L, 1 );
         return 0;
     }
 }

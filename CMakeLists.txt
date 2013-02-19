@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
 set(MACHANGUITOS_VERSION_MINOR 1)
 
+set(CMAKE_MODULE_PATH "${MACHANGUITOS_SOURCE_DIR}/cmake/Modules" )
+
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
@@ -26,8 +28,8 @@ else()
 #  message("compiler detected as: non-GNU compiler")
 endif()
 
-set(LUA_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/lua-5.2/src")
-set(LUA_LIBRARIES lua)
+find_package(LuaJIT REQUIRED)
+set(LUA_INCLUDE_DIRS ${LuaJIT_INCLUDE_DIRS})
+set(LUA_LIBRARIES ${LuaJIT_LIBRARIES})
 
-add_subdirectory(lua-5.2)
 add_subdirectory(src)
