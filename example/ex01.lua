@@ -3,7 +3,8 @@ io.write( "Cow Example (Machen " .. config.VERSION_MAJOR .. "." .. config.VERSIO
 config.add_agent( "cow", 100 );
 
 config.setvars( {
-            starttime = 0.0,
-            endtime = 10.0,
-            iters = 100
+                   starttime = 0.0,
+                   endtime = 10.0,
+                   iters = 100,
+                   author = "Luis Cabellos"
          } );

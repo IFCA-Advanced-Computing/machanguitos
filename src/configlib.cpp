@@ -21,8 +21,21 @@ namespace Config{
         lua_pushnil( L );
         while( lua_next( L, 1 ) != 0 ) {
             std::string keyname( luaL_checkstring( L, -2 ) );
-            std::cout << keyname << " = " 
-                      << lua_typename(L, lua_type(L, -1)) << std::endl;
+            std::cout << keyname << " = ";
+            auto ltype = lua_type( L, -1 );
+            switch( ltype ){
+            case LUA_TNUMBER:
+                std::cout << lua_tonumber(L, -1 ) << std::endl;
+                break;
+
+            case LUA_TSTRING:
+                std::cout << "'" << lua_tostring(L, -1 ) << "'" << std::endl;
+                break;
+
+            default:
+                std::cout << lua_typename(L, ltype ) << std::endl;
+            }
+
             // removes 'value'; keeps 'key' for next iteration
             lua_pop( L, 1 );
         }
