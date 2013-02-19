@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
 set(MACHANGUITOS_VERSION_MINOR 1)
 
-set(CMAKE_MODULE_PATH "${MACHANGUITOS_SOURCE_DIR}/cmake/Modules" )
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
@@ -31,5 +31,8 @@ endif()
 find_package(LuaJIT REQUIRED)
 set(LUA_INCLUDE_DIRS ${LuaJIT_INCLUDE_DIRS})
 set(LUA_LIBRARIES ${LuaJIT_LIBRARIES})
+
+configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
+                "${PROJECT_BINARY_DIR}/config.h" )
 
 add_subdirectory(src)
