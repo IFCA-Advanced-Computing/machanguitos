@@ -7,6 +7,7 @@
 #include "lua.hpp"
 
 #include "config.h"
+#include "server.h"
 
 //------------------------------------------------------------------------------
 namespace Config{
@@ -15,7 +16,8 @@ namespace Config{
     int config_add_agent( lua_State *L ){
         auto name = luaL_checkstring( L, 1 );
         auto num = luaL_checknumber( L, 2 );
-        std::cout << "Creating: " << num << " of " << name << std::endl;
+        auto server = Engine::Server::instance();
+        server->addAgents( name, num );
         return 0;
     }
 
