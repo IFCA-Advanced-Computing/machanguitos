@@ -1,4 +1,4 @@
-io.write( "Cow Example\n" );
+io.write( "Cow Example (Machen " .. config.VERSION_MAJOR .. "." .. config.VERSION_MINOR .. ")\n" );
 
 config.add_agent( "cow", 100 );
 

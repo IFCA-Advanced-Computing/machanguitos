@@ -4,6 +4,8 @@
 
 #include "lua.hpp"
 
+#include "config.h"
+
 namespace Config{
 
     int config_add_agent( lua_State *L ){
@@ -34,11 +36,15 @@ namespace Config{
     };
 
     int openlib( lua_State *L ){
-        luaL_newlib( L, configlib );
-        /* HOW to set constants
-        lua_pushnumber( L, PI );
-        lua_setfield( L, -2, "pi" );*/
-        lua_setglobal(L, "config");
+        // set functions
+        luaL_register( L, "config", configlib );
+        // Set constants
+        lua_pushnumber( L, VERSION_MAJOR );
+        lua_setfield( L, -2, "VERSION_MAJOR" );
+        lua_pushnumber( L, VERSION_MINOR );
+        lua_setfield( L, -2, "VERSION_MINOR" );
+        // removes table
+        lua_pop( L, 1 );
         return 0;
     }
 }

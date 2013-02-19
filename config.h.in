@@ -1,0 +1,7 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+constexpr unsigned VERSION_MAJOR{@MACHANGUITOS_VERSION_MAJOR@};
+constexpr unsigned VERSION_MINOR{@MACHANGUITOS_VERSION_MINOR@};
+
+#endif//CONFIG_H

@@ -1,8 +1,9 @@
 file(GLOB MACHANGUITOS_SOURCES "*.cpp")
 
 include_directories(${LUA_INCLUDE_DIRS})
-include_directories(${MACHANGUITOS_SOURCE_DIR}/src)
+include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${PROJECT_BINARY_DIR})
 
-add_executable(machan ${MACHANGUITOS_SOURCES})
+add_executable(machen ${MACHANGUITOS_SOURCES})
 
-target_link_libraries(machan ${LUA_LIBRARIES})
+target_link_libraries(machen ${LUA_LIBRARIES})
