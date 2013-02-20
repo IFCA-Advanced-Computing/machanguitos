@@ -5,6 +5,7 @@
  
 #include "configlib.h"
 #include "server.h"
+#include "clientlocal.h"
 
 //------------------------------------------------------------------------------
 int main( const int argc, const char * argv[] ){
@@ -16,6 +17,9 @@ int main( const int argc, const char * argv[] ){
 
     auto server = Engine::Server::instance();
 
+    Engine::Client * client = new Engine::ClientLocal();
+
+    server->addClient( client );
     server->createAgents();
     server->run();
 
