@@ -32,6 +32,8 @@ find_package(LuaJIT REQUIRED)
 set(LUA_INCLUDE_DIRS ${LuaJIT_INCLUDE_DIRS})
 set(LUA_LIBRARIES ${LuaJIT_LIBRARIES})
 
+find_package( Boost COMPONENTS filesystem REQUIRED )
+
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
