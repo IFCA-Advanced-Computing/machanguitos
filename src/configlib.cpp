@@ -4,13 +4,18 @@
 #include <iostream>
 #include <cassert>
 
+#include <boost/filesystem.hpp>
+
 #include "lua.hpp"
 
 #include "config.h"
 #include "server.h"
+#include "agentfactory.h"
 
 //------------------------------------------------------------------------------
 namespace Config{
+    using namespace std;
+    using namespace boost::filesystem;
 
     //--------------------------------------------------------------------------
     int config_add_agent( lua_State *L ){
@@ -71,24 +76,37 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
-    bool load( const std::string & filename ){
+    bool load( const string & filename ){
+        // check file
+        if( !exists( filename ) || !is_regular_file( filename ) ){
+            cerr << "Error: There is no config file " << filename << endl;
+            return false;
+        }
+
+        // set directory with Agent classes
+        path datadir(filename);
+        datadir.remove_filename();
+        Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
+
+        // Lua Initialization
         bool is_ok{true};
+
         auto L = luaL_newstate();
         assert( L && "Can't create Lua State" );
 
-        // Lua Initialization
         lua_gc(L, LUA_GCSTOP, 0);
         luaL_openlibs( L );
         Config::openlib( L );
         lua_gc(L, LUA_GCRESTART, 0);
 
+        // execute config file
         auto ret = luaL_dofile( L, filename.c_str() );
         if( ret != 0 ){
             auto msg = lua_tostring(L, -1);
             if( msg == nullptr ){
-                std::cout << "Error : (error object is not a string)\n";
+                cerr << "Error : (error object is not a string)\n";
             }else{
-                std::cout << msg << std::endl;
+                cerr << msg << endl;
             }
             is_ok = false;
         }

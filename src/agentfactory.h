@@ -11,9 +11,11 @@ namespace Agent{
 
     class AgentFactory : public Singleton<AgentFactory>{
     public:
+        void setDatadir( const std::string & dir );
         AgentClass * createClass( const std::string & name );
         AgentClass * getClass( const std::string & name ) const;
     private:
+        std::string m_dir{""};
     };
 }
 
