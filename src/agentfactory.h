@@ -5,6 +5,7 @@
 #include "singleton.h"
 
 #include <string>
+#include <map>
 
 namespace Agent{
     class AgentClass;
@@ -16,6 +17,7 @@ namespace Agent{
         AgentClass * getClass( const std::string & name ) const;
     private:
         std::string m_dir{""};
+        std::map<std::string, AgentClass *> m_classes;
     };
 }
 
