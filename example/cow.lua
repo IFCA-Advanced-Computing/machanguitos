@@ -1,5 +1,5 @@
 function Agent:init()
-   io.write( "Agent init\n" )
+   io.write( ">> Agent init\n" )
    self.x = 4;
    if self.x then
       io.write( "self.x = " .. self.x .. "\n" )
@@ -8,7 +8,7 @@ function Agent:init()
 end
 
 function Agent:update( delta )
-   io.write( "Agent update = " .. delta .. "\n" )
+   io.write( ">> Agent update = " .. delta .. "\n" )
 end
 
 function Agent:test()
