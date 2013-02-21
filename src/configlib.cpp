@@ -8,6 +8,7 @@
 
 #include "lua.hpp"
 
+#include "util.h"
 #include "config.h"
 #include "server.h"
 #include "agentfactory.h"
@@ -101,15 +102,7 @@ namespace Config{
 
         // execute config file
         auto ret = luaL_dofile( L, filename.c_str() );
-        if( ret != 0 ){
-            auto msg = lua_tostring(L, -1);
-            if( msg == nullptr ){
-                cerr << "Error : (error object is not a string)\n";
-            }else{
-                cerr << msg << endl;
-            }
-            is_ok = false;
-        }
+        is_ok = Util::checkLuaReturn( L, ret );
 
         lua_close( L );
 
