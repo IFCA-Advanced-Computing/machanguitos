@@ -12,13 +12,31 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     int agent_newindex( lua_State *L ){
-        cout << "agent newindex called\n";
+        if( lua_isstring( L, -2 ) ){
+            string key = lua_tostring( L, -2 );
+            lua_pushstring( L, "__obj" );
+            lua_rawget( L, -4 );
+            if( lua_islightuserdata( L, -1 ) ){
+                AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
+                assert( agent && "Invalid agent object" );
+                agent->newData( L, key );
+            }
+        }
         return 0;
     }
 
     //--------------------------------------------------------------------------
     int agent_index( lua_State *L ){
-        cout << "agent index called\n";
+        if( lua_isstring( L, -1 ) ){
+            string key = lua_tostring( L, -1 );
+            lua_pushstring( L, "__obj" );
+            lua_rawget( L, -3 );
+            if( lua_islightuserdata( L, -1 ) ){
+                AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
+                assert( agent && "Invalid agent object" );
+                return agent->pushData( L, key );
+            }
+        }
         return 0;
     }
 
