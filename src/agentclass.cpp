@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cassert>
 
+#include "agentinstance.h"
+
 //------------------------------------------------------------------------------
 namespace Agent{
     using namespace std;
@@ -42,6 +44,12 @@ namespace Agent{
         lua_close( m_L );
     }
 
+    //--------------------------------------------------------------------------
+    AgentInstance * AgentClass::createInstance(){
+        AgentInstance * obj = new AgentInstance(this);
+        assert( obj && "Can't create AgentInstance" );
+        return obj;
+    }
 }
 
 //------------------------------------------------------------------------------
