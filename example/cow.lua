@@ -1,9 +1,7 @@
 function Agent:init()
    io.write( ">> Agent init\n" )
-   self.x = 4;
-   if self.x then
-      io.write( "self.x = " .. self.x .. "\n" )
-   end
+   self.x = math.random( 10 );
+   io.write( "self.x = " .. self.x .. "\n" )
    self:test()
 end
 
