@@ -14,9 +14,9 @@ namespace Agent{
     public:
         AgentInstance( AgentClass * c );
         void init();
+        void update( const double delta );
 
         int pushData( lua_State * L, const std::string key ) const;
-
         void newData( lua_State * L, const std::string key );
     private:
         AgentClass * m_class{nullptr};
