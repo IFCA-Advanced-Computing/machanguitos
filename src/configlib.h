@@ -1,10 +1,12 @@
 #ifndef CONFIGLIB_H
 #define CONFIGLIB_H
 
+#include <string>
+
 struct lua_State;
 
 namespace Config{
-    int openlib(  lua_State *L );
+    bool load( const std::string & filename );
 }
 
 #endif//CONFIGLIB_H
