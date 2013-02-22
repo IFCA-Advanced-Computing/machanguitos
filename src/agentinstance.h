@@ -2,8 +2,11 @@
 #ifndef AGENTINSTANCE_H
 #define AGENTINSTANCE_H
 
+//------------------------------------------------------------------------------
 #include <string>
 #include <map>
+
+#include "scriptvalue.h"
 
 struct lua_State;
 
@@ -26,7 +29,7 @@ namespace Agent{
         void newData( lua_State * L, const std::string & key );
     private:
         AgentClass * m_class{nullptr};
-        std::map<std::string, double> m_vals;
+        std::map<std::string, Util::ScriptValue> m_vals;
     };
 }
 

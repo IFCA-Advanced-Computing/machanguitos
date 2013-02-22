@@ -12,6 +12,7 @@
 //------------------------------------------------------------------------------
 namespace Agent{
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     AgentInstance::AgentInstance( AgentClass * c ) : m_class(c) {
@@ -55,7 +56,19 @@ namespace Agent{
     int AgentInstance::pushData( lua_State * L, const string & key ) const{
         const auto i = m_vals.find(key);
         if( i != m_vals.end() ){
-            lua_pushnumber( L, i->second );
+            switch( i->second.getType() ){
+            case ScriptValue::ValueType::BOOLEAN:
+                lua_pushboolean( L, i->second.getBoolean() );
+                break;
+
+            case ScriptValue::ValueType::NUMBER:
+                lua_pushnumber( L, i->second.getNumber() );
+                break;
+
+            default:
+                lua_pushnil( L );
+                break;
+            }
         }else{
             lua_pushnil( L );
         }
@@ -67,10 +80,13 @@ namespace Agent{
         auto ltype = lua_type( L, -2 );
         switch( ltype ){
         case LUA_TNUMBER:
-            m_vals[key] = lua_tonumber( L, -2 );
+            m_vals[key] = ScriptValue(lua_tonumber( L, -2 ));
+            break;
+        case LUA_TBOOLEAN:
+            m_vals[key] = ScriptValue(lua_toboolean( L, -2 )==1);
             break;
         default:
-            cerr << "WARNING: type not implemented " << lua_typename( L, ltype ) 
+            cerr << "WARNING: type not implemented " << lua_typename( L, ltype )
                  << " on key '" << key << "'\n";
         }
     }
