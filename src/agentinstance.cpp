@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------
 #include "agentinstance.h"
 
+#include <iostream>
 #include <cassert>
 
 #include "lua.hpp"
@@ -10,6 +11,8 @@
 
 //------------------------------------------------------------------------------
 namespace Agent{
+    using namespace std;
+
     //--------------------------------------------------------------------------
     AgentInstance::AgentInstance( AgentClass * c ) : m_class(c) {
         assert( m_class && "Invalid Agent Class" );
@@ -49,15 +52,26 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    int AgentInstance::pushData( lua_State * L, const std::string key ) const{
-        lua_pushnumber( L, m_number );
+    int AgentInstance::pushData( lua_State * L, const string & key ) const{
+        const auto i = m_vals.find(key);
+        if( i != m_vals.end() ){
+            lua_pushnumber( L, i->second );
+        }else{
+            lua_pushnil( L );
+        }
         return 1;
     }
 
     //--------------------------------------------------------------------------
-    void AgentInstance::newData( lua_State * L, const std::string key ){
-        if( lua_isnumber( L, -2 ) ){
-            m_number = lua_tonumber( L, -2 );
+    void AgentInstance::newData( lua_State * L, const string & key ){
+        auto ltype = lua_type( L, -2 );
+        switch( ltype ){
+        case LUA_TNUMBER:
+            m_vals[key] = lua_tonumber( L, -2 );
+            break;
+        default:
+            cerr << "WARNING: type not implemented " << lua_typename( L, ltype ) 
+                 << " on key '" << key << "'\n";
         }
     }
 }
