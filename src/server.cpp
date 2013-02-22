@@ -49,6 +49,9 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::run(){
+        for( auto c: m_clients ){
+            c->runAgents( 1.0 );
+        }
     }
 }
 

@@ -24,7 +24,7 @@ namespace Engine{
         auto agentClass = Agent::AgentFactory::instance()->createClass( name );
         return (agentClass != nullptr);
     }
-    
+
     //--------------------------------------------------------------------------
     void ClientLocal::createAgents( const std::string & name, int n ){
         auto agentClass = Agent::AgentFactory::instance()->getClass( name );
@@ -35,6 +35,13 @@ namespace Engine{
                 obj->init();
                 m_objects.push_back( obj );
             }
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    void ClientLocal::runAgents( const double delta ){
+        for( auto obj: m_objects ){
+            obj->update( delta );
         }
     }
 
