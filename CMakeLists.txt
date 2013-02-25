@@ -1,7 +1,7 @@
 project(MACHANGUITOS)
 cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
-set(MACHANGUITOS_VERSION_MINOR 2)
+set(MACHANGUITOS_VERSION_MINOR 3)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
@@ -38,3 +38,15 @@ configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
 add_subdirectory(src)
+
+# documentation
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
+  add_custom_target(doc
+    ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
+endif()

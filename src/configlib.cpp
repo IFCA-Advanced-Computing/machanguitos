@@ -17,6 +17,7 @@
 namespace Config{
     using namespace std;
     using namespace boost::filesystem;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     int config_add_agent( lua_State *L ){
@@ -29,24 +30,29 @@ namespace Config{
 
     //--------------------------------------------------------------------------
     int config_setvars( lua_State *L ){
+        auto server = Engine::Server::instance();
         luaL_checktype( L, 1, LUA_TTABLE );
         // push first key
         lua_pushnil( L );
         while( lua_next( L, 1 ) != 0 ) {
-            std::string keyname( luaL_checkstring( L, -2 ) );
-            std::cout << keyname << " = ";
+            std::string key( luaL_checkstring( L, -2 ) );
             auto ltype = lua_type( L, -1 );
             switch( ltype ){
+            case LUA_TNIL:
+                server->insertConfig( key, ScriptValue() );
+                break;
             case LUA_TNUMBER:
-                std::cout << lua_tonumber(L, -1 ) << std::endl;
+                server->insertConfig( key, ScriptValue(lua_tonumber( L, -1 )) );
                 break;
-
+            case LUA_TBOOLEAN:
+                server->insertConfig( key, ScriptValue(lua_toboolean( L, -1)==1) );
+                break;
             case LUA_TSTRING:
-                std::cout << "'" << lua_tostring(L, -1 ) << "'" << std::endl;
+                server->insertConfig( key, ScriptValue(lua_tostring( L, -1)) );
                 break;
-
             default:
-                std::cout << lua_typename(L, ltype ) << std::endl;
+                cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
+                     << "' on key '" << key << "'\n";
             }
 
             // removes 'value'; keeps 'key' for next iteration

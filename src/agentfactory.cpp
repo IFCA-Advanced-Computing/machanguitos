@@ -40,7 +40,7 @@ namespace Agent{
 
         // create Agent class on Lua
         lua_newtable( L );
-        lua_setfield(L, LUA_GLOBALSINDEX, "Agent");
+        lua_setfield(L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
 
         // execute class file
         auto ret = luaL_dofile( L, filename.c_str() );

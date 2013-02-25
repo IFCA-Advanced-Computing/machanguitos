@@ -14,7 +14,7 @@ namespace Agent{
     int agent_newindex( lua_State *L ){
         if( lua_isstring( L, -2 ) ){
             string key = lua_tostring( L, -2 );
-            lua_pushstring( L, "__obj" );
+            lua_pushstring( L, SCRIPT_AGENT_OBJ );
             lua_rawget( L, -4 );
             if( lua_islightuserdata( L, -1 ) ){
                 AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
@@ -29,7 +29,7 @@ namespace Agent{
     int agent_index( lua_State *L ){
         if( lua_isstring( L, -1 ) ){
             string key = lua_tostring( L, -1 );
-            lua_pushstring( L, "__obj" );
+            lua_pushstring( L, SCRIPT_AGENT_OBJ );
             lua_rawget( L, -3 );
             if( lua_islightuserdata( L, -1 ) ){
                 AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
@@ -45,8 +45,8 @@ namespace Agent{
         assert( m_L && "Invalid AgentClass creation" );
 
         // set class methods for agent
-        lua_getfield( L, LUA_GLOBALSINDEX, "Agent" );
-        luaL_newmetatable( L, "Agent" );
+        lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
+        luaL_newmetatable( L, SCRIPT_AGENT_NAME );
         lua_pushstring(L, "__newindex");
         lua_pushcfunction( L, agent_newindex );
         lua_settable( L, -3 );

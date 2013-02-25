@@ -48,10 +48,47 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void Server::run(){
-        for( auto c: m_clients ){
-            c->runAgents( 1.0 );
+    int Server::getConfigInt( const string & key, const int d ) const{
+        const auto i = m_config.find( key );
+        if( i != m_config.end() ){
+            if( i->second.getType() != Util::ScriptValue::ValueType::NUMBER ){
+                cerr << "WARNING: '" << key << "' is not a number\n";
+            }
+            return static_cast<int>(i->second.getNumber(d));
+        }else{
+            return d;
         }
+    }
+
+    //--------------------------------------------------------------------------
+    double Server::getConfigNumber( const string & key, const double d ) const{
+        const auto i = m_config.find( key );
+        if( i != m_config.end() ){
+            if( i->second.getType() != Util::ScriptValue::ValueType::NUMBER ){
+                cerr << "WARNING: '" << key << "' is not a number\n";
+            }
+            return i->second.getNumber(d);
+        }else{
+            return d;
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    void Server::run(){
+        auto iters = getConfigInt( "iters", 10 );
+        auto startt = getConfigNumber( "starttime", 0 );
+        auto endt = getConfigNumber( "endtime", 10 );
+
+        double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
+
+        cout << "\nSERVER: Start Simulation\n\n";
+        for( int i = 0 ; i < iters ; i++ ){
+            cout << "SERVER: iteration " << i+1 << endl;
+            for( auto c: m_clients ){
+                c->runAgents( delta );
+            }
+        }
+        cout << "\nSERVER: End Simulation\n\n";
     }
 }
 

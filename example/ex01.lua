@@ -6,6 +6,5 @@ config.add_agent( "cat", 3 );
 config.setvars( {
                    starttime = 0.0,
                    endtime = 10.0,
-                   iters = 100,
-                   author = "Luis Cabellos"
+                   iters = 10,
          } );

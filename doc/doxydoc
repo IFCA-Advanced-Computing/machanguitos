@@ -1,0 +1,23 @@
+/** @mainpage Machanguitos
+@tableofcontents
+
+@section intr_sec Introduction
+The Easiest <b>Multi-Agent System</b> in the world.
+
+Work done at The Institute of Physics of Cantabria (<a href="http://www.ifca.es">IFCA</a>).
+
+@section inst_sec Install
+
+ */
+
+/** @defgroup Engine Main classes to run the Multi-Agent System.
+ */
+
+/** @defgroup Agent Multi-Agent definitions.
+ */
+
+/** @defgroup Util Utils, File functions and commons stuff.
+ */
+
+/** @defgroup Config Configuration classes.
+ */
