@@ -83,7 +83,7 @@ namespace Engine{
 
         cout << "\nSERVER: Start Simulation\n\n";
         for( int i = 0 ; i < iters ; i++ ){
-            cout << "SERVER: iteration " << i << endl;
+            cout << "SERVER: iteration " << i+1 << endl;
             for( auto c: m_clients ){
                 c->runAgents( delta );
             }
