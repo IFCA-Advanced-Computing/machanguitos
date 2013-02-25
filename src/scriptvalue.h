@@ -2,7 +2,6 @@
 #ifndef SCRIPTVALUE_H
 #define SCRIPTVALUE_H
 
-#include <iostream>
 #include <string>
 
 namespace Util {
