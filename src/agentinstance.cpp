@@ -57,12 +57,20 @@ namespace Agent{
         const auto i = m_vals.find(key);
         if( i != m_vals.end() ){
             switch( i->second.getType() ){
+            case ScriptValue::ValueType::NIL:
+                lua_pushnil( L );
+                break;
+
             case ScriptValue::ValueType::BOOLEAN:
                 lua_pushboolean( L, i->second.getBoolean() );
                 break;
 
             case ScriptValue::ValueType::NUMBER:
                 lua_pushnumber( L, i->second.getNumber() );
+                break;
+
+            case ScriptValue::ValueType::STRING:
+                lua_pushstring( L, i->second.getString().c_str() );
                 break;
 
             default:
@@ -79,15 +87,21 @@ namespace Agent{
     void AgentInstance::newData( lua_State * L, const string & key ){
         auto ltype = lua_type( L, -2 );
         switch( ltype ){
+        case LUA_TNIL:
+            m_vals[key] = ScriptValue();
+            break;
         case LUA_TNUMBER:
             m_vals[key] = ScriptValue(lua_tonumber( L, -2 ));
             break;
         case LUA_TBOOLEAN:
             m_vals[key] = ScriptValue(lua_toboolean( L, -2 )==1);
             break;
+        case LUA_TSTRING:
+            m_vals[key] = ScriptValue(lua_tostring( L, -2));
+            break;
         default:
-            cerr << "WARNING: type not implemented " << lua_typename( L, ltype )
-                 << " on key '" << key << "'\n";
+            cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
+                 << "' on key '" << key << "'\n";
         }
     }
 }
