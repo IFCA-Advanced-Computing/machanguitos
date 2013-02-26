@@ -1,0 +1,163 @@
+\documentclass{beamer}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\definecolor{kugreen}{RGB}{50,93,61}
+\definecolor{mygreen}{rgb}{0,0.4,0}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+
+\usetheme{PaloAlto}
+
+\usecolortheme[named=kugreen]{structure}
+\setbeamertemplate{navigation symbols}{}
+
+\lstdefinestyle{agentlang}{language=C++,
+  frame=tLBr,
+  framerule=0.2pt,
+  backgroundcolor=\color{gray97},
+  captionpos=b,
+  %
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\tiny,
+  numbersep=7pt,
+  numberfirstline=false,
+  %
+  extendedchars=true,
+  basicstyle=\scriptsize\ttfamily,
+  commentstyle=\color{mygreen}\ttfamily,
+  stringstyle=\ttfamily\color{magenta},
+  showstringspaces=false,
+  keywordstyle=\color{violet}\bfseries,
+  morekeywords={end,function,config},
+  morecomment=[l]{\-\-},
+  breaklines=true,
+}
+
+\lstdefinestyle{console}{
+  frame=l,
+  backgroundcolor=\color{gray75},
+  basicstyle=\scriptsize\bf\ttfamily,
+}
+
+\title{Machanguitos}
+\subtitle{The Simpliest Multi-Agent System ever}
+\author{Luis Cabellos}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%% \frame{\tableofcontents}
+
+\section{Introduction}
+
+\frame{
+  Current Solutions:
+  \begin{itemize}
+    \item Ugly Frameworks\footnote{There is something ugly that C++: Fortran.}
+    \item Doesn't Scale
+  \end{itemize}
+  \pause
+  \frametitle{Introduction}
+  \begin{block}{Machanguitos}
+    The Simplest Multi-Agent System Ever.
+    
+    Easy, Scalable, but Powerful.
+  \end{block}
+  
+}
+
+\section{Features}
+
+\begin{frame}[fragile]
+  \frametitle{Machen Applications}
+  \begin{block}{}
+    Machanguitos is not a Framework.
+  \end{block}
+  \pause
+  \begin{block}{}
+    Machanguitos is an application that simulate agents.
+  \end{block}
+  \pause
+  \begin{block}{}
+    Agents are defined using Lua Language.
+  \end{block}
+\begin{lstlisting}[style=agentlang]
+function factorial(n)
+  if n == 0 then
+    return 1
+  else
+    return n * factorial(n - 1)
+  end
+end
+\end{lstlisting}
+\end{frame}
+
+\frame{
+  \frametitle{Machanguitos Scalability}
+  \begin{itemize}
+    \item Enviroment: NoSQL database
+    \item MPI for use multiple computing resources
+    \item Agents comunicate only with the Enviroment
+  \end{itemize}
+}
+
+\section{Example}
+
+\begin{frame}[fragile]
+  \frametitle{Simple Example: Agent}
+\begin{lstlisting}[style=agentlang,caption=cow.lua]
+function Agent:init()
+   self.x = math.random( 10 );
+   self.y = math.random( 10 );
+end
+
+function Agent:update( delta )
+   self.x = self.x + 0.1*delta;
+   self.y = self.y + 0.1*delta;
+   io.write( "cow pos = ("..self.x..","..self.y..")\n" )
+end
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simple Example: Main}
+\begin{lstlisting}[style=agentlang,caption=ex01.lua]
+-- io.write( "Cow Example\n" );
+config.add_agent( "cow", 10 );
+
+config.setvars( {
+  starttime = 0.0,
+  endtime = 10.0,
+  iters = 10,
+} );
+\end{lstlisting}
+  
+\begin{lstlisting}[style=console]
+# machen ~uc00103/agents/ex01.lua
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simple Example: Saving Output}
+\begin{lstlisting}[style=agentlang,caption=cow.lua]
+AgentClass:save( 'x', 'y' )
+
+function Agent:init()
+   self.x = math.random( 10 );
+   self.y = math.random( 10 );
+end
+
+function Agent:update( delta )
+   self.x = self.x + 0.1*delta;
+   self.y = self.y + 0.1*delta;
+   io.write( "cow pos = ("..self.x..","..self.y..")\n" )
+end
+\end{lstlisting}
+\end{frame}
+
+\end{document}
