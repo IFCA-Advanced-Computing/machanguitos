@@ -4,4 +4,6 @@
 constexpr unsigned VERSION_MAJOR{@MACHANGUITOS_VERSION_MAJOR@};
 constexpr unsigned VERSION_MINOR{@MACHANGUITOS_VERSION_MINOR@};
 
+constexpr unsigned MAX_CLASS_NAME{200};
+
 #endif//CONFIG_H
