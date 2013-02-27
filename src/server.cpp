@@ -88,6 +88,10 @@ namespace Engine{
                 c->runAgents( delta );
             }
         }
+
+        for( auto c: m_clients ){
+            c->end();
+        }
         cout << "\nSERVER: End Simulation\n\n";
     }
 }
