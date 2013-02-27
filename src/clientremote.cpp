@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include <iostream>
+#include <cassert>
+#include <cstring>
 
 #include "config.h"
 
@@ -27,8 +29,13 @@ namespace Engine{
     //--------------------------------------------------------------------------
     bool ClientRemote::createClass( const std::string & name ){
 #if defined(HAVE_MPI)
+        assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{0};
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD);
+        char * cstr = new char [name.length()+1];
+        strcpy( cstr, name.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
+        MPI_Send( cstr, name.length(), MPI_CHAR, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
         return true;
 #else//!HAVE_MPI
         return false;

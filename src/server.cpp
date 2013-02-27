@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------------
 #include <iostream>
 
+#include "config.h"
 #include "client.h"
 
 //------------------------------------------------------------------------------
@@ -17,7 +18,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::addAgents( const string & name, const unsigned n ){
-        m_numAgents[name] = m_numAgents[name] + n;
+        if( name.length() > MAX_CLASS_NAME ){
+            cerr << "WARNING: Class name '" << name << "' too long\n";
+        }else{
+            m_numAgents[name] = m_numAgents[name] + n;
+        }
     }
 
     //--------------------------------------------------------------------------

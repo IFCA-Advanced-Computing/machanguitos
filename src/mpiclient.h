@@ -8,9 +8,12 @@ namespace Engine{
 
         @ingroup Engine
      */
+    class Client;
+
     class MPIClient {
     public:
         MPIClient( const int r );
+        ~MPIClient();
 
         void run();
 
@@ -18,12 +21,8 @@ namespace Engine{
         void runCreateClass();
 
         int m_rank;
+        Client * m_local{nullptr};
     };
-
-    //--------------------------------------------------------------------------
-    inline MPIClient::MPIClient( const int r ) : m_rank{r} {
-        // empty
-    }
 }
 
 //------------------------------------------------------------------------------

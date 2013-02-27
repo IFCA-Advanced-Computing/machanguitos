@@ -2,12 +2,30 @@
 #include "mpiclient.h"
 
 #include "config.h"
+#include "clientlocal.h"
+
 #if defined(HAVE_MPI)
 #include <mpi.h>
 #include "mpitags.h"
 #endif
 //------------------------------------------------------------------------------
 namespace Engine{
+    using namespace std;
+
+    //--------------------------------------------------------------------------
+    MPIClient::MPIClient( const int r ) : m_rank{r} {
+#if defined(HAVE_MPI)
+        m_local = new Engine::ClientLocal();
+#endif
+    }
+
+    //--------------------------------------------------------------------------
+    MPIClient::~MPIClient(){
+        if( m_local ){
+            delete m_local;
+        }
+    }
+
     //--------------------------------------------------------------------------
     void MPIClient::run(){
 #if defined(HAVE_MPI)
@@ -18,7 +36,7 @@ namespace Engine{
         while( running ){
             MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
-                std::cerr << "ERROR: Received on " << m_rank << std::endl;
+                cerr << "ERROR: Received on " << m_rank << endl;
                 MPI_Abort( MPI_COMM_WORLD, 0 );
             }
 
@@ -32,11 +50,11 @@ namespace Engine{
                 break;
 
             default:
-                    std::cerr << "ERROR: not-implemented message[" << status.MPI_TAG 
-                              << "] on " << m_rank << std::endl;
+                    cerr << "ERROR: not-implemented message[" << status.MPI_TAG
+                         << "] on " << m_rank << endl;
             }
         }
-        
+
 #else//!HAVE_MPI
         assert( false && "MPI code without MPI" );
 #endif//HAVE_MPI
@@ -44,7 +62,25 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void MPIClient::runCreateClass(){
-        std::cout << " creating class " << std::endl;
+        char val[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATECLASS, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        val[count] = 0;
+
+        string name( val );
+        if( m_local ){
+            if( !m_local->createClass( name ) ){
+                cerr << "WARNING: Class " << name << " can't be created" << endl;
+                MPI_Abort( MPI_COMM_WORLD, 0 );
+            }
+        }
     }
 }
 
