@@ -40,6 +40,8 @@ int singleMain( int argc, char * argv[] ){
 
 #if defined(HAVE_MPI)
 #include "mpi.h"
+#include "clientremote.h"
+#include "mpiclient.h"
 
 //------------------------------------------------------------------------------
 int multiMain( int argc, char * argv[] ){
@@ -59,7 +61,16 @@ int multiMain( int argc, char * argv[] ){
             return EXIT_FAILURE;
         }
 
-        std::cout << "SERVER\n";
+        auto server = Engine::Server::instance();
+
+        for( int i = 1 ; i < nprocs ; ++i ){
+            Engine::Client * client = new Engine::ClientRemote( i );
+            server->addClient( client );
+        }
+
+        server->createAgents();
+        server->run();
+
     }else{
         if( argc != 2 ){
             return EXIT_FAILURE;
@@ -69,7 +80,9 @@ int multiMain( int argc, char * argv[] ){
             return EXIT_FAILURE;
         }
 
-        std::cout << "CLIENT " << rank << std::endl;
+        Engine::MPIClient client(rank);
+
+        client.run();
     }
 
     return EXIT_SUCCESS;
