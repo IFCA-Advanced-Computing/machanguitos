@@ -19,6 +19,7 @@ namespace Engine{
 
     private:
         void runCreateClass();
+        void runCreateAgents( const int num );
 
         int m_rank;
         Client * m_local{nullptr};

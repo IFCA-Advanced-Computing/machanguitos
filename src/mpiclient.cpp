@@ -45,6 +45,10 @@ namespace Engine{
                 runCreateClass();
                 break;
 
+            case TAG_CREATEAGENTS:
+                runCreateAgents( val );
+                break;
+
             case TAG_END:
                 running = false;
                 break;
@@ -62,6 +66,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void MPIClient::runCreateClass(){
+#if defined(HAVE_MPI)
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATECLASS, MPI_COMM_WORLD, &status );
@@ -77,10 +82,39 @@ namespace Engine{
         string name( val );
         if( m_local ){
             if( !m_local->createClass( name ) ){
-                cerr << "WARNING: Class " << name << " can't be created" << endl;
+                cerr << "WARNING: Class '" << name << "' can't be created" << endl;
                 MPI_Abort( MPI_COMM_WORLD, 0 );
             }
         }
+
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+    //--------------------------------------------------------------------------
+    void MPIClient::runCreateAgents( const int num ){
+#if defined(HAVE_MPI)
+        char val[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATEAGENTS, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        val[count] = 0;
+
+        string name( val );
+        if( m_local ){
+            m_local->createAgents( name, num );
+        }
+
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
     }
 }
 

@@ -44,7 +44,17 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientRemote::createAgents( const std::string & name, int n ){
-        std::cout << " remote create " << n << " of " << name << std::endl;
+#if defined(HAVE_MPI)
+        assert( name.length() <= MAX_CLASS_NAME && "name too long" );
+        int32_t val = n;
+        char * cstr = new char [name.length()+1];
+        strcpy( cstr, name.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
+        MPI_Send( cstr, name.length(), MPI_CHAR, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
