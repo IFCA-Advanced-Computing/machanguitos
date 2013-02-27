@@ -21,6 +21,7 @@ namespace Engine{
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;
+        void end() override;
 
     private:
         std::vector<Agent::AgentInstance *> m_objects;

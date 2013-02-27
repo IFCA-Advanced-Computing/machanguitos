@@ -1,12 +1,21 @@
 //------------------------------------------------------------------------------
 #include "clientremote.h"
 
+#include <cstdint>
 #include <iostream>
+
+#include "config.h"
+
+#if defined(HAVE_MPI)
+#include <mpi.h>
+#include "mpitags.h"
+#endif//HAVE_MPI
+
 
 //------------------------------------------------------------------------------
 namespace Engine{
     //--------------------------------------------------------------------------
-    ClientRemote::ClientRemote(){
+    ClientRemote::ClientRemote( int dest ) : m_dest{dest} {
         // empty
     }
 
@@ -17,8 +26,13 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     bool ClientRemote::createClass( const std::string & name ){
-        std::cout << " remote create class " << name << std::endl;
+#if defined(HAVE_MPI)
+        int32_t val{0};
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD);
         return true;
+#else//!HAVE_MPI
+        return false;
+#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
@@ -31,7 +45,17 @@ namespace Engine{
         std::cout << " remote run agents\n";
     }
 
-    
+    //--------------------------------------------------------------------------
+    void ClientRemote::end(){
+#if defined(HAVE_MPI)
+        int32_t val{0};
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_END, MPI_COMM_WORLD);
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+
 }
 
 //------------------------------------------------------------------------------
