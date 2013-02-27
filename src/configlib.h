@@ -6,6 +6,7 @@
 struct lua_State;
 
 namespace Config{
+    bool setDataDir( const std::string & filename );
     bool load( const std::string & filename );
 }
 
