@@ -110,7 +110,7 @@ int main( int argc, char * argv[] ){
 #else//!HAVE_MPI
 
 //------------------------------------------------------------------------------
-int main( const int argc, const char * argv[] ){
+int main( int argc, char * argv[] ){
     return singleMain( argc, argv );
 }
 
