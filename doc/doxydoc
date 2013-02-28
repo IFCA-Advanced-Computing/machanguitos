@@ -1,12 +1,13 @@
 /** @mainpage Machanguitos
-@tableofcontents
-
 @section intr_sec Introduction
 The Easiest <b>Multi-Agent System</b> in the world.
 
 Work done at The Institute of Physics of Cantabria (<a href="http://www.ifca.es">IFCA</a>).
 
 @section inst_sec Install
+@subsection inst_pre_ssec Prerequisites
+@subsection inst_com_ssec Compile
+@subsection inst_test_ssec Test Example
 
  */
 

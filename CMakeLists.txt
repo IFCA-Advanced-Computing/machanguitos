@@ -1,7 +1,7 @@
 project(MACHANGUITOS)
 cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
-set(MACHANGUITOS_VERSION_MINOR 3)
+set(MACHANGUITOS_VERSION_MINOR 4)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
@@ -32,8 +32,14 @@ find_package(LuaJIT REQUIRED)
 set(LUA_INCLUDE_DIRS ${LuaJIT_INCLUDE_DIRS})
 set(LUA_LIBRARIES ${LuaJIT_LIBRARIES})
 
+set(Boost_USE_MULTITHREADED 0)
 find_package( Boost 1.53 COMPONENTS system filesystem REQUIRED )
-message(${Boost_LIBRARIES})
+
+find_package( MPI )
+if(MPI_FOUND)
+  add_definitions(-DHAVE_MPI)
+endif()
+
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 

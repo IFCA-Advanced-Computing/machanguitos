@@ -1,27 +1,21 @@
 //------------------------------------------------------------------------------
-#ifndef CLIENTLOCAL_H
-#define CLIENTLOCAL_H
-
-//------------------------------------------------------------------------------
-#include <vector>
+#ifndef CLIENTREMOTE_H
+#define CLIENTREMOTE_H
 
 #include "client.h"
 
 //------------------------------------------------------------------------------
-namespace Agent{
-    class AgentInstance;
-}
-
-//------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    /** Client instance that runs in local proccess.
-        @ingroup Engine
+    /** Client instance that acts as proxy of a remote MPI worker.
+        @ingroup: Engine
      */
-    class ClientLocal : public Client{
+    class ClientRemote : public Client{
     public:
-        ClientLocal();
-        virtual ~ClientLocal();
+        /** Constructor.
+            @param dest MPI rank of remote worker.
+         */
+        ClientRemote( int dest );
+        virtual ~ClientRemote();
 
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
@@ -30,17 +24,19 @@ namespace Engine{
         void end() override;
 
     private:
-        /// list of Agents in this Client instance.
-        std::vector<Agent::AgentInstance *> m_objects;
+        /// MPI rank of remote worker.
+        int m_dest;
+        /// number of Agents created in remote.
+        int m_numAgents;
     };
 
     //--------------------------------------------------------------------------
-    inline int ClientLocal::numAgents() const{
-        return m_objects.size();
+    inline int ClientRemote::numAgents() const{
+        return m_numAgents;
     }
 }
 
 //------------------------------------------------------------------------------
-#endif//CLIENTLOCAL_H
+#endif//CLIENTREMOTE_H
 
 //------------------------------------------------------------------------------

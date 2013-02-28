@@ -1,1 +1,11 @@
 /build/
+
+# latex
+/doc/*.aux
+/doc/*.log
+/doc/*.nav
+/doc/*.out
+/doc/*.pdf
+/doc/*.snm
+/doc/*.toc
+/doc/*.vrb

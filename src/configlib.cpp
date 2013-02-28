@@ -83,7 +83,7 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
-    bool load( const string & filename ){
+    bool setDataDir( const string & filename ){
         // check file
         if( !exists( filename ) || !is_regular_file( filename ) ){
             cerr << "Error: There is no config file " << filename << endl;
@@ -94,6 +94,15 @@ namespace Config{
         path datadir(filename);
         datadir.remove_filename();
         Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
+        
+        return true;
+    }
+
+    //--------------------------------------------------------------------------
+    bool load( const string & filename ){
+        if( !setDataDir( filename ) ){
+            return false;
+        }
 
         // Lua Initialization
         bool is_ok{true};

@@ -26,13 +26,16 @@ namespace Agent{
 
         path filename = path(m_dir) /= (name + ".lua");
         if( !is_regular_file(filename) ){
-            cerr << "ERROR: not file for class " << name << endl;
+            cerr << "ERROR: not file for class '" << name << "'\n";
             return nullptr;
         }
 
         // Lua Initialization
         auto L = luaL_newstate();
-        assert( L && "Can't create Lua State" );
+        if( !L ){
+            cerr << "ERROR: Can't create Lua State\n";
+            return nullptr;
+        }
 
         lua_gc( L, LUA_GCSTOP, 0 );
         luaL_openlibs( L );
@@ -49,8 +52,10 @@ namespace Agent{
             return nullptr;
         }
 
-        AgentClass * aclass = new AgentClass( L );
-        m_classes[name] = aclass;
+        AgentClass * aclass = new (std::nothrow) AgentClass( L );
+        if( aclass ){
+            m_classes[name] = aclass;
+        }
 
         return aclass;
     }
