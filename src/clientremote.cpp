@@ -52,6 +52,8 @@ namespace Engine{
 
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
         MPI_Send( cstr, name.length(), MPI_CHAR, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
+
+        m_numAgents += n;
 #else//!HAVE_MPI
         assert( false && "MPI code without MPI" );
 #endif//HAVE_MPI

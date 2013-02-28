@@ -14,6 +14,7 @@ namespace Engine{
         virtual bool createClass( const std::string & name )=0;
         virtual void createAgents( const std::string & name, int n )=0;
         virtual void runAgents( const double delta )=0;
+        virtual int numAgents() const =0;
         virtual void end()=0;
     };
 }
