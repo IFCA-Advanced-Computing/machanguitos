@@ -2,7 +2,6 @@
 #include "agentclass.h"
 
 #include <iostream>
-#include <cassert>
 
 #include "agentinstance.h"
 
@@ -18,8 +17,11 @@ namespace Agent{
             lua_rawget( L, -4 );
             if( lua_islightuserdata( L, -1 ) ){
                 AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
-                assert( agent && "Invalid agent object" );
-                agent->newData( L, key );
+                if( agent ){
+                    agent->newData( L, key );
+                }else{
+                    cerr << "Invalid agent object\n";
+                }
             }
         }
         return 0;
@@ -33,8 +35,11 @@ namespace Agent{
             lua_rawget( L, -3 );
             if( lua_islightuserdata( L, -1 ) ){
                 AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
-                assert( agent && "Invalid agent object" );
-                return agent->pushData( L, key );
+                if( agent ){
+                    return agent->pushData( L, key );
+                }else{
+                    cerr << "Invalid agent object\n";
+                }
             }
         }
         return 0;
@@ -42,31 +47,27 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     AgentClass::AgentClass( lua_State * L ) : m_L{L} {
-        assert( m_L && "Invalid AgentClass creation" );
-
-        // set class methods for agent
-        lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-        luaL_newmetatable( L, SCRIPT_AGENT_NAME );
-        lua_pushstring(L, "__newindex");
-        lua_pushcfunction( L, agent_newindex );
-        lua_settable( L, -3 );
-        lua_pushstring(L, "__index");
-        lua_pushcfunction( L, agent_index );
-        lua_settable( L, -3 );
-        lua_setmetatable( L, -2 );
+        if( m_L ){
+            // set class methods for agent
+            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
+            luaL_newmetatable( L, SCRIPT_AGENT_NAME );
+            lua_pushstring(L, "__newindex");
+            lua_pushcfunction( L, agent_newindex );
+            lua_settable( L, -3 );
+            lua_pushstring(L, "__index");
+            lua_pushcfunction( L, agent_index );
+            lua_settable( L, -3 );
+            lua_setmetatable( L, -2 );
+        }else{
+            cerr << "AgentClass creation with invalid Lua State\n";
+        }
     }
 
     //--------------------------------------------------------------------------
     AgentClass::~AgentClass(){
-        assert( m_L && "Invalid AgentClass" );
-        lua_close( m_L );
-    }
-
-    //--------------------------------------------------------------------------
-    AgentInstance * AgentClass::createInstance(){
-        AgentInstance * obj = new AgentInstance(this);
-        assert( obj && "Can't create AgentInstance" );
-        return obj;
+        if( m_L ){
+            lua_close( m_L );
+        }
     }
 }
 

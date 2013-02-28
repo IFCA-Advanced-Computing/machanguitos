@@ -3,14 +3,12 @@
 #define AGENTCLASS_H
 
 #include "lua.hpp"
+#include "agentinstance.h"
 
 //------------------------------------------------------------------------------
 namespace Agent{
     //--------------------------------------------------------------------------
     constexpr const char * SCRIPT_AGENT_NAME = "Agent";
-
-    //--------------------------------------------------------------------------
-    class AgentInstance;
 
     //--------------------------------------------------------------------------
     class AgentClass{
@@ -26,8 +24,14 @@ namespace Agent{
         lua_State * m_L{nullptr};
     };
 
+    //--------------------------------------------------------------------------
     inline lua_State * AgentClass::getLua() const{
         return m_L;
+    }
+
+    //--------------------------------------------------------------------------
+    inline AgentInstance * AgentClass::createInstance(){
+        return (new (std::nothrow) AgentInstance(this));
     }
 }
 
