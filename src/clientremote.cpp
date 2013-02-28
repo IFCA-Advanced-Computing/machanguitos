@@ -59,7 +59,14 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientRemote::runAgents( const double delta ){
-        std::cout << " remote run agents\n";
+#if defined(HAVE_MPI)
+        int32_t val{0};
+        double d{delta};
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &d, 1, MPI_DOUBLE, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------

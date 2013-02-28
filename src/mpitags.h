@@ -5,6 +5,7 @@
 namespace Engine{
     constexpr int TAG_CREATECLASS = 1;
     constexpr int TAG_CREATEAGENTS = 2;
+    constexpr int TAG_RUNAGENTS = 3;
     constexpr int TAG_END = 66;
 }
 
