@@ -42,17 +42,17 @@ namespace Util {
 
         /** Returns the boolean value of this variable.
             @param d default value to return
-            @returns the value of default if this variable is not boolean type.
+            @returns the value, or default if this variable is not boolean type.
          */
         bool getBoolean( const bool d = false ) const;
         /** Returns the numeric value of this variable.
             @param d default value to return
-            @returns the value of default if this variable is not numeric type.
+            @returns the value, or default if this variable is not numeric type.
          */
         double getNumber( const double d = 0 ) const;
         /** Returns the string value of this variable.
             @param d default value to return
-            @returns the value of default if this variable is not string type.
+            @returns the value, or default if this variable is not string type.
          */
         std::string getString( const std::string & d ="" ) const;
 
@@ -60,12 +60,13 @@ namespace Util {
         /// Erase old value data.
         void erase();
 
+        /// Value of a script variable.
         union Value{
-            /// value for numeric variables
+            /// value for numeric variables.
             double valn;
-            /// value for boolean variables
+            /// value for boolean variables.
             bool valb;
-            /// value for string variables
+            /// value for string variables.
             std::string * vals;
 
             Value();

@@ -6,10 +6,14 @@
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    /** @ingroup: Engine
+    /** Client instance that acts as proxy of a remote MPI worker.
+        @ingroup: Engine
      */
     class ClientRemote : public Client{
     public:
+        /** Constructor.
+            @param dest MPI rank of remote worker.
+         */
         ClientRemote( int dest );
         virtual ~ClientRemote();
 
@@ -20,8 +24,10 @@ namespace Engine{
         void end() override;
 
     private:
+        /// MPI rank of remote worker.
         int m_dest;
-        int m_numAgents{0};
+        /// number of Agents created in remote.
+        int m_numAgents;
     };
 
     //--------------------------------------------------------------------------

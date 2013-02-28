@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------
 namespace Engine{
     //--------------------------------------------------------------------------
-    ClientRemote::ClientRemote( int dest ) : m_dest{dest} {
+    ClientRemote::ClientRemote( int dest ) : m_dest{dest}, m_numAgents{0} {
         // empty
     }
 
