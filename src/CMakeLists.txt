@@ -23,3 +23,5 @@ target_link_libraries(machen ${Boost_LIBRARIES})
 if(MPI_FOUND)
   target_link_libraries(machen ${MPI_LIBRARIES})
 endif()
+
+install(TARGETS machen RUNTIME DESTINATION bin)
