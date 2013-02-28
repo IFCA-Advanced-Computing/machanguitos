@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include "clientlocal.h"
+#include <cassert>
 
 #if defined(HAVE_MPI)
 #include <mpi.h>
