@@ -2,6 +2,7 @@ project(MACHANGUITOS)
 cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
 set(MACHANGUITOS_VERSION_MINOR 4)
+set(MACHANGUITOS_VERSION_RELEASE 1)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
@@ -33,17 +34,22 @@ set(LUA_INCLUDE_DIRS ${LuaJIT_INCLUDE_DIRS})
 set(LUA_LIBRARIES ${LuaJIT_LIBRARIES})
 
 set(Boost_USE_MULTITHREADED 0)
-find_package( Boost 1.53 COMPONENTS system filesystem REQUIRED )
+find_package( Boost 1.52 COMPONENTS system filesystem REQUIRED )
 
 find_package( MPI )
 if(MPI_FOUND)
   add_definitions(-DHAVE_MPI)
 endif()
 
+set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSION_MAJOR}.${MACHANGUITOS_VERSION_MINOR}")
+
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
 add_subdirectory(src)
+
+#data files
+install(DIRECTORY "example" DESTINATION ${DATADIR})
 
 # documentation
 find_package(Doxygen)
