@@ -3,6 +3,7 @@
 
 //------------------------------------------------------------------------------
 #include <iostream>
+#include <algorithm>
 
 #include "config.h"
 #include "client.h"
@@ -30,16 +31,30 @@ namespace Engine{
         auto nClients = m_clients.size();
         if( nClients > 0 ){
             for( const auto p: m_numAgents ){
+                // sort, first the clients with less agents
+                std::sort( m_clients.begin(), m_clients.end(),
+                           [](Client * a, Client * b){
+                               return a->numAgents() < b->numAgents();
+                           } );
+
                 cout << "Creating: " << p.second << " of " << p.first << endl;
                 size_t nPerClient = p.second / nClients;
-                size_t total = nPerClient * nClients;
+                size_t rem = p.second % nClients;
 
-                if( total < p.second ){
-                    cerr << "WARNING: Creating " << total << " of " << p.second
-                         << " " << p.first << " agents" << endl;
+                // put more agents in the first clients
+                size_t i;
+                for( i = 0 ; i < rem ; ++i ){
+                    auto c = m_clients[i];
+                    if( c->createClass( p.first ) ){
+                        c->createAgents( p.first, nPerClient+1 );
+                    }else{
+                        cerr << "WARNING: Class " << p.first << " can't be created" << endl;
+                    }
                 }
 
-                for( auto c: m_clients ){
+                // then put the rest
+                for( i = rem ; i < m_clients.size() ; ++i ){
+                    auto c = m_clients[i];
                     if( c->createClass( p.first ) ){
                         c->createAgents( p.first, nPerClient );
                     }else{

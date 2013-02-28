@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 #include <string>
 #include <map>
-#include <list>
+#include <vector>
 
 #include "singleton.h"
 #include "scriptvalue.h"
@@ -29,7 +29,7 @@ namespace Engine{
         double getConfigNumber( const std::string & key, const double d ) const;
 
         std::map<std::string, unsigned> m_numAgents;
-        std::list<Client*> m_clients;
+        std::vector<Client*> m_clients;
         std::map<std::string, Util::ScriptValue> m_config;
     };
 
