@@ -7,6 +7,9 @@ Work done at The Institute of Physics of Cantabria (<a href="http://www.ifca.es"
 @section inst_sec Install
 @subsection inst_pre_ssec Prerequisites
 @subsection inst_com_ssec Compile
+
+cmake -DCMAKE_PREFIX_PATH=/gpfs/res_apps/MACHANGUITOS/0.4
+
 @subsection inst_test_ssec Test Example
 
  */
