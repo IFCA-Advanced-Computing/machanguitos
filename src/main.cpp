@@ -90,6 +90,8 @@ int multiMain( int argc, char * argv[] ){
 
 //------------------------------------------------------------------------------
 int main( int argc, char * argv[] ){
+    static_assert( sizeof(double) == sizeof(int64_t), 
+                   "Double type isn't 64 bits" );
     MPI_Init( &argc, &argv );
 
     int nprocs;
