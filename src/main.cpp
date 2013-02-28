@@ -41,7 +41,7 @@ int singleMain( int argc, char * argv[] ){
 #if defined(HAVE_MPI)
 #include "mpi.h"
 #include "clientremote.h"
-#include "mpiclient.h"
+#include "mpiworker.h"
 
 //------------------------------------------------------------------------------
 int multiMain( int argc, char * argv[] ){
@@ -80,9 +80,9 @@ int multiMain( int argc, char * argv[] ){
             return EXIT_FAILURE;
         }
 
-        Engine::MPIClient client(rank);
+        Engine::MPIWorker worker(rank);
 
-        client.run();
+        worker.run();
     }
 
     return EXIT_SUCCESS;
