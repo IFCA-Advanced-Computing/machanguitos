@@ -7,4 +7,6 @@ constexpr unsigned VERSION_RELEASE{@MACHANGUITOS_VERSION_RELEASE@};
 
 constexpr unsigned MAX_CLASS_NAME{200};
 
+constexpr const char * const g_datapath = "@DATADIR@";
+
 #endif//CONFIG_H

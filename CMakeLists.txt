@@ -41,10 +41,15 @@ if(MPI_FOUND)
   add_definitions(-DHAVE_MPI)
 endif()
 
+set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSION_MAJOR}.${MACHANGUITOS_VERSION_MINOR}")
+
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
 add_subdirectory(src)
+
+#data files
+install(DIRECTORY "example" DESTINATION ${DATADIR})
 
 # documentation
 find_package(Doxygen)
