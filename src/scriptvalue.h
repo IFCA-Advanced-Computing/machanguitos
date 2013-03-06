@@ -93,8 +93,12 @@ namespace Util {
 
     //--------------------------------------------------------------------------
     inline ScriptValue::ScriptValue( const char * val ){
-        m_val.vals = new std::string(val);
-        m_type = ValueType::STRING;
+        if( val ){
+            m_val.vals = new std::string(val);
+            m_type = ValueType::STRING;
+        }else{
+            m_type = ValueType::NIL;
+        }
     }
 
     //--------------------------------------------------------------------------
