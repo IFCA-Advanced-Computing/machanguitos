@@ -50,6 +50,7 @@ set(MONGO_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/mongoc")
 
 add_subdirectory(mongoc)
 add_subdirectory(src)
+add_subdirectory(test)
 
 #data files
 install(DIRECTORY "example" DESTINATION ${DATADIR})
