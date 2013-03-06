@@ -58,6 +58,8 @@ install(DIRECTORY "example" DESTINATION ${DATADIR})
 # documentation
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
+  set(DOXYGEN_INPUTS
+    "${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/mongoc ${PROJECT_SOURCE_DIR}/doc/doxydoc")
   configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
     "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
   add_custom_target(doc
