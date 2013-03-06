@@ -21,11 +21,11 @@ namespace Util {
         /// Copy Constructor.
         ScriptValue( const ScriptValue & val );
         /// Move Constructor.
-        ScriptValue( ScriptValue && val );
+        ScriptValue( ScriptValue && val ) noexcept;
         /// Copy assign.
         ScriptValue & operator=( const ScriptValue & val );
         /// Move assign.
-        ScriptValue & operator=( ScriptValue && val );
+        ScriptValue & operator=( ScriptValue && val ) noexcept;
         ~ScriptValue();
 
         /// Construct a boolean value.

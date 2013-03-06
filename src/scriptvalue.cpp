@@ -42,7 +42,7 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
-    ScriptValue::ScriptValue( ScriptValue && val ) : m_type{val.m_type} {
+    ScriptValue::ScriptValue( ScriptValue && val ) noexcept : m_type{val.m_type} {
         switch( m_type ){
         case ValueType::NIL: // empty
             break;
@@ -81,7 +81,7 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
-    ScriptValue & ScriptValue::operator=( ScriptValue && val ){
+    ScriptValue & ScriptValue::operator=( ScriptValue && val ) noexcept {
         erase();
         m_type = val.m_type;
         switch( m_type ){
