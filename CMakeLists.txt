@@ -46,6 +46,9 @@ set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSIO
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
+set(MONGO_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/mongoc")
+
+add_subdirectory(mongoc)
 add_subdirectory(src)
 
 #data files
