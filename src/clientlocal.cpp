@@ -73,6 +73,12 @@ namespace Engine{
         for( auto obj: m_objects ){
             obj->update( delta );
         }
+
+        m_totalTime += delta;
+
+        for( auto obj: m_objects ){
+            obj->outVars( m_totalTime );
+        }
     }
 
     //--------------------------------------------------------------------------

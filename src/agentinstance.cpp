@@ -125,6 +125,21 @@ namespace Agent{
                  << "' on key '" << key << "'\n";
         }
     }
+
+    //--------------------------------------------------------------------------
+    void AgentInstance::outVars( const double t ) const{
+        auto outKeys = m_class->getOutVars();
+
+        std::map<std::string, const ScriptValue *> ovars;
+        for( const auto key: outKeys ){
+            const auto variable = m_vals.find( key );
+            if( variable != m_vals.end() ){
+                cout << t << " (" << m_id0 << ", " << m_id1 << ") : ";
+                cout << key << " = " << variable->second << endl;
+                ovars[key] = &variable->second;
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------------

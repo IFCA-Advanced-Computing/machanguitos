@@ -59,6 +59,8 @@ namespace Agent{
             @param key new variable to output.
          */
         void insertOutVariable( std::string && key );
+        /// Returns the list of output variables.
+        const std::set<std::string> & getOutVars() const;
 
     private:
         /// Lua State
@@ -76,6 +78,11 @@ namespace Agent{
     //--------------------------------------------------------------------------
     inline AgentInstance * AgentClass::createInstance( const int mayor, const int minor ){
         return new (std::nothrow) AgentInstance( this, mayor, minor );
+    }
+
+    //--------------------------------------------------------------------------
+    inline const std::set<std::string> & AgentClass::getOutVars() const {
+        return m_outVars;
     }
 }
 

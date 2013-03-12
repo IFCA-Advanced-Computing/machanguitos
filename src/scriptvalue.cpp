@@ -19,6 +19,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "scriptvalue.h"
 
 #include <cassert>
+#include <ostream>
 
 //------------------------------------------------------------------------------
 namespace Util {
@@ -116,6 +117,25 @@ namespace Util {
             break;
         }
         return (*this);
+    }
+
+    //--------------------------------------------------------------------------
+    std::ostream & operator<<( std::ostream &out, const ScriptValue &val ){
+        switch( val.getType() ){
+        case ScriptValue::ValueType::NIL:
+            out << "<NIL>";
+            break;
+        case ScriptValue::ValueType::BOOLEAN:
+            out << val.getBoolean();
+            break;
+        case ScriptValue::ValueType::NUMBER:
+            out << val.getNumber();
+            break;
+        case ScriptValue::ValueType::STRING:
+            out << val.getString();
+            break;
+        }
+        return out;
     }
 
 }//namespace Util
