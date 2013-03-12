@@ -37,6 +37,9 @@ namespace Engine{
      */
     class ClientLocal : public Client{
     public:
+        /**
+           @param id Client Identifier, and mayor number of Agents in this client.
+         */
         ClientLocal( const int id );
         virtual ~ClientLocal();
 

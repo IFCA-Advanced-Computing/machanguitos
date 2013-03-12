@@ -47,6 +47,8 @@ namespace Agent{
     public:
         /** AgentInstance constructor. It should receive a AgentClass instance.
             @param c AgentClass instance of the Agent.
+            @param mayor mayor number of Agent Instance identifier.
+            @param minor minor number of Agent Instance identifier.
          */
         AgentInstance( AgentClass * c, const int mayor, const int minor );
         /// initialize the Agent calling its 'init' function on Lua.
