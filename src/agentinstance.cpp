@@ -32,7 +32,9 @@ namespace Agent{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    AgentInstance::AgentInstance( AgentClass * c ) : m_class(c) {
+    AgentInstance::AgentInstance( AgentClass * c, const int mayor, const int minor )
+        : m_class(c), m_id0(mayor), m_id1(minor)
+    {
         assert( m_class && "Invalid Agent Class" );
     }
 

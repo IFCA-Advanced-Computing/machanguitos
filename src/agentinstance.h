@@ -48,7 +48,7 @@ namespace Agent{
         /** AgentInstance constructor. It should receive a AgentClass instance.
             @param c AgentClass instance of the Agent.
          */
-        AgentInstance( AgentClass * c );
+        AgentInstance( AgentClass * c, const int mayor, const int minor );
         /// initialize the Agent calling its 'init' function on Lua.
         void init();
         /** Update the Agent calling its 'update' fuction on Lua.
@@ -71,6 +71,10 @@ namespace Agent{
         AgentClass * m_class;
         /// list of variables of the Agent.
         std::map<std::string, Util::ScriptValue> m_vals;
+        /// mayor identifier of instance.
+        int m_id0;
+        /// minor identifier of instance.
+        int m_id1;
     };
 }
 

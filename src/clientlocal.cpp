@@ -30,7 +30,7 @@ namespace Engine{
     using namespace std;
 
     //--------------------------------------------------------------------------
-    ClientLocal::ClientLocal(){
+    ClientLocal::ClientLocal() : m_totalTime{0}, m_nextID{0} {
         // empty
     }
 
@@ -50,8 +50,9 @@ namespace Engine{
         auto agentClass = Agent::AgentFactory::instance()->getClass( name );
         if( agentClass ){
             for( int i = 0 ; i < n ; ++i ){
-                Agent::AgentInstance * obj = agentClass->createInstance();
+                Agent::AgentInstance * obj = agentClass->createInstance( 0, m_nextID );
                 if( obj ){
+                    m_nextID += 1;
                     obj->init();
                     m_objects.push_back( obj );
                 }else{

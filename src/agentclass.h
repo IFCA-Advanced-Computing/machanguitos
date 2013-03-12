@@ -42,7 +42,7 @@ namespace Agent{
     public:
         /** Constructs the AgentClass object with a initialiced Lua State.
             @param L Lua State. It should be already initializated.
-        */
+         */
         AgentClass( lua_State * L );
         ~AgentClass();
 
@@ -50,14 +50,14 @@ namespace Agent{
         void init();
 
         /// Create a AgentInstance object of this AgentClass.
-        AgentInstance * createInstance();
+        AgentInstance * createInstance( const int mayor, const int minor );
         /// Returns current Lua State for this AgentClass.
         lua_State * getLua() const;
         /** Add a new variable to the list of out variables. Out variables are
             Agent instance variables that are saved to the database in each
             step.
-            @param key new variable to outputh
-        */
+            @param key new variable to output.
+         */
         void insertOutVariable( std::string && key );
 
     private:
@@ -74,8 +74,8 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    inline AgentInstance * AgentClass::createInstance(){
-        return (new (std::nothrow) AgentInstance(this));
+    inline AgentInstance * AgentClass::createInstance( const int mayor, const int minor ){
+        return new (std::nothrow) AgentInstance( this, mayor, minor );
     }
 }
 

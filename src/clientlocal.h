@@ -49,6 +49,10 @@ namespace Engine{
     private:
         /// list of Agents in this Client instance.
         std::vector<Agent::AgentInstance *> m_objects;
+        /// next minor id to use in object creation.
+        int m_nextID;
+        /// actual simulation time
+        double m_totalTime;
     };
 
     //--------------------------------------------------------------------------
