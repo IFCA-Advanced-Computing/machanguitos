@@ -64,19 +64,24 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     AgentClass::AgentClass( lua_State * L ) : m_L{L} {
+        if( !m_L ){
+            cerr << "AgentClass creation with invalid Lua State\n";
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    void AgentClass::init(){
         if( m_L ){
             // set class methods for agent
-            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-            luaL_newmetatable( L, SCRIPT_AGENT_NAME );
-            lua_pushstring(L, "__newindex");
-            lua_pushcfunction( L, agent_newindex );
-            lua_settable( L, -3 );
-            lua_pushstring(L, "__index");
-            lua_pushcfunction( L, agent_index );
-            lua_settable( L, -3 );
-            lua_setmetatable( L, -2 );
-        }else{
-            cerr << "AgentClass creation with invalid Lua State\n";
+            lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
+            luaL_newmetatable( m_L, SCRIPT_AGENT_NAME );
+            lua_pushstring( m_L, "__newindex");
+            lua_pushcfunction( m_L, agent_newindex );
+            lua_settable( m_L, -3 );
+            lua_pushstring( m_L, "__index");
+            lua_pushcfunction( m_L, agent_index );
+            lua_settable( m_L, -3 );
+            lua_setmetatable( m_L, -2 );
         }
     }
 
@@ -85,6 +90,11 @@ namespace Agent{
         if( m_L ){
             lua_close( m_L );
         }
+    }
+
+    //--------------------------------------------------------------------------
+    void AgentClass::insertOutVariable( std::string && key ){
+        m_outVars.insert( std::move(key) );
     }
 }
 

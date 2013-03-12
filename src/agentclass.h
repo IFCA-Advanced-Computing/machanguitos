@@ -20,6 +20,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AGENTCLASS_H
 
 //------------------------------------------------------------------------------
+#include <set>
+#include <string>
 #include "lua.hpp"
 #include "agentinstance.h"
 
@@ -30,6 +32,7 @@ namespace Agent{
         @ingroup Agent
      */
     constexpr const char * SCRIPT_AGENT_NAME = "Agent";
+    constexpr const char * SCRIPT_AGENTCLASS_NAME = "AgentClass";
 
     //--------------------------------------------------------------------------
     /** Class with Class definitions of Agents.
@@ -39,18 +42,30 @@ namespace Agent{
     public:
         /** Constructs the AgentClass object with a initialiced Lua State.
             @param L Lua State. It should be already initializated.
-         */
+        */
         AgentClass( lua_State * L );
         ~AgentClass();
+
+        /// init class instance lua state
+        void init();
 
         /// Create a AgentInstance object of this AgentClass.
         AgentInstance * createInstance();
         /// Returns current Lua State for this AgentClass.
         lua_State * getLua() const;
+        /** Add a new variable to the list of out variables. Out variables are
+            Agent instance variables that are saved to the database in each
+            step.
+            @param key new variable to outputh
+        */
+        void insertOutVariable( std::string && key );
 
     private:
         /// Lua State
         lua_State * m_L;
+
+        /// list of variables to out
+        std::set< std::string > m_outVars;
     };
 
     //--------------------------------------------------------------------------

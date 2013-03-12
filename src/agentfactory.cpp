@@ -35,6 +35,38 @@ namespace Agent{
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** private name of AgentInstance objects in Lua tables.
+        @ingroup Agent
+     */
+    constexpr const char * SCRIPT_AGENTCLASS_OBJ = "__c";
+
+    //--------------------------------------------------------------------------
+    int ac_outVariables( lua_State *L ){
+        lua_getglobal( L, SCRIPT_AGENTCLASS_NAME );
+        lua_getfield( L, -1, SCRIPT_AGENTCLASS_OBJ );
+        if( lua_islightuserdata( L, -1 ) ){
+            AgentClass * aclass = (AgentClass*) lua_topointer( L, -1 );
+            lua_pop( L, 2 );
+            if( aclass ){
+                auto n = lua_gettop( L );
+                for( int i = 1 ; i <= n ; i++ ){
+                    aclass->insertOutVariable( luaL_checkstring( L, i ) );
+                }
+            }else{
+                luaL_error( L, "Invalid agent object" );
+            }
+        }
+
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
+    const luaL_Reg agentclasslib[] = {
+        {"outVariables",  ac_outVariables},
+        {nullptr, nullptr}
+    };
+
+    //--------------------------------------------------------------------------
     AgentClass * AgentFactory::createClass( const string & name ){
         auto el = m_classes.find( name );
         if( el != m_classes.end() ){
@@ -56,23 +88,33 @@ namespace Agent{
 
         lua_gc( L, LUA_GCSTOP, 0 );
         luaL_openlibs( L );
+        lua_newtable( L );
+        lua_setfield(L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
         lua_gc( L, LUA_GCRESTART, 0 );
 
         // create Agent class on Lua
-        lua_newtable( L );
-        lua_setfield(L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
+        AgentClass * aclass = new (std::nothrow) AgentClass( L );
+        if( !aclass ){
+            cerr << "ERROR: Can't create agent class '" << name << "' instance\n";
+            return nullptr;
+        }
+
+        // set functions
+        luaL_register( L, SCRIPT_AGENTCLASS_NAME, agentclasslib );
+        lua_pushlightuserdata( L, (void*)aclass );
+        lua_setfield( L, -2, SCRIPT_AGENTCLASS_OBJ );
+        // removes table
+        lua_pop( L, 1 );
 
         // execute class file
         auto ret = luaL_dofile( L, filename.c_str() );
         if( !checkLuaReturn( L, ret ) ){
-            lua_close( L );
+            delete aclass;
             return nullptr;
         }
 
-        AgentClass * aclass = new (std::nothrow) AgentClass( L );
-        if( aclass ){
-            m_classes[name] = aclass;
-        }
+        aclass->init();
+        m_classes[name] = aclass;
 
         return aclass;
     }
