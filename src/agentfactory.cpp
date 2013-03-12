@@ -89,7 +89,7 @@ namespace Agent{
     //--------------------------------------------------------------------------
     void AgentFactory::setDatadir( const string & dir ){
         assert( is_directory(dir) && "not directory" );
-        m_dir = dir;        
+        m_dir = dir;
     }
 }
 

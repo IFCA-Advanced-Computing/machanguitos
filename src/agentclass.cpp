@@ -37,7 +37,7 @@ namespace Agent{
                 if( agent ){
                     agent->newData( L, key );
                 }else{
-                    cerr << "Invalid agent object\n";
+                    luaL_error( L, "Invalid agent object" );
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace Agent{
                 if( agent ){
                     return agent->pushData( L, key );
                 }else{
-                    cerr << "Invalid agent object\n";
+                    luaL_error( L, "Invalid agent object" );
                 }
             }
         }
