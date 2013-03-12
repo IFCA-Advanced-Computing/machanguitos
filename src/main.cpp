@@ -119,6 +119,9 @@ int main( int argc, char * argv[] ){
         ret = singleMain( argc, argv );
     }else{
         ret = multiMain( argc, argv );
+        if( ret != EXIT_SUCCESS ){
+            MPI_Abort( MPI_COMM_WORLD, ret );
+        }
     }
 
     MPI_Finalize();
