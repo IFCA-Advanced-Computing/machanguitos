@@ -68,8 +68,8 @@ namespace Config{
                 server->insertConfig( key, ScriptValue(lua_tostring( L, -1)) );
                 break;
             default:
-                luaL_error( L, "type not implemented '%s' on key '%s'",
-                            lua_typename( L, ltype ), key.c_str() );
+                luaL_warn( L, "type not implemented '%s' on key '%s'",
+                           lua_typename( L, ltype ), key.c_str() );
             }
 
             // removes 'value'; keeps 'key' for next iteration

@@ -39,6 +39,18 @@ namespace Util{
         }
         return true;
     }
+
+    //--------------------------------------------------------------------------
+    void luaL_warn( lua_State *L, const char *fmt, ... ){
+        va_list argp;
+        va_start( argp, fmt );
+        luaL_where( L, 1 );
+        lua_pushvfstring( L, fmt, argp );
+        va_end( argp );
+        lua_concat( L, 2 );
+        printf("Warning: %s\n", lua_tostring( L,-1 ) );
+        lua_pop( L, 1 );
+    }
 }
 
 //------------------------------------------------------------------------------

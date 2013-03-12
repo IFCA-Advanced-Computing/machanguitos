@@ -25,6 +25,7 @@ struct lua_State;
 //------------------------------------------------------------------------------
 namespace Util{
     bool checkLuaReturn( lua_State * const L, const int err );
+    void luaL_warn( lua_State *L, const char *fmt, ... );
 }
 
 //------------------------------------------------------------------------------
