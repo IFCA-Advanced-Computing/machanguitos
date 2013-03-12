@@ -55,7 +55,10 @@ namespace Agent{
             @param delta time increment in seconds between updates.
          */
         void update( const double delta );
-
+        /** Output the variables.
+           @param t is the simulation time.
+         */
+        void outVars( const double t ) const;
         /** Put the Agent variable on Lua stack.
             @param L Lua State.
             @param key name of the variable to get.

@@ -33,7 +33,7 @@ namespace Engine{
     //--------------------------------------------------------------------------
     MPIWorker::MPIWorker( const int r ) : m_rank{r} {
 #if defined(HAVE_MPI)
-        m_local = new (std::nothrow) Engine::ClientLocal();
+        m_local = new (std::nothrow) Engine::ClientLocal( m_rank );
         if( !m_local ){
             cerr << "ERROR: can't create local agents on worker\n";
             MPI_Abort( MPI_COMM_WORLD, 0 );

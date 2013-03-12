@@ -46,7 +46,7 @@ int singleMain( int argc, char * argv[] ){
 
     auto server = Engine::Server::instance();
 
-    Engine::Client * client = new Engine::ClientLocal();
+    Engine::Client * client = new Engine::ClientLocal( 0 );
 
     server->addClient( client );
     server->createAgents();

@@ -37,7 +37,7 @@ namespace Engine{
      */
     class ClientLocal : public Client{
     public:
-        ClientLocal();
+        ClientLocal( const int id );
         virtual ~ClientLocal();
 
         bool createClass( const std::string & name ) override;
@@ -49,10 +49,12 @@ namespace Engine{
     private:
         /// list of Agents in this Client instance.
         std::vector<Agent::AgentInstance *> m_objects;
-        /// next minor id to use in object creation.
-        int m_nextID;
         /// actual simulation time
         double m_totalTime;
+        /// client ID. Also mayor ID of Agent Instances.
+        int m_ID;
+        /// next minor id to use in object creation.
+        int m_nextID;
     };
 
     //--------------------------------------------------------------------------
