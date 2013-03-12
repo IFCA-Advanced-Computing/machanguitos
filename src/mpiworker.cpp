@@ -107,8 +107,7 @@ namespace Engine{
 
         if( m_local ){
             if( !m_local->createClass( val ) ){
-                cerr << "WARNING: Class '" << val << "' can't be created" << endl;
-                MPI_Abort( MPI_COMM_WORLD, 0 );
+                cerr << "WARNING: Class '" << val << "' can't be created\n";
             }
         }
 
