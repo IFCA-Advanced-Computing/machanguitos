@@ -1,3 +1,5 @@
+AgentClass.outVariables( 'x', 'y' )
+
 function Agent:init()
    io.write( ">> Agent init\n" )
    self.x = math.random( 10 );
