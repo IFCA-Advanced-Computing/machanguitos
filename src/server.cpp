@@ -45,7 +45,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::initialize(){
-        // empty
+        auto startt = getConfigNumber( "starttime", 0 );
+
+        for( auto c: m_clients ){
+            c->setStartTime( startt );
+        }
     }
 
     //--------------------------------------------------------------------------
