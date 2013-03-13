@@ -44,6 +44,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void Server::initialize(){
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     void Server::createAgents(){
         auto nClients = m_clients.size();
         if( nClients > 0 ){

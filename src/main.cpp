@@ -49,6 +49,7 @@ int singleMain( int argc, char * argv[] ){
     Engine::Client * client = new Engine::ClientLocal( 0 );
 
     server->addClient( client );
+    server->initialize();
     server->createAgents();
     server->run();
 
@@ -85,6 +86,7 @@ int multiMain( int argc, char * argv[] ){
             server->addClient( client );
         }
 
+        server->initialize();
         server->createAgents();
         server->run();
 
