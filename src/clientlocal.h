@@ -43,6 +43,7 @@ namespace Engine{
         ClientLocal( const int id );
         virtual ~ClientLocal();
 
+        void setStartTime( const double time ) override;
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;
@@ -52,6 +53,8 @@ namespace Engine{
     private:
         /// list of Agents in this Client instance.
         std::vector<Agent::AgentInstance *> m_objects;
+        /// simulation start time
+        double m_startTime;
         /// actual simulation time
         double m_totalTime;
         /// client ID. Also mayor ID of Agent Instances.
@@ -63,6 +66,11 @@ namespace Engine{
     //--------------------------------------------------------------------------
     inline int ClientLocal::numAgents() const{
         return m_objects.size();
+    }
+
+    //--------------------------------------------------------------------------
+    inline void ClientLocal::setStartTime( const double time ){
+        m_startTime = time;
     }
 }
 

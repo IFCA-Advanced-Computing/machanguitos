@@ -37,6 +37,10 @@ namespace Engine{
         Client();
         virtual ~Client();
 
+        /** Set the simulation start time.
+            @param time start time in seconds.
+         */
+        virtual void setStartTime( const double time )=0;
         /** Create a AgentClass and save it.
             @param name name of the AgentClass.
             @retval true if it can create the AgentClass instance.

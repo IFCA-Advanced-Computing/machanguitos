@@ -34,6 +34,7 @@ namespace Engine{
         ClientRemote( int dest );
         virtual ~ClientRemote();
 
+        void setStartTime( const double time ) override;
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;

@@ -41,6 +41,8 @@ namespace Engine{
         void run();
 
     private:
+        /// Execute a Set Start Time command.
+        void runSetStartTime();
         /// Execute a Create Class command.
         void runCreateClass();
         /** Execute a Create Agents command.

@@ -75,6 +75,10 @@ namespace Engine{
                 runAgents();
                 break;
 
+            case TAG_SETSTARTTIME:
+                runSetStartTime();
+                break;
+
             case TAG_END:
                 running = false;
                 break;
@@ -83,6 +87,26 @@ namespace Engine{
                     cerr << "ERROR: not-implemented message[" << status.MPI_TAG
                          << "] on " << m_rank << endl;
             }
+        }
+
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+    //--------------------------------------------------------------------------
+    void MPIWorker::runSetStartTime(){
+#if defined(HAVE_MPI)
+        double val;
+        MPI_Status status;
+        MPI_Recv( &val, 1, MPI_DOUBLE, 0, TAG_SETSTARTTIME, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        if( m_local ){
+            m_local->setStartTime( val );
         }
 
 #else//!HAVE_MPI

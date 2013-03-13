@@ -31,7 +31,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     ClientLocal::ClientLocal( const int id )
-        : m_totalTime{0}, m_ID{id}, m_nextID{0}
+        : m_startTime{0}, m_totalTime{0}, m_ID{id}, m_nextID{0}
     {
         // empty
     }
@@ -77,7 +77,7 @@ namespace Engine{
         m_totalTime += delta;
 
         for( auto obj: m_objects ){
-            obj->outVars( m_totalTime );
+            obj->outVars( m_startTime + m_totalTime );
         }
     }
 

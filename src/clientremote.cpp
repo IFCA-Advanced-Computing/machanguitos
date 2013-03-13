@@ -60,6 +60,18 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void ClientRemote::setStartTime( const double time ){
+#if defined(HAVE_MPI)
+        int32_t val{0};
+        double t{time};
+        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
+        MPI_Send( &t, 1, MPI_DOUBLE, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+    //--------------------------------------------------------------------------
     void ClientRemote::createAgents( const std::string & name, int n ){
 #if defined(HAVE_MPI)
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
