@@ -18,3 +18,8 @@ cp $SOURCEDIR/*.css dev/
 cp $SOURCEDIR/*.js dev/
 
 git add dev/search/* dev/*.*
+
+DELETED=$(git status | grep "dev/" | grep "deleted:" | cut -d':' -f2)
+if [ -n "$DELETED" ] ; then
+    git rm $DELETED
+fi
