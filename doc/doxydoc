@@ -1,3 +1,7 @@
+/** @file doxydoc
+    @brief Doxygen main page. And group definitions.
+    @author Luis Cabellos
+ */
 /** @mainpage Machanguitos
 @section intr_sec Introduction
 The Easiest <b>Multi-Agent System</b> in the world.
