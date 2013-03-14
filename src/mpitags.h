@@ -25,10 +25,25 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine{
+    /** Create Class Message Tag.
+        @ingroup Engine
+     */
     constexpr int TAG_CREATECLASS = 1;
+    /** Create Agents Message Tag.
+        @ingroup Engine
+     */
     constexpr int TAG_CREATEAGENTS = 2;
+    /** Run Agents Message Tag.
+        @ingroup Engine
+     */
     constexpr int TAG_RUNAGENTS = 3;
+    /** Set Start Time Message Tag.
+        @ingroup Engine
+     */
     constexpr int TAG_SETSTARTTIME = 4;
+    /** End Simulation Message Tag.
+        @ingroup Engine
+     */
     constexpr int TAG_END = 66;
 }
 

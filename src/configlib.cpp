@@ -41,6 +41,19 @@ namespace Config{
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** Define config.add_agent library function.
+
+        This function sets the number of agents to simulate of a AgentClass.
+
+        @code{.lua}
+        config.add_agent( "cow", 10 );
+        config.add_agent( "cat", 3 );
+        @endcode
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int config_add_agent( lua_State *L ){
         auto name = luaL_checkstring( L, 1 );
         auto num = luaL_checknumber( L, 2 );
@@ -50,6 +63,22 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** Define config.setvars library function.
+
+        This function sets configuration variables for the simulation.
+
+        @code{.lua}
+        config.setvars( {
+                   starttime = 0.0,
+                   endtime = 10.0,
+                   iters = 10,
+         } );
+        @endcode
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int config_setvars( lua_State *L ){
         auto server = Engine::Server::instance();
         luaL_checktype( L, 1, LUA_TTABLE );
@@ -83,6 +112,9 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** List of functions of config lua library for Agent files.
+        @ingroup Config
+     */
     const luaL_Reg configlib[] = {
         {"add_agent",   config_add_agent},
         {"setvars",   config_setvars},
@@ -90,6 +122,11 @@ namespace Config{
     };
 
     //--------------------------------------------------------------------------
+    /** Load config lib in Lua State
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int openlib( lua_State *L ){
         // set functions
         luaL_register( L, "config", configlib );
@@ -117,7 +154,7 @@ namespace Config{
         path datadir(filename);
         datadir.remove_filename();
         Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
-        
+
         return true;
     }
 

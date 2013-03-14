@@ -159,6 +159,11 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
+    /** Insert formatted ScriptValue to an output stream.
+        @param out Output stream object.
+        @param val ScriptValue to be formatted and inserted into the stream.
+        @returns The Output stream object.
+     */
     std::ostream & operator<<( std::ostream &out, const ScriptValue &val );
 
 }//namespace Util

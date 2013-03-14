@@ -28,7 +28,18 @@ struct lua_State;
 
 //------------------------------------------------------------------------------
 namespace Util{
+    /** Check a lua function return, and show error message if needed.
+        @param L Lua State.
+        @param err Lua error state.
+        @retval True if Lua Return Value is OK.
+        @ingrop Util
+     */
     bool checkLuaReturn( lua_State * const L, const int err );
+    /** Warning Message function to be used inside a C function called from Lua.
+        @param fmt format string of warning.
+        @param L Lua State.
+        @ingrop Util
+     */
     void luaL_warn( lua_State *L, const char *fmt, ... );
 }
 

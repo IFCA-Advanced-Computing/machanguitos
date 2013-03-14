@@ -36,6 +36,9 @@ namespace Agent{
         @ingroup Agent
      */
     constexpr const char * SCRIPT_AGENT_NAME = "Agent";
+    /** AgentClass Table Name for Lua files.
+        @ingroup Agent
+     */
     constexpr const char * SCRIPT_AGENTCLASS_NAME = "AgentClass";
 
     //--------------------------------------------------------------------------

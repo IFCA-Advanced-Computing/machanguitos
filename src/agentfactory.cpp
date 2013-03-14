@@ -45,6 +45,15 @@ namespace Agent{
     constexpr const char * SCRIPT_AGENTCLASS_OBJ = "__c";
 
     //--------------------------------------------------------------------------
+    /** Define AgentClass.outVariables library function.
+
+        This function sets the variables that should write out in each step of
+        the simulation.
+
+        @param L lua_State.
+        @ingroup Agent
+        @retval 0 No return values to Lua.
+     */
     int ac_outVariables( lua_State *L ){
         lua_getglobal( L, SCRIPT_AGENTCLASS_NAME );
         lua_getfield( L, -1, SCRIPT_AGENTCLASS_OBJ );
@@ -65,6 +74,9 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** List of functions of AgentClass lua library for Agent files.
+        @ingroup Agent
+     */
     const luaL_Reg agentclasslib[] = {
         {"outVariables",  ac_outVariables},
         {nullptr, nullptr}

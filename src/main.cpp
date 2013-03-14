@@ -30,6 +30,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.h"
 
 //------------------------------------------------------------------------------
+/** Output application how to message
+    @param name application name
+ */
 void printHelp( const std::string & name ){
     std::cerr << name << " " << VERSION_MAJOR << "." << VERSION_MINOR
               << std::endl << std::endl;
@@ -37,6 +40,11 @@ void printHelp( const std::string & name ){
 }
 
 //------------------------------------------------------------------------------
+/** Main application function for single proccess.
+    @param argc argument count.
+    @param argv argument vector.
+    @returns exit status of the process.
+ */
 int singleMain( int argc, char * argv[] ){
     if( argc != 2 ){
         assert( argc > 0 && "Error in command args" );
@@ -66,6 +74,11 @@ int singleMain( int argc, char * argv[] ){
 #include "mpiworker.h"
 
 //------------------------------------------------------------------------------
+/** Main application function for multiple MPI proccesses.
+    @param argc argument count.
+    @param argv argument vector.
+    @returns exit status of the process.
+ */
 int multiMain( int argc, char * argv[] ){
     int nprocs, rank;
 
@@ -112,6 +125,11 @@ int multiMain( int argc, char * argv[] ){
 }
 
 //------------------------------------------------------------------------------
+/** Main function for MPI application.
+    @param argc argument count.
+    @param argv argument vector.
+    @returns exit status of the process.
+ */
 int main( int argc, char * argv[] ){
     static_assert( sizeof(double) == sizeof(int64_t), 
                    "Double type isn't 64 bits" );
@@ -138,6 +156,11 @@ int main( int argc, char * argv[] ){
 #else//!HAVE_MPI
 
 //------------------------------------------------------------------------------
+/** Main function.
+    @param argc argument count.
+    @param argv argument vector.
+    @returns exit status of the process.
+ */
 int main( int argc, char * argv[] ){
     return singleMain( argc, argv );
 }

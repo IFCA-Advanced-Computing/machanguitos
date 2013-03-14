@@ -31,6 +31,11 @@ namespace Agent{
     using namespace std;
 
     //--------------------------------------------------------------------------
+    /** Define the indexing access of Agent intances metatable.
+        @param L lua_State.
+        @ingroup Agent
+        @retval 0 No return values to Lua.
+     */
     int agent_newindex( lua_State *L ){
         if( lua_isstring( L, -2 ) ){
             string key = lua_tostring( L, -2 );
@@ -49,6 +54,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define the indexing assignment of Agent intances metatable.
+        @param L lua_State.
+        @ingroup Agent
+        @retval 0 No return values to Lua.
+     */
     int agent_index( lua_State *L ){
         if( lua_isstring( L, -1 ) ){
             string key = lua_tostring( L, -1 );
