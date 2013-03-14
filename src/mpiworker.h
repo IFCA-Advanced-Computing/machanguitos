@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 /** @file mpiworker.h
-    @brief MpiWorker Declaration.
+    @brief Engine::MPIWorker Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------

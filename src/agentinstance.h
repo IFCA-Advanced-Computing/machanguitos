@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 /** @file agentinstance.h
-    @brief AgentInstance Declaragion.
+    @brief Agent::AgentInstance Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
