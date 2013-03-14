@@ -57,7 +57,7 @@ namespace Agent{
         void init();
 
         /// Create a AgentInstance object of this AgentClass.
-        AgentInstance * createInstance( const int mayor, const int minor );
+        AgentInstance * createInstance( AgentId && id );
         /// Returns current Lua State for this AgentClass.
         lua_State * getLua() const;
         /** Add a new variable to the list of out variables. Out variables are
@@ -83,8 +83,8 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    inline AgentInstance * AgentClass::createInstance( const int mayor, const int minor ){
-        return new (std::nothrow) AgentInstance( this, mayor, minor );
+    inline AgentInstance * AgentClass::createInstance( AgentId && id ){
+        return new (std::nothrow) AgentInstance( this, std::move(id) );
     }
 
     //--------------------------------------------------------------------------

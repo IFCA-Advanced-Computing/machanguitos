@@ -36,8 +36,8 @@ namespace Agent{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    AgentInstance::AgentInstance( AgentClass * c, const int mayor, const int minor )
-        : m_class(c), m_id0(mayor), m_id1(minor)
+    AgentInstance::AgentInstance( AgentClass * c, AgentId && id )
+        : m_class{c}, m_id{std::move(id)}
     {
         assert( m_class && "Invalid Agent Class" );
     }
@@ -138,7 +138,7 @@ namespace Agent{
         for( const auto key: outKeys ){
             const auto variable = m_vals.find( key );
             if( variable != m_vals.end() ){
-                cout << t << " (" << m_id0 << ", " << m_id1 << ") : ";
+                cout << t << " (" << m_id.mayor << ", " << m_id.minor << ") : ";
                 cout << key << " = " << variable->second << endl;
                 ovars[key] = &variable->second;
             }

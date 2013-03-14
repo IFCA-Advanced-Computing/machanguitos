@@ -44,6 +44,31 @@ namespace Agent{
     class AgentClass;
 
     //--------------------------------------------------------------------------
+    /** Identifier of an AgentInstance.
+        @ingroup Agent
+     */
+    class AgentId {
+    public:
+        /** AgentId constructor.
+            @param mayor mayor number of AgentId.
+            @param minor minor number of AgentId.
+         */
+        AgentId( const int mayor, const int minor );
+
+        /// mayor component of identifier.
+        int mayor;
+        /// minor component of identifier.
+        int minor;
+    };
+
+    //--------------------------------------------------------------------------
+    inline AgentId::AgentId( const int my, const int mn )
+        : mayor{my}, minor{mn}
+    {
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     /** Instance of an AgentClass.
         @ingroup Agent
      */
@@ -51,10 +76,9 @@ namespace Agent{
     public:
         /** AgentInstance constructor. It should receive a AgentClass instance.
             @param c AgentClass instance of the Agent.
-            @param mayor mayor number of Agent Instance identifier.
-            @param minor minor number of Agent Instance identifier.
+            @param id AgentInstance identifier.
          */
-        AgentInstance( AgentClass * c, const int mayor, const int minor );
+        AgentInstance( AgentClass * c, AgentId && id );
         /// initialize the Agent calling its 'init' function on Lua.
         void init();
         /** Update the Agent calling its 'update' fuction on Lua.
@@ -80,10 +104,8 @@ namespace Agent{
         AgentClass * m_class;
         /// list of variables of the Agent.
         std::map<std::string, Util::ScriptValue> m_vals;
-        /// mayor identifier of instance.
-        int m_id0;
-        /// minor identifier of instance.
-        int m_id1;
+        /// identifier of instance.
+        AgentId m_id;
     };
 }
 
