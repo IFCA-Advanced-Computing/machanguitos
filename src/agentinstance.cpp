@@ -29,6 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.h"
 #include "agentclass.h"
+#include "datastore.h"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -134,15 +135,17 @@ namespace Agent{
     void AgentInstance::outVars( const double t ) const{
         auto outKeys = m_class->getOutVars();
 
+        auto db = IO::DataStore::instance();
+
         std::map<std::string, const ScriptValue *> ovars;
         for( const auto key: outKeys ){
             const auto variable = m_vals.find( key );
             if( variable != m_vals.end() ){
-                cout << t << " (" << m_id.mayor << ", " << m_id.minor << ") : ";
-                cout << key << " = " << variable->second << endl;
                 ovars[key] = &variable->second;
             }
         }
+
+        db->saveAgentInstance( t, m_id, ovars );
     }
 }
 
