@@ -56,14 +56,14 @@ namespace Agent{
         AgentId( const int mayor, const int minor );
 
         /// mayor component of identifier.
-        int mayor;
+        int m_mayor;
         /// minor component of identifier.
-        int minor;
+        int m_minor;
     };
 
     //--------------------------------------------------------------------------
     inline AgentId::AgentId( const int my, const int mn )
-        : mayor{my}, minor{mn}
+        : m_mayor(my), m_minor(mn)
     {
         // empty
     }
