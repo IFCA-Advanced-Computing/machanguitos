@@ -74,7 +74,7 @@ namespace Agent{
     //--------------------------------------------------------------------------
     inline std::string AgentId::str() const{
         std::ostringstream strval;
-        strval << m_mayor << "." << m_minor;
+        strval << "m" << m_mayor << ".n" << m_minor;
         return strval.str();
     }
 
