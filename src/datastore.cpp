@@ -23,6 +23,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "datastore.h"
 
 #include <iostream>
+#include <string>
+#include "mongo.h"
 
 //------------------------------------------------------------------------------
 namespace IO {
@@ -30,13 +32,60 @@ namespace IO {
     using namespace Agent;
     using namespace Util;
 
-    void DataStore::saveAgentInstance( const double time, const AgentId & id, 
+    //--------------------------------------------------------------------------
+    constexpr const char * TEST_SERVER = "localhost";
+    constexpr int TEST_PORT = 27017;
+
+    //--------------------------------------------------------------------------
+    void DataStore::saveAgentInstance( const double time, const AgentId & id,
                                        const map<string, const ScriptValue *> & vars )
     {
-        for( const auto i: vars ){
-            cout << time << " - (" << id.str() << ") : ";
-            cout << i.first << " = " << *(i.second) << endl;
+        mongo conn;
+
+        if( mongo_client( &conn , TEST_SERVER, TEST_PORT ) != MONGO_OK ) {
+            cout << "failed to connect mongo\n";
+            return;
         }
+
+        string ns{ "test.instance." + id.str() };
+
+        bson b;
+
+        bson_init( &b );
+        if( bson_append_new_oid( &b, "_id" ) != BSON_OK ){
+            cout << "failed to create bson id\n";
+            mongo_disconnect( &conn );
+            return;
+        }
+
+        bson_append_double( &b, "time", time );
+
+        for( const auto i: vars ){
+            const ScriptValue & val = *(i.second);
+            switch( val.getType() ){
+            case ScriptValue::ValueType::NIL: // empty
+                break;
+            case ScriptValue::ValueType::BOOLEAN:
+                bson_append_bool( &b, i.first.c_str(), val.getBoolean() );
+                break;
+            case ScriptValue::ValueType::NUMBER:
+                bson_append_double( &b, i.first.c_str(), val.getNumber() );
+                break;
+            case ScriptValue::ValueType::STRING:
+                bson_append_string( &b, i.first.c_str(), val.getString().c_str() );
+                break;
+            }
+        }
+
+        bson_finish( &b );
+
+        if( mongo_insert( &conn , ns.c_str() , &b, NULL ) != MONGO_OK ){
+            cout << "failed to insert in mongo\n";
+        }
+
+        bson_destroy( &b );
+
+        mongo_disconnect( &conn );
     }
 
 }//namespace IO
