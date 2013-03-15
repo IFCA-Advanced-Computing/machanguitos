@@ -51,6 +51,7 @@ namespace IO {
         }
 
         mongo conn;
+        mongo_init( &conn );
 
         if( mongo_client( &conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
             cout << "failed to connect mongo\n";
@@ -96,6 +97,7 @@ namespace IO {
         bson_destroy( &b );
 
         mongo_disconnect( &conn );
+        mongo_destroy( &conn );
     }
 
 }//namespace IO
