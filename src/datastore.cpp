@@ -40,6 +40,10 @@ namespace IO {
     void DataStore::saveAgentInstance( const double time, const AgentId & id,
                                        const map<string, const ScriptValue *> & vars )
     {
+        if( vars.size() == 0 ){
+            return;
+        }
+
         mongo conn;
 
         if( mongo_client( &conn , TEST_SERVER, TEST_PORT ) != MONGO_OK ) {
