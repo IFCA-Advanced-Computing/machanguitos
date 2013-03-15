@@ -42,12 +42,19 @@ namespace IO {
      */
     class DataStore : public Singleton<DataStore> {
     public:
+        DataStore();
+
         /** Save the agent instance step in the Data Store.
             @param time simulation time of the step.
             @param id identifier of Agent Instance.
             @param vars variables to save.
          */
         void saveAgentInstance( const double time, const Agent::AgentId & id, const std::map<std::string, const Util::ScriptValue *> & vars );
+
+    private:
+        std::string m_dbname;
+        std::string m_dbhost;
+        int m_dbport;
     };
 
 }//namespace IO

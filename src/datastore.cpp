@@ -33,8 +33,14 @@ namespace IO {
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    constexpr const char * TEST_SERVER = "localhost";
-    constexpr int TEST_PORT = 27017;
+    constexpr const char * AGENT_COLL_PREFIX = ".ins.";
+
+    //--------------------------------------------------------------------------
+    DataStore::DataStore()
+        : m_dbname{"_dataStore"}, m_dbhost{"localhost"}, m_dbport{27017}
+    {
+        // empty
+    }
 
     //--------------------------------------------------------------------------
     void DataStore::saveAgentInstance( const double time, const AgentId & id,
@@ -46,12 +52,12 @@ namespace IO {
 
         mongo conn;
 
-        if( mongo_client( &conn , TEST_SERVER, TEST_PORT ) != MONGO_OK ) {
+        if( mongo_client( &conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
             cout << "failed to connect mongo\n";
             return;
         }
 
-        string ns{ "test.instance." + id.str() };
+        string ns{ m_dbname + AGENT_COLL_PREFIX + id.str() };
 
         bson b;
 
