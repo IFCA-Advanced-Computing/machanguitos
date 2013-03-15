@@ -183,6 +183,7 @@ namespace Engine{
             m_local->runAgents( val );
         }
 
+        MPI_Barrier( MPI_COMM_WORLD );
 #else//!HAVE_MPI
         assert( false && "MPI code without MPI" );
 #endif//HAVE_MPI

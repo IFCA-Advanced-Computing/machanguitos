@@ -92,6 +92,8 @@ namespace Engine{
             @returns the value, or default if this variable is not numeric type.
          */
         double getConfigNumber( const std::string & key, const double d ) const;
+        /// Wait the clients end its simulation step
+        void waitClients() const;
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
