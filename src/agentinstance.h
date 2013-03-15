@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <string>
+#include <sstream>
 #include <map>
 
 #include "scriptvalue.h"
@@ -55,6 +56,8 @@ namespace Agent{
          */
         AgentId( const int mayor, const int minor );
 
+        std::string str() const;
+
         /// mayor component of identifier.
         int m_mayor;
         /// minor component of identifier.
@@ -66,6 +69,13 @@ namespace Agent{
         : m_mayor(my), m_minor(mn)
     {
         // empty
+    }
+
+    //--------------------------------------------------------------------------
+    inline std::string AgentId::str() const{
+        std::ostringstream strval;
+        strval << m_mayor << "." << m_minor;
+        return strval.str();
     }
 
     //--------------------------------------------------------------------------

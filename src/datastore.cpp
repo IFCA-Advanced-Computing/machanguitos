@@ -34,7 +34,7 @@ namespace IO {
                                        const map<string, const ScriptValue *> & vars )
     {
         for( const auto i: vars ){
-            cout << time << " - (" << id.m_mayor << ", " << id.m_minor << ") : ";
+            cout << time << " - (" << id.str() << ") : ";
             cout << i.first << " = " << *(i.second) << endl;
         }
     }
