@@ -68,7 +68,7 @@ namespace Engine{
          */
         void addAgents( const std::string & name, const unsigned n );
         /// configure clients and world.
-        void initialize();
+        bool initialize();
         /// create the agents for the simulation.
         void createAgents();
         /** Insert a config parameter.

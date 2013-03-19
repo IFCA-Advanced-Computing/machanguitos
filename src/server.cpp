@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config.h"
 #include "client.h"
+#include "datastore.h"
 
 #if defined(HAVE_MPI)
 #include "mpi.h"
@@ -52,12 +53,23 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void Server::initialize(){
+    bool Server::initialize(){
+        auto db = IO::DataStore::instance();
+
+        auto name = db->mkName();
+        cout << "creating datastore: " << name << endl;
+        if( !db->createStore( name ) ){
+            cerr << "ERROR: Can't create DataStore '" << name << "'\n";
+            return false;
+        }
+
         auto startt = getConfigNumber( "starttime", 0 );
 
         for( auto c: m_clients ){
             c->setStartTime( startt );
         }
+
+        return true;
     }
 
     //--------------------------------------------------------------------------
@@ -66,10 +78,10 @@ namespace Engine{
         if( nClients > 0 ){
             for( const auto p: m_numAgents ){
                 // sort, first the clients with less agents
-                std::sort( m_clients.begin(), m_clients.end(),
-                           [](Client * a, Client * b){
-                               return a->numAgents() < b->numAgents();
-                           } );
+                sort( m_clients.begin(), m_clients.end(),
+                      [](Client * a, Client * b){
+                          return a->numAgents() < b->numAgents();
+                      } );
 
                 cout << "Creating: " << p.second << " of " << p.first << endl;
                 size_t nPerClient = p.second / nClients;
