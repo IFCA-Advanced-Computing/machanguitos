@@ -20,16 +20,15 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "mpiworker.h"
-
-#include "config.h"
-#include "clientlocal.h"
+#include "mpiworker.hpp"
 #include <cassert>
-
+#include "config.h"
+#include "clientlocal.hpp"
 #if defined(HAVE_MPI)
 #include <mpi.h>
-#include "mpitags.h"
+#include "mpitags.hpp"
 #endif
+
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;

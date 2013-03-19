@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file server.h
+/** @file server.hpp
     @brief Engine::Server Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef SERVER_HPP
+#define SERVER_HPP
 
 //------------------------------------------------------------------------------
 #include <string>
@@ -117,6 +117,6 @@ namespace Engine{
 }
 
 //------------------------------------------------------------------------------
-#endif//SERVER_H
+#endif//SERVER_HPP
 
 //------------------------------------------------------------------------------

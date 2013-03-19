@@ -20,17 +20,13 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "agentfactory.h"
-
+#include "agentfactory.hpp"
 #include <cassert>
 #include <iostream>
-
 #include <boost/filesystem.hpp>
-
 #include "lua.hpp"
-
 #include "util.hpp"
-#include "agentclass.h"
+#include "agentclass.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{

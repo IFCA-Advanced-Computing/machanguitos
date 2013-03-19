@@ -20,18 +20,15 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "clientremote.h"
-
+#include "clientremote.hpp"
 #include <cstdint>
 #include <iostream>
 #include <cassert>
 #include <cstring>
-
 #include "config.h"
-
 #if defined(HAVE_MPI)
 #include <mpi.h>
-#include "mpitags.h"
+#include "mpitags.hpp"
 #endif//HAVE_MPI
 
 

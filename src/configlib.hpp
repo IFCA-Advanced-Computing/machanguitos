@@ -15,43 +15,38 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpitags.h
-    @brief Declaration of MPI message tags.
+/** @file configlib.hpp
+    @brief Configuration functions.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef MPITAGS_H
-#define MPITAGS_H
+#ifndef CONFIGLIB_HPP
+#define CONFIGLIB_HPP
 
 //------------------------------------------------------------------------------
-namespace Engine{
-    /** Create Class Message Tag.
-        @ingroup Engine
+#include <string>
+
+//------------------------------------------------------------------------------
+struct lua_State;
+
+//------------------------------------------------------------------------------
+namespace Config{
+    //--------------------------------------------------------------------------
+    /** Sets the directory to use for load data files. The data dir is relative
+        to the config file
+        @param filename name of the config file.
+        @ingroup Config
      */
-    constexpr int TAG_CREATECLASS = 1;
-    /** Create Agents Message Tag.
-        @ingroup Engine
+    bool setDataDir( const std::string & filename );
+    //--------------------------------------------------------------------------
+    /** Load a configure file.
+        @param filename name of the file to load.
+        @ingroup Config
      */
-    constexpr int TAG_CREATEAGENTS = 2;
-    /** Run Agents Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_RUNAGENTS = 3;
-    /** Set Start Time Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_SETSTARTTIME = 4;
-    /** Set Data Store info.
-        @ingroup Engine
-     */
-    constexpr int TAG_SETDATASTORE = 5;
-    /** End Simulation Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_END = 66;
+    bool load( const std::string & filename );
 }
 
 //------------------------------------------------------------------------------
-#endif//MPITAGS_H
+#endif//CONFIGLIB_HPP
 
 //------------------------------------------------------------------------------

@@ -15,38 +15,59 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file configlib.h
-    @brief Configuration functions.
+/** @file agentfactory.hpp
+    @brief Agent::AgentFactory Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef CONFIGLIB_H
-#define CONFIGLIB_H
+#ifndef AGENTFACTORY_HPP
+#define AGENTFACTORY_HPP
 
 //------------------------------------------------------------------------------
+#include "singleton.hpp"
+
 #include <string>
+#include <map>
 
 //------------------------------------------------------------------------------
-struct lua_State;
+namespace Agent{
+    //--------------------------------------------------------------------------
+    class AgentClass;
 
-//------------------------------------------------------------------------------
-namespace Config{
     //--------------------------------------------------------------------------
-    /** Sets the directory to use for load data files. The data dir is relative
-        to the config file
-        @param filename name of the config file.
-        @ingroup Config
+    /** Singleton Class that will create Agent objects.
+        @ingroup Agent
      */
-    bool setDataDir( const std::string & filename );
-    //--------------------------------------------------------------------------
-    /** Load a configure file.
-        @param filename name of the file to load.
-        @ingroup Config
-     */
-    bool load( const std::string & filename );
+    class AgentFactory : public Singleton<AgentFactory>{
+    public:
+        /** Set the directory that use to lookup Lua files for Agent classes.
+            @param dir directory to set.
+         */
+        void setDatadir( const std::string & dir );
+
+        /** Create a new AgentClass instance.
+
+            It will execute the Lua file that contains the AgentClass
+            definitions using the name of the AgentClass as filename.
+
+            @param name name of the AgentClass. Used as Lua filename also.
+         */
+        AgentClass * createClass( const std::string & name );
+
+        /** Get an already create AgentClass, if it exists.
+            @param name name of the AgentClass.
+         */
+        AgentClass * getClass( const std::string & name ) const;
+
+    private:
+        /// Directory where this class lookup for Lua files.
+        std::string m_dir{""};
+        /// List of already created AgentClass instances.
+        std::map<std::string, AgentClass *> m_classes;
+    };
 }
 
 //------------------------------------------------------------------------------
-#endif//CONFIGLIB_H
+#endif//AGENTFACTORY_HPP
 
 //------------------------------------------------------------------------------

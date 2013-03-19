@@ -20,16 +20,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "server.h"
-
-//------------------------------------------------------------------------------
+#include "server.hpp"
 #include <iostream>
 #include <algorithm>
-
 #include "config.h"
-#include "client.h"
+#include "client.hpp"
 #include "datastore.hpp"
-
 #if defined(HAVE_MPI)
 #include "mpi.h"
 #endif

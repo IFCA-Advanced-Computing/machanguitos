@@ -15,59 +15,57 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file agentfactory.h
-    @brief Agent::AgentFactory Declaration.
+/** @file mpiworker.hpp
+    @brief Engine::MPIWorker Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef AGENTFACTORY_H
-#define AGENTFACTORY_H
+#ifndef MPIWORKER_HPP
+#define MPIWORKER_HPP
 
 //------------------------------------------------------------------------------
-#include "singleton.hpp"
-
-#include <string>
-#include <map>
-
-//------------------------------------------------------------------------------
-namespace Agent{
+namespace Engine{
     //--------------------------------------------------------------------------
-    class AgentClass;
+    class Client;
 
     //--------------------------------------------------------------------------
-    /** Singleton Class that will create Agent objects.
-        @ingroup Agent
+    /** Define a MPI Process main loop to run as a Worker in a MPI program.
+
+        @ingroup Engine
      */
-    class AgentFactory : public Singleton<AgentFactory>{
+    class MPIWorker {
     public:
-        /** Set the directory that use to lookup Lua files for Agent classes.
-            @param dir directory to set.
-         */
-        void setDatadir( const std::string & dir );
+        /** Construct a MPI worker
+            @param r MPI rank
+        */
+        MPIWorker( const int r );
+        ~MPIWorker();
 
-        /** Create a new AgentClass instance.
-
-            It will execute the Lua file that contains the AgentClass
-            definitions using the name of the AgentClass as filename.
-
-            @param name name of the AgentClass. Used as Lua filename also.
-         */
-        AgentClass * createClass( const std::string & name );
-
-        /** Get an already create AgentClass, if it exists.
-            @param name name of the AgentClass.
-         */
-        AgentClass * getClass( const std::string & name ) const;
+        /// run loop of the MPI worker waiting for Server orders.
+        void run();
 
     private:
-        /// Directory where this class lookup for Lua files.
-        std::string m_dir{""};
-        /// List of already created AgentClass instances.
-        std::map<std::string, AgentClass *> m_classes;
+        /// Execute a Set Start Time command.
+        void runSetStartTime();
+        /// Execute a Set DataStore info command.
+        void runSetDataStore( const int num );
+        /// Execute a Create Class command.
+        void runCreateClass();
+        /** Execute a Create Agents command.
+            @param num number of agents to create.
+        */
+        void runCreateAgents( const int num );
+        /// Execute a End command.
+        void runAgents();
+
+        /// Own MPI rank value.
+        int m_rank;
+        /// Client instance that runs the real code.
+        Client * m_local;
     };
 }
 
 //------------------------------------------------------------------------------
-#endif//AGENTFACTORY_H
+#endif//MPIWORKER_HPP
 
 //------------------------------------------------------------------------------

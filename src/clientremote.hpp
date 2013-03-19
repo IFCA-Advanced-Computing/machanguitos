@@ -15,37 +15,28 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file clientlocal.h
-    @brief Engine::ClientLocal Declaration.
+/** @file clientremote.hpp
+    @brief Engine::ClientRemote Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef CLIENTLOCAL_H
-#define CLIENTLOCAL_H
+#ifndef CLIENTREMOTE_HPP
+#define CLIENTREMOTE_HPP
 
-//------------------------------------------------------------------------------
-#include <vector>
-
-#include "client.h"
-
-//------------------------------------------------------------------------------
-namespace Agent{
-    class AgentInstance;
-}
+#include "client.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    /** Client instance that runs in local proccess.
-        @ingroup Engine
+    /** Client instance that acts as proxy of a remote MPI worker.
+        @ingroup: Engine
      */
-    class ClientLocal final : public Client{
+    class ClientRemote final : public Client{
     public:
-        /**
-           @param id Client Identifier, and mayor number of Agents in this client.
+        /** Constructor.
+            @param dest MPI rank of remote worker.
          */
-        ClientLocal( const int id );
-        virtual ~ClientLocal();
+        ClientRemote( int dest );
+        virtual ~ClientRemote();
 
         void setStartTime( const double time ) override;
         void setDataStore( const std::string & name,
@@ -57,30 +48,19 @@ namespace Engine{
         void end() override;
 
     private:
-        /// list of Agents in this Client instance.
-        std::vector<Agent::AgentInstance *> m_objects;
-        /// simulation start time
-        double m_startTime;
-        /// actual simulation time
-        double m_totalTime;
-        /// client ID. Also mayor ID of Agent Instances.
-        int m_ID;
-        /// next minor id to use in object creation.
-        int m_nextID;
+        /// MPI rank of remote worker.
+        int m_dest;
+        /// number of Agents created in remote.
+        int m_numAgents;
     };
 
     //--------------------------------------------------------------------------
-    inline int ClientLocal::numAgents() const{
-        return m_objects.size();
-    }
-
-    //--------------------------------------------------------------------------
-    inline void ClientLocal::setStartTime( const double time ){
-        m_startTime = time;
+    inline int ClientRemote::numAgents() const{
+        return m_numAgents;
     }
 }
 
 //------------------------------------------------------------------------------
-#endif//CLIENTLOCAL_H
+#endif//CLIENTREMOTE_HPP
 
 //------------------------------------------------------------------------------

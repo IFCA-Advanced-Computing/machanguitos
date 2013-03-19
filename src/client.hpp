@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file client.h
+/** @file client.hpp
     @brief Engine::Client Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
 //------------------------------------------------------------------------------
 #include <string>
@@ -75,6 +75,6 @@ namespace Engine{
 }
 
 //------------------------------------------------------------------------------
-#endif//CLIENT_H
+#endif//CLIENT_HPP
 
 //------------------------------------------------------------------------------

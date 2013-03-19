@@ -23,11 +23,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cassert>
 #include <iostream>
-
 #include "config.h"
-#include "configlib.h"
-#include "server.h"
-#include "clientlocal.h"
+#include "configlib.hpp"
+#include "server.hpp"
+#include "clientlocal.hpp"
 
 //------------------------------------------------------------------------------
 /** Output application how to message
@@ -72,8 +71,8 @@ int singleMain( int argc, char * argv[] ){
 
 #if defined(HAVE_MPI)
 #include "mpi.h"
-#include "clientremote.h"
-#include "mpiworker.h"
+#include "clientremote.hpp"
+#include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
 /** Main application function for multiple MPI proccesses.

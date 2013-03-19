@@ -20,11 +20,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "agentclass.h"
-
+#include "agentclass.hpp"
 #include <iostream>
-
-#include "agentinstance.h"
+#include "agentinstance.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{

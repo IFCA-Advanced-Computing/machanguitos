@@ -15,57 +15,43 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpiworker.h
-    @brief Engine::MPIWorker Declaration.
+/** @file mpitags.hpp
+    @brief Declaration of MPI message tags.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef MPIWORKER_H
-#define MPIWORKER_H
+#ifndef MPITAGS_HPP
+#define MPITAGS_HPP
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    class Client;
-
-    //--------------------------------------------------------------------------
-    /** Define a MPI Process main loop to run as a Worker in a MPI program.
-
+    /** Create Class Message Tag.
         @ingroup Engine
      */
-    class MPIWorker {
-    public:
-        /** Construct a MPI worker
-            @param r MPI rank
-        */
-        MPIWorker( const int r );
-        ~MPIWorker();
-
-        /// run loop of the MPI worker waiting for Server orders.
-        void run();
-
-    private:
-        /// Execute a Set Start Time command.
-        void runSetStartTime();
-        /// Execute a Set DataStore info command.
-        void runSetDataStore( const int num );
-        /// Execute a Create Class command.
-        void runCreateClass();
-        /** Execute a Create Agents command.
-            @param num number of agents to create.
-        */
-        void runCreateAgents( const int num );
-        /// Execute a End command.
-        void runAgents();
-
-        /// Own MPI rank value.
-        int m_rank;
-        /// Client instance that runs the real code.
-        Client * m_local;
-    };
+    constexpr int TAG_CREATECLASS = 1;
+    /** Create Agents Message Tag.
+        @ingroup Engine
+     */
+    constexpr int TAG_CREATEAGENTS = 2;
+    /** Run Agents Message Tag.
+        @ingroup Engine
+     */
+    constexpr int TAG_RUNAGENTS = 3;
+    /** Set Start Time Message Tag.
+        @ingroup Engine
+     */
+    constexpr int TAG_SETSTARTTIME = 4;
+    /** Set Data Store info.
+        @ingroup Engine
+     */
+    constexpr int TAG_SETDATASTORE = 5;
+    /** End Simulation Message Tag.
+        @ingroup Engine
+     */
+    constexpr int TAG_END = 66;
 }
 
 //------------------------------------------------------------------------------
-#endif//MPIWORKER_H
+#endif//MPITAGS_HPP
 
 //------------------------------------------------------------------------------

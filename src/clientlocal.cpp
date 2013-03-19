@@ -20,14 +20,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "clientlocal.h"
-
+#include "clientlocal.hpp"
 #include <iostream>
 #include <cassert>
-
-#include "agentfactory.h"
-#include "agentclass.h"
-#include "agentinstance.h"
+#include "agentfactory.hpp"
+#include "agentclass.hpp"
+#include "agentinstance.hpp"
 #include "datastore.hpp"
 
 //------------------------------------------------------------------------------

@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file agentinstance.h
+/** @file agentinstance.hpp
     @brief Agent::AgentInstance Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef AGENTINSTANCE_H
-#define AGENTINSTANCE_H
+#ifndef AGENTINSTANCE_HPP
+#define AGENTINSTANCE_HPP
 
 //------------------------------------------------------------------------------
 #include <string>
@@ -86,6 +86,6 @@ namespace Agent{
 }
 
 //------------------------------------------------------------------------------
-#endif//AGENTINSTANCE_H
+#endif//AGENTINSTANCE_HPP
 
 //------------------------------------------------------------------------------
