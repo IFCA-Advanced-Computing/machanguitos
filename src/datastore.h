@@ -82,6 +82,10 @@ namespace IO {
         void setDataStorePort( const uint16_t port );
 
     private:
+        /// connect with datastore.
+        /// retval true if connection was ok.
+        bool connect();
+
         /// datastore name.
         std::string m_dbname;
         /// datastore host.

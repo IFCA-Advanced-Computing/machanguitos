@@ -37,6 +37,9 @@ namespace IO {
     using namespace boost;
 
     //--------------------------------------------------------------------------
+    /** private prefix of agent collections in mongo.
+        @ingroup IO
+     */
     constexpr const char * AGENT_COLL_PREFIX = ".ins.";
 
     //--------------------------------------------------------------------------
@@ -76,11 +79,20 @@ namespace IO {
     }
 
     //--------------------------------------------------------------------------
+    bool DataStore::connect() {
+        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
+            cout << "failed to connect '" << m_dbhost << ":" << m_dbport << "'\n";
+            cout << "  mongo error: " << m_conn.err << endl;
+            return false;
+        }
+        return true;
+    }
+
+    //--------------------------------------------------------------------------
     bool DataStore::createStore( const std::string & name ){
         m_dbname = name;
 
-        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
-            cout << "failed to connect mongo\n";
+        if( !connect() ) {
             return false;
         }
 
@@ -102,8 +114,7 @@ namespace IO {
             return;
         }
 
-        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
-            cout << "failed to connect mongo\n";
+        if( !connect() ) {
             return;
         }
 
