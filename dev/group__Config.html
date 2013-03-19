@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -110,17 +110,225 @@ function toggleVisibility(linkObj) {
 </script>
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <h1>Configuration classes.</h1>  </div>
 </div>
 <div class="contents">
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#ga93be0c9ad611a8593a89d80d24c7634e">Config::config_add_agent</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define config.add_agent library function.  <a href="#ga93be0c9ad611a8593a89d80d24c7634e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#ga75fcb39db1e8b410fb80c0f6c125e2db">Config::config_setvars</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define config.setvars library function.  <a href="#ga75fcb39db1e8b410fb80c0f6c125e2db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#gaadf2879127c849e5d100bd1858e1d351">Config::openlib</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load config lib in Lua State.  <a href="#gaadf2879127c849e5d100bd1858e1d351"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#gaf412da0da0057eb34b237ca8f216ceec">Config::setDataDir</a> (const std::string &amp;filename)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the directory to use for load data files.  <a href="#gaf412da0da0057eb34b237ca8f216ceec"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#ga5e3336e5f83b8cea516039537861e9e6">Config::load</a> (const std::string &amp;filename)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a configure file.  <a href="#ga5e3336e5f83b8cea516039537861e9e6"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const luaL_Reg&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Config.html#ga1f17e962a69bb0af7faa6c0f95890d50">Config::configlib</a> []</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">List of functions of config lua library for Agent files.  <a href="#ga1f17e962a69bb0af7faa6c0f95890d50"></a><br/></td></tr>
 </table>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga93be0c9ad611a8593a89d80d24c7634e"></a><!-- doxytag: member="Config::config_add_agent" ref="ga93be0c9ad611a8593a89d80d24c7634e" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Config::config_add_agent </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Define config.add_agent library function. </p>
+<p>This function sets the number of agents to simulate of a AgentClass.</p>
+<div class="fragment"><pre class="fragment"> {.lua}
+        config.add_agent( <span class="stringliteral">&quot;cow&quot;</span>, 10 );
+        config.add_agent( <span class="stringliteral">&quot;cat&quot;</span>, 3 );
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00059">59</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga75fcb39db1e8b410fb80c0f6c125e2db"></a><!-- doxytag: member="Config::config_setvars" ref="ga75fcb39db1e8b410fb80c0f6c125e2db" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Config::config_setvars </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Define config.setvars library function. </p>
+<p>This function sets configuration variables for the simulation.</p>
+<div class="fragment"><pre class="fragment"> {.lua}
+        config.setvars( {
+                   starttime = 0.0,
+                   endtime = 10.0,
+                   iters = 10,
+         } );
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00084">84</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga5e3336e5f83b8cea516039537861e9e6"></a><!-- doxytag: member="Config::load" ref="ga5e3336e5f83b8cea516039537861e9e6" args="(const std::string &amp;filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Config::load </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Load a configure file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>name of the file to load. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00164">164</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaadf2879127c849e5d100bd1858e1d351"></a><!-- doxytag: member="Config::openlib" ref="gaadf2879127c849e5d100bd1858e1d351" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Config::openlib </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Load config lib in Lua State. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00132">132</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaf412da0da0057eb34b237ca8f216ceec"></a><!-- doxytag: member="Config::setDataDir" ref="gaf412da0da0057eb34b237ca8f216ceec" args="(const std::string &amp;filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Config::setDataDir </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the directory to use for load data files. </p>
+<p>The data dir is relative to the config file </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>name of the config file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00148">148</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="ga1f17e962a69bb0af7faa6c0f95890d50"></a><!-- doxytag: member="Config::configlib" ref="ga1f17e962a69bb0af7faa6c0f95890d50" args="[]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const luaL_Reg Config::configlib[]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Initial value:</b><div class="fragment"><pre class="fragment"> {
+        {<span class="stringliteral">&quot;add_agent&quot;</span>,   <a class="code" href="group__Config.html#ga93be0c9ad611a8593a89d80d24c7634e" title="Define config.add_agent library function.">config_add_agent</a>},
+        {<span class="stringliteral">&quot;setvars&quot;</span>,   <a class="code" href="group__Config.html#ga75fcb39db1e8b410fb80c0f6c125e2db" title="Define config.setvars library function.">config_setvars</a>},
+        {<span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>}
+    }
+</pre></div>
+<p>List of functions of config lua library for Agent files. </p>
+
+<p>Definition at line <a class="el" href="configlib_8cpp_source.html#l00120">120</a> of file <a class="el" href="configlib_8cpp_source.html">configlib.cpp</a>.</p>
+
+</div>
+</div>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -130,7 +338,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

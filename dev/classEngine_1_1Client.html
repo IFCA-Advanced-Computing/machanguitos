@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -136,13 +136,17 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classEngine_1_1Client__inherit__graph.png" border="0" usemap="#Engine_1_1Client_inherit__map" alt="Inheritance graph"/></div>
 <map name="Engine_1_1Client_inherit__map" id="Engine_1_1Client_inherit__map">
-<area shape="rect" id="node3" href="classEngine_1_1ClientLocal.html" title="Client instance that runs in local proccess." alt="" coords="5,252,139,441"/><area shape="rect" id="node5" href="classEngine_1_1ClientRemote.html" title="Client instance that acts as proxy of a remote MPI worker." alt="" coords="163,243,312,450"/></map>
+<area shape="rect" id="node3" href="classEngine_1_1final.html" title="Client instance that runs in local proccess." alt="" coords="5,278,136,762"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classEngine_1_1Client-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Client.html#a6bdc3ad131ac0674776ef76a9cf9d65c">setStartTime</a> (const double time)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the simulation start time.  <a href="#a6bdc3ad131ac0674776ef76a9cf9d65c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Client.html#a979e1b4c39d3f0bff1f4bd24fd8963fd">setDataStore</a> (const std::string &amp;name, const std::string &amp;host, const uint16_t port)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Data Store info.  <a href="#a979e1b4c39d3f0bff1f4bd24fd8963fd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Client.html#ae9aa1d24b06ea27ca22ed75360772b10">createClass</a> (const std::string &amp;name)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a AgentClass and save it.  <a href="#ae9aa1d24b06ea27ca22ed75360772b10"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Client.html#a558a99f99272023a86e9adc1b74fc8da">createAgents</a> (const std::string &amp;name, int n)=0</td></tr>
@@ -160,7 +164,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="textblock"><p><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> Interface. </p>
 <p>A <a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> is the class that should maintain the Agents and execute its code. </p>
 
-<p>Definition at line <a class="el" href="client_8h_source.html#l00018">18</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+<p>Definition at line <a class="el" href="client_8h_source.html#l00039">39</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a558a99f99272023a86e9adc1b74fc8da"></a><!-- doxytag: member="Engine::Client::createAgents" ref="a558a99f99272023a86e9adc1b74fc8da" args="(const std::string &amp;name, int n)=0" -->
 <div class="memitem">
@@ -196,7 +200,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classEngine_1_1ClientLocal.html#aaad1ef08c116e74f93d26bf36c5bfaa9">Engine::ClientLocal</a>, and <a class="el" href="classEngine_1_1ClientRemote.html#ad0c140f79f7903e48493228b7b233a13">Engine::ClientRemote</a>.</p>
+<p>Implemented in <a class="el" href="classEngine_1_1final.html#ae98ac00f51f47a023d7f41773d716369">Engine::final</a>, and <a class="el" href="classEngine_1_1final.html#ae98ac00f51f47a023d7f41773d716369">Engine::final</a>.</p>
 
 </div>
 </div>
@@ -229,7 +233,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classEngine_1_1ClientLocal.html#abaa534c881406d3bb55b16bcc8e8f5e3">Engine::ClientLocal</a>, and <a class="el" href="classEngine_1_1ClientRemote.html#af2beedecaedf9d2702086bc53893045f">Engine::ClientRemote</a>.</p>
+<p>Implemented in <a class="el" href="classEngine_1_1final.html#a0bccf9bdd8e259bf9b7e307717540527">Engine::final</a>, and <a class="el" href="classEngine_1_1final.html#a0bccf9bdd8e259bf9b7e307717540527">Engine::final</a>.</p>
 
 </div>
 </div>
@@ -256,7 +260,79 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classEngine_1_1ClientLocal.html#a4faace4271ab7aaa5f933994fd14bd28">Engine::ClientLocal</a>, and <a class="el" href="classEngine_1_1ClientRemote.html#a1dfd1a71ae4450aec135cea680aa4179">Engine::ClientRemote</a>.</p>
+<p>Implemented in <a class="el" href="classEngine_1_1final.html#a5e8643d861bf1926f79dba3e42799ff4">Engine::final</a>, and <a class="el" href="classEngine_1_1final.html#a5e8643d861bf1926f79dba3e42799ff4">Engine::final</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a979e1b4c39d3f0bff1f4bd24fd8963fd"></a><!-- doxytag: member="Engine::Client::setDataStore" ref="a979e1b4c39d3f0bff1f4bd24fd8963fd" args="(const std::string &amp;name, const std::string &amp;host, const uint16_t port)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Engine::Client::setDataStore </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the Data Store info. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>datastore name. </td></tr>
+    <tr><td class="paramname">host</td><td>datastore host name. </td></tr>
+    <tr><td class="paramname">port</td><td>datastore host port. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classEngine_1_1final.html#ae11e901489719cd7bd798b829dcb6b18">Engine::final</a>, and <a class="el" href="classEngine_1_1final.html#ae11e901489719cd7bd798b829dcb6b18">Engine::final</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6bdc3ad131ac0674776ef76a9cf9d65c"></a><!-- doxytag: member="Engine::Client::setStartTime" ref="a6bdc3ad131ac0674776ef76a9cf9d65c" args="(const double time)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Engine::Client::setStartTime </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the simulation start time. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>start time in seconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classEngine_1_1final.html#a6fb34ac817d80e75ed09126cd636b478">Engine::final</a>, and <a class="el" href="classEngine_1_1final.html#a6fb34ac817d80e75ed09126cd636b478">Engine::final</a>.</p>
 
 </div>
 </div>
@@ -270,7 +346,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
     <ul>
       <li class="navelem"><b>Engine</b>      </li>
       <li class="navelem"><a class="el" href="classEngine_1_1Client.html">Client</a>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -280,7 +356,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

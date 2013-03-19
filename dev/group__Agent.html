@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -112,6 +112,7 @@ function toggleVisibility(linkObj) {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <h1>Multi-Agent definitions.</h1>  </div>
@@ -124,22 +125,163 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Class with Class definitions of Agents.  <a href="classAgent_1_1AgentClass.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent_1_1AgentFactory.html">Agent::AgentFactory</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSingleton.html" title="Singleton behaviour to add to a Class.">Singleton</a> Class that will create Agent objects.  <a href="classAgent_1_1AgentFactory.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent_1_1AgentId.html">Agent::AgentId</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of an <a class="el" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a>.  <a href="classAgent_1_1AgentId.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAgent_1_1AgentInstance.html">Agent::AgentInstance</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of an <a class="el" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a>.  <a href="classAgent_1_1AgentInstance.html#_details">More...</a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#ga086a67052aa2cb8c8bc02b9ec228f580">Agent::agent_newindex</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the indexing access of Agent intances metatable.  <a href="#ga086a67052aa2cb8c8bc02b9ec228f580"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#ga5ec8fe935907f478c801cc028679fe63">Agent::agent_index</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the indexing assignment of Agent intances metatable.  <a href="#ga5ec8fe935907f478c801cc028679fe63"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#ga41433555cf3d604791d6529332c6259d">Agent::ac_outVariables</a> (lua_State *L)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define AgentClass.outVariables library function.  <a href="#ga41433555cf3d604791d6529332c6259d"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa12bfe607170eba5f3553ea27e19c679"></a><!-- doxytag: member="Agent::SCRIPT_AGENT_NAME" ref="gaa12bfe607170eba5f3553ea27e19c679" args="" -->
 constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#gaa12bfe607170eba5f3553ea27e19c679">Agent::SCRIPT_AGENT_NAME</a> = &quot;Agent&quot;</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Agent Table Name for Lua files. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab70fe55cf7584f6e7f765e03afdd5dd2"></a><!-- doxytag: member="Agent::SCRIPT_AGENTCLASS_NAME" ref="gab70fe55cf7584f6e7f765e03afdd5dd2" args="" -->
+constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#gab70fe55cf7584f6e7f765e03afdd5dd2">Agent::SCRIPT_AGENTCLASS_NAME</a> = &quot;AgentClass&quot;</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a> Table Name for Lua files. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9b91e132ae63b258096a47b35c3e9b80"></a><!-- doxytag: member="Agent::SCRIPT_AGENTCLASS_OBJ" ref="ga9b91e132ae63b258096a47b35c3e9b80" args="" -->
+constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#ga9b91e132ae63b258096a47b35c3e9b80">Agent::SCRIPT_AGENTCLASS_OBJ</a> = &quot;__c&quot;</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">private name of <a class="el" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> objects in Lua tables. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const luaL_Reg&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#gac08b75c42e8adefd290dc7c993b2d19d">Agent::agentclasslib</a> []</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">List of functions of <a class="el" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a> lua library for Agent files.  <a href="#gac08b75c42e8adefd290dc7c993b2d19d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab65a9178597856ab26b379b2ba3e3df1"></a><!-- doxytag: member="Agent::SCRIPT_AGENT_OBJ" ref="gab65a9178597856ab26b379b2ba3e3df1" args="" -->
 constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Agent.html#gab65a9178597856ab26b379b2ba3e3df1">Agent::SCRIPT_AGENT_OBJ</a> = &quot;__obj&quot;</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">private name of <a class="el" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> objects in Lua tables. <br/></td></tr>
 </table>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga41433555cf3d604791d6529332c6259d"></a><!-- doxytag: member="Agent::ac_outVariables" ref="ga41433555cf3d604791d6529332c6259d" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Agent::ac_outVariables </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Define AgentClass.outVariables library function. </p>
+<p>This function sets the variables that should write out in each step of the simulation.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="agentfactory_8cpp_source.html#l00059">59</a> of file <a class="el" href="agentfactory_8cpp_source.html">agentfactory.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga5ec8fe935907f478c801cc028679fe63"></a><!-- doxytag: member="Agent::agent_index" ref="ga5ec8fe935907f478c801cc028679fe63" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Agent::agent_index </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Define the indexing assignment of Agent intances metatable. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="agentclass_8cpp_source.html#l00063">63</a> of file <a class="el" href="agentclass_8cpp_source.html">agentclass.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga086a67052aa2cb8c8bc02b9ec228f580"></a><!-- doxytag: member="Agent::agent_newindex" ref="ga086a67052aa2cb8c8bc02b9ec228f580" args="(lua_State *L)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Agent::agent_newindex </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *&#160;</td>
+          <td class="paramname"><em>L</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Define the indexing access of Agent intances metatable. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>lua_State.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>No return values to Lua. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="agentclass_8cpp_source.html#l00040">40</a> of file <a class="el" href="agentclass_8cpp_source.html">agentclass.cpp</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="gac08b75c42e8adefd290dc7c993b2d19d"></a><!-- doxytag: member="Agent::agentclasslib" ref="gac08b75c42e8adefd290dc7c993b2d19d" args="[]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const luaL_Reg Agent::agentclasslib[]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Initial value:</b><div class="fragment"><pre class="fragment"> {
+        {<span class="stringliteral">&quot;outVariables&quot;</span>,  <a class="code" href="group__Agent.html#ga41433555cf3d604791d6529332c6259d" title="Define AgentClass.outVariables library function.">ac_outVariables</a>},
+        {<span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>}
+    }
+</pre></div>
+<p>List of functions of <a class="el" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a> lua library for Agent files. </p>
+
+<p>Definition at line <a class="el" href="agentfactory_8cpp_source.html#l00082">82</a> of file <a class="el" href="agentfactory_8cpp_source.html">agentfactory.cpp</a>.</p>
+
+</div>
+</div>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -149,7 +291,7 @@ constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a cla
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

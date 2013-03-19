@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -98,6 +98,7 @@ function toggleVisibility(linkObj) {
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,53 +120,84 @@ function toggleVisibility(linkObj) {
 <h1>agentclass.h</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#ifndef AGENTCLASS_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#define AGENTCLASS_H</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a>00005 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;lua.hpp&quot;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;agentinstance.h&quot;</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00010"></a>00010 <span class="keyword">namespace </span>Agent{
-<a name="l00011"></a>00011     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00015"></a><a class="code" href="group__Agent.html#gaa12bfe607170eba5f3553ea27e19c679">00015</a> <span class="comment"></span>    constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="group__Agent.html#gaa12bfe607170eba5f3553ea27e19c679" title="Agent Table Name for Lua files.">SCRIPT_AGENT_NAME</a> = <span class="stringliteral">&quot;Agent&quot;</span>;
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00021"></a><a class="code" href="classAgent_1_1AgentClass.html">00021</a> <span class="comment"></span>    <span class="keyword">class </span><a class="code" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a>{
-<a name="l00022"></a>00022     <span class="keyword">public</span>:
-<a name="l00026"></a>00026         <a class="code" href="classAgent_1_1AgentClass.html#a758b4f086811a964b3ef087d70cb2848" title="Constructs the AgentClass object with a initialiced Lua State.">AgentClass</a>( lua_State * L );
-<a name="l00027"></a>00027         ~<a class="code" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a>();
-<a name="l00028"></a>00028 
-<a name="l00030"></a>00030         <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> * <a class="code" href="classAgent_1_1AgentClass.html#a459b5299c807d06833743085295c174d" title="Create a AgentInstance object of this AgentClass.">createInstance</a>();
-<a name="l00032"></a>00032         lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d" title="Returns current Lua State for this AgentClass.">getLua</a>() <span class="keyword">const</span>;
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034     <span class="keyword">private</span>:
-<a name="l00036"></a><a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9">00036</a>         lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9" title="Lua State.">m_L</a>;
-<a name="l00037"></a>00037     };
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00040"></a><a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d">00040</a>     <span class="keyword">inline</span> lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d" title="Returns current Lua State for this AgentClass.">AgentClass::getLua</a>()<span class="keyword"> const</span>{
-<a name="l00041"></a>00041         <span class="keywordflow">return</span> <a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9" title="Lua State.">m_L</a>;
-<a name="l00042"></a>00042     }
+<a href="agentclass_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment">Machanguitos is The Easiest Multi-Agent System in the world. Work done at The</span>
+<a name="l00003"></a>00003 <span class="comment">Institute of Physics of Cantabria (IFCA).</span>
+<a name="l00004"></a>00004 <span class="comment">Copyright (C) 2013  Luis Cabellos</span>
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">This program is free software: you can redistribute it and/or modify it under</span>
+<a name="l00007"></a>00007 <span class="comment">the terms of the GNU General Public License as published by the Free Software</span>
+<a name="l00008"></a>00008 <span class="comment">Foundation, either version 3 of the License, or (at your option) any later</span>
+<a name="l00009"></a>00009 <span class="comment">version.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<a name="l00012"></a>00012 <span class="comment">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span>
+<a name="l00013"></a>00013 <span class="comment">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<a name="l00014"></a>00014 <span class="comment"></span>
+<a name="l00015"></a>00015 <span class="comment">You should have received a copy of the GNU General Public License along with</span>
+<a name="l00016"></a>00016 <span class="comment">this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00017"></a>00017 <span class="comment">*******************************************************************************/</span>
+<a name="l00022"></a>00022 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#ifndef AGENTCLASS_H</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define AGENTCLASS_H</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &lt;set&gt;</span>
+<a name="l00028"></a>00028 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;lua.hpp&quot;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="agentinstance_8h.html" title="Agent::AgentInstance Declaration.">agentinstance.h</a>&quot;</span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00033"></a>00033 <span class="keyword">namespace </span>Agent{
+<a name="l00034"></a>00034     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00038"></a><a class="code" href="group__Agent.html#gaa12bfe607170eba5f3553ea27e19c679">00038</a> <span class="comment"></span>    constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="group__Agent.html#gaa12bfe607170eba5f3553ea27e19c679" title="Agent Table Name for Lua files.">SCRIPT_AGENT_NAME</a> = <span class="stringliteral">&quot;Agent&quot;</span>;
+<a name="l00042"></a><a class="code" href="group__Agent.html#gab70fe55cf7584f6e7f765e03afdd5dd2">00042</a>     constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="group__Agent.html#gab70fe55cf7584f6e7f765e03afdd5dd2" title="AgentClass Table Name for Lua files.">SCRIPT_AGENTCLASS_NAME</a> = <span class="stringliteral">&quot;AgentClass&quot;</span>;
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00045"></a><a class="code" href="classAgent_1_1AgentClass.html#a459b5299c807d06833743085295c174d">00045</a>     <span class="keyword">inline</span> <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> * <a class="code" href="classAgent_1_1AgentClass.html#a459b5299c807d06833743085295c174d" title="Create a AgentInstance object of this AgentClass.">AgentClass::createInstance</a>(){
-<a name="l00046"></a>00046         <span class="keywordflow">return</span> (<span class="keyword">new</span> (std::nothrow) <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a>(<span class="keyword">this</span>));
-<a name="l00047"></a>00047     }
-<a name="l00048"></a>00048 }
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00051"></a>00051 <span class="preprocessor">#endif//AGENTCLASS_H</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>
-<a name="l00053"></a>00053 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00048"></a><a class="code" href="classAgent_1_1AgentClass.html">00048</a> <span class="comment"></span>    <span class="keyword">class </span><a class="code" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a>{
+<a name="l00049"></a>00049     <span class="keyword">public</span>:
+<a name="l00053"></a>00053         <a class="code" href="classAgent_1_1AgentClass.html#a758b4f086811a964b3ef087d70cb2848" title="Constructs the AgentClass object with a initialiced Lua State.">AgentClass</a>( lua_State * L );
+<a name="l00054"></a>00054         ~<a class="code" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents.">AgentClass</a>();
+<a name="l00055"></a>00055 
+<a name="l00057"></a>00057         <span class="keywordtype">void</span> <a class="code" href="classAgent_1_1AgentClass.html#a5bd61777505b5526b788db825735edc9" title="init class instance lua state">init</a>();
+<a name="l00058"></a>00058 
+<a name="l00060"></a>00060         <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> * <a class="code" href="classAgent_1_1AgentClass.html#a80cc77f295767c109857d500a309ed3d" title="Create a AgentInstance object of this AgentClass.">createInstance</a>( <a class="code" href="classAgent_1_1AgentId.html" title="Identifier of an AgentInstance.">AgentId</a> &amp;&amp; <span class="keywordtype">id</span> );
+<a name="l00062"></a>00062         lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d" title="Returns current Lua State for this AgentClass.">getLua</a>() <span class="keyword">const</span>;
+<a name="l00068"></a>00068         <span class="keywordtype">void</span> <a class="code" href="classAgent_1_1AgentClass.html#a8e0f98b1bacca1f98b3e77cd103bad1c" title="Add a new variable to the list of out variables.">insertOutVariable</a>( std::string &amp;&amp; key );
+<a name="l00070"></a>00070         <span class="keyword">const</span> std::set&lt;std::string&gt; &amp; <a class="code" href="classAgent_1_1AgentClass.html#a41956faddefe067c4f9bb67817af8c2a" title="Returns the list of output variables.">getOutVars</a>() <span class="keyword">const</span>;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     <span class="keyword">private</span>:
+<a name="l00074"></a><a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9">00074</a>         lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9" title="Lua State.">m_L</a>;
+<a name="l00075"></a>00075 
+<a name="l00077"></a><a class="code" href="classAgent_1_1AgentClass.html#a58cc1d620667f882670f432f56da0de4">00077</a>         std::set&lt; std::string &gt; <a class="code" href="classAgent_1_1AgentClass.html#a58cc1d620667f882670f432f56da0de4" title="list of variables to out">m_outVars</a>;
+<a name="l00078"></a>00078     };
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00081"></a><a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d">00081</a>     <span class="keyword">inline</span> lua_State * <a class="code" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d" title="Returns current Lua State for this AgentClass.">AgentClass::getLua</a>()<span class="keyword"> const</span>{
+<a name="l00082"></a>00082         <span class="keywordflow">return</span> <a class="code" href="classAgent_1_1AgentClass.html#a296a08dbaa26b8560559aa2631cb00f9" title="Lua State.">m_L</a>;
+<a name="l00083"></a>00083     }
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00086"></a><a class="code" href="classAgent_1_1AgentClass.html#a80cc77f295767c109857d500a309ed3d">00086</a>     <span class="keyword">inline</span> <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a> * <a class="code" href="classAgent_1_1AgentClass.html#a80cc77f295767c109857d500a309ed3d" title="Create a AgentInstance object of this AgentClass.">AgentClass::createInstance</a>( <a class="code" href="classAgent_1_1AgentId.html" title="Identifier of an AgentInstance.">AgentId</a> &amp;&amp; <span class="keywordtype">id</span> ){
+<a name="l00087"></a>00087         <span class="keywordflow">return</span> <span class="keyword">new</span> (std::nothrow) <a class="code" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass.">AgentInstance</a>( <span class="keyword">this</span>, std::move(<span class="keywordtype">id</span>) );
+<a name="l00088"></a>00088     }
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00091"></a><a class="code" href="classAgent_1_1AgentClass.html#a41956faddefe067c4f9bb67817af8c2a">00091</a>     <span class="keyword">inline</span> <span class="keyword">const</span> std::set&lt;std::string&gt; &amp; <a class="code" href="classAgent_1_1AgentClass.html#a41956faddefe067c4f9bb67817af8c2a" title="Returns the list of output variables.">AgentClass::getOutVars</a>()<span class="keyword"> const </span>{
+<a name="l00092"></a>00092         <span class="keywordflow">return</span> <a class="code" href="classAgent_1_1AgentClass.html#a58cc1d620667f882670f432f56da0de4" title="list of variables to out">m_outVars</a>;
+<a name="l00093"></a>00093     }
+<a name="l00094"></a>00094 }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00097"></a>00097 <span class="preprocessor">#endif//AGENTCLASS_H</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span>
+<a name="l00099"></a>00099 <span class="comment">//------------------------------------------------------------------------------</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><b>agentclass.h</b>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="navelem"><a class="el" href="agentclass_8h.html">agentclass.h</a>      </li>
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -175,7 +207,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

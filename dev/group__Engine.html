@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -111,7 +111,8 @@ function toggleVisibility(linkObj) {
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <h1>Main classes to run the Multi-Agent System.</h1>  </div>
 </div>
@@ -121,20 +122,38 @@ function toggleVisibility(linkObj) {
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Client.html">Engine::Client</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> Interface.  <a href="classEngine_1_1Client.html#_details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html">Engine::ClientLocal</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> instance that runs in local proccess.  <a href="classEngine_1_1ClientLocal.html#_details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientRemote.html">Engine::ClientRemote</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> instance that acts as proxy of a remote MPI worker.  <a href="classEngine_1_1ClientRemote.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1final.html">Engine::final</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> instance that runs in local proccess.  <a href="classEngine_1_1final.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1MPIWorker.html">Engine::MPIWorker</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a MPI Process main loop to run as a Worker in a MPI program.  <a href="classEngine_1_1MPIWorker.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html">Engine::Server</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSingleton.html" title="Singleton behaviour to add to a Class.">Singleton</a> Class that controls teh simulation execution.  <a href="classEngine_1_1Server.html#_details">More...</a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4cd8609d113dddc889972e9801fb221c"></a><!-- doxytag: member="Engine::TAG_CREATECLASS" ref="ga4cd8609d113dddc889972e9801fb221c" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#ga4cd8609d113dddc889972e9801fb221c">Engine::TAG_CREATECLASS</a> = 1</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Class Message Tag. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa7d38c2518fa0ecdc3f5e3297eb96df3"></a><!-- doxytag: member="Engine::TAG_CREATEAGENTS" ref="gaa7d38c2518fa0ecdc3f5e3297eb96df3" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#gaa7d38c2518fa0ecdc3f5e3297eb96df3">Engine::TAG_CREATEAGENTS</a> = 2</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Agents Message Tag. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga43af90a6db11e7b3fd4575c5c0ceffae"></a><!-- doxytag: member="Engine::TAG_RUNAGENTS" ref="ga43af90a6db11e7b3fd4575c5c0ceffae" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#ga43af90a6db11e7b3fd4575c5c0ceffae">Engine::TAG_RUNAGENTS</a> = 3</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Run Agents Message Tag. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa64f2ff2e0e65a72e87e85dd4631e041"></a><!-- doxytag: member="Engine::TAG_SETSTARTTIME" ref="gaa64f2ff2e0e65a72e87e85dd4631e041" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#gaa64f2ff2e0e65a72e87e85dd4631e041">Engine::TAG_SETSTARTTIME</a> = 4</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Start Time Message Tag. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga352814e32dbf8324c79b8a0a4b4dad65"></a><!-- doxytag: member="Engine::TAG_SETDATASTORE" ref="ga352814e32dbf8324c79b8a0a4b4dad65" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#ga352814e32dbf8324c79b8a0a4b4dad65">Engine::TAG_SETDATASTORE</a> = 5</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Data Store info. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga08147ec4421d1c134a4c7fb5d48ffe38"></a><!-- doxytag: member="Engine::TAG_END" ref="ga08147ec4421d1c134a4c7fb5d48ffe38" args="" -->
+constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Engine.html#ga08147ec4421d1c134a4c7fb5d48ffe38">Engine::TAG_END</a> = 66</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">End Simulation Message Tag. <br/></td></tr>
 </table>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -144,7 +163,7 @@ Classes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

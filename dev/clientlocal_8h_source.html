@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -98,6 +98,7 @@ function toggleVisibility(linkObj) {
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,54 +120,83 @@ function toggleVisibility(linkObj) {
 <h1>clientlocal.h</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#ifndef CLIENTLOCAL_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#define CLIENTLOCAL_H</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a>00005 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;client.h&quot;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00011"></a>00011 <span class="keyword">namespace </span>Agent{
-<a name="l00012"></a>00012     <span class="keyword">class </span>AgentInstance;
-<a name="l00013"></a>00013 }
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00016"></a>00016 <span class="keyword">namespace </span>Engine{
-<a name="l00017"></a>00017     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00021"></a><a class="code" href="classEngine_1_1ClientLocal.html">00021</a> <span class="comment"></span>    <span class="keyword">class </span><a class="code" href="classEngine_1_1ClientLocal.html" title="Client instance that runs in local proccess.">ClientLocal</a> : <span class="keyword">public</span> <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Client</a>{
-<a name="l00022"></a>00022     <span class="keyword">public</span>:
-<a name="l00023"></a>00023         <a class="code" href="classEngine_1_1ClientLocal.html" title="Client instance that runs in local proccess.">ClientLocal</a>();
-<a name="l00024"></a>00024         <span class="keyword">virtual</span> ~<a class="code" href="classEngine_1_1ClientLocal.html" title="Client instance that runs in local proccess.">ClientLocal</a>();
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026         <span class="keywordtype">bool</span> <a class="code" href="classEngine_1_1ClientLocal.html#abaa534c881406d3bb55b16bcc8e8f5e3" title="Create a AgentClass and save it.">createClass</a>( <span class="keyword">const</span> std::string &amp; name ) <span class="keyword">override</span>;
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1ClientLocal.html#aaad1ef08c116e74f93d26bf36c5bfaa9" title="Create Agents of an AgentClass instance.">createAgents</a>( <span class="keyword">const</span> std::string &amp; name, <span class="keywordtype">int</span> n ) <span class="keyword">override</span>;
-<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1ClientLocal.html#a4faace4271ab7aaa5f933994fd14bd28" title="Run a tick of the &amp;#39;update&amp;#39; function for the Agents in this Client instance.">runAgents</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> delta ) <span class="keyword">override</span>;
-<a name="l00029"></a>00029         <span class="keywordtype">int</span> <a class="code" href="classEngine_1_1ClientLocal.html#ad410961791bc9c50e184e92ecdedd1f7" title="Returns the number of agents in this Client instance.">numAgents</a>() <span class="keyword">const override</span>;
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1ClientLocal.html#ae0cef0fffe8d0d7c60cf785696d49de6" title="End the Agent simulation.">end</a>() <span class="keyword">override</span>;
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032     <span class="keyword">private</span>:
-<a name="l00034"></a><a class="code" href="classEngine_1_1ClientLocal.html#af5f98b07726c4ccdd89f4c41d36cb7ad">00034</a>         std::vector&lt;Agent::AgentInstance *&gt; <a class="code" href="classEngine_1_1ClientLocal.html#af5f98b07726c4ccdd89f4c41d36cb7ad" title="list of Agents in this Client instance.">m_objects</a>;
-<a name="l00035"></a>00035     };
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00038"></a><a class="code" href="classEngine_1_1ClientLocal.html#ad410961791bc9c50e184e92ecdedd1f7">00038</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classEngine_1_1ClientLocal.html#ad410961791bc9c50e184e92ecdedd1f7" title="Returns the number of agents in this Client instance.">ClientLocal::numAgents</a>()<span class="keyword"> const</span>{
-<a name="l00039"></a>00039         <span class="keywordflow">return</span> <a class="code" href="classEngine_1_1ClientLocal.html#af5f98b07726c4ccdd89f4c41d36cb7ad" title="list of Agents in this Client instance.">m_objects</a>.size();
-<a name="l00040"></a>00040     }
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#endif//CLIENTLOCAL_H</span>
-<a name="l00045"></a>00045 <span class="preprocessor"></span>
-<a name="l00046"></a>00046 <span class="comment">//------------------------------------------------------------------------------</span>
+<a href="clientlocal_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment">Machanguitos is The Easiest Multi-Agent System in the world. Work done at The</span>
+<a name="l00003"></a>00003 <span class="comment">Institute of Physics of Cantabria (IFCA).</span>
+<a name="l00004"></a>00004 <span class="comment">Copyright (C) 2013  Luis Cabellos</span>
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">This program is free software: you can redistribute it and/or modify it under</span>
+<a name="l00007"></a>00007 <span class="comment">the terms of the GNU General Public License as published by the Free Software</span>
+<a name="l00008"></a>00008 <span class="comment">Foundation, either version 3 of the License, or (at your option) any later</span>
+<a name="l00009"></a>00009 <span class="comment">version.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<a name="l00012"></a>00012 <span class="comment">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span>
+<a name="l00013"></a>00013 <span class="comment">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<a name="l00014"></a>00014 <span class="comment"></span>
+<a name="l00015"></a>00015 <span class="comment">You should have received a copy of the GNU General Public License along with</span>
+<a name="l00016"></a>00016 <span class="comment">this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00017"></a>00017 <span class="comment">*******************************************************************************/</span>
+<a name="l00022"></a>00022 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#ifndef CLIENTLOCAL_H</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define CLIENTLOCAL_H</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="client_8h.html" title="Engine::Client Declaration.">client.h</a>&quot;</span>
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00032"></a>00032 <span class="keyword">namespace </span>Agent{
+<a name="l00033"></a>00033     <span class="keyword">class </span>AgentInstance;
+<a name="l00034"></a>00034 }
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="keyword">namespace </span>Engine{
+<a name="l00038"></a>00038     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00042"></a><a class="code" href="classEngine_1_1final.html">00042</a> <span class="comment"></span>    <span class="keyword">class </span>ClientLocal <a class="code" href="classEngine_1_1final.html" title="Client instance that runs in local proccess.">final</a> : <span class="keyword">public</span> <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Client</a>{
+<a name="l00043"></a>00043     <span class="keyword">public</span>:
+<a name="l00047"></a>00047         ClientLocal( <span class="keyword">const</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> );
+<a name="l00048"></a>00048         <span class="keyword">virtual</span> ~ClientLocal();
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050         <span class="keywordtype">void</span> setStartTime( <span class="keyword">const</span> <span class="keywordtype">double</span> time ) <span class="keyword">override</span>;
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> setDataStore( <span class="keyword">const</span> std::string &amp; name,
+<a name="l00052"></a>00052                            <span class="keyword">const</span> std::string &amp; host, <span class="keyword">const</span> uint16_t port ) <span class="keyword">override</span>;
+<a name="l00053"></a>00053         <span class="keywordtype">bool</span> createClass( <span class="keyword">const</span> std::string &amp; name ) <span class="keyword">override</span>;
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> createAgents( <span class="keyword">const</span> std::string &amp; name, <span class="keywordtype">int</span> n ) <span class="keyword">override</span>;
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> runAgents( <span class="keyword">const</span> <span class="keywordtype">double</span> delta ) <span class="keyword">override</span>;
+<a name="l00056"></a>00056         <span class="keywordtype">int</span> numAgents() <span class="keyword">const override</span>;
+<a name="l00057"></a>00057         <span class="keywordtype">void</span> end() <span class="keyword">override</span>;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059     <span class="keyword">private</span>:
+<a name="l00061"></a><a class="code" href="classEngine_1_1final.html#a2a2074105649bb6a3845e6a0ca450917">00061</a>         std::vector&lt;Agent::AgentInstance *&gt; <a class="code" href="classEngine_1_1final.html#a2a2074105649bb6a3845e6a0ca450917" title="list of Agents in this Client instance.">m_objects</a>;
+<a name="l00063"></a><a class="code" href="classEngine_1_1final.html#ae6d5803e26cb4ae7eea81828af3c1a6f">00063</a>         <span class="keywordtype">double</span> <a class="code" href="classEngine_1_1final.html#ae6d5803e26cb4ae7eea81828af3c1a6f" title="simulation start time">m_startTime</a>;
+<a name="l00065"></a><a class="code" href="classEngine_1_1final.html#a9bf015a38ebf798a80080d1429f79b1a">00065</a>         <span class="keywordtype">double</span> <a class="code" href="classEngine_1_1final.html#a9bf015a38ebf798a80080d1429f79b1a" title="actual simulation time">m_totalTime</a>;
+<a name="l00067"></a><a class="code" href="classEngine_1_1final.html#a8ead84160d59f59fc7fb7e7bc8c57715">00067</a>         <span class="keywordtype">int</span> <a class="code" href="classEngine_1_1final.html#a8ead84160d59f59fc7fb7e7bc8c57715" title="client ID. Also mayor ID of Agent Instances.">m_ID</a>;
+<a name="l00069"></a><a class="code" href="classEngine_1_1final.html#a275ff289e41b9be028c0730b24a3c683">00069</a>         <span class="keywordtype">int</span> <a class="code" href="classEngine_1_1final.html#a275ff289e41b9be028c0730b24a3c683" title="next minor id to use in object creation.">m_nextID</a>;
+<a name="l00070"></a>00070     };
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00073"></a>00073     <span class="keyword">inline</span> <span class="keywordtype">int</span> ClientLocal::numAgents()<span class="keyword"> const</span>{
+<a name="l00074"></a>00074         <span class="keywordflow">return</span> m_objects.size();
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00078"></a>00078     <span class="keyword">inline</span> <span class="keywordtype">void</span> ClientLocal::setStartTime( <span class="keyword">const</span> <span class="keywordtype">double</span> time ){
+<a name="l00079"></a>00079         m_startTime = time;
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081 }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#endif//CLIENTLOCAL_H</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>
+<a name="l00086"></a>00086 <span class="comment">//------------------------------------------------------------------------------</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><b>clientlocal.h</b>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="navelem"><a class="el" href="clientlocal_8h.html">clientlocal.h</a>      </li>
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -176,7 +206,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

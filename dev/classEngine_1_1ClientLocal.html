@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -137,7 +137,7 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classEngine_1_1ClientLocal__inherit__graph.png" border="0" usemap="#Engine_1_1ClientLocal_inherit__map" alt="Inheritance graph"/></div>
 <map name="Engine_1_1ClientLocal_inherit__map" id="Engine_1_1ClientLocal_inherit__map">
-<area shape="rect" id="node2" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="13,5,131,195"/></map>
+<area shape="rect" id="node2" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="13,6,131,213"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png"/> Collaboration diagram for Engine::ClientLocal:</div>
@@ -146,13 +146,16 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classEngine_1_1ClientLocal__coll__graph.png" border="0" usemap="#Engine_1_1ClientLocal_coll__map" alt="Collaboration graph"/></div>
 <map name="Engine_1_1ClientLocal_coll__map" id="Engine_1_1ClientLocal_coll__map">
-<area shape="rect" id="node2" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="36,1357,153,1547"/><area shape="rect" id="node6" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass." alt="" coords="225,1118,372,1290"/><area shape="rect" id="node10" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua)." alt="" coords="160,499,277,845"/><area shape="rect" id="node12" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable." alt="" coords="151,294,308,431"/><area shape="rect" id="node14" title="STL class." alt="" coords="113,141,193,227"/><area shape="rect" id="node16" title="STL class." alt="" coords="71,5,236,91"/><area shape="rect" id="node19" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents." alt="" coords="288,913,419,1050"/></map>
+<area shape="rect" id="node2" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="49,1582,167,1789"/><area shape="rect" id="node6" href="classAgent_1_1AgentInstance.html" title="Instance of an AgentClass." alt="" coords="239,1307,385,1514"/><area shape="rect" id="node10" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua)." alt="" coords="77,499,195,845"/><area shape="rect" id="node12" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable." alt="" coords="57,294,215,431"/><area shape="rect" id="node14" title="STL class." alt="" coords="96,141,176,227"/><area shape="rect" id="node16" title="STL class." alt="" coords="53,5,219,91"/><area shape="rect" id="node19" href="classAgent_1_1AgentClass.html" title="Class with Class definitions of Agents." alt="" coords="241,870,383,1077"/><area shape="rect" id="node24" href="classAgent_1_1AgentId.html" title="Identifier of an AgentInstance." alt="" coords="385,1102,495,1239"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classEngine_1_1ClientLocal-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#a5e903874dbe4d2e117429e6d0a6b8b3d">ClientLocal</a> (const int id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#a20748f1373d020f19a569510eb3491da">setStartTime</a> (const double time) override</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the simulation start time.  <a href="#a20748f1373d020f19a569510eb3491da"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#abaa534c881406d3bb55b16bcc8e8f5e3">createClass</a> (const std::string &amp;name) override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a AgentClass and save it.  <a href="#abaa534c881406d3bb55b16bcc8e8f5e3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#aaad1ef08c116e74f93d26bf36c5bfaa9">createAgents</a> (const std::string &amp;name, int n) override</td></tr>
@@ -171,12 +174,50 @@ Private Attributes</h2></td></tr>
 std::vector<br class="typebreak"/>
 &lt; <a class="el" href="classAgent_1_1AgentInstance.html">Agent::AgentInstance</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#af5f98b07726c4ccdd89f4c41d36cb7ad">m_objects</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">list of Agents in this <a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> instance. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4bd2c00ae569a3983a16f1538846b7f"></a><!-- doxytag: member="Engine::ClientLocal::m_startTime" ref="ab4bd2c00ae569a3983a16f1538846b7f" args="" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#ab4bd2c00ae569a3983a16f1538846b7f">m_startTime</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">simulation start time <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f9e344f841465311e810d1439e456ac"></a><!-- doxytag: member="Engine::ClientLocal::m_totalTime" ref="a3f9e344f841465311e810d1439e456ac" args="" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#a3f9e344f841465311e810d1439e456ac">m_totalTime</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">actual simulation time <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc4bfd0993db36cac0001e24cf68c6e8"></a><!-- doxytag: member="Engine::ClientLocal::m_ID" ref="afc4bfd0993db36cac0001e24cf68c6e8" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#afc4bfd0993db36cac0001e24cf68c6e8">m_ID</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">client ID. Also mayor ID of Agent Instances. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cae5e524ad0f395eabfe15bafe236d1"></a><!-- doxytag: member="Engine::ClientLocal::m_nextID" ref="a7cae5e524ad0f395eabfe15bafe236d1" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1ClientLocal.html#a7cae5e524ad0f395eabfe15bafe236d1">m_nextID</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">next minor id to use in object creation. <br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> instance that runs in local proccess. </p>
 
-<p>Definition at line <a class="el" href="clientlocal_8h_source.html#l00021">21</a> of file <a class="el" href="clientlocal_8h_source.html">clientlocal.h</a>.</p>
-</div><hr/><h2>Member Function Documentation</h2>
+<p>Definition at line <a class="el" href="clientlocal_8h_source.html#l00042">42</a> of file <a class="el" href="clientlocal_8h_source.html">clientlocal.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a5e903874dbe4d2e117429e6d0a6b8b3d"></a><!-- doxytag: member="Engine::ClientLocal::ClientLocal" ref="a5e903874dbe4d2e117429e6d0a6b8b3d" args="(const int id)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ClientLocal::ClientLocal </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td><a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> Identifier, and mayor number of Agents in this client. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="clientlocal_8cpp_source.html#l00038">38</a> of file <a class="el" href="clientlocal_8cpp_source.html">clientlocal.cpp</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aaad1ef08c116e74f93d26bf36c5bfaa9"></a><!-- doxytag: member="Engine::ClientLocal::createAgents" ref="aaad1ef08c116e74f93d26bf36c5bfaa9" args="(const std::string &amp;name, int n) override" -->
 <div class="memitem">
 <div class="memproto">
@@ -213,8 +254,6 @@ std::vector<br class="typebreak"/>
 
 <p>Implements <a class="el" href="classEngine_1_1Client.html#a558a99f99272023a86e9adc1b74fc8da">Engine::Client</a>.</p>
 
-<p>Definition at line <a class="el" href="clientlocal_8cpp_source.html#l00033">33</a> of file <a class="el" href="clientlocal_8cpp_source.html">clientlocal.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="abaa534c881406d3bb55b16bcc8e8f5e3"></a><!-- doxytag: member="Engine::ClientLocal::createClass" ref="abaa534c881406d3bb55b16bcc8e8f5e3" args="(const std::string &amp;name) override" -->
@@ -248,8 +287,6 @@ std::vector<br class="typebreak"/>
 
 <p>Implements <a class="el" href="classEngine_1_1Client.html#ae9aa1d24b06ea27ca22ed75360772b10">Engine::Client</a>.</p>
 
-<p>Definition at line <a class="el" href="clientlocal_8cpp_source.html#l00027">27</a> of file <a class="el" href="clientlocal_8cpp_source.html">clientlocal.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a4faace4271ab7aaa5f933994fd14bd28"></a><!-- doxytag: member="Engine::ClientLocal::runAgents" ref="a4faace4271ab7aaa5f933994fd14bd28" args="(const double delta) override" -->
@@ -277,7 +314,34 @@ std::vector<br class="typebreak"/>
 
 <p>Implements <a class="el" href="classEngine_1_1Client.html#a226c55bf89876f592b097fbc8ebedcdf">Engine::Client</a>.</p>
 
-<p>Definition at line <a class="el" href="clientlocal_8cpp_source.html#l00053">53</a> of file <a class="el" href="clientlocal_8cpp_source.html">clientlocal.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a20748f1373d020f19a569510eb3491da"></a><!-- doxytag: member="Engine::ClientLocal::setStartTime" ref="a20748f1373d020f19a569510eb3491da" args="(const double time) override" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::ClientLocal::setStartTime </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td><code> [inline, override, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the simulation start time. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>start time in seconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classEngine_1_1Client.html#a6bdc3ad131ac0674776ef76a9cf9d65c">Engine::Client</a>.</p>
+
+<p>Definition at line <a class="el" href="clientlocal_8h_source.html#l00076">76</a> of file <a class="el" href="clientlocal_8h_source.html">clientlocal.h</a>.</p>
 
 </div>
 </div>
@@ -291,7 +355,7 @@ std::vector<br class="typebreak"/>
     <ul>
       <li class="navelem"><b>Engine</b>      </li>
       <li class="navelem"><a class="el" href="classEngine_1_1ClientLocal.html">ClientLocal</a>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 11:04:01 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -301,7 +365,7 @@ std::vector<br class="typebreak"/>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -147,7 +147,7 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classEngine_1_1Server__coll__graph.png" border="0" usemap="#Engine_1_1Server_coll__map" alt="Collaboration graph"/></div>
 <map name="Engine_1_1Server_coll__map" id="Engine_1_1Server_coll__map">
-<area shape="rect" id="node2" href="classSingleton.html" title="{Singleton\&lt; Server \&gt;\n|&#45; s_singleton\l|+ instance()\l}" alt="" coords="232,1459,371,1544"/><area shape="rect" id="node7" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua)." alt="" coords="93,585,211,930"/><area shape="rect" id="node9" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable." alt="" coords="93,294,251,431"/><area shape="rect" id="node11" title="STL class." alt="" coords="132,141,212,227"/><area shape="rect" id="node13" title="STL class." alt="" coords="89,5,255,91"/><area shape="rect" id="node21" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="359,663,476,852"/></map>
+<area shape="rect" id="node2" href="classSingleton.html" title="{Singleton\&lt; Server \&gt;\n|&#45; s_singleton\l|+ instance()\l}" alt="" coords="232,1512,371,1597"/><area shape="rect" id="node7" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua)." alt="" coords="93,585,211,930"/><area shape="rect" id="node9" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable." alt="" coords="93,294,251,431"/><area shape="rect" id="node11" title="STL class." alt="" coords="132,141,212,227"/><area shape="rect" id="node13" title="STL class." alt="" coords="89,5,255,91"/><area shape="rect" id="node21" href="classEngine_1_1Client.html" title="Client Interface." alt="" coords="359,645,476,869"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classEngine_1_1Server-members.html">List of all members.</a></p>
@@ -158,6 +158,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="classEngine_1_1Client.html" title="Client Interface.">Client</a> in the simulation.  <a href="#aea1020688a65a313fce5e04522149c64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#aacbf818e29c9b0afdd16424a861e172a">addAgents</a> (const std::string &amp;name, const unsigned n)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add agents number to create them in the future.  <a href="#aacbf818e29c9b0afdd16424a861e172a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b9b43c2daae0e0af4848f187ebc2381"></a><!-- doxytag: member="Engine::Server::initialize" ref="a3b9b43c2daae0e0af4848f187ebc2381" args="()" -->
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#a3b9b43c2daae0e0af4848f187ebc2381">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">configure clients and world. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8660fa998c5ddf07b427132d581e5bbe"></a><!-- doxytag: member="Engine::Server::createAgents" ref="a8660fa998c5ddf07b427132d581e5bbe" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#a8660fa998c5ddf07b427132d581e5bbe">createAgents</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">create the agents for the simulation. <br/></td></tr>
@@ -172,6 +175,11 @@ Private Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Integer value of a config parameter.  <a href="#a835bf8aa02d96294ee2e2280cca2b1c2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#acac98c07badd4af0914df8940b238cbc">getConfigNumber</a> (const std::string &amp;key, const double d) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the numeric value of a config parameter.  <a href="#acac98c07badd4af0914df8940b238cbc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#ac21adaa551dafe9fe1b7ae9271fc9364">getConfigString</a> (const std::string &amp;key, const std::string &amp;d) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the string value of a config parameter.  <a href="#ac21adaa551dafe9fe1b7ae9271fc9364"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c0935eec539819f339dba0d5f55848d"></a><!-- doxytag: member="Engine::Server::waitClients" ref="a6c0935eec539819f339dba0d5f55848d" args="() const " -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Server.html#a6c0935eec539819f339dba0d5f55848d">waitClients</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait the clients end its simulation step. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa530d2f0dcfb170d47f5d48730362b10"></a><!-- doxytag: member="Engine::Server::m_numAgents" ref="aa530d2f0dcfb170d47f5d48730362b10" args="" -->
@@ -188,7 +196,7 @@ std::map&lt; std::string, <br class="typebreak"/>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classSingleton.html" title="Singleton behaviour to add to a Class.">Singleton</a> Class that controls teh simulation execution. </p>
 
-<p>Definition at line <a class="el" href="server_8h_source.html#l00022">22</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p>Definition at line <a class="el" href="server_8h_source.html#l00043">43</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aacbf818e29c9b0afdd16424a861e172a"></a><!-- doxytag: member="Engine::Server::addAgents" ref="aacbf818e29c9b0afdd16424a861e172a" args="(const std::string &amp;name, const unsigned n)" -->
 <div class="memitem">
@@ -229,7 +237,7 @@ std::map&lt; std::string, <br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="server_8cpp_source.html#l00021">21</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
+<p>Definition at line <a class="el" href="server_8cpp_source.html#l00047">47</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,7 +264,7 @@ std::map&lt; std::string, <br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="server_8cpp_source.html#l00016">16</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
+<p>Definition at line <a class="el" href="server_8cpp_source.html#l00042">42</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +303,7 @@ std::map&lt; std::string, <br class="typebreak"/>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the value, or default if this variable is not integer type. </dd></dl>
 
-<p>Definition at line <a class="el" href="server_8cpp_source.html#l00071">71</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
+<p>Definition at line <a class="el" href="server_8cpp_source.html#l00122">122</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
 
 </div>
 </div>
@@ -334,7 +342,46 @@ std::map&lt; std::string, <br class="typebreak"/>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the value, or default if this variable is not numeric type. </dd></dl>
 
-<p>Definition at line <a class="el" href="server_8cpp_source.html#l00084">84</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
+<p>Definition at line <a class="el" href="server_8cpp_source.html#l00135">135</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac21adaa551dafe9fe1b7ae9271fc9364"></a><!-- doxytag: member="Engine::Server::getConfigString" ref="ac21adaa551dafe9fe1b7ae9271fc9364" args="(const std::string &amp;key, const std::string &amp;d) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Engine::Server::getConfigString </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the string value of a config parameter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>name of the parameter. </td></tr>
+    <tr><td class="paramname">d</td><td>default value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the value, or default if this variable is not string type. </dd></dl>
+
+<p>Definition at line <a class="el" href="server_8cpp_source.html#l00148">148</a> of file <a class="el" href="server_8cpp_source.html">server.cpp</a>.</p>
 
 </div>
 </div>
@@ -372,7 +419,7 @@ std::map&lt; std::string, <br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="server_8h_source.html#l00082">82</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p>Definition at line <a class="el" href="server_8h_source.html#l00113">113</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -386,7 +433,7 @@ std::map&lt; std::string, <br class="typebreak"/>
     <ul>
       <li class="navelem"><b>Engine</b>      </li>
       <li class="navelem"><a class="el" href="classEngine_1_1Server.html">Server</a>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -396,7 +443,7 @@ std::map&lt; std::string, <br class="typebreak"/>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

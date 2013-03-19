@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -125,6 +125,7 @@ function toggleVisibility(linkObj) {
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_w"><span>w</span></a></li>
     </ul>
   </div>
 </div>
@@ -154,30 +155,41 @@ function toggleVisibility(linkObj) {
 <li>AgentClass()
 : <a class="el" href="classAgent_1_1AgentClass.html#a758b4f086811a964b3ef087d70cb2848">Agent::AgentClass</a>
 </li>
+<li>AgentId()
+: <a class="el" href="classAgent_1_1AgentId.html#af252ac5fa67e58062a528c2a6889287f">Agent::AgentId</a>
+</li>
 <li>AgentInstance()
-: <a class="el" href="classAgent_1_1AgentInstance.html#aae953b746436327b6304809f1e27f15e">Agent::AgentInstance</a>
+: <a class="el" href="classAgent_1_1AgentInstance.html#a2bb1de6be4cac13841edb77c600ebb36">Agent::AgentInstance</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>ClientLocal()
+: <a class="el" href="classEngine_1_1final.html#a7a1ee5d8cd34d74a8bc408f1ae1d0fb6">Engine::final</a>
+</li>
 <li>ClientRemote()
-: <a class="el" href="classEngine_1_1ClientRemote.html#a6c8280044c5299a69ee0e9a675aa10b9">Engine::ClientRemote</a>
+: <a class="el" href="classEngine_1_1final.html#a49bcbb68af1e2c28e0fc81dbce936111">Engine::final</a>
+</li>
+<li>connect()
+: <a class="el" href="classIO_1_1DataStore.html#a2dfbe75ae4168bd0795b489203697088">IO::DataStore</a>
 </li>
 <li>createAgents()
 : <a class="el" href="classEngine_1_1Client.html#a558a99f99272023a86e9adc1b74fc8da">Engine::Client</a>
-, <a class="el" href="classEngine_1_1ClientRemote.html#ad0c140f79f7903e48493228b7b233a13">Engine::ClientRemote</a>
+, <a class="el" href="classEngine_1_1final.html#ae98ac00f51f47a023d7f41773d716369">Engine::final</a>
 , <a class="el" href="classEngine_1_1Server.html#a8660fa998c5ddf07b427132d581e5bbe">Engine::Server</a>
-, <a class="el" href="classEngine_1_1ClientLocal.html#aaad1ef08c116e74f93d26bf36c5bfaa9">Engine::ClientLocal</a>
 </li>
 <li>createClass()
-: <a class="el" href="classAgent_1_1AgentFactory.html#a12a47ce13d36313a4316560f117b5eb1">Agent::AgentFactory</a>
-, <a class="el" href="classEngine_1_1ClientRemote.html#af2beedecaedf9d2702086bc53893045f">Engine::ClientRemote</a>
-, <a class="el" href="classEngine_1_1ClientLocal.html#abaa534c881406d3bb55b16bcc8e8f5e3">Engine::ClientLocal</a>
+: <a class="el" href="classEngine_1_1final.html#a0bccf9bdd8e259bf9b7e307717540527">Engine::final</a>
+, <a class="el" href="classAgent_1_1AgentFactory.html#a12a47ce13d36313a4316560f117b5eb1">Agent::AgentFactory</a>
+, <a class="el" href="classEngine_1_1final.html#a0bccf9bdd8e259bf9b7e307717540527">Engine::final</a>
 , <a class="el" href="classEngine_1_1Client.html#ae9aa1d24b06ea27ca22ed75360772b10">Engine::Client</a>
 </li>
 <li>createInstance()
-: <a class="el" href="classAgent_1_1AgentClass.html#a459b5299c807d06833743085295c174d">Agent::AgentClass</a>
+: <a class="el" href="classAgent_1_1AgentClass.html#a80cc77f295767c109857d500a309ed3d">Agent::AgentClass</a>
+</li>
+<li>createStore()
+: <a class="el" href="classIO_1_1DataStore.html#af043609ec630e9495be5a082d36041b1">IO::DataStore</a>
 </li>
 </ul>
 
@@ -185,8 +197,7 @@ function toggleVisibility(linkObj) {
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>end()
 : <a class="el" href="classEngine_1_1Client.html#a1a31abbd737b4b1b0f0fed8424b7cb91">Engine::Client</a>
-, <a class="el" href="classEngine_1_1ClientLocal.html#ae0cef0fffe8d0d7c60cf785696d49de6">Engine::ClientLocal</a>
-, <a class="el" href="classEngine_1_1ClientRemote.html#a627d3b7e7f1dd906e30d316618921037">Engine::ClientRemote</a>
+, <a class="el" href="classEngine_1_1final.html#a8e01b959d25904e95397d5c9495d5162">Engine::final</a>
 </li>
 <li>erase()
 : <a class="el" href="classUtil_1_1ScriptValue.html#ac4ea04a166fee89e768ed2e2296bfee5">Util::ScriptValue</a>
@@ -207,11 +218,17 @@ function toggleVisibility(linkObj) {
 <li>getConfigNumber()
 : <a class="el" href="classEngine_1_1Server.html#acac98c07badd4af0914df8940b238cbc">Engine::Server</a>
 </li>
+<li>getConfigString()
+: <a class="el" href="classEngine_1_1Server.html#ac21adaa551dafe9fe1b7ae9271fc9364">Engine::Server</a>
+</li>
 <li>getLua()
 : <a class="el" href="classAgent_1_1AgentClass.html#a2a7e0d039ca64629f649df56d795701d">Agent::AgentClass</a>
 </li>
 <li>getNumber()
 : <a class="el" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3">Util::ScriptValue</a>
+</li>
+<li>getOutVars()
+: <a class="el" href="classAgent_1_1AgentClass.html#a41956faddefe067c4f9bb67817af8c2a">Agent::AgentClass</a>
 </li>
 <li>getString()
 : <a class="el" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb">Util::ScriptValue</a>
@@ -223,11 +240,21 @@ function toggleVisibility(linkObj) {
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>idstr()
+: <a class="el" href="classAgent_1_1AgentId.html#a996de3193f1977d46c9ea0a8c618b007">Agent::AgentId</a>
+</li>
 <li>init()
-: <a class="el" href="classAgent_1_1AgentInstance.html#aadc19ac677300e4ec4939fab495cd2a3">Agent::AgentInstance</a>
+: <a class="el" href="classAgent_1_1AgentClass.html#a5bd61777505b5526b788db825735edc9">Agent::AgentClass</a>
+, <a class="el" href="classAgent_1_1AgentInstance.html#aadc19ac677300e4ec4939fab495cd2a3">Agent::AgentInstance</a>
+</li>
+<li>initialize()
+: <a class="el" href="classEngine_1_1Server.html#a3b9b43c2daae0e0af4848f187ebc2381">Engine::Server</a>
 </li>
 <li>insertConfig()
 : <a class="el" href="classEngine_1_1Server.html#ade6d984448d499cbb55ee3caddfa79cd">Engine::Server</a>
+</li>
+<li>insertOutVariable()
+: <a class="el" href="classAgent_1_1AgentClass.html#a8e0f98b1bacca1f98b3e77cd103bad1c">Agent::AgentClass</a>
 </li>
 <li>instance()
 : <a class="el" href="classSingleton.html#aac905478443d25ac6129119670caa3cb">Singleton&lt; T &gt;</a>
@@ -236,6 +263,9 @@ function toggleVisibility(linkObj) {
 
 
 <h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>mkName()
+: <a class="el" href="classIO_1_1DataStore.html#a82dcec154d57aee427b1e08fa7b372cd">IO::DataStore</a>
+</li>
 <li>MPIWorker()
 : <a class="el" href="classEngine_1_1MPIWorker.html#a2d0487c63cedb27c45f9eeb1c3871f64">Engine::MPIWorker</a>
 </li>
@@ -247,8 +277,7 @@ function toggleVisibility(linkObj) {
 : <a class="el" href="classAgent_1_1AgentInstance.html#a848caeefcbb8a6867ac23dab295f38c2">Agent::AgentInstance</a>
 </li>
 <li>numAgents()
-: <a class="el" href="classEngine_1_1ClientRemote.html#a5b2bb6c6b291230ab2e94b63ecd8760b">Engine::ClientRemote</a>
-, <a class="el" href="classEngine_1_1ClientLocal.html#ad410961791bc9c50e184e92ecdedd1f7">Engine::ClientLocal</a>
+: <a class="el" href="classEngine_1_1final.html#a71da16cd57aebaef26e08484f7e8e54a">Engine::final</a>
 , <a class="el" href="classEngine_1_1Client.html#a6dbbb18825c92b0d987490b00d3c361c">Engine::Client</a>
 </li>
 </ul>
@@ -257,6 +286,9 @@ function toggleVisibility(linkObj) {
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>operator=()
 : <a class="el" href="classUtil_1_1ScriptValue.html#ac240a8e44cfebf8a1b7ef8c93eac4bc5">Util::ScriptValue</a>
+</li>
+<li>outVars()
+: <a class="el" href="classAgent_1_1AgentInstance.html#a13c2d2255ea03c995eea1ec4f366d1f7">Agent::AgentInstance</a>
 </li>
 </ul>
 
@@ -274,10 +306,9 @@ function toggleVisibility(linkObj) {
 , <a class="el" href="classEngine_1_1Server.html#a1e6773e0d6e19b8b50df644a3faec7ed">Engine::Server</a>
 </li>
 <li>runAgents()
-: <a class="el" href="classEngine_1_1ClientLocal.html#a4faace4271ab7aaa5f933994fd14bd28">Engine::ClientLocal</a>
-, <a class="el" href="classEngine_1_1MPIWorker.html#ae0dc2e30e619f3b4046a0630eb6619e6">Engine::MPIWorker</a>
-, <a class="el" href="classEngine_1_1ClientRemote.html#a1dfd1a71ae4450aec135cea680aa4179">Engine::ClientRemote</a>
+: <a class="el" href="classEngine_1_1final.html#a5e8643d861bf1926f79dba3e42799ff4">Engine::final</a>
 , <a class="el" href="classEngine_1_1Client.html#a226c55bf89876f592b097fbc8ebedcdf">Engine::Client</a>
+, <a class="el" href="classEngine_1_1MPIWorker.html#ae0dc2e30e619f3b4046a0630eb6619e6">Engine::MPIWorker</a>
 </li>
 <li>runCreateAgents()
 : <a class="el" href="classEngine_1_1MPIWorker.html#a6a69332dffee3ac279363264de99e5c1">Engine::MPIWorker</a>
@@ -285,15 +316,45 @@ function toggleVisibility(linkObj) {
 <li>runCreateClass()
 : <a class="el" href="classEngine_1_1MPIWorker.html#af550c1b169dadcfd948e46d9aa9cfa57">Engine::MPIWorker</a>
 </li>
+<li>runSetDataStore()
+: <a class="el" href="classEngine_1_1MPIWorker.html#aec1e8c837bf6d06c4bd67cbb0b754ba6">Engine::MPIWorker</a>
+</li>
+<li>runSetStartTime()
+: <a class="el" href="classEngine_1_1MPIWorker.html#a40102ce484b51ea7c93301b6a3525153">Engine::MPIWorker</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>saveAgentInstance()
+: <a class="el" href="classIO_1_1DataStore.html#ad22a88513b40ae1ae0bf469242e3a971">IO::DataStore</a>
+</li>
 <li>ScriptValue()
 : <a class="el" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4">Util::ScriptValue</a>
 </li>
 <li>setDatadir()
 : <a class="el" href="classAgent_1_1AgentFactory.html#ab7b746669d076e6a84acb135a4c080d1">Agent::AgentFactory</a>
+</li>
+<li>setDataStore()
+: <a class="el" href="classEngine_1_1Client.html#a979e1b4c39d3f0bff1f4bd24fd8963fd">Engine::Client</a>
+, <a class="el" href="classEngine_1_1final.html#ae11e901489719cd7bd798b829dcb6b18">Engine::final</a>
+</li>
+<li>setDataStoreHost()
+: <a class="el" href="classIO_1_1DataStore.html#a85d150fc91a2be6127c403e9170eee74">IO::DataStore</a>
+</li>
+<li>setDataStoreName()
+: <a class="el" href="classIO_1_1DataStore.html#ae5ce385ab9a89520a78b0308b24c4b8f">IO::DataStore</a>
+</li>
+<li>setDataStorePort()
+: <a class="el" href="classIO_1_1DataStore.html#ad212be42b5ce8bad5feebaea31615657">IO::DataStore</a>
+</li>
+<li>setStartTime()
+: <a class="el" href="classEngine_1_1final.html#a6fb34ac817d80e75ed09126cd636b478">Engine::final</a>
+, <a class="el" href="classEngine_1_1Client.html#a6bdc3ad131ac0674776ef76a9cf9d65c">Engine::Client</a>
+, <a class="el" href="classEngine_1_1final.html#a6fb34ac817d80e75ed09126cd636b478">Engine::final</a>
+</li>
+<li>str()
+: <a class="el" href="classAgent_1_1AgentId.html#a4551b3d3fb8642339e25016d3338a2ce">Agent::AgentId</a>
 </li>
 </ul>
 
@@ -303,11 +364,18 @@ function toggleVisibility(linkObj) {
 : <a class="el" href="classAgent_1_1AgentInstance.html#a9efaabff933f287fd284aa02e3202cf0">Agent::AgentInstance</a>
 </li>
 </ul>
+
+
+<h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
+<li>waitClients()
+: <a class="el" href="classEngine_1_1Server.html#a6c0935eec539819f339dba0d5f55848d">Engine::Server</a>
+</li>
+</ul>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -317,7 +385,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

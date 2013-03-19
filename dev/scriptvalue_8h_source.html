@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -98,6 +98,7 @@ function toggleVisibility(linkObj) {
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,120 +120,144 @@ function toggleVisibility(linkObj) {
 <h1>scriptvalue.h</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#ifndef SCRIPTVALUE_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#define SCRIPTVALUE_H</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a>00005 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00009"></a>00009 <span class="keyword">namespace </span>Util {
-<a name="l00010"></a>00010     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00014"></a><a class="code" href="classUtil_1_1ScriptValue.html">00014</a> <span class="comment"></span>    <span class="keyword">class </span><a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>{
-<a name="l00015"></a>00015     <span class="keyword">public</span>:
-<a name="l00017"></a><a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7">00017</a>         <span class="keyword">enum class</span> <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> : char { NIL, BOOLEAN, NUMBER, STRING };
-<a name="l00018"></a>00018 
-<a name="l00020"></a>00020         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>();
-<a name="l00022"></a>00022         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <span class="keyword">const</span> <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; val );
-<a name="l00024"></a>00024         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp;&amp; val );
-<a name="l00026"></a>00026         <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; <a class="code" href="classUtil_1_1ScriptValue.html#ac240a8e44cfebf8a1b7ef8c93eac4bc5" title="Copy assign.">operator=</a>( <span class="keyword">const</span> <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; val );
-<a name="l00028"></a>00028         <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; <a class="code" href="classUtil_1_1ScriptValue.html#ac240a8e44cfebf8a1b7ef8c93eac4bc5" title="Copy assign.">operator=</a>( <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp;&amp; val );
-<a name="l00029"></a>00029         ~<a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>();
-<a name="l00030"></a>00030 
-<a name="l00032"></a>00032         <span class="keyword">explicit</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> val );
-<a name="l00034"></a>00034         <span class="keyword">explicit</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> val );
-<a name="l00036"></a>00036         <span class="keyword">explicit</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> * val );
-<a name="l00038"></a>00038         <span class="keyword">explicit</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue</a>( <span class="keyword">const</span> std::string &amp; val );
+<a href="scriptvalue_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment">Machanguitos is The Easiest Multi-Agent System in the world. Work done at The</span>
+<a name="l00003"></a>00003 <span class="comment">Institute of Physics of Cantabria (IFCA).</span>
+<a name="l00004"></a>00004 <span class="comment">Copyright (C) 2013  Luis Cabellos</span>
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">This program is free software: you can redistribute it and/or modify it under</span>
+<a name="l00007"></a>00007 <span class="comment">the terms of the GNU General Public License as published by the Free Software</span>
+<a name="l00008"></a>00008 <span class="comment">Foundation, either version 3 of the License, or (at your option) any later</span>
+<a name="l00009"></a>00009 <span class="comment">version.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<a name="l00012"></a>00012 <span class="comment">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span>
+<a name="l00013"></a>00013 <span class="comment">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<a name="l00014"></a>00014 <span class="comment"></span>
+<a name="l00015"></a>00015 <span class="comment">You should have received a copy of the GNU General Public License along with</span>
+<a name="l00016"></a>00016 <span class="comment">this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00017"></a>00017 <span class="comment">*******************************************************************************/</span>
+<a name="l00022"></a>00022 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#ifndef SCRIPTVALUE_H</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define SCRIPTVALUE_H</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00030"></a>00030 <span class="keyword">namespace </span>Util {
+<a name="l00031"></a>00031     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00035"></a><a class="code" href="classUtil_1_1ScriptValue.html">00035</a> <span class="comment"></span>    <span class="keyword">class </span><a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>{
+<a name="l00036"></a>00036     <span class="keyword">public</span>:
+<a name="l00038"></a><a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7">00038</a>         <span class="keyword">enum class</span> <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> : char { NIL, BOOLEAN, NUMBER, STRING };
 <a name="l00039"></a>00039 
-<a name="l00041"></a>00041         <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad" title="Get the Value Type of this instance.">getType</a>() <span class="keyword">const</span>;
-<a name="l00042"></a>00042 
-<a name="l00047"></a>00047         <span class="keywordtype">bool</span> <a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727" title="Returns the boolean value of this variable.">getBoolean</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> d = <span class="keyword">false</span> ) <span class="keyword">const</span>;
-<a name="l00052"></a>00052         <span class="keywordtype">double</span> <a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3" title="Returns the numeric value of this variable.">getNumber</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> d = 0 ) <span class="keyword">const</span>;
-<a name="l00057"></a>00057         std::string <a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb" title="Returns the string value of this variable.">getString</a>( <span class="keyword">const</span> std::string &amp; d =<span class="stringliteral">&quot;&quot;</span> ) <span class="keyword">const</span>;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <span class="keyword">private</span>:
-<a name="l00061"></a>00061         <span class="keywordtype">void</span> <a class="code" href="classUtil_1_1ScriptValue.html#ac4ea04a166fee89e768ed2e2296bfee5" title="Erase old value data.">erase</a>();
-<a name="l00062"></a>00062 
-<a name="l00064"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html">00064</a>         <span class="keyword">union </span><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a>{
-<a name="l00066"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d">00066</a>             <span class="keywordtype">double</span> <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a>;
-<a name="l00068"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34">00068</a>             <span class="keywordtype">bool</span> <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a>;
-<a name="l00070"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414">00070</a>             std::string * <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a>;
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072             <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a>();
-<a name="l00073"></a>00073             ~<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a>();
-<a name="l00074"></a>00074         };
-<a name="l00075"></a>00075 
-<a name="l00077"></a><a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a">00077</a>         <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a> <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>;
-<a name="l00079"></a><a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8">00079</a>         <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a>;
-<a name="l00080"></a>00080     };
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00083"></a><a class="code" href="classUtil_1_1ScriptValue.html#a63aec82b989e33a556e549bc4a7dff39">00083</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> val ){
-<a name="l00084"></a>00084         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a> = val;
-<a name="l00085"></a>00085         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::NUMBER;
-<a name="l00086"></a>00086     }
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00089"></a><a class="code" href="classUtil_1_1ScriptValue.html#a94c8665d356c050b640c7798268dc630">00089</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> val ){
-<a name="l00090"></a>00090         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a> = val;
-<a name="l00091"></a>00091         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::BOOLEAN;
-<a name="l00092"></a>00092     }
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00095"></a><a class="code" href="classUtil_1_1ScriptValue.html#a5139d074d0f60d28ab88b2437c1fdc0f">00095</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> * val ){
-<a name="l00096"></a>00096         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">new</span> std::string(val);
-<a name="l00097"></a>00097         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::STRING;
-<a name="l00098"></a>00098     }
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00101"></a><a class="code" href="classUtil_1_1ScriptValue.html#ad18e290846f02679998b550d2d66c664">00101</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to numeric 0.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> std::string &amp; val ){
-<a name="l00102"></a>00102         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">new</span> std::string(val);
-<a name="l00103"></a>00103         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::STRING;
-<a name="l00104"></a>00104     }
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00107"></a><a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad">00107</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ScriptValue::ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad" title="Get the Value Type of this instance.">ScriptValue::getType</a>()<span class="keyword"> const</span>{
-<a name="l00108"></a>00108         <span class="keywordflow">return</span> <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a>;
-<a name="l00109"></a>00109     }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00112"></a><a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727">00112</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727" title="Returns the boolean value of this variable.">ScriptValue::getBoolean</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> d )<span class="keyword"> const</span>{
-<a name="l00113"></a>00113         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::BOOLEAN ) ? <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a> : d;
-<a name="l00114"></a>00114     }
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00117"></a><a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3">00117</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3" title="Returns the numeric value of this variable.">ScriptValue::getNumber</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> d )<span class="keyword"> const</span>{
-<a name="l00118"></a>00118         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::NUMBER ) ? <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a> : d;
-<a name="l00119"></a>00119     }
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00122"></a><a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb">00122</a>     <span class="keyword">inline</span> std::string <a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb" title="Returns the string value of this variable.">ScriptValue::getString</a>( <span class="keyword">const</span> std::string &amp; d )<span class="keyword"> const</span>{
-<a name="l00123"></a>00123         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::STRING ) ? (*<a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a>) : d;
-<a name="l00124"></a>00124     }
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00127"></a>00127     <span class="keyword">inline</span> ScriptValue::Value::Value(){
-<a name="l00128"></a>00128         this-&gt;<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">nullptr</span>;
+<a name="l00041"></a>00041         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue</a>();
+<a name="l00043"></a>00043         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue</a>( <span class="keyword">const</span> <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; val );
+<a name="l00045"></a>00045         <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue</a>( <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp;&amp; val ) noexcept;
+<a name="l00047"></a>00047         <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; operator=( const <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; val );
+<a name="l00049"></a>00049         <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp; operator=( <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a> &amp;&amp; val ) noexcept;
+<a name="l00050"></a>00050         ~<a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>();
+<a name="l00051"></a>00051 
+<a name="l00053"></a>00053         explicit <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>( const <span class="keywordtype">bool</span> val );
+<a name="l00055"></a>00055         explicit <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>( const <span class="keywordtype">double</span> val );
+<a name="l00057"></a>00057         explicit <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>( const <span class="keywordtype">char</span> * val );
+<a name="l00059"></a>00059         explicit <a class="code" href="classUtil_1_1ScriptValue.html" title="Class to save variable values from script code (e.g: Lua).">ScriptValue</a>( const std::<span class="keywordtype">string</span> &amp; val );
+<a name="l00060"></a>00060 
+<a name="l00062"></a>00062         <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad" title="Get the Value Type of this instance.">getType</a>() const;
+<a name="l00063"></a>00063 
+<a name="l00068"></a>00068         <span class="keywordtype">bool</span> <a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727" title="Returns the boolean value of this variable.">getBoolean</a>( const <span class="keywordtype">bool</span> d = false ) const;
+<a name="l00073"></a>00073         <span class="keywordtype">double</span> <a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3" title="Returns the numeric value of this variable.">getNumber</a>( const <span class="keywordtype">double</span> d = 0 ) const;
+<a name="l00078"></a>00078         std::<span class="keywordtype">string</span> <a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb" title="Returns the string value of this variable.">getString</a>( const std::<span class="keywordtype">string</span> &amp; d =&quot;&quot; ) const;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080     private:
+<a name="l00082"></a>00082         <span class="keywordtype">void</span> <a class="code" href="classUtil_1_1ScriptValue.html#ac4ea04a166fee89e768ed2e2296bfee5" title="Erase old value data.">erase</a>();
+<a name="l00083"></a>00083 
+<a name="l00085"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html">00085</a>         union <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a>{
+<a name="l00087"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d">00087</a>             <span class="keywordtype">double</span> <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a>;
+<a name="l00089"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34">00089</a>             <span class="keywordtype">bool</span> <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a>;
+<a name="l00091"></a><a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414">00091</a>             std::string * <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a>;
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093             Value();
+<a name="l00094"></a>00094             ~Value();
+<a name="l00095"></a>00095         };
+<a name="l00096"></a>00096 
+<a name="l00098"></a><a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a">00098</a>         <a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html" title="Value of a script variable.">Value</a> <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>;
+<a name="l00100"></a><a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8">00100</a>         <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a>;
+<a name="l00101"></a>00101     };
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00104"></a><a class="code" href="classUtil_1_1ScriptValue.html#a63aec82b989e33a556e549bc4a7dff39">00104</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> val ){
+<a name="l00105"></a>00105         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a> = val;
+<a name="l00106"></a>00106         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::NUMBER;
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00110"></a><a class="code" href="classUtil_1_1ScriptValue.html#a94c8665d356c050b640c7798268dc630">00110</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> val ){
+<a name="l00111"></a>00111         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a> = val;
+<a name="l00112"></a>00112         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::BOOLEAN;
+<a name="l00113"></a>00113     }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00116"></a><a class="code" href="classUtil_1_1ScriptValue.html#a5139d074d0f60d28ab88b2437c1fdc0f">00116</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> * val ){
+<a name="l00117"></a>00117         <span class="keywordflow">if</span>( val ){
+<a name="l00118"></a>00118             <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">new</span> std::string(val);
+<a name="l00119"></a>00119             <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::STRING;
+<a name="l00120"></a>00120         }<span class="keywordflow">else</span>{
+<a name="l00121"></a>00121             <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::NIL;
+<a name="l00122"></a>00122         }
+<a name="l00123"></a>00123     }
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00126"></a><a class="code" href="classUtil_1_1ScriptValue.html#ad18e290846f02679998b550d2d66c664">00126</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue::ScriptValue</a>( <span class="keyword">const</span> std::string &amp; val ){
+<a name="l00127"></a>00127         <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">new</span> std::string(val);
+<a name="l00128"></a>00128         <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> = ValueType::STRING;
 <a name="l00129"></a>00129     }
 <a name="l00130"></a>00130 
 <a name="l00131"></a>00131     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00132"></a>00132     <span class="keyword">inline</span> ScriptValue::Value::~Value(){
-<a name="l00133"></a>00133         <span class="comment">// empty</span>
+<a name="l00132"></a><a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad">00132</a>     <span class="keyword">inline</span> <a class="code" href="classUtil_1_1ScriptValue.html#a9630e93ff0c496f6acf3536b502bb2e7" title="Type of a ScriptValue variable.">ScriptValue::ValueType</a> <a class="code" href="classUtil_1_1ScriptValue.html#a7b2bd8b12b6d849af646311ea64e69ad" title="Get the Value Type of this instance.">ScriptValue::getType</a>()<span class="keyword"> const</span>{
+<a name="l00133"></a>00133         <span class="keywordflow">return</span> <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a>;
 <a name="l00134"></a>00134     }
 <a name="l00135"></a>00135 
-<a name="l00136"></a>00136 }<span class="comment">//namespace Util</span>
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00139"></a>00139 <span class="preprocessor">#endif//SCRIPTVALUE_H</span>
-<a name="l00140"></a>00140 <span class="preprocessor"></span>
-<a name="l00141"></a>00141 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00136"></a>00136     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00137"></a><a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727">00137</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classUtil_1_1ScriptValue.html#a49cc5caa30297556a4144c83a2c3b727" title="Returns the boolean value of this variable.">ScriptValue::getBoolean</a>( <span class="keyword">const</span> <span class="keywordtype">bool</span> d )<span class="keyword"> const</span>{
+<a name="l00138"></a>00138         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::BOOLEAN ) ? <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#adbb14024c51d73f3c9f914690e327c34" title="value for boolean variables.">valb</a> : d;
+<a name="l00139"></a>00139     }
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00142"></a><a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3">00142</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classUtil_1_1ScriptValue.html#a26cd1e97881ed88a99652c14f0592fc3" title="Returns the numeric value of this variable.">ScriptValue::getNumber</a>( <span class="keyword">const</span> <span class="keywordtype">double</span> d )<span class="keyword"> const</span>{
+<a name="l00143"></a>00143         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::NUMBER ) ? <a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a80c76818c01023f248ff0dfe4758b41d" title="value for numeric variables.">valn</a> : d;
+<a name="l00144"></a>00144     }
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00147"></a><a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb">00147</a>     <span class="keyword">inline</span> std::string <a class="code" href="classUtil_1_1ScriptValue.html#aeea8a38af13f1258be73cf5c55e520fb" title="Returns the string value of this variable.">ScriptValue::getString</a>( <span class="keyword">const</span> std::string &amp; d )<span class="keyword"> const</span>{
+<a name="l00148"></a>00148         <span class="keywordflow">return</span> ( <a class="code" href="classUtil_1_1ScriptValue.html#a3bd165d39d95ce0bc17ec3b9f26ac5f8" title="type of the value in this instance.">m_type</a> == ValueType::STRING ) ? (*<a class="code" href="classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a" title="value if this instance.">m_val</a>.<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a>) : d;
+<a name="l00149"></a>00149     }
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00152"></a>00152     <span class="keyword">inline</span> ScriptValue::Value::Value(){
+<a name="l00153"></a>00153         this-&gt;<a class="code" href="unionUtil_1_1ScriptValue_1_1Value.html#a6a8d616e07dd3d636ca5b5435bffb414" title="value for string variables.">vals</a> = <span class="keyword">nullptr</span>;
+<a name="l00154"></a>00154     }
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00157"></a>00157     <span class="keyword">inline</span> ScriptValue::Value::~Value(){
+<a name="l00158"></a>00158         <span class="comment">// empty</span>
+<a name="l00159"></a>00159     }
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00167"></a>00167 <span class="comment"></span>    std::ostream &amp; operator&lt;&lt;( std::ostream &amp;out, <span class="keyword">const</span> <a class="code" href="classUtil_1_1ScriptValue.html#a19c24b892e56a2e17360b2d9b67b38d4" title="Construct an empty value. Defaults to NIL.">ScriptValue</a> &amp;val );
+<a name="l00168"></a>00168 
+<a name="l00169"></a>00169 }<span class="comment">//namespace Util</span>
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00172"></a>00172 <span class="preprocessor">#endif//SCRIPTVALUE_H</span>
+<a name="l00173"></a>00173 <span class="preprocessor"></span>
+<a name="l00174"></a>00174 <span class="comment">//------------------------------------------------------------------------------</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><b>scriptvalue.h</b>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="navelem"><a class="el" href="scriptvalue_8h.html">scriptvalue.h</a>      </li>
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -242,7 +267,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

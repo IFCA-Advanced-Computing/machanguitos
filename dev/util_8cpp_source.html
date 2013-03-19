@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -98,6 +98,7 @@ function toggleVisibility(linkObj) {
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,39 +120,68 @@ function toggleVisibility(linkObj) {
 <h1>util.cpp</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#include &quot;util.h&quot;</span>
-<a name="l00003"></a>00003 
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;lua.hpp&quot;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00009"></a>00009 <span class="keyword">namespace </span>Util{
-<a name="l00010"></a>00010     <span class="keyword">using namespace </span>std;
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012     <span class="comment">//--------------------------------------------------------------------------</span>
-<a name="l00013"></a>00013     <span class="keywordtype">bool</span> checkLuaReturn( lua_State * <span class="keyword">const</span> L, <span class="keyword">const</span> <span class="keywordtype">int</span> ret ){
-<a name="l00014"></a>00014         <span class="keywordflow">if</span>( ret != 0 ){
-<a name="l00015"></a>00015             <span class="keyword">auto</span> msg = lua_tostring(L, -1);
-<a name="l00016"></a>00016             <span class="keywordflow">if</span>( msg == <span class="keyword">nullptr</span> ){
-<a name="l00017"></a>00017                 cerr &lt;&lt; <span class="stringliteral">&quot;Error: (error object is not a string)\n&quot;</span>;
-<a name="l00018"></a>00018             }<span class="keywordflow">else</span>{
-<a name="l00019"></a>00019                 cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; msg &lt;&lt; endl;
-<a name="l00020"></a>00020             }
-<a name="l00021"></a>00021             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00022"></a>00022         }
-<a name="l00023"></a>00023         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00024"></a>00024     }
-<a name="l00025"></a>00025 }
+<a href="util_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment">Machanguitos is The Easiest Multi-Agent System in the world. Work done at The</span>
+<a name="l00003"></a>00003 <span class="comment">Institute of Physics of Cantabria (IFCA).</span>
+<a name="l00004"></a>00004 <span class="comment">Copyright (C) 2013  Luis Cabellos</span>
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">This program is free software: you can redistribute it and/or modify it under</span>
+<a name="l00007"></a>00007 <span class="comment">the terms of the GNU General Public License as published by the Free Software</span>
+<a name="l00008"></a>00008 <span class="comment">Foundation, either version 3 of the License, or (at your option) any later</span>
+<a name="l00009"></a>00009 <span class="comment">version.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<a name="l00012"></a>00012 <span class="comment">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span>
+<a name="l00013"></a>00013 <span class="comment">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<a name="l00014"></a>00014 <span class="comment"></span>
+<a name="l00015"></a>00015 <span class="comment">You should have received a copy of the GNU General Public License along with</span>
+<a name="l00016"></a>00016 <span class="comment">this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00017"></a>00017 <span class="comment">*******************************************************************************/</span>
+<a name="l00022"></a>00022 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="util_8h.html" title="Util functions.">util.h</a>&quot;</span>
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;lua.hpp&quot;</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00030"></a>00030 <span class="keyword">namespace </span>Util{
+<a name="l00031"></a>00031     <span class="keyword">using namespace </span>std;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00034"></a>00034     <span class="keywordtype">bool</span> checkLuaReturn( lua_State * <span class="keyword">const</span> L, <span class="keyword">const</span> <span class="keywordtype">int</span> ret ){
+<a name="l00035"></a>00035         <span class="keywordflow">if</span>( ret != 0 ){
+<a name="l00036"></a>00036             <span class="keyword">auto</span> msg = lua_tostring(L, -1);
+<a name="l00037"></a>00037             <span class="keywordflow">if</span>( msg == <span class="keyword">nullptr</span> ){
+<a name="l00038"></a>00038                 cerr &lt;&lt; <span class="stringliteral">&quot;Error: (error object is not a string)\n&quot;</span>;
+<a name="l00039"></a>00039             }<span class="keywordflow">else</span>{
+<a name="l00040"></a>00040                 cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; msg &lt;&lt; endl;
+<a name="l00041"></a>00041             }
+<a name="l00042"></a>00042             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00043"></a>00043         }
+<a name="l00044"></a>00044         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00045"></a>00045     }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="comment">//--------------------------------------------------------------------------</span>
+<a name="l00048"></a>00048     <span class="keywordtype">void</span> luaL_warn( lua_State *L, <span class="keyword">const</span> <span class="keywordtype">char</span> *fmt, ... ){
+<a name="l00049"></a>00049         va_list argp;
+<a name="l00050"></a>00050         va_start( argp, fmt );
+<a name="l00051"></a>00051         luaL_where( L, 1 );
+<a name="l00052"></a>00052         lua_pushvfstring( L, fmt, argp );
+<a name="l00053"></a>00053         va_end( argp );
+<a name="l00054"></a>00054         lua_concat( L, 2 );
+<a name="l00055"></a>00055         printf(<span class="stringliteral">&quot;Warning: %s\n&quot;</span>, lua_tostring( L,-1 ) );
+<a name="l00056"></a>00056         lua_pop( L, 1 );
+<a name="l00057"></a>00057     }
+<a name="l00058"></a>00058 }
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="comment">//------------------------------------------------------------------------------</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><b>util.cpp</b>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="navelem"><a class="el" href="util_8cpp.html">util.cpp</a>      </li>
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -161,7 +191,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

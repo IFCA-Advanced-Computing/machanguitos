@@ -63,7 +63,7 @@ function toggleVisibility(linkObj) {
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.4</span></div>
+   <div id="projectname">Machanguitos&#160;<span id="projectnumber">0.5.0</span></div>
    <div id="projectbrief">The Easiest Multi-Agent System</div>
   </td>
  </tr>
@@ -98,6 +98,7 @@ function toggleVisibility(linkObj) {
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,133 +120,159 @@ function toggleVisibility(linkObj) {
 <h1>main.cpp</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;cstdlib&gt;</span>
-<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;cassert&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;config.h&quot;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;configlib.h&quot;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;server.h&quot;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;clientlocal.h&quot;</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00012"></a>00012 <span class="keywordtype">void</span> printHelp( <span class="keyword">const</span> std::string &amp; name ){
-<a name="l00013"></a>00013     std::cerr &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; VERSION_MAJOR &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; VERSION_MINOR
-<a name="l00014"></a>00014               &lt;&lt; std::endl &lt;&lt; std::endl;
-<a name="l00015"></a>00015     std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot; &lt;config.lua&gt;\n\n&quot;</span>;
-<a name="l00016"></a>00016 }
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00019"></a>00019 <span class="keywordtype">int</span> singleMain( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
-<a name="l00020"></a>00020     <span class="keywordflow">if</span>( argc != 2 ){
-<a name="l00021"></a>00021         assert( argc &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Error in command args&quot;</span> );
-<a name="l00022"></a>00022         printHelp( argv[0] );
-<a name="l00023"></a>00023         <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00024"></a>00024     }
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026     <span class="keywordflow">if</span>( !Config::load( argv[1] ) ){
-<a name="l00027"></a>00027         <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00028"></a>00028     }
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030     <span class="keyword">auto</span> server = <a class="code" href="classSingleton.html#aac905478443d25ac6129119670caa3cb" title="Returns the singleton instance of a Class.">Engine::Server::instance</a>();
+<a href="main_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment">Machanguitos is The Easiest Multi-Agent System in the world. Work done at The</span>
+<a name="l00003"></a>00003 <span class="comment">Institute of Physics of Cantabria (IFCA).</span>
+<a name="l00004"></a>00004 <span class="comment">Copyright (C) 2013  Luis Cabellos</span>
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">This program is free software: you can redistribute it and/or modify it under</span>
+<a name="l00007"></a>00007 <span class="comment">the terms of the GNU General Public License as published by the Free Software</span>
+<a name="l00008"></a>00008 <span class="comment">Foundation, either version 3 of the License, or (at your option) any later</span>
+<a name="l00009"></a>00009 <span class="comment">version.</span>
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<a name="l00012"></a>00012 <span class="comment">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span>
+<a name="l00013"></a>00013 <span class="comment">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<a name="l00014"></a>00014 <span class="comment"></span>
+<a name="l00015"></a>00015 <span class="comment">You should have received a copy of the GNU General Public License along with</span>
+<a name="l00016"></a>00016 <span class="comment">this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="l00017"></a>00017 <span class="comment">*******************************************************************************/</span>
+<a name="l00022"></a>00022 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &lt;cstdlib&gt;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &lt;cassert&gt;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;config.h&quot;</span>
+<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="configlib_8h.html" title="Configuration functions.">configlib.h</a>&quot;</span>
+<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="server_8h.html" title="Engine::Server Declaration.">server.h</a>&quot;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="clientlocal_8h.html" title="Engine::ClientLocal Declaration.">clientlocal.h</a>&quot;</span>
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032     <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Engine::Client</a> * client = <span class="keyword">new</span> <a class="code" href="classEngine_1_1ClientLocal.html" title="Client instance that runs in local proccess.">Engine::ClientLocal</a>();
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034     server-&gt;addClient( client );
-<a name="l00035"></a>00035     server-&gt;createAgents();
-<a name="l00036"></a>00036     server-&gt;run();
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038     <span class="keywordflow">return</span> EXIT_SUCCESS;
-<a name="l00039"></a>00039 }
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 <span class="preprocessor">#if defined(HAVE_MPI)</span>
-<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">#include &quot;mpi.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;clientremote.h&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;mpiworker.h&quot;</span>
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00047"></a>00047 <span class="keywordtype">int</span> multiMain( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
-<a name="l00048"></a>00048     <span class="keywordtype">int</span> nprocs, rank;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050     MPI_Comm_size( MPI_COMM_WORLD, &amp;nprocs );
-<a name="l00051"></a>00051     MPI_Comm_rank( MPI_COMM_WORLD, &amp;rank );
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053     <span class="keywordflow">if</span>( rank == 0 ){
-<a name="l00054"></a>00054         <span class="keywordflow">if</span>( argc != 2 ){
-<a name="l00055"></a>00055             assert( argc &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Error in command args&quot;</span> );
-<a name="l00056"></a>00056             printHelp( argv[0] );
-<a name="l00057"></a>00057             <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00058"></a>00058         }
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060         <span class="keywordflow">if</span>( !Config::load( argv[1] ) ){
-<a name="l00061"></a>00061             <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00062"></a>00062         }
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064         <span class="keyword">auto</span> server = <a class="code" href="classSingleton.html#aac905478443d25ac6129119670caa3cb" title="Returns the singleton instance of a Class.">Engine::Server::instance</a>();
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066         <span class="keywordflow">for</span>( <span class="keywordtype">int</span> i = 1 ; i &lt; nprocs ; ++i ){
-<a name="l00067"></a>00067             <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Engine::Client</a> * client = <span class="keyword">new</span> <a class="code" href="classEngine_1_1ClientRemote.html" title="Client instance that acts as proxy of a remote MPI worker.">Engine::ClientRemote</a>( i );
-<a name="l00068"></a>00068             server-&gt;addClient( client );
-<a name="l00069"></a>00069         }
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071         server-&gt;createAgents();
-<a name="l00072"></a>00072         server-&gt;run();
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074     }<span class="keywordflow">else</span>{
-<a name="l00075"></a>00075         <span class="keywordflow">if</span>( argc != 2 ){
-<a name="l00076"></a>00076             <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00077"></a>00077         }
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079         <span class="keywordflow">if</span>( !Config::setDataDir( argv[1] ) ){
-<a name="l00080"></a>00080             <span class="keywordflow">return</span> EXIT_FAILURE;
-<a name="l00081"></a>00081         }
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083         <a class="code" href="classEngine_1_1MPIWorker.html" title="Define a MPI Process main loop to run as a Worker in a MPI program.">Engine::MPIWorker</a> worker(rank);
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085         worker.run();
-<a name="l00086"></a>00086     }
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088     <span class="keywordflow">return</span> EXIT_SUCCESS;
-<a name="l00089"></a>00089 }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00092"></a>00092 <span class="keywordtype">int</span> main( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
-<a name="l00093"></a>00093     static_assert( <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>) == <span class="keyword">sizeof</span>(int64_t), 
-<a name="l00094"></a>00094                    <span class="stringliteral">&quot;Double type isn&#39;t 64 bits&quot;</span> );
-<a name="l00095"></a>00095     MPI_Init( &amp;argc, &amp;argv );
+<a name="l00032"></a>00032 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00036"></a><a class="code" href="main_8cpp.html#ad6daef9906b4616df1db0f65c77c874a">00036</a> <span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="main_8cpp.html#ad6daef9906b4616df1db0f65c77c874a" title="Output application how to message.">printHelp</a>( <span class="keyword">const</span> std::string &amp; name ){
+<a name="l00037"></a>00037     std::cerr &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; VERSION_MAJOR &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; VERSION_MINOR
+<a name="l00038"></a>00038               &lt;&lt; std::endl &lt;&lt; std::endl;
+<a name="l00039"></a>00039     std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot; &lt;config.lua&gt;\n\n&quot;</span>;
+<a name="l00040"></a>00040 }
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00048"></a><a class="code" href="main_8cpp.html#aeef904642edaf48a0ba88d248cfc0a90">00048</a> <span class="comment"></span><span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#aeef904642edaf48a0ba88d248cfc0a90" title="Main application function for single proccess.">singleMain</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
+<a name="l00049"></a>00049     <span class="keywordflow">if</span>( argc != 2 ){
+<a name="l00050"></a>00050         assert( argc &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Error in command args&quot;</span> );
+<a name="l00051"></a>00051         <a class="code" href="main_8cpp.html#ad6daef9906b4616df1db0f65c77c874a" title="Output application how to message.">printHelp</a>( argv[0] );
+<a name="l00052"></a>00052         <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00053"></a>00053     }
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     <span class="keywordflow">if</span>( !<a class="code" href="group__Config.html#ga5e3336e5f83b8cea516039537861e9e6" title="Load a configure file.">Config::load</a>( argv[1] ) ){
+<a name="l00056"></a>00056         <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00057"></a>00057     }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059     <span class="keyword">auto</span> server = <a class="code" href="classSingleton.html#aac905478443d25ac6129119670caa3cb" title="Returns the singleton instance of a Class.">Engine::Server::instance</a>();
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061     <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Engine::Client</a> * client = <span class="keyword">new</span> Engine::ClientLocal( 0 );
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     server-&gt;addClient( client );
+<a name="l00064"></a>00064     <span class="keywordflow">if</span>( !server-&gt;initialize() ){
+<a name="l00065"></a>00065         <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067     server-&gt;createAgents();
+<a name="l00068"></a>00068     server-&gt;run();
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     <span class="keywordflow">return</span> EXIT_SUCCESS;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 <span class="preprocessor">#if defined(HAVE_MPI)</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span><span class="preprocessor">#include &quot;mpi.h&quot;</span>
+<a name="l00075"></a>00075 <span class="preprocessor">#include &quot;<a class="code" href="clientremote_8h.html" title="Engine::ClientRemote Declaration.">clientremote.h</a>&quot;</span>
+<a name="l00076"></a>00076 <span class="preprocessor">#include &quot;<a class="code" href="mpiworker_8h.html" title="Engine::MPIWorker Declaration.">mpiworker.h</a>&quot;</span>
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00084"></a><a class="code" href="main_8cpp.html#ad4f39afc477aba0721bf4b7fa2eca173">00084</a> <span class="comment"></span><span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#ad4f39afc477aba0721bf4b7fa2eca173" title="Main application function for multiple MPI proccesses.">multiMain</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
+<a name="l00085"></a>00085     <span class="keywordtype">int</span> nprocs, rank;
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     MPI_Comm_size( MPI_COMM_WORLD, &amp;nprocs );
+<a name="l00088"></a>00088     MPI_Comm_rank( MPI_COMM_WORLD, &amp;rank );
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <span class="keywordflow">if</span>( rank == 0 ){
+<a name="l00091"></a>00091         <span class="keywordflow">if</span>( argc != 2 ){
+<a name="l00092"></a>00092             assert( argc &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Error in command args&quot;</span> );
+<a name="l00093"></a>00093             <a class="code" href="main_8cpp.html#ad6daef9906b4616df1db0f65c77c874a" title="Output application how to message.">printHelp</a>( argv[0] );
+<a name="l00094"></a>00094             <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00095"></a>00095         }
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097     <span class="keywordtype">int</span> nprocs;
-<a name="l00098"></a>00098     MPI_Comm_size( MPI_COMM_WORLD, &amp;nprocs );
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100     <span class="keywordtype">int</span> ret{ EXIT_SUCCESS };
-<a name="l00101"></a>00101     <span class="keywordflow">if</span>( nprocs == 1 ){
-<a name="l00102"></a>00102         ret = singleMain( argc, argv );
-<a name="l00103"></a>00103     }<span class="keywordflow">else</span>{
-<a name="l00104"></a>00104         ret = multiMain( argc, argv );
-<a name="l00105"></a>00105     }
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107     MPI_Finalize();
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109     <span class="keywordflow">return</span> ret;
-<a name="l00110"></a>00110 }
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112 <span class="preprocessor">#else//!HAVE_MPI</span>
-<a name="l00113"></a>00113 <span class="preprocessor"></span>
-<a name="l00114"></a>00114 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00115"></a>00115 <span class="keywordtype">int</span> main( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
-<a name="l00116"></a>00116     <span class="keywordflow">return</span> singleMain( argc, argv );
-<a name="l00117"></a>00117 }
+<a name="l00097"></a>00097         <span class="keywordflow">if</span>( !<a class="code" href="group__Config.html#ga5e3336e5f83b8cea516039537861e9e6" title="Load a configure file.">Config::load</a>( argv[1] ) ){
+<a name="l00098"></a>00098             <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00099"></a>00099         }
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101         <span class="keyword">auto</span> server = <a class="code" href="classSingleton.html#aac905478443d25ac6129119670caa3cb" title="Returns the singleton instance of a Class.">Engine::Server::instance</a>();
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <span class="keywordflow">for</span>( <span class="keywordtype">int</span> i = 1 ; i &lt; nprocs ; ++i ){
+<a name="l00104"></a>00104             <a class="code" href="classEngine_1_1Client.html" title="Client Interface.">Engine::Client</a> * client = <span class="keyword">new</span> Engine::ClientRemote( i );
+<a name="l00105"></a>00105             server-&gt;addClient( client );
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108         <span class="keywordflow">if</span>( !server-&gt;initialize() ){
+<a name="l00109"></a>00109             <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00110"></a>00110         }
+<a name="l00111"></a>00111         server-&gt;createAgents();
+<a name="l00112"></a>00112         server-&gt;run();
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114     }<span class="keywordflow">else</span>{
+<a name="l00115"></a>00115         <span class="keywordflow">if</span>( argc != 2 ){
+<a name="l00116"></a>00116             <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00117"></a>00117         }
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119 <span class="preprocessor">#endif//HAVE_MPI</span>
-<a name="l00120"></a>00120 <span class="preprocessor"></span>
-<a name="l00121"></a>00121 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00119"></a>00119         <span class="keywordflow">if</span>( !<a class="code" href="group__Config.html#gaf412da0da0057eb34b237ca8f216ceec" title="Sets the directory to use for load data files.">Config::setDataDir</a>( argv[1] ) ){
+<a name="l00120"></a>00120             <span class="keywordflow">return</span> EXIT_FAILURE;
+<a name="l00121"></a>00121         }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123         <a class="code" href="classEngine_1_1MPIWorker.html" title="Define a MPI Process main loop to run as a Worker in a MPI program.">Engine::MPIWorker</a> worker(rank);
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125         worker.<a class="code" href="classEngine_1_1MPIWorker.html#a9d8d8b39455c8daa4a8f4b2e4d0c09e2" title="run loop of the MPI worker waiting for Server orders.">run</a>();
+<a name="l00126"></a>00126     }
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128     <span class="keywordflow">return</span> EXIT_SUCCESS;
+<a name="l00129"></a>00129 }
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00137"></a><a class="code" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">00137</a> <span class="comment"></span><span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="Main function for MPI application.">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
+<a name="l00138"></a>00138     static_assert( <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>) == <span class="keyword">sizeof</span>(int64_t), 
+<a name="l00139"></a>00139                    <span class="stringliteral">&quot;Double type isn&#39;t 64 bits&quot;</span> );
+<a name="l00140"></a>00140     MPI_Init( &amp;argc, &amp;argv );
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142     <span class="keywordtype">int</span> nprocs;
+<a name="l00143"></a>00143     MPI_Comm_size( MPI_COMM_WORLD, &amp;nprocs );
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145     <span class="keywordtype">int</span> ret{ EXIT_SUCCESS };
+<a name="l00146"></a>00146     <span class="keywordflow">if</span>( nprocs == 1 ){
+<a name="l00147"></a>00147         ret = <a class="code" href="main_8cpp.html#aeef904642edaf48a0ba88d248cfc0a90" title="Main application function for single proccess.">singleMain</a>( argc, argv );
+<a name="l00148"></a>00148     }<span class="keywordflow">else</span>{
+<a name="l00149"></a>00149         ret = <a class="code" href="main_8cpp.html#ad4f39afc477aba0721bf4b7fa2eca173" title="Main application function for multiple MPI proccesses.">multiMain</a>( argc, argv );
+<a name="l00150"></a>00150         <span class="keywordflow">if</span>( ret != EXIT_SUCCESS ){
+<a name="l00151"></a>00151             MPI_Abort( MPI_COMM_WORLD, ret );
+<a name="l00152"></a>00152         }
+<a name="l00153"></a>00153     }
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155     MPI_Finalize();
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157     <span class="keywordflow">return</span> ret;
+<a name="l00158"></a>00158 }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 <span class="preprocessor">#else//!HAVE_MPI</span>
+<a name="l00161"></a>00161 <span class="preprocessor"></span>
+<a name="l00162"></a>00162 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00168"></a>00168 <span class="comment"></span><span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="Main function for MPI application.">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * argv[] ){
+<a name="l00169"></a>00169     <span class="keywordflow">return</span> <a class="code" href="main_8cpp.html#aeef904642edaf48a0ba88d248cfc0a90" title="Main application function for single proccess.">singleMain</a>( argc, argv );
+<a name="l00170"></a>00170 }
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172 <span class="preprocessor">#endif//HAVE_MPI</span>
+<a name="l00173"></a>00173 <span class="preprocessor"></span>
+<a name="l00174"></a>00174 <span class="comment">//------------------------------------------------------------------------------</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><b>main.cpp</b>      </li>
-      <li class="footer">Generated on Wed Mar 13 2013 11:08:48 for Machanguitos by&#160;
+      <li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a>      </li>
+      <li class="footer">Generated on Tue Mar 19 2013 15:33:52 for Machanguitos by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
     </ul>
@@ -255,7 +282,7 @@ function toggleVisibility(linkObj) {
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
