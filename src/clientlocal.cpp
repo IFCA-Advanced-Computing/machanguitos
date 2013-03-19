@@ -47,10 +47,13 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientLocal::setDataStore( const std::string & name, const uint16_t port ){
+    void ClientLocal::setDataStore( const std::string & name,
+                                    const std::string & host, const uint16_t port )
+    {
         auto db = IO::DataStore::instance();
 
         db->setDataStoreName( name );
+        db->setDataStoreHost( host );
         db->setDataStorePort( port );
     }
 

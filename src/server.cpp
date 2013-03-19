@@ -55,7 +55,9 @@ namespace Engine{
     //--------------------------------------------------------------------------
     bool Server::initialize(){
         auto db = IO::DataStore::instance();
+        auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
         auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
+        db->setDataStoreHost( host );
         db->setDataStorePort( port );
 
         auto name = db->mkName();
@@ -68,7 +70,7 @@ namespace Engine{
         auto startt = getConfigNumber( "starttime", 0 );
 
         for( auto c: m_clients ){
-            c->setDataStore( name, port );
+            c->setDataStore( name, host, port );
             c->setStartTime( startt );
         }
 

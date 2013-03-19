@@ -47,8 +47,11 @@ namespace Engine{
         virtual void setStartTime( const double time )=0;
         /** Set the Data Store info.
             @param name datastore name.
+            @param host datastore host name.
+            @param port datastore host port.
          */
-        virtual void setDataStore( const std::string & name, const uint16_t port )=0;
+        virtual void setDataStore( const std::string & name,
+                                   const std::string & host, const uint16_t port )=0;
         /** Create a AgentClass and save it.
             @param name name of the AgentClass.
             @retval true if it can create the AgentClass instance.
@@ -60,7 +63,7 @@ namespace Engine{
          */
         virtual void createAgents( const std::string & name, int n )=0;
         /** Run a tick of the 'update' function for the Agents in this Client
-            instance.  
+            instance.
             @param delta time increment in seconds between updates.
          */
         virtual void runAgents( const double delta )=0;

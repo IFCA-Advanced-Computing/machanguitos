@@ -125,9 +125,9 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void MPIWorker::runSetDataStore( const int num ){
 #if defined(HAVE_MPI)
-        char val[MAX_DB_NAME+1];
+        char cname[MAX_DB_NAME+1];
         MPI_Status status;
-        MPI_Recv( &val, MAX_DB_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -135,10 +135,20 @@ namespace Engine{
 
         int count;
         MPI_Get_count( &status, MPI_CHAR, &count );
-        val[count] = 0;
+        cname[count] = 0;
+
+        char chost[MAX_HOST_NAME+1];
+        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        chost[count] = 0;
 
         if( m_local ){
-            m_local->setDataStore( val, num );
+            m_local->setDataStore( cname, chost, num );
         }
 
 #else//!HAVE_MPI
