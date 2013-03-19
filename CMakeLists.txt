@@ -51,8 +51,8 @@ configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
 set(MONGO_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/mongoc")
 
 add_subdirectory(mongoc)
-add_subdirectory(src)
 add_subdirectory(common)
+add_subdirectory(machen)
 add_subdirectory(test)
 
 #data files
@@ -62,7 +62,7 @@ install(DIRECTORY "example" DESTINATION ${DATADIR})
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_INPUTS
-    "${PROJECT_SOURCE_DIR}/common ${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/mongoc ${PROJECT_SOURCE_DIR}/doc/doxydoc")
+    "${PROJECT_SOURCE_DIR}/doc/doxydoc ${PROJECT_SOURCE_DIR}/mongoc ${PROJECT_SOURCE_DIR}/common ${PROJECT_SOURCE_DIR}/machen")
   set(DOXYGEN_DEFINES "")
   if(MPI_FOUND)
     set(DOXYGEN_DEFINES "${DOXYGEN_DEFINES} HAVE_MPI")
