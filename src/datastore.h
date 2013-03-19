@@ -62,6 +62,11 @@ namespace IO {
          */
         bool createStore( const std::string & name );
 
+        /** Set the datastore name.
+            @param name name of the datastore.
+         */
+        void setDataStoreName( const std::string & name );
+
     private:
         /// datastore name.
         std::string m_dbname;
@@ -70,6 +75,11 @@ namespace IO {
         /// datastore host port.
         int m_dbport;
     };
+
+    //--------------------------------------------------------------------------
+    inline void DataStore::setDataStoreName( const std::string & name ){
+        m_dbname = name;
+    }
 
 }//namespace IO
 
