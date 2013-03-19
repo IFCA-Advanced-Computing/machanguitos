@@ -57,9 +57,8 @@ namespace IO {
             strval.width(2);
             strval << uppercase << hex << static_cast<unsigned>(i);
         }
-        strval << ends;
 
-        return strval.str();
+        return "d" + strval.str();
     }
 
     //--------------------------------------------------------------------------
