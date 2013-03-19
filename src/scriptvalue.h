@@ -37,7 +37,7 @@ namespace Util {
         /// Type of a ScriptValue variable
         enum class ValueType : char { NIL, BOOLEAN, NUMBER, STRING };
 
-        /// Construct an empty value. Defaults to numeric 0.
+        /// Construct an empty value. Defaults to NIL.
         ScriptValue();
         /// Copy Constructor.
         ScriptValue( const ScriptValue & val );
