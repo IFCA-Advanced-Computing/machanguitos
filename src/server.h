@@ -92,6 +92,12 @@ namespace Engine{
             @returns the value, or default if this variable is not numeric type.
          */
         double getConfigNumber( const std::string & key, const double d ) const;
+        /** Returns the string value of a config parameter.
+            @param key name of the parameter.
+            @param d default value.
+            @returns the value, or default if this variable is not string type.
+         */
+        std::string getConfigString( const std::string & key, const std::string & d ) const;
         /// Wait the clients end its simulation step
         void waitClients() const;
 

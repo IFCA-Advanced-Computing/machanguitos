@@ -143,6 +143,19 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    string Server::getConfigString( const std::string & key, const std::string & d ) const{
+        const auto i = m_config.find( key );
+        if( i != m_config.end() ){
+            if( i->second.getType() != Util::ScriptValue::ValueType::STRING ){
+                cerr << "WARNING: '" << key << "' is not a string\n";
+            }
+            return i->second.getString(d);
+        }else{
+            return d;
+        }
+    }
+
+    //--------------------------------------------------------------------------
     void Server::run(){
         auto iters = getConfigInt( "iters", 10 );
         auto startt = getConfigNumber( "starttime", 0 );
