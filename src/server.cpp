@@ -55,6 +55,8 @@ namespace Engine{
     //--------------------------------------------------------------------------
     bool Server::initialize(){
         auto db = IO::DataStore::instance();
+        auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
+        db->setDataStorePort( port );
 
         auto name = db->mkName();
         cout << "creating datastore: " << name << endl;
