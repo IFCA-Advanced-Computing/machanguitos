@@ -56,6 +56,12 @@ namespace IO {
          */
         std::string mkName() const;
 
+        /** Create a DataStore.
+            @param name name of the datastore.
+            @retval true if can be created.
+         */
+        bool createStore( const std::string & name );
+
     private:
         /// datastore name.
         std::string m_dbname;

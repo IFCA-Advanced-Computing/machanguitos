@@ -63,6 +63,29 @@ namespace IO {
     }
 
     //--------------------------------------------------------------------------
+    bool DataStore::createStore( const std::string & name ){
+        m_dbname = name;
+
+        mongo conn;
+        mongo_init( &conn );
+
+        if( mongo_client( &conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
+            cout << "failed to connect mongo\n";
+            return false;
+        }
+
+        if( mongo_cmd_drop_db( &conn, name.c_str() ) != MONGO_OK ){
+            cout << "failed to drop database" << name << endl;
+            return false;
+        }
+
+        mongo_disconnect( &conn );
+        mongo_destroy( &conn );
+
+        return true;
+    }
+
+    //--------------------------------------------------------------------------
     void DataStore::saveAgentInstance( const double time, const AgentId & id,
                                        const map<string, const ScriptValue *> & vars )
     {
