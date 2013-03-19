@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "config.h"
+#include "scriptvalue.h"
 
 //------------------------------------------------------------------------------
 namespace IO {

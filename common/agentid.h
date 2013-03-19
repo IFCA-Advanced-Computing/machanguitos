@@ -15,34 +15,19 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file agentinstance.h
-    @brief Agent::AgentInstance Declaration.
+/** @file agentid.h
+    @brief Agent::AgentID declaration.
     @author Luis Cabellos
- */
+*/
 //------------------------------------------------------------------------------
-#ifndef AGENTINSTANCE_H
-#define AGENTINSTANCE_H
+#ifndef AGENTID_H
+#define AGENTID_H
 
 //------------------------------------------------------------------------------
 #include <string>
-#include <map>
-
-#include "scriptvalue.h"
-
-//------------------------------------------------------------------------------
-struct lua_State;
 
 //------------------------------------------------------------------------------
 namespace Agent{
-    //--------------------------------------------------------------------------
-    /** private name of AgentInstance objects in Lua tables.
-        @ingroup Agent
-     */
-    constexpr const char * SCRIPT_AGENT_OBJ = "__obj";
-
-    //--------------------------------------------------------------------------
-    class AgentClass;
-
     //--------------------------------------------------------------------------
     /** Identifier of an AgentInstance.
         @ingroup Agent
@@ -84,48 +69,9 @@ namespace Agent{
         return "m" + std::to_string(m_mayor) + "n" + std::to_string(m_minor);
     }
 
-    //--------------------------------------------------------------------------
-    /** Instance of an AgentClass.
-        @ingroup Agent
-     */
-    class AgentInstance {
-    public:
-        /** AgentInstance constructor. It should receive a AgentClass instance.
-            @param c AgentClass instance of the Agent.
-            @param id AgentInstance identifier.
-         */
-        AgentInstance( AgentClass * c, AgentId && id );
-        /// initialize the Agent calling its 'init' function on Lua.
-        void init();
-        /** Update the Agent calling its 'update' fuction on Lua.
-            @param delta time increment in seconds between updates.
-         */
-        void update( const double delta );
-        /** Output the variables.
-           @param t is the simulation time.
-         */
-        void outVars( const double t ) const;
-        /** Put the Agent variable on Lua stack.
-            @param L Lua State.
-            @param key name of the variable to get.
-         */
-        int pushData( lua_State * L, const std::string & key ) const;
-        /** Save a Lua value in an Agent variable.
-            @param L Lua State.
-            @param key name of the variable to save.
-         */
-        void newData( lua_State * L, const std::string & key );
-    private:
-        /// AgentClass instance of this Agent.
-        AgentClass * m_class;
-        /// list of variables of the Agent.
-        std::map<std::string, Util::ScriptValue> m_vals;
-        /// identifier of instance.
-        AgentId m_id;
-    };
 }
 
 //------------------------------------------------------------------------------
-#endif//AGENTINSTANCE_H
+#endif//AGENTID_H
 
 //------------------------------------------------------------------------------

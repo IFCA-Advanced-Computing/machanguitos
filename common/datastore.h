@@ -28,7 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mongo.h"
 #include "singleton.h"
-#include "agentinstance.h"
+#include "agentid.h"
 
 //------------------------------------------------------------------------------
 namespace Util {
