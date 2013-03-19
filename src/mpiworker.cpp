@@ -84,7 +84,7 @@ namespace Engine{
                 break;
 
             case TAG_SETDATASTORE:
-                runSetDataStore();
+                runSetDataStore( val );
                 break;
 
             case TAG_END:
@@ -123,7 +123,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataStore(){
+    void MPIWorker::runSetDataStore( const int num ){
 #if defined(HAVE_MPI)
         char val[MAX_DB_NAME+1];
         MPI_Status status;
@@ -138,7 +138,7 @@ namespace Engine{
         val[count] = 0;
 
         if( m_local ){
-            m_local->setDataStore( val );
+            m_local->setDataStore( val, num );
         }
 
 #else//!HAVE_MPI

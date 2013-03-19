@@ -76,10 +76,10 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::setDataStore( const std::string & name ){
+    void ClientRemote::setDataStore( const std::string & name, const uint16_t port ){
 #if defined(HAVE_MPI)
         assert( name.length() <= MAX_DB_NAME && "name too long" );
-        int32_t val{0};
+        int32_t val{port};
         char * cstr = new char [name.length()+1];
         strcpy( cstr, name.c_str() );
 

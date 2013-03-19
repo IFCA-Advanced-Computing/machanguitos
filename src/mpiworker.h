@@ -48,7 +48,7 @@ namespace Engine{
         /// Execute a Set Start Time command.
         void runSetStartTime();
         /// Execute a Set DataStore info command.
-        void runSetDataStore();
+        void runSetDataStore( const int num );
         /// Execute a Create Class command.
         void runCreateClass();
         /** Execute a Create Agents command.

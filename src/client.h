@@ -48,7 +48,7 @@ namespace Engine{
         /** Set the Data Store info.
             @param name datastore name.
          */
-        virtual void setDataStore( const std::string & name )=0;
+        virtual void setDataStore( const std::string & name, const uint16_t port )=0;
         /** Create a AgentClass and save it.
             @param name name of the AgentClass.
             @retval true if it can create the AgentClass instance.

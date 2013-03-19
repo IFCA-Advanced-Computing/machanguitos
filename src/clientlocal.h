@@ -48,7 +48,7 @@ namespace Engine{
         virtual ~ClientLocal();
 
         void setStartTime( const double time ) override;
-        void setDataStore( const std::string & name ) override;
+        void setDataStore( const std::string & name, const uint16_t port ) override;
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;
