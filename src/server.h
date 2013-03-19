@@ -1,3 +1,24 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file server.h
+    @brief Engine::Server Declaration.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #ifndef SERVER_H
 #define SERVER_H
@@ -46,6 +67,8 @@ namespace Engine{
             @param n number of Agents to create.
          */
         void addAgents( const std::string & name, const unsigned n );
+        /// configure clients and world.
+        bool initialize();
         /// create the agents for the simulation.
         void createAgents();
         /** Insert a config parameter.
@@ -69,6 +92,14 @@ namespace Engine{
             @returns the value, or default if this variable is not numeric type.
          */
         double getConfigNumber( const std::string & key, const double d ) const;
+        /** Returns the string value of a config parameter.
+            @param key name of the parameter.
+            @param d default value.
+            @returns the value, or default if this variable is not string type.
+         */
+        std::string getConfigString( const std::string & key, const std::string & d ) const;
+        /// Wait the clients end its simulation step
+        void waitClients() const;
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;

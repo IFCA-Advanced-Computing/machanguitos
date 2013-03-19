@@ -1,7 +1,29 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file scriptvalue.cpp
+    @brief Util::ScriptValue Definition.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #include "scriptvalue.h"
 
 #include <cassert>
+#include <ostream>
 
 //------------------------------------------------------------------------------
 namespace Util {
@@ -42,7 +64,7 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
-    ScriptValue::ScriptValue( ScriptValue && val ) : m_type{val.m_type} {
+    ScriptValue::ScriptValue( ScriptValue && val ) noexcept : m_type{val.m_type} {
         switch( m_type ){
         case ValueType::NIL: // empty
             break;
@@ -81,7 +103,7 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
-    ScriptValue & ScriptValue::operator=( ScriptValue && val ){
+    ScriptValue & ScriptValue::operator=( ScriptValue && val ) noexcept {
         erase();
         m_type = val.m_type;
         switch( m_type ){
@@ -99,6 +121,25 @@ namespace Util {
             break;
         }
         return (*this);
+    }
+
+    //--------------------------------------------------------------------------
+    std::ostream & operator<<( std::ostream &out, const ScriptValue &val ){
+        switch( val.getType() ){
+        case ScriptValue::ValueType::NIL:
+            out << "<NIL>";
+            break;
+        case ScriptValue::ValueType::BOOLEAN:
+            out << val.getBoolean();
+            break;
+        case ScriptValue::ValueType::NUMBER:
+            out << val.getNumber();
+            break;
+        case ScriptValue::ValueType::STRING:
+            out << val.getString();
+            break;
+        }
+        return out;
     }
 
 }//namespace Util

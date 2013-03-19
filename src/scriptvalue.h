@@ -1,3 +1,24 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file scriptvalue.h
+    @brief Util::ScriptValue Declaration.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #ifndef SCRIPTVALUE_H
 #define SCRIPTVALUE_H
@@ -16,16 +37,16 @@ namespace Util {
         /// Type of a ScriptValue variable
         enum class ValueType : char { NIL, BOOLEAN, NUMBER, STRING };
 
-        /// Construct an empty value. Defaults to numeric 0.
+        /// Construct an empty value. Defaults to NIL.
         ScriptValue();
         /// Copy Constructor.
         ScriptValue( const ScriptValue & val );
         /// Move Constructor.
-        ScriptValue( ScriptValue && val );
+        ScriptValue( ScriptValue && val ) noexcept;
         /// Copy assign.
         ScriptValue & operator=( const ScriptValue & val );
         /// Move assign.
-        ScriptValue & operator=( ScriptValue && val );
+        ScriptValue & operator=( ScriptValue && val ) noexcept;
         ~ScriptValue();
 
         /// Construct a boolean value.
@@ -93,8 +114,12 @@ namespace Util {
 
     //--------------------------------------------------------------------------
     inline ScriptValue::ScriptValue( const char * val ){
-        m_val.vals = new std::string(val);
-        m_type = ValueType::STRING;
+        if( val ){
+            m_val.vals = new std::string(val);
+            m_type = ValueType::STRING;
+        }else{
+            m_type = ValueType::NIL;
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -132,6 +157,14 @@ namespace Util {
     inline ScriptValue::Value::~Value(){
         // empty
     }
+
+    //--------------------------------------------------------------------------
+    /** Insert formatted ScriptValue to an output stream.
+        @param out Output stream object.
+        @param val ScriptValue to be formatted and inserted into the stream.
+        @returns The Output stream object.
+     */
+    std::ostream & operator<<( std::ostream &out, const ScriptValue &val );
 
 }//namespace Util
 

@@ -1,3 +1,7 @@
+/** @file doxydoc
+    @brief Doxygen main page. And group definitions.
+    @author Luis Cabellos
+ */
 /** @mainpage Machanguitos
 @section intr_sec Introduction
 The Easiest <b>Multi-Agent System</b> in the world.
@@ -24,4 +28,7 @@ cmake -DCMAKE_PREFIX_PATH=/gpfs/res_apps/MACHANGUITOS/0.4
  */
 
 /** @defgroup Config Configuration classes.
+ */
+
+/** @defgroup IO Input Output classes.
  */

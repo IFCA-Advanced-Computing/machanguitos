@@ -1,8 +1,8 @@
 project(MACHANGUITOS)
 cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
-set(MACHANGUITOS_VERSION_MINOR 4)
-set(MACHANGUITOS_VERSION_RELEASE 1)
+set(MACHANGUITOS_VERSION_MINOR 5)
+set(MACHANGUITOS_VERSION_RELEASE 0)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
@@ -46,7 +46,11 @@ set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSIO
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
                 "${PROJECT_BINARY_DIR}/config.h" )
 
+set(MONGO_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/mongoc")
+
+add_subdirectory(mongoc)
 add_subdirectory(src)
+add_subdirectory(test)
 
 #data files
 install(DIRECTORY "example" DESTINATION ${DATADIR})
@@ -54,6 +58,13 @@ install(DIRECTORY "example" DESTINATION ${DATADIR})
 # documentation
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
+  set(DOXYGEN_INPUTS
+    "${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/mongoc ${PROJECT_SOURCE_DIR}/doc/doxydoc")
+  set(DOXYGEN_DEFINES "")
+  if(MPI_FOUND)
+    set(DOXYGEN_DEFINES "${DOXYGEN_DEFINES} HAVE_MPI")
+  endif()
+
   configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
     "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
   add_custom_target(doc

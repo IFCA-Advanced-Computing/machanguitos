@@ -9,7 +9,7 @@
 
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "Machanguitos"
-PROJECT_NUMBER         = @MACHANGUITOS_VERSION_MAJOR@.@MACHANGUITOS_VERSION_MINOR@
+PROJECT_NUMBER         = @MACHANGUITOS_VERSION_MAJOR@.@MACHANGUITOS_VERSION_MINOR@.@MACHANGUITOS_VERSION_RELEASE@
 PROJECT_BRIEF          = "The Easiest Multi-Agent System"
 PROJECT_LOGO           =
 
@@ -111,7 +111,7 @@ WARN_LOGFILE           =
 # configuration options related to the input files
 #---------------------------------------------------------------------------
 
-INPUT                  = @PROJECT_SOURCE_DIR@/src @PROJECT_SOURCE_DIR@/doc/doxydoc
+INPUT                  = @DOXYGEN_INPUTS@
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.cpp *.h
 RECURSIVE              = NO
@@ -152,7 +152,7 @@ VERBATIM_HEADERS       = YES
 #---------------------------------------------------------------------------
 
 ALPHABETICAL_INDEX     = YES
-COLS_IN_ALPHA_INDEX    = 5
+COLS_IN_ALPHA_INDEX    = 4
 IGNORE_PREFIX          =
 
 #---------------------------------------------------------------------------
@@ -286,7 +286,7 @@ EXPAND_ONLY_PREDEF     = NO
 SEARCH_INCLUDES        = YES
 INCLUDE_PATH           =
 INCLUDE_FILE_PATTERNS  =
-PREDEFINED             =
+PREDEFINED             = @DOXYGEN_DEFINES@
 EXPAND_AS_DEFINED      =
 SKIP_FUNCTION_MACROS   = YES
 

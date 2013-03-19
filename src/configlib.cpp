@@ -1,3 +1,24 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file configlib.cpp
+    @brief Configuration function definitions.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #include "configlib.h"
 
@@ -20,6 +41,19 @@ namespace Config{
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** Define config.add_agent library function.
+
+        This function sets the number of agents to simulate of a AgentClass.
+
+        @code{.lua}
+        config.add_agent( "cow", 10 );
+        config.add_agent( "cat", 3 );
+        @endcode
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int config_add_agent( lua_State *L ){
         auto name = luaL_checkstring( L, 1 );
         auto num = luaL_checknumber( L, 2 );
@@ -29,6 +63,22 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** Define config.setvars library function.
+
+        This function sets configuration variables for the simulation.
+
+        @code{.lua}
+        config.setvars( {
+                   starttime = 0.0,
+                   endtime = 10.0,
+                   iters = 10,
+         } );
+        @endcode
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int config_setvars( lua_State *L ){
         auto server = Engine::Server::instance();
         luaL_checktype( L, 1, LUA_TTABLE );
@@ -51,8 +101,8 @@ namespace Config{
                 server->insertConfig( key, ScriptValue(lua_tostring( L, -1)) );
                 break;
             default:
-                cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
-                     << "' on key '" << key << "'\n";
+                luaL_warn( L, "type not implemented '%s' on key '%s'",
+                           lua_typename( L, ltype ), key.c_str() );
             }
 
             // removes 'value'; keeps 'key' for next iteration
@@ -62,6 +112,9 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** List of functions of config lua library for Agent files.
+        @ingroup Config
+     */
     const luaL_Reg configlib[] = {
         {"add_agent",   config_add_agent},
         {"setvars",   config_setvars},
@@ -69,6 +122,11 @@ namespace Config{
     };
 
     //--------------------------------------------------------------------------
+    /** Load config lib in Lua State
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
     int openlib( lua_State *L ){
         // set functions
         luaL_register( L, "config", configlib );
@@ -96,7 +154,7 @@ namespace Config{
         path datadir(filename);
         datadir.remove_filename();
         Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
-        
+
         return true;
     }
 

@@ -1,3 +1,24 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file agentinstance.cpp
+    @brief Agent::AgentInstance Definition.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #include "agentinstance.h"
 
@@ -8,6 +29,7 @@
 
 #include "util.h"
 #include "agentclass.h"
+#include "datastore.h"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -15,7 +37,9 @@ namespace Agent{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    AgentInstance::AgentInstance( AgentClass * c ) : m_class(c) {
+    AgentInstance::AgentInstance( AgentClass * c, AgentId && id )
+        : m_class{c}, m_id{std::move(id)}
+    {
         assert( m_class && "Invalid Agent Class" );
     }
 
@@ -105,6 +129,23 @@ namespace Agent{
             cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
                  << "' on key '" << key << "'\n";
         }
+    }
+
+    //--------------------------------------------------------------------------
+    void AgentInstance::outVars( const double t ) const{
+        auto outKeys = m_class->getOutVars();
+
+        auto db = IO::DataStore::instance();
+
+        std::map<std::string, const ScriptValue *> ovars;
+        for( const auto key: outKeys ){
+            const auto variable = m_vals.find( key );
+            if( variable != m_vals.end() ){
+                ovars[key] = &variable->second;
+            }
+        }
+
+        db->saveAgentInstance( t, m_id, ovars );
     }
 }
 

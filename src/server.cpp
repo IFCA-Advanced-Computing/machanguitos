@@ -1,3 +1,24 @@
+/*******************************************************************************
+Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
+Institute of Physics of Cantabria (IFCA).
+Copyright (C) 2013  Luis Cabellos
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
+*******************************************************************************/
+/** @file server.cpp
+    @brief Engine::Server Definition.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
 #include "server.h"
 
@@ -7,6 +28,11 @@
 
 #include "config.h"
 #include "client.h"
+#include "datastore.h"
+
+#if defined(HAVE_MPI)
+#include "mpi.h"
+#endif
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -27,15 +53,40 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    bool Server::initialize(){
+        auto db = IO::DataStore::instance();
+        auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
+        auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
+        db->setDataStoreHost( host );
+        db->setDataStorePort( port );
+
+        auto name = db->mkName();
+        cout << "creating datastore: " << name << endl;
+        if( !db->createStore( name ) ){
+            cerr << "ERROR: Can't create DataStore '" << name << "'\n";
+            return false;
+        }
+
+        auto startt = getConfigNumber( "starttime", 0 );
+
+        for( auto c: m_clients ){
+            c->setDataStore( name, host, port );
+            c->setStartTime( startt );
+        }
+
+        return true;
+    }
+
+    //--------------------------------------------------------------------------
     void Server::createAgents(){
         auto nClients = m_clients.size();
         if( nClients > 0 ){
             for( const auto p: m_numAgents ){
                 // sort, first the clients with less agents
-                std::sort( m_clients.begin(), m_clients.end(),
-                           [](Client * a, Client * b){
-                               return a->numAgents() < b->numAgents();
-                           } );
+                sort( m_clients.begin(), m_clients.end(),
+                      [](Client * a, Client * b){
+                          return a->numAgents() < b->numAgents();
+                      } );
 
                 cout << "Creating: " << p.second << " of " << p.first << endl;
                 size_t nPerClient = p.second / nClients;
@@ -94,6 +145,19 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    string Server::getConfigString( const std::string & key, const std::string & d ) const{
+        const auto i = m_config.find( key );
+        if( i != m_config.end() ){
+            if( i->second.getType() != Util::ScriptValue::ValueType::STRING ){
+                cerr << "WARNING: '" << key << "' is not a string\n";
+            }
+            return i->second.getString(d);
+        }else{
+            return d;
+        }
+    }
+
+    //--------------------------------------------------------------------------
     void Server::run(){
         auto iters = getConfigInt( "iters", 10 );
         auto startt = getConfigNumber( "starttime", 0 );
@@ -107,12 +171,21 @@ namespace Engine{
             for( auto c: m_clients ){
                 c->runAgents( delta );
             }
+
+            waitClients();
         }
 
         for( auto c: m_clients ){
             c->end();
         }
         cout << "\nSERVER: End Simulation\n\n";
+    }
+
+    //--------------------------------------------------------------------------
+    void Server::waitClients() const{
+#if defined(HAVE_MPI)
+        MPI_Barrier( MPI_COMM_WORLD );
+#endif
     }
 }
 
