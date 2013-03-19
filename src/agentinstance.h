@@ -25,7 +25,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <string>
-#include <sstream>
 #include <map>
 
 #include "scriptvalue.h"
@@ -73,9 +72,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     inline std::string AgentId::str() const{
-        std::ostringstream strval;
-        strval << "m" << m_mayor << ".n" << m_minor;
-        return strval.str();
+        return "m" + std::to_string(m_mayor) + "n" + std::to_string(m_minor);
     }
 
     //--------------------------------------------------------------------------
