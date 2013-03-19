@@ -39,6 +39,8 @@ find_package( Boost 1.52 COMPONENTS system filesystem REQUIRED )
 find_package( MPI )
 if(MPI_FOUND)
   add_definitions(-DHAVE_MPI)
+  set(CMAKE_CXX_COMPILE_FLAGS ${CMAKE_CXX_COMPILE_FLAGS} ${MPI_COMPILE_FLAGS})
+  set(CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS})
 endif()
 
 set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSION_MAJOR}.${MACHANGUITOS_VERSION_MINOR}")
@@ -50,6 +52,7 @@ set(MONGO_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/mongoc")
 
 add_subdirectory(mongoc)
 add_subdirectory(src)
+add_subdirectory(common)
 add_subdirectory(test)
 
 #data files
