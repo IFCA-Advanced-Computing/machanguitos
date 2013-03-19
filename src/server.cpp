@@ -66,6 +66,7 @@ namespace Engine{
         auto startt = getConfigNumber( "starttime", 0 );
 
         for( auto c: m_clients ){
+            c->setDataStore( name );
             c->setStartTime( startt );
         }
 

@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.h"
 #include "agentclass.h"
 #include "agentinstance.h"
+#include "datastore.h"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -43,6 +44,13 @@ namespace Engine{
     //--------------------------------------------------------------------------
     ClientLocal::~ClientLocal(){
         // empty
+    }
+
+    //--------------------------------------------------------------------------
+    void ClientLocal::setDataStore( const std::string & name ){
+        auto db = IO::DataStore::instance();
+
+        db->setDataStoreName( name );
     }
 
     //--------------------------------------------------------------------------

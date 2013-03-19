@@ -83,6 +83,10 @@ namespace Engine{
                 runSetStartTime();
                 break;
 
+            case TAG_SETDATASTORE:
+                runSetDataStore();
+                break;
+
             case TAG_END:
                 running = false;
                 break;
@@ -111,6 +115,30 @@ namespace Engine{
 
         if( m_local ){
             m_local->setStartTime( val );
+        }
+
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+    //--------------------------------------------------------------------------
+    void MPIWorker::runSetDataStore(){
+#if defined(HAVE_MPI)
+        char val[MAX_DB_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &val, MAX_DB_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        val[count] = 0;
+
+        if( m_local ){
+            m_local->setDataStore( val );
         }
 
 #else//!HAVE_MPI

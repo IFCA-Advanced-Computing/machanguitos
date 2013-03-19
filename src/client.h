@@ -45,6 +45,10 @@ namespace Engine{
             @param time start time in seconds.
          */
         virtual void setStartTime( const double time )=0;
+        /** Set the Data Store info.
+            @param name datastore name.
+         */
+        virtual void setDataStore( const std::string & name )=0;
         /** Create a AgentClass and save it.
             @param name name of the AgentClass.
             @retval true if it can create the AgentClass instance.
