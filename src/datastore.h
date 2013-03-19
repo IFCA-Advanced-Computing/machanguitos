@@ -42,6 +42,8 @@ namespace IO {
      */
     class DataStore : public Singleton<DataStore> {
     public:
+        constexpr static uint16_t DEFAULT_PORT{27017};
+
         DataStore();
 
         /** Save the agent instance step in the Data Store.
@@ -66,6 +68,10 @@ namespace IO {
             @param name name of the datastore.
          */
         void setDataStoreName( const std::string & name );
+        /** Set the datastore host port.
+            @param port host port.
+         */
+        void setDataStorePort( const uint16_t port );
 
     private:
         /// datastore name.
@@ -73,12 +79,17 @@ namespace IO {
         /// datastore host.
         std::string m_dbhost;
         /// datastore host port.
-        int m_dbport;
+        uint16_t m_dbport;
     };
 
     //--------------------------------------------------------------------------
     inline void DataStore::setDataStoreName( const std::string & name ){
         m_dbname = name;
+    }
+
+    //--------------------------------------------------------------------------
+    inline void DataStore::setDataStorePort( const uint16_t port ){
+        m_dbport = port;
     }
 
 }//namespace IO

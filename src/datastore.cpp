@@ -41,7 +41,7 @@ namespace IO {
 
     //--------------------------------------------------------------------------
     DataStore::DataStore()
-        : m_dbname{"_dataStore"}, m_dbhost{"localhost"}, m_dbport{27017}
+        : m_dbname{"_dataStore"}, m_dbhost{"localhost"}, m_dbport{DEFAULT_PORT}
     {
         // empty
     }
