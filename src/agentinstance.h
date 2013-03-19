@@ -55,7 +55,11 @@ namespace Agent{
          */
         AgentId( const int mayor, const int minor );
 
+        /// Returns the string representation of ID.
         std::string str() const;
+        /** Returns the safe string representation of id. The safe
+            representation also is valid as a name in databases. */
+        std::string idstr() const;
 
         /// mayor component of identifier.
         int m_mayor;
@@ -72,6 +76,11 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     inline std::string AgentId::str() const{
+        return std::to_string(m_mayor) + "." + std::to_string(m_minor);
+    }
+
+    //--------------------------------------------------------------------------
+    inline std::string AgentId::idstr() const{
         return "m" + std::to_string(m_mayor) + "n" + std::to_string(m_minor);
     }
 

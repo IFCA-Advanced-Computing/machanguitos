@@ -58,7 +58,7 @@ namespace IO {
             return;
         }
 
-        string ns{ m_dbname + AGENT_COLL_PREFIX + id.str() };
+        string ns{ m_dbname + AGENT_COLL_PREFIX + id.idstr() };
 
         bson b;
 
