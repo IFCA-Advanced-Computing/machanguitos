@@ -24,6 +24,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include "mongo.h"
 
 //------------------------------------------------------------------------------
@@ -31,6 +34,7 @@ namespace IO {
     using namespace std;
     using namespace Agent;
     using namespace Util;
+    using namespace boost;
 
     //--------------------------------------------------------------------------
     constexpr const char * AGENT_COLL_PREFIX = ".ins.";
@@ -40,6 +44,22 @@ namespace IO {
         : m_dbname{"_dataStore"}, m_dbhost{"localhost"}, m_dbport{27017}
     {
         // empty
+    }
+
+    //--------------------------------------------------------------------------
+    string DataStore::mkName() const{
+        uuids::random_generator gen;
+        uuids::uuid u = gen();
+
+        ostringstream strval;
+        for( auto i: u ){
+            strval.fill('0');
+            strval.width(2);
+            strval << uppercase << hex << static_cast<unsigned>(i);
+        }
+        strval << ends;
+
+        return strval.str();
     }
 
     //--------------------------------------------------------------------------

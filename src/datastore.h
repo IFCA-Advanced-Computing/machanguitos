@@ -51,9 +51,17 @@ namespace IO {
          */
         void saveAgentInstance( const double time, const Agent::AgentId & id, const std::map<std::string, const Util::ScriptValue *> & vars );
 
+        /** Create a DataStore name using random UUID.
+            @returns the name.
+         */
+        std::string mkName() const;
+
     private:
+        /// datastore name.
         std::string m_dbname;
+        /// datastore host.
         std::string m_dbhost;
+        /// datastore host port.
         int m_dbport;
     };
 
