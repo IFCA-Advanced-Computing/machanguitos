@@ -39,7 +39,7 @@ namespace Engine{
     /** Client instance that runs in local proccess.
         @ingroup Engine
      */
-    class ClientLocal : public Client{
+    class ClientLocal final : public Client{
     public:
         /**
            @param id Client Identifier, and mayor number of Agents in this client.

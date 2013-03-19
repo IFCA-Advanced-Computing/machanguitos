@@ -30,7 +30,7 @@ namespace Engine{
     /** Client instance that acts as proxy of a remote MPI worker.
         @ingroup: Engine
      */
-    class ClientRemote : public Client{
+    class ClientRemote final : public Client{
     public:
         /** Constructor.
             @param dest MPI rank of remote worker.
