@@ -27,7 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
-#include "mongo.h"
+#include "config.h"
 
 //------------------------------------------------------------------------------
 namespace IO {
@@ -43,7 +43,21 @@ namespace IO {
     DataStore::DataStore()
         : m_dbname{"_ds"}, m_dbhost{DEFAULT_HOSTNAME}, m_dbport{DEFAULT_PORT}
     {
-        // empty
+        mongo_init( &m_conn );
+    }
+
+    //--------------------------------------------------------------------------
+    DataStore::~DataStore(){
+        mongo_destroy( &m_conn );
+    }
+
+    //--------------------------------------------------------------------------
+    void DataStore::setDataStoreHost( const std::string & host ){
+        if( host.length() < MAX_HOST_NAME ){
+            m_dbhost = host;
+        }else{
+            cerr << "WARNING: datastore host too long '" << host << "'\n";
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -65,21 +79,17 @@ namespace IO {
     bool DataStore::createStore( const std::string & name ){
         m_dbname = name;
 
-        mongo conn;
-        mongo_init( &conn );
-
-        if( mongo_client( &conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
+        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
             cout << "failed to connect mongo\n";
             return false;
         }
 
-        if( mongo_cmd_drop_db( &conn, name.c_str() ) != MONGO_OK ){
+        if( mongo_cmd_drop_db( &m_conn, name.c_str() ) != MONGO_OK ){
             cout << "failed to drop database" << name << endl;
             return false;
         }
 
-        mongo_disconnect( &conn );
-        mongo_destroy( &conn );
+        mongo_disconnect( &m_conn );
 
         return true;
     }
@@ -92,10 +102,7 @@ namespace IO {
             return;
         }
 
-        mongo conn;
-        mongo_init( &conn );
-
-        if( mongo_client( &conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
+        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
             cout << "failed to connect mongo\n";
             return;
         }
@@ -107,7 +114,7 @@ namespace IO {
         bson_init( &b );
         if( bson_append_new_oid( &b, "_id" ) != BSON_OK ){
             cout << "failed to create bson id\n";
-            mongo_disconnect( &conn );
+            mongo_disconnect( &m_conn );
             return;
         }
 
@@ -132,14 +139,13 @@ namespace IO {
 
         bson_finish( &b );
 
-        if( mongo_insert( &conn , ns.c_str() , &b, NULL ) != MONGO_OK ){
+        if( mongo_insert( &m_conn , ns.c_str() , &b, NULL ) != MONGO_OK ){
             cout << "failed to insert in mongo\n";
         }
 
         bson_destroy( &b );
 
-        mongo_disconnect( &conn );
-        mongo_destroy( &conn );
+        mongo_disconnect( &m_conn );
     }
 
 }//namespace IO

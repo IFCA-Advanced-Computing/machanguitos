@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include <map>
 
+#include "mongo.h"
 #include "singleton.h"
 #include "agentinstance.h"
 
@@ -46,6 +47,7 @@ namespace IO {
         constexpr static uint16_t DEFAULT_PORT{27017};
 
         DataStore();
+        ~DataStore();
 
         /** Save the agent instance step in the Data Store.
             @param time simulation time of the step.
@@ -86,6 +88,8 @@ namespace IO {
         std::string m_dbhost;
         /// datastore host port.
         uint16_t m_dbport;
+        /// mongo connection attribute.
+        mongo m_conn;
     };
 
     //--------------------------------------------------------------------------
@@ -96,11 +100,6 @@ namespace IO {
     //--------------------------------------------------------------------------
     inline void DataStore::setDataStorePort( const uint16_t port ){
         m_dbport = port;
-    }
-
-    //--------------------------------------------------------------------------
-    inline void DataStore::setDataStoreHost( const std::string & host ){
-        m_dbhost = host;
     }
 
 }//namespace IO
