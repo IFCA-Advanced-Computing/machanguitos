@@ -28,7 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config.h"
 #include "client.h"
-#include "datastore.h"
+#include "datastore.hpp"
 
 #if defined(HAVE_MPI)
 #include "mpi.h"

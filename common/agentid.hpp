@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file agentid.h
+/** @file agentid.hpp
     @brief Agent::AgentID declaration.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#ifndef AGENTID_H
-#define AGENTID_H
+#ifndef AGENTID_HPP
+#define AGENTID_HPP
 
 //------------------------------------------------------------------------------
 #include <string>
@@ -72,6 +72,6 @@ namespace Agent{
 }
 
 //------------------------------------------------------------------------------
-#endif//AGENTID_H
+#endif//AGENTID_HPP
 
 //------------------------------------------------------------------------------

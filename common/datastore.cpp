@@ -20,7 +20,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#include "datastore.h"
+#include "datastore.hpp"
 
 #include <iostream>
 #include <string>
@@ -28,7 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "config.h"
-#include "scriptvalue.h"
+#include "scriptvalue.hpp"
 
 //------------------------------------------------------------------------------
 namespace IO {

@@ -15,20 +15,20 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file datastore.h
+/** @file datastore.hpp
     @brief IO::DataStore Declaration.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#ifndef DATASTORE_H
-#define DATASTORE_H
+#ifndef DATASTORE_HPP
+#define DATASTORE_HPP
 
 //------------------------------------------------------------------------------
 #include <map>
 
 #include "mongo.h"
-#include "singleton.h"
-#include "agentid.h"
+#include "singleton.hpp"
+#include "agentid.hpp"
 
 //------------------------------------------------------------------------------
 namespace Util {
@@ -109,6 +109,6 @@ namespace IO {
 }//namespace IO
 
 //------------------------------------------------------------------------------
-#endif//DATASTORE_H
+#endif//DATASTORE_HPP
 
 //------------------------------------------------------------------------------

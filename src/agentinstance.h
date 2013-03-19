@@ -27,8 +27,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <map>
 
-#include "scriptvalue.h"
-#include "agentid.h"
+#include "scriptvalue.hpp"
+#include "agentid.hpp"
 
 //------------------------------------------------------------------------------
 struct lua_State;

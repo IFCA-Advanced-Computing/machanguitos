@@ -20,7 +20,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "scriptvalue.h"
+#include "scriptvalue.hpp"
 
 #include <cassert>
 #include <ostream>

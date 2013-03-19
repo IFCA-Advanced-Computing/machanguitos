@@ -28,7 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.h"
 #include "agentclass.h"
 #include "agentinstance.h"
-#include "datastore.h"
+#include "datastore.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{

@@ -15,47 +15,35 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file singleton.h
-    @brief Singleton Declaration.
+/** @file util.hpp
+    @brief Util functions.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef SINGLETON_H
-#define SINGLETON_H
+#ifndef UTIL_HPP
+#define UTIL_HPP
 
 //------------------------------------------------------------------------------
-/** Singleton behaviour to add to a Class.
-
-    Implements the Singleton Design Pattern. Creates the class instance the
-    first time that it is accessed.
-
-    @ingroup Util
- */
-template<class T>
-class Singleton{
- public:
-    /// Returns the singleton instance of a Class.
-    static T * instance();
-
- private:
-    /// singleton instance of a Class.
-    static T * s_singleton;
-};
+struct lua_State;
 
 //------------------------------------------------------------------------------
-template<class T>
-inline T * Singleton<T>::instance(){
-    if( nullptr == s_singleton ){
-        s_singleton = new T();
-    }
-
-    return s_singleton;
+namespace Util{
+    /** Check a lua function return, and show error message if needed.
+        @param L Lua State.
+        @param err Lua error state.
+        @retval True if Lua Return Value is OK.
+        @ingrop Util
+     */
+    bool checkLuaReturn( lua_State * const L, const int err );
+    /** Warning Message function to be used inside a C function called from Lua.
+        @param fmt format string of warning.
+        @param L Lua State.
+        @ingrop Util
+     */
+    void luaL_warn( lua_State *L, const char *fmt, ... );
 }
 
 //------------------------------------------------------------------------------
-template<class T> T * Singleton<T>::s_singleton = nullptr;
-
-//------------------------------------------------------------------------------
-#endif//SINGLETON_H
+#endif//UTIL_HPP
 
 //------------------------------------------------------------------------------

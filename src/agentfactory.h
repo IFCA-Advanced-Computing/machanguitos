@@ -24,7 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AGENTFACTORY_H
 
 //------------------------------------------------------------------------------
-#include "singleton.h"
+#include "singleton.hpp"
 
 #include <string>
 #include <map>

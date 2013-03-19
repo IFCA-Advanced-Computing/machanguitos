@@ -27,9 +27,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "lua.hpp"
 
-#include "util.h"
+#include "util.hpp"
 #include "agentclass.h"
-#include "datastore.h"
+#include "datastore.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{

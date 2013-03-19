@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file scriptvalue.h
+/** @file scriptvalue.hpp
     @brief Util::ScriptValue Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef SCRIPTVALUE_H
-#define SCRIPTVALUE_H
+#ifndef SCRIPTVALUE_HPP
+#define SCRIPTVALUE_HPP
 
 //------------------------------------------------------------------------------
 #include <string>
@@ -169,6 +169,6 @@ namespace Util {
 }//namespace Util
 
 //------------------------------------------------------------------------------
-#endif//SCRIPTVALUE_H
+#endif//SCRIPTVALUE_HPP
 
 //------------------------------------------------------------------------------
