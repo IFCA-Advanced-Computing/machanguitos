@@ -42,6 +42,7 @@ namespace IO {
      */
     class DataStore : public Singleton<DataStore> {
     public:
+        constexpr static const char * const DEFAULT_HOSTNAME{"localhost"};
         constexpr static uint16_t DEFAULT_PORT{27017};
 
         DataStore();
@@ -68,6 +69,11 @@ namespace IO {
             @param name name of the datastore.
          */
         void setDataStoreName( const std::string & name );
+        /** Set the datastore host name.
+            @param host hostname.
+         */
+        void setDataStoreHost( const std::string & host );
+
         /** Set the datastore host port.
             @param port host port.
          */
@@ -90,6 +96,11 @@ namespace IO {
     //--------------------------------------------------------------------------
     inline void DataStore::setDataStorePort( const uint16_t port ){
         m_dbport = port;
+    }
+
+    //--------------------------------------------------------------------------
+    inline void DataStore::setDataStoreHost( const std::string & host ){
+        m_dbhost = host;
     }
 
 }//namespace IO
