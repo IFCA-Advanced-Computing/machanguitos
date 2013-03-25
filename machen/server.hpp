@@ -42,6 +42,10 @@ namespace Engine{
      */
     class Server : public Singleton<Server> {
     public:
+        /** Set the directory that use to lookup data files.
+            @param filename filename to get the path from.
+         */
+        void setDatadir( const std::string & filename );
         /** Create the expectect number of clients.
             @param nprocs number of MPI proccesses.
          */
@@ -111,6 +115,8 @@ namespace Engine{
         std::vector<Client*> m_clients;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
+        /// data path.
+        std::string m_datadir;
     };
 
     //--------------------------------------------------------------------------

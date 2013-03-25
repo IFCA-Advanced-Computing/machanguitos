@@ -22,7 +22,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include <cstdlib>
 #include <cassert>
-#include <boost/filesystem.hpp>
 #include "config.h"
 #include "configlib.hpp"
 #include "agentfactory.hpp"
@@ -38,6 +37,12 @@ void printHelp( const std::string & name ){
     std::cerr << name << " " << VERSION_MAJOR << "." << VERSION_MINOR
               << std::endl << std::endl;
     std::cerr << "Usage: " << name << " <config.lua>\n\n";
+}
+
+//------------------------------------------------------------------------------
+inline int mainAbort(){
+    MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
+    return EXIT_FAILURE;
 }
 
 //------------------------------------------------------------------------------
@@ -61,26 +66,19 @@ int main( int argc, char * argv[] ){
         if( argc != 2 ){
             assert( argc > 0 && "Error in command args" );
             printHelp( argv[0] );
-            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
-            return EXIT_FAILURE;
+            return mainAbort();
         }
 
         std::string filename{ argv[1] };
         if( !Config::load( filename ) ){
-            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
-            return EXIT_FAILURE;
+            return mainAbort();
         }
 
-        // set directory for Agent classes
-        boost::filesystem::path datadir( filename );
-        datadir.remove_filename();
-        Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
-
         auto server = Engine::Server::instance();
+        server->setDatadir( filename );
         server->createClients( nprocs );
         if( !server->initialize() ){
-            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
-            return EXIT_FAILURE;
+            return mainAbort();
         }
         server->createAgents();
         server->run();
@@ -88,7 +86,6 @@ int main( int argc, char * argv[] ){
     // MPI CLIENTS
     }else{
         Engine::MPIWorker worker(rank);
-
         worker.run();
     }
 

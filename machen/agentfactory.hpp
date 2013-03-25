@@ -40,10 +40,6 @@ namespace Agent{
      */
     class AgentFactory : public Singleton<AgentFactory>{
     public:
-        /** Gets the directory to use to lookup Lua files for Agent classes.
-            @returns the data directory
-        */
-        std::string getDatadir() const;
         /** Set the directory that use to lookup Lua files for Agent classes.
             @param dir directory to set.
          */
@@ -70,10 +66,6 @@ namespace Agent{
         std::map<std::string, AgentClass *> m_classes;
     };
 
-    //--------------------------------------------------------------------------
-    inline std::string AgentFactory::getDatadir() const{
-        return m_dir;
-    }
 }
 
 //------------------------------------------------------------------------------

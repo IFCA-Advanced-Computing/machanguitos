@@ -23,6 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include <iostream>
 #include <algorithm>
+#include <boost/filesystem.hpp>
 #include "config.h"
 #include "agentfactory.hpp"
 #include "clientlocal.hpp"
@@ -33,6 +34,13 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+
+    //--------------------------------------------------------------------------
+    void Server::setDatadir( const std::string & filename ){
+        boost::filesystem::path datadir( filename );
+        datadir.remove_filename();
+        m_datadir = datadir.c_str();
+    }
 
     //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
@@ -78,10 +86,8 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
-        auto datadir = Agent::AgentFactory::instance()->getDatadir();
-
         for( auto c: m_clients ){
-            c->setDataDir( datadir );
+            c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
         }
