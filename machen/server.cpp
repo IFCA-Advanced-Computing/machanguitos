@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <algorithm>
 #include "config.h"
+#include "agentfactory.hpp"
 #include "client.hpp"
 #include "datastore.hpp"
 #if defined(HAVE_MPI)
@@ -65,7 +66,10 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
+        auto datadir = Agent::AgentFactory::instance()->getDatadir();
+
         for( auto c: m_clients ){
+            c->setDataDir( datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
         }

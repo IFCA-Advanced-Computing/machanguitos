@@ -32,13 +32,6 @@ struct lua_State;
 //------------------------------------------------------------------------------
 namespace Config{
     //--------------------------------------------------------------------------
-    /** Sets the directory to use for load data files. The data dir is relative
-        to the config file
-        @param filename name of the config file.
-        @ingroup Config
-     */
-    bool setDataDir( const std::string & filename );
-    //--------------------------------------------------------------------------
     /** Load a configure file.
         @param filename name of the file to load.
         @ingroup Config

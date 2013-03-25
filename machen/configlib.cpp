@@ -139,36 +139,10 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
-    /** Sets the data directory.
-        Gets the same path as the filename directory part.
-        @param filename file with configuration options.
-        @retval true if file is ok.
-     */
-    bool setDataDir( const string & filename ){
+    bool load( const string & filename ){
         // check file
         if( !exists( filename ) || !is_regular_file( filename ) ){
             cerr << "Error: There is no config file " << filename << endl;
-            return false;
-        }
-
-        // set directory with Agent classes
-        path datadir(filename);
-        datadir.remove_filename();
-        Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
-
-        return true;
-    }
-
-    //--------------------------------------------------------------------------
-    /** Load the configuration.
-        Also, sets the data directory using the same path of the configuration
-        file.
-
-        @param filename file with configuration options.
-        @retval true if load is ok.
-     */
-    bool load( const string & filename ){
-        if( !setDataDir( filename ) ){
             return false;
         }
 

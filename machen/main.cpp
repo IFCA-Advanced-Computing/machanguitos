@@ -23,8 +23,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cassert>
 #include <iostream>
+#include <boost/filesystem.hpp>
 #include "config.h"
 #include "configlib.hpp"
+#include "agentfactory.hpp"
 #include "server.hpp"
 #include "clientlocal.hpp"
 
@@ -54,6 +56,11 @@ int singleMain( int argc, char * argv[] ){
     if( !Config::load( argv[1] ) ){
         return EXIT_FAILURE;
     }
+
+    // set directory for Agent classes
+    boost::filesystem::path datadir( argv[1] );
+    datadir.remove_filename();
+    Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
 
     auto server = Engine::Server::instance();
 
@@ -93,9 +100,15 @@ int multiMain( int argc, char * argv[] ){
             return EXIT_FAILURE;
         }
 
-        if( !Config::load( argv[1] ) ){
+        std::string filename{ argv[1] };
+        if( !Config::load( filename ) ){
             return EXIT_FAILURE;
         }
+
+        // set directory for Agent classes
+        boost::filesystem::path datadir( filename );
+        datadir.remove_filename();
+        Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
 
         auto server = Engine::Server::instance();
 
@@ -111,14 +124,6 @@ int multiMain( int argc, char * argv[] ){
         server->run();
 
     }else{
-        if( argc != 2 ){
-            return EXIT_FAILURE;
-        }
-
-        if( !Config::setDataDir( argv[1] ) ){
-            return EXIT_FAILURE;
-        }
-
         Engine::MPIWorker worker(rank);
 
         worker.run();
