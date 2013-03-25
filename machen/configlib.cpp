@@ -139,6 +139,11 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** Sets the data directory.
+        Gets the same path as the filename directory part.
+        @param filename file with configuration options.
+        @retval true if file is ok.
+     */
     bool setDataDir( const string & filename ){
         // check file
         if( !exists( filename ) || !is_regular_file( filename ) ){
@@ -155,6 +160,13 @@ namespace Config{
     }
 
     //--------------------------------------------------------------------------
+    /** Load the configuration.
+        Also, sets the data directory using the same path of the configuration
+        file.
+
+        @param filename file with configuration options.
+        @retval true if load is ok.
+     */
     bool load( const string & filename ){
         if( !setDataDir( filename ) ){
             return false;

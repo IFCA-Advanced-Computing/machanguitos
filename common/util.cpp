@@ -31,6 +31,11 @@ namespace Util{
     using namespace std;
 
     //--------------------------------------------------------------------------
+    /** Check a Lua return error, and print a message when is failed.
+        @param L lua_State.
+        @param ret The return value of a lua function
+        @retval true if return value is 0
+     */
     bool checkLuaReturn( lua_State * const L, const int ret ){
         if( ret != 0 ){
             auto msg = lua_tostring(L, -1);
@@ -45,6 +50,16 @@ namespace Util{
     }
 
     //--------------------------------------------------------------------------
+    /** Generates a Lua warning.
+        The error message format is given by fmt plus any extra arguments,
+        following the same rules of lua_pushfstring. It also adds at the
+        beginning of the message the file name and the line number where the
+        error occurred, if this information is available.
+        It's similar to luaL_error, but in this case, the funtions returns.
+        @param L lua_State.
+        @param fmt message format
+        @param ... parameters of the message
+     */
     void luaL_warn( lua_State *L, const char *fmt, ... ){
         va_list argp;
         va_start( argp, fmt );
