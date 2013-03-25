@@ -45,6 +45,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void ClientLocal::setDataDir( const std::string & path ){
+        Agent::AgentFactory::instance()->setDatadir( path );
+    }
+
+    //--------------------------------------------------------------------------
     void ClientLocal::setDataStore( const std::string & name,
                                     const std::string & host, const uint16_t port )
     {

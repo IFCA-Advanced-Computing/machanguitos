@@ -86,6 +86,10 @@ namespace Engine{
                 runSetDataStore( val );
                 break;
 
+            case TAG_SETDATAPATH:
+                runSetDataPath();
+                break;
+
             case TAG_END:
                 running = false;
                 break;
@@ -114,6 +118,30 @@ namespace Engine{
 
         if( m_local ){
             m_local->setStartTime( val );
+        }
+
+#else//!HAVE_MPI
+        assert( false && "MPI code without MPI" );
+#endif//HAVE_MPI
+    }
+
+    //--------------------------------------------------------------------------
+    void MPIWorker::runSetDataPath(){
+#if defined(HAVE_MPI)
+        char cname[MAX_PATH_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, TAG_SETDATAPATH, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cname[count] = 0;
+
+        if( m_local ){
+            m_local->setDataDir( cname );
         }
 
 #else//!HAVE_MPI

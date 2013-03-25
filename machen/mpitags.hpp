@@ -45,6 +45,10 @@ namespace Engine{
         @ingroup Engine
      */
     constexpr int TAG_SETDATASTORE = 5;
+    /** Set Data Path Tag.
+        @ingroup Engine
+     */
+    constexpr int TAG_SETDATAPATH = 6;
     /** End Simulation Message Tag.
         @ingroup Engine
      */
