@@ -24,10 +24,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include "config.h"
 #include "clientlocal.hpp"
-#if defined(HAVE_MPI)
 #include <mpi.h>
 #include "mpitags.hpp"
-#endif
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -35,13 +33,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     MPIWorker::MPIWorker( const int r ) : m_rank{r} {
-#if defined(HAVE_MPI)
         m_local = new (std::nothrow) Engine::ClientLocal( m_rank );
         if( !m_local ){
             cerr << "ERROR: can't create local agents on worker\n";
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
-#endif
     }
 
     //--------------------------------------------------------------------------
@@ -53,7 +49,6 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void MPIWorker::run(){
-#if defined(HAVE_MPI)
         int32_t val{0};
         MPI_Status status;
         bool running = true;
@@ -99,15 +94,10 @@ namespace Engine{
                          << "] on " << m_rank << endl;
             }
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runSetStartTime(){
-#if defined(HAVE_MPI)
         double val;
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, TAG_SETSTARTTIME, MPI_COMM_WORLD, &status );
@@ -119,15 +109,10 @@ namespace Engine{
         if( m_local ){
             m_local->setStartTime( val );
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runSetDataPath(){
-#if defined(HAVE_MPI)
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
         MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, TAG_SETDATAPATH, MPI_COMM_WORLD, &status );
@@ -143,15 +128,10 @@ namespace Engine{
         if( m_local ){
             m_local->setDataDir( cname );
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runSetDataStore( const int num ){
-#if defined(HAVE_MPI)
         char cname[MAX_DB_NAME+1];
         MPI_Status status;
         MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
@@ -177,15 +157,10 @@ namespace Engine{
         if( m_local ){
             m_local->setDataStore( cname, chost, num );
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runCreateClass(){
-#if defined(HAVE_MPI)
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATECLASS, MPI_COMM_WORLD, &status );
@@ -203,15 +178,10 @@ namespace Engine{
                 cerr << "WARNING: Class '" << val << "' can't be created\n";
             }
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runCreateAgents( const int num ){
-#if defined(HAVE_MPI)
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATEAGENTS, MPI_COMM_WORLD, &status );
@@ -227,15 +197,10 @@ namespace Engine{
         if( m_local ){
             m_local->createAgents( val, num );
         }
-
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void MPIWorker::runAgents(){
-#if defined(HAVE_MPI)
         double val;
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, TAG_RUNAGENTS, MPI_COMM_WORLD, &status );
@@ -249,9 +214,6 @@ namespace Engine{
         }
 
         MPI_Barrier( MPI_COMM_WORLD );
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
 }

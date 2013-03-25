@@ -27,9 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.hpp"
 #include "client.hpp"
 #include "datastore.hpp"
-#if defined(HAVE_MPI)
 #include "mpi.h"
-#endif
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -183,9 +181,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::waitClients() const{
-#if defined(HAVE_MPI)
         MPI_Barrier( MPI_COMM_WORLD );
-#endif
     }
 }
 

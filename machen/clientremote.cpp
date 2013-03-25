@@ -26,10 +26,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include <cstring>
 #include "config.h"
-#if defined(HAVE_MPI)
 #include <mpi.h>
 #include "mpitags.hpp"
-#endif//HAVE_MPI
 
 
 //------------------------------------------------------------------------------
@@ -46,7 +44,6 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     bool ClientRemote::createClass( const std::string & name ){
-#if defined(HAVE_MPI)
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{0};
         char * cname = new char [name.length()+1];
@@ -55,26 +52,18 @@ namespace Engine{
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
         return true;
-#else//!HAVE_MPI
-        return false;
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::setStartTime( const double time ){
-#if defined(HAVE_MPI)
         int32_t val{0};
         double t{time};
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
         MPI_Send( &t, 1, MPI_DOUBLE, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::setDataDir( const std::string & filename ){
-#if defined(HAVE_MPI)
         assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
         int32_t val{0};
         char * cname = new char [filename.length()+1];
@@ -82,16 +71,12 @@ namespace Engine{
 
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETDATAPATH, MPI_COMM_WORLD );
         MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, TAG_SETDATAPATH, MPI_COMM_WORLD );
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::setDataStore( const std::string & name,
                                      const std::string & host, const uint16_t port )
     {
-#if defined(HAVE_MPI)
         assert( name.length() <= MAX_DB_NAME && "name too long" );
         assert( name.length() <= MAX_HOST_NAME && "hostname too long" );
         int32_t val{port};
@@ -103,14 +88,10 @@ namespace Engine{
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
         MPI_Send( chost, host.length(), MPI_CHAR, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::createAgents( const std::string & name, int n ){
-#if defined(HAVE_MPI)
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val = n;
         char * cname = new char [name.length()+1];
@@ -120,33 +101,21 @@ namespace Engine{
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
 
         m_numAgents += n;
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::runAgents( const double delta ){
-#if defined(HAVE_MPI)
         int32_t val{0};
         double d{delta};
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
         MPI_Send( &d, 1, MPI_DOUBLE, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::end(){
-#if defined(HAVE_MPI)
         int32_t val{0};
         MPI_Send( &val, 1, MPI_INT, m_dest, TAG_END, MPI_COMM_WORLD);
-#else//!HAVE_MPI
-        assert( false && "MPI code without MPI" );
-#endif//HAVE_MPI
     }
-
 
 }
 

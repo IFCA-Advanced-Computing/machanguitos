@@ -29,6 +29,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.hpp"
 #include "server.hpp"
 #include "clientlocal.hpp"
+#include "mpi.h"
+#include "clientremote.hpp"
+#include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
 /** Output application how to message
@@ -75,11 +78,6 @@ int singleMain( int argc, char * argv[] ){
 
     return EXIT_SUCCESS;
 }
-
-#if defined(HAVE_MPI)
-#include "mpi.h"
-#include "clientremote.hpp"
-#include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
 /** Main application function for multiple MPI proccesses.
@@ -160,19 +158,5 @@ int main( int argc, char * argv[] ){
 
     return ret;
 }
-
-#else//!HAVE_MPI
-
-//------------------------------------------------------------------------------
-/** Main function.
-    @param argc argument count.
-    @param argv argument vector.
-    @returns exit status of the process.
- */
-int main( int argc, char * argv[] ){
-    return singleMain( argc, argv );
-}
-
-#endif//HAVE_MPI
 
 //------------------------------------------------------------------------------
