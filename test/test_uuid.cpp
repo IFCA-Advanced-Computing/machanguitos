@@ -23,7 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <boost/uuid/uuid_generators.hpp>
 
 //------------------------------------------------------------------------------
-int main( int argc, char * argv[] ){
+int main( int /*argc*/, char * /*argv*/[] ){
     boost::uuids::random_generator gen;
     boost::uuids::uuid u = gen();
 
