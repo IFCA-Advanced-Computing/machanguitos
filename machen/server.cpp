@@ -25,13 +25,27 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <algorithm>
 #include "config.h"
 #include "agentfactory.hpp"
-#include "client.hpp"
+#include "clientlocal.hpp"
+#include "clientremote.hpp"
 #include "datastore.hpp"
 #include "mpi.h"
 
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+
+    //--------------------------------------------------------------------------
+    void Server::createClients( const int nprocs ){
+        if( nprocs == 1 ){
+            Engine::Client * client = new Engine::ClientLocal( 0 );
+            addClient( client );
+        }
+
+        for( int i = 1 ; i < nprocs ; ++i ){
+            Engine::Client * client = new Engine::ClientRemote( i );
+            addClient( client );
+        }
+    }
 
     //--------------------------------------------------------------------------
     void Server::addClient( Client * c ){

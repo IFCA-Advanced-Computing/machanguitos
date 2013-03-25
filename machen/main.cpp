@@ -27,9 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "configlib.hpp"
 #include "agentfactory.hpp"
 #include "server.hpp"
-#include "clientlocal.hpp"
 #include "mpi.h"
-#include "clientremote.hpp"
 #include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
@@ -79,17 +77,7 @@ int main( int argc, char * argv[] ){
         Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
 
         auto server = Engine::Server::instance();
-
-        if( nprocs == 1 ){
-            Engine::Client * client = new Engine::ClientLocal( 0 );
-            server->addClient( client );
-        }
-
-        for( int i = 1 ; i < nprocs ; ++i ){
-            Engine::Client * client = new Engine::ClientRemote( i );
-            server->addClient( client );
-        }
-
+        server->createClients( nprocs );
         if( !server->initialize() ){
             MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
             return EXIT_FAILURE;

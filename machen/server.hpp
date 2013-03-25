@@ -42,10 +42,10 @@ namespace Engine{
      */
     class Server : public Singleton<Server> {
     public:
-        /** Add a Client in the simulation.
-            @param c Client instance.
+        /** Create the expectect number of clients.
+            @param nprocs number of MPI proccesses.
          */
-        void addClient( Client * c );
+        void createClients( const int nprocs );
         /** Add agents number to create them in the future.
 
             This method don't create the agent rigth now. It only adds to an
@@ -58,7 +58,7 @@ namespace Engine{
             \endcode
 
             Has the same result of:
-          
+
             \code
             Server::instance()->addAgents( "cow", 20 );
             \endcode
@@ -80,6 +80,10 @@ namespace Engine{
         void run();
 
     private:
+        /** Add a Client in the simulation.
+            @param c Client instance.
+         */
+        void addClient( Client * c );
         /** Returns the Integer value of a config parameter.
             @param key name of the parameter.
             @param d default value.
@@ -110,7 +114,7 @@ namespace Engine{
     };
 
     //--------------------------------------------------------------------------
-    inline void Server::insertConfig( const std::string & key, 
+    inline void Server::insertConfig( const std::string & key,
                                       Util::ScriptValue && val ){
         m_config[key] = std::move(val);
     }
