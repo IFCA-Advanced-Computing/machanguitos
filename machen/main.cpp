@@ -22,7 +22,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include <cstdlib>
 #include <cassert>
-#include <iostream>
 #include <boost/filesystem.hpp>
 #include "config.h"
 #include "configlib.hpp"
@@ -44,62 +43,33 @@ void printHelp( const std::string & name ){
 }
 
 //------------------------------------------------------------------------------
-/** Main application function for single proccess.
+/** Main application function.
     @param argc argument count.
     @param argv argument vector.
     @returns exit status of the process.
  */
-int singleMain( int argc, char * argv[] ){
-    if( argc != 2 ){
-        assert( argc > 0 && "Error in command args" );
-        printHelp( argv[0] );
-        return EXIT_FAILURE;
-    }
+int main( int argc, char * argv[] ){
+    static_assert( sizeof(double) == sizeof(int64_t),
+                   "Double type isn't 64 bits" );
+    MPI_Init( &argc, &argv );
 
-    if( !Config::load( argv[1] ) ){
-        return EXIT_FAILURE;
-    }
-
-    // set directory for Agent classes
-    boost::filesystem::path datadir( argv[1] );
-    datadir.remove_filename();
-    Agent::AgentFactory::instance()->setDatadir( datadir.c_str() );
-
-    auto server = Engine::Server::instance();
-
-    Engine::Client * client = new Engine::ClientLocal( 0 );
-
-    server->addClient( client );
-    if( !server->initialize() ){
-        return EXIT_FAILURE;
-    }
-    server->createAgents();
-    server->run();
-
-    return EXIT_SUCCESS;
-}
-
-//------------------------------------------------------------------------------
-/** Main application function for multiple MPI proccesses.
-    @param argc argument count.
-    @param argv argument vector.
-    @returns exit status of the process.
- */
-int multiMain( int argc, char * argv[] ){
     int nprocs, rank;
 
     MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
+    // MPI SERVER
     if( rank == 0 ){
         if( argc != 2 ){
             assert( argc > 0 && "Error in command args" );
             printHelp( argv[0] );
+            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
             return EXIT_FAILURE;
         }
 
         std::string filename{ argv[1] };
         if( !Config::load( filename ) ){
+            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
             return EXIT_FAILURE;
         }
 
@@ -110,53 +80,33 @@ int multiMain( int argc, char * argv[] ){
 
         auto server = Engine::Server::instance();
 
+        if( nprocs == 1 ){
+            Engine::Client * client = new Engine::ClientLocal( 0 );
+            server->addClient( client );
+        }
+
         for( int i = 1 ; i < nprocs ; ++i ){
             Engine::Client * client = new Engine::ClientRemote( i );
             server->addClient( client );
         }
 
         if( !server->initialize() ){
+            MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
             return EXIT_FAILURE;
         }
         server->createAgents();
         server->run();
 
+    // MPI CLIENTS
     }else{
         Engine::MPIWorker worker(rank);
 
         worker.run();
     }
 
-    return EXIT_SUCCESS;
-}
-
-//------------------------------------------------------------------------------
-/** Main function for MPI application.
-    @param argc argument count.
-    @param argv argument vector.
-    @returns exit status of the process.
- */
-int main( int argc, char * argv[] ){
-    static_assert( sizeof(double) == sizeof(int64_t), 
-                   "Double type isn't 64 bits" );
-    MPI_Init( &argc, &argv );
-
-    int nprocs;
-    MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
-
-    int ret{ EXIT_SUCCESS };
-    if( nprocs == 1 ){
-        ret = singleMain( argc, argv );
-    }else{
-        ret = multiMain( argc, argv );
-        if( ret != EXIT_SUCCESS ){
-            MPI_Abort( MPI_COMM_WORLD, ret );
-        }
-    }
-
     MPI_Finalize();
 
-    return ret;
+    return EXIT_SUCCESS;
 }
 
 //------------------------------------------------------------------------------
