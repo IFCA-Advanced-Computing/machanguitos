@@ -25,8 +25,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <cassert>
 #include <cstring>
-#include "config.h"
 #include <mpi.h>
+#include "config.h"
 #include "mpitags.hpp"
 
 

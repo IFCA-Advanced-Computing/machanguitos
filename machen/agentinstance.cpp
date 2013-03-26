@@ -24,9 +24,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <cassert>
 #include "lua.hpp"
-#include "util.hpp"
+#include "common/util.hpp"
+#include "common/datastore.hpp"
 #include "agentclass.hpp"
-#include "datastore.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{

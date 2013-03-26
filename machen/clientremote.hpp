@@ -23,6 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef CLIENTREMOTE_HPP
 #define CLIENTREMOTE_HPP
 
+//------------------------------------------------------------------------------
 #include "client.hpp"
 
 //------------------------------------------------------------------------------

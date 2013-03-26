@@ -25,7 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include "lua.hpp"
-#include "util.hpp"
+#include "common/util.hpp"
 #include "agentclass.hpp"
 
 //------------------------------------------------------------------------------

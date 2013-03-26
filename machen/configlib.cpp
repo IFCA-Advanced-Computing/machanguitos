@@ -24,8 +24,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <cassert>
 #include <boost/filesystem.hpp>
-#include "lua.hpp"
-#include "util.hpp"
+#include <lua.hpp>
+#include "common/util.hpp"
 #include "config.h"
 #include "server.hpp"
 #include "agentfactory.hpp"

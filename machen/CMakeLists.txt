@@ -1,7 +1,7 @@
 file(GLOB MACHEN_SOURCES "*.cpp")
 
 include_directories(${LUA_INCLUDE_DIRS})
-include_directories(${PROJECT_SOURCE_DIR}/common)
+include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${MONGO_INCLUDE_DIRS})

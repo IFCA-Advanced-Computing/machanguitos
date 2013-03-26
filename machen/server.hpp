@@ -27,9 +27,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <map>
 #include <vector>
-
-#include "singleton.hpp"
-#include "scriptvalue.hpp"
+#include "common/singleton.hpp"
+#include "common/scriptvalue.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{

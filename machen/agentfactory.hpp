@@ -24,10 +24,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AGENTFACTORY_HPP
 
 //------------------------------------------------------------------------------
-#include "singleton.hpp"
-
 #include <string>
 #include <map>
+#include "common/singleton.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{

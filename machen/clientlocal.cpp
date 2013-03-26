@@ -23,10 +23,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include <iostream>
 #include <cassert>
+#include "common/datastore.hpp"
 #include "agentfactory.hpp"
 #include "agentclass.hpp"
 #include "agentinstance.hpp"
-#include "datastore.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{

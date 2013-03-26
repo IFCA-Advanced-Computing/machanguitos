@@ -24,12 +24,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <algorithm>
 #include <boost/filesystem.hpp>
+#include <mpi.h>
+#include "common/datastore.hpp"
 #include "config.h"
 #include "agentfactory.hpp"
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
-#include "datastore.hpp"
-#include "mpi.h"
 
 //------------------------------------------------------------------------------
 namespace Engine{
