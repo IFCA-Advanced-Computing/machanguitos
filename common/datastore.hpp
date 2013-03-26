@@ -46,7 +46,7 @@ namespace IO {
         /// Default Hostname of Data Store.
         constexpr static const char * const DEFAULT_HOSTNAME{"localhost"};
         /// Default Host port of Data Store.
-        constexpr static uint16_t DEFAULT_PORT{27017};
+        constexpr static uint16_t DEFAULT_PORT{MONGO_DEFAULT_PORT};
 
         DataStore();
         ~DataStore();
