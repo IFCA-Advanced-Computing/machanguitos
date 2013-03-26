@@ -21,9 +21,42 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include <cstdlib>
+#include <iostream>
+#include <getopt.h>
 
 //------------------------------------------------------------------------------
 int main( int argc, char * argv[] ){
+    constexpr const char * params = "h:p:";
+    std::string hoststr{"localhost"};
+    std::string portstr{"27017"};
+    std::string datastr{""};
+
+    int c;
+    while( (c = getopt( argc, argv, params )) != -1 ){
+        switch( c ){
+        case 'h':
+            hoststr = optarg;
+            break;
+
+        case 'p':
+            portstr = optarg;
+            break;
+
+        default:
+            std::cerr << "Unknown options\n";
+            return EXIT_FAILURE;
+        }
+    }
+
+    if( argc > optind ){
+        datastr = argv[optind];
+    }else{
+        std::cerr << "There is not namespace name\n";
+        return EXIT_FAILURE;
+    }
+
+    std::cout << hoststr << ":" << portstr << " " << datastr << std::endl;
+
     return EXIT_SUCCESS;
 }
 

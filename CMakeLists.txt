@@ -41,6 +41,12 @@ find_package( MPI REQUIRED)
 set(CMAKE_CXX_COMPILE_FLAGS ${CMAKE_CXX_COMPILE_FLAGS} ${MPI_COMPILE_FLAGS})
 set(CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS})
 
+include(CheckIncludeFile)
+check_include_file("getopt.h" HAVE_GETOPT_H)
+if("${HAVE_GETOPT_H}" STREQUAL "")
+  message( FATAL_ERROR "getopt Not Found" )
+endif()
+
 set(DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}-${MACHANGUITOS_VERSION_MAJOR}.${MACHANGUITOS_VERSION_MINOR}")
 
 configure_file ("${PROJECT_SOURCE_DIR}/config.h.in"
