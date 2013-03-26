@@ -61,31 +61,31 @@ namespace Engine{
             }
 
             switch( status.MPI_TAG ){
-            case TAG_CREATECLASS:
+            case MpiTag::CREATECLASS:
                 runCreateClass();
                 break;
 
-            case TAG_CREATEAGENTS:
+            case MpiTag::CREATEAGENTS:
                 runCreateAgents( val );
                 break;
 
-            case TAG_RUNAGENTS:
+            case MpiTag::RUNAGENTS:
                 runAgents();
                 break;
 
-            case TAG_SETSTARTTIME:
+            case MpiTag::SETSTARTTIME:
                 runSetStartTime();
                 break;
 
-            case TAG_SETDATASTORE:
+            case MpiTag::SETDATASTORE:
                 runSetDataStore( val );
                 break;
 
-            case TAG_SETDATAPATH:
+            case MpiTag::SETDATAPATH:
                 runSetDataPath();
                 break;
 
-            case TAG_END:
+            case MpiTag::END:
                 running = false;
                 break;
 
@@ -100,7 +100,7 @@ namespace Engine{
     void MPIWorker::runSetStartTime(){
         double val;
         MPI_Status status;
-        MPI_Recv( &val, 1, MPI_DOUBLE, 0, TAG_SETSTARTTIME, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTag::SETSTARTTIME, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -115,7 +115,7 @@ namespace Engine{
     void MPIWorker::runSetDataPath(){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, TAG_SETDATAPATH, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -134,7 +134,7 @@ namespace Engine{
     void MPIWorker::runSetDataStore( const int num ){
         char cname[MAX_DB_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -145,7 +145,7 @@ namespace Engine{
         cname[count] = 0;
 
         char chost[MAX_HOST_NAME+1];
-        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, TAG_SETDATASTORE, MPI_COMM_WORLD, &status );
+        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -163,7 +163,7 @@ namespace Engine{
     void MPIWorker::runCreateClass(){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATECLASS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTag::CREATECLASS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -184,7 +184,7 @@ namespace Engine{
     void MPIWorker::runCreateAgents( const int num ){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, TAG_CREATEAGENTS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTag::CREATEAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );
@@ -203,7 +203,7 @@ namespace Engine{
     void MPIWorker::runAgents(){
         double val;
         MPI_Status status;
-        MPI_Recv( &val, 1, MPI_DOUBLE, 0, TAG_RUNAGENTS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTag::RUNAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
             MPI_Abort( MPI_COMM_WORLD, 0 );

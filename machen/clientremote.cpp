@@ -49,8 +49,8 @@ namespace Engine{
         char * cname = new char [name.length()+1];
         strcpy( cname, name.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_CREATECLASS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
         return true;
     }
 
@@ -58,8 +58,8 @@ namespace Engine{
     void ClientRemote::setStartTime( const double time ){
         int32_t val{0};
         double t{time};
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
-        MPI_Send( &t, 1, MPI_DOUBLE, m_dest, TAG_SETSTARTTIME, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETSTARTTIME, MPI_COMM_WORLD );
+        MPI_Send( &t, 1, MPI_DOUBLE, m_dest, MpiTag::SETSTARTTIME, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
@@ -69,8 +69,8 @@ namespace Engine{
         char * cname = new char [filename.length()+1];
         strcpy( cname, filename.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETDATAPATH, MPI_COMM_WORLD );
-        MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, TAG_SETDATAPATH, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
+        MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
@@ -85,9 +85,9 @@ namespace Engine{
         char * chost = new char [host.length()+1];
         strcpy( chost, host.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( chost, host.length(), MPI_CHAR, m_dest, TAG_SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( chost, host.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
@@ -97,8 +97,8 @@ namespace Engine{
         char * cname = new char [name.length()+1];
         strcpy( cname, name.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, TAG_CREATEAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATEAGENTS, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATEAGENTS, MPI_COMM_WORLD );
 
         m_numAgents += n;
     }
@@ -107,14 +107,14 @@ namespace Engine{
     void ClientRemote::runAgents( const double delta ){
         int32_t val{0};
         double d{delta};
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
-        MPI_Send( &d, 1, MPI_DOUBLE, m_dest, TAG_RUNAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::RUNAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &d, 1, MPI_DOUBLE, m_dest, MpiTag::RUNAGENTS, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
     void ClientRemote::end(){
         int32_t val{0};
-        MPI_Send( &val, 1, MPI_INT, m_dest, TAG_END, MPI_COMM_WORLD);
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::END, MPI_COMM_WORLD);
     }
 
 }

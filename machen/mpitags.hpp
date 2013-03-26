@@ -25,34 +25,26 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    /** Create Class Message Tag.
+    /** MPI message Tags.
         @ingroup Engine
      */
-    constexpr int TAG_CREATECLASS = 1;
-    /** Create Agents Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_CREATEAGENTS = 2;
-    /** Run Agents Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_RUNAGENTS = 3;
-    /** Set Start Time Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_SETSTARTTIME = 4;
-    /** Set Data Store info.
-        @ingroup Engine
-     */
-    constexpr int TAG_SETDATASTORE = 5;
-    /** Set Data Path Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_SETDATAPATH = 6;
-    /** End Simulation Message Tag.
-        @ingroup Engine
-     */
-    constexpr int TAG_END = 66;
+    enum MpiTag {
+        /// Create Class Message Tag.
+        CREATECLASS = 1,
+        /// Create Agents Message Tag.
+        CREATEAGENTS = 2,
+        /// Run Agents Message Tag.
+        RUNAGENTS = 3,
+        /// Set Start Time Message Tag.
+        SETSTARTTIME = 4,
+        /// Set Data Store info.
+        SETDATASTORE = 5,
+        /// Set Data Path Tag.
+        SETDATAPATH = 6,
+        /// End Simulation Message Tag.
+        END = 66,
+    };
+
 }
 
 //------------------------------------------------------------------------------
