@@ -83,10 +83,6 @@ namespace Engine{
         void run();
 
     private:
-        /** Add a Client in the simulation.
-            @param c Client instance.
-         */
-        void addClient( Client * c );
         /** Returns the Integer value of a config parameter.
             @param key name of the parameter.
             @param d default value.

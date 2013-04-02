@@ -45,19 +45,12 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
         if( nprocs == 1 ){
-            Engine::Client * client = new Engine::ClientLocal( 0 );
-            addClient( client );
+            m_clients.push_back( new Engine::ClientLocal( 0 ) );
         }
 
         for( int i = 1 ; i < nprocs ; ++i ){
-            Engine::Client * client = new Engine::ClientRemote( i );
-            addClient( client );
+            m_clients.push_back( new Engine::ClientRemote( i ) );
         }
-    }
-
-    //--------------------------------------------------------------------------
-    void Server::addClient( Client * c ){
-        m_clients.push_back( c );
     }
 
     //--------------------------------------------------------------------------
