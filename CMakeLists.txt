@@ -43,7 +43,7 @@ set(CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS})
 
 include(CheckIncludeFile)
 check_include_file("getopt.h" HAVE_GETOPT_H)
-if("${HAVE_GETOPT_H}" STREQUAL "")
+if(NOT HAVE_GETOPT_H)
   message( FATAL_ERROR "getopt Not Found" )
 endif()
 
