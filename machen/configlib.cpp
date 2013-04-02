@@ -37,20 +37,20 @@ namespace Config{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    /** Define config.add_agent library function.
+    /** Define config.addAgent library function.
 
         This function sets the number of agents to simulate of a AgentClass.
 
         @code{.lua}
-        config.add_agent( "cow", 10 );
-        config.add_agent( "cat", 3 );
+        config.addAgent( "cow", 10 );
+        config.addAgent( "cat", 3 );
         @endcode
 
         @param L lua_State.
         @ingroup Config
         @retval 0 No return values to Lua.
      */
-    int config_add_agent( lua_State *L ){
+    int config_addAgent( lua_State *L ){
         auto name = luaL_checkstring( L, 1 );
         auto num = luaL_checknumber( L, 2 );
         auto server = Engine::Server::instance();
@@ -112,7 +112,7 @@ namespace Config{
         @ingroup Config
      */
     const luaL_Reg configlib[] = {
-        {"add_agent",   config_add_agent},
+        {"addAgent",   config_addAgent},
         {"setvars",   config_setvars},
         {nullptr, nullptr}
     };
