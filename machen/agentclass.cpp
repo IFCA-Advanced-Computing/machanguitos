@@ -85,15 +85,16 @@ namespace Agent{
     void AgentClass::init(){
         if( m_L ){
             // set class methods for agent
-            lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-            luaL_newmetatable( m_L, SCRIPT_AGENT_NAME );
-            lua_pushstring( m_L, "__newindex");
-            lua_pushcfunction( m_L, agent_newindex );
-            lua_settable( m_L, -3 );
-            lua_pushstring( m_L, "__index");
-            lua_pushcfunction( m_L, agent_index );
-            lua_settable( m_L, -3 );
-            lua_setmetatable( m_L, -2 );
+            lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME ); // 1
+            luaL_newmetatable( m_L, SCRIPT_AGENT_NAME );              // 2
+            lua_pushstring( m_L, "__newindex");                       // 3
+            lua_pushcfunction( m_L, agent_newindex );                 // 4
+            lua_settable( m_L, -3 );                                  // 2
+            lua_pushstring( m_L, "__index");                          // 3
+            lua_pushcfunction( m_L, agent_index );                    // 4
+            lua_settable( m_L, -3 );                                  // 2
+            lua_setmetatable( m_L, -2 );                              // 1
+            lua_pop( m_L, 1 );                                        // 0
         }
     }
 

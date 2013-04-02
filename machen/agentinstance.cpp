@@ -44,15 +44,18 @@ namespace Agent{
     void AgentInstance::init(){
         auto L = m_class->getLua();
         if( L ){
-            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-            lua_getfield( L, -1, "init");
+            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );     // 1
+            lua_getfield( L, -1, "init");                               // 2
             if( lua_isfunction( L, -1 ) ){
-                lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-                lua_pushstring( L, SCRIPT_AGENT_OBJ );
-                lua_pushlightuserdata( L, (void*)this );
-                lua_rawset( L, -3 );
-                auto ret = lua_pcall( L, 1, 0, 0 );
+                lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME ); // 3
+                lua_pushstring( L, SCRIPT_AGENT_OBJ );                  // 4
+                lua_pushlightuserdata( L, (void*)this );                // 5
+                lua_rawset( L, -3 );                                    // 3
+                auto ret = lua_pcall( L, 1, 0, 0 );                     // 1
                 Util::checkLuaReturn( L, ret );
+                lua_pop( L, 1 );                                        // 0
+            }else{
+                lua_pop( L, 2 );                                        // 0
             }
         }
     }
@@ -61,16 +64,19 @@ namespace Agent{
     void AgentInstance::update( const double delta ){
         auto L = m_class->getLua();
         if( L ){
-            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-            lua_getfield( L, -1, "update");
+            lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );     // 1
+            lua_getfield( L, -1, "update");                             // 2
             if( lua_isfunction( L, -1 ) ){
-                lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
-                lua_pushstring( L, SCRIPT_AGENT_OBJ );
-                lua_pushlightuserdata( L, (void*)this );
-                lua_rawset( L, -3 );
-                lua_pushnumber( L, delta );
-                auto ret = lua_pcall( L, 2, 0, 0 );
+                lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME ); // 3
+                lua_pushstring( L, SCRIPT_AGENT_OBJ );                  // 4
+                lua_pushlightuserdata( L, (void*)this );                // 5
+                lua_rawset( L, -3 );                                    // 3
+                lua_pushnumber( L, delta );                             // 4
+                auto ret = lua_pcall( L, 2, 0, 0 );                     // 1
                 Util::checkLuaReturn( L, ret );
+                lua_pop( L, 1 );                                        // 0
+            }else{
+                lua_pop( L, 2 );                                        // 0
             }
         }
     }
