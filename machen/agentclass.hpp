@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AGENTCLASS_HPP
 
 //------------------------------------------------------------------------------
+#include <memory>
 #include <set>
 #include <string>
 #include "lua.hpp"
@@ -57,7 +58,7 @@ namespace Agent{
         void init();
 
         /// Create a AgentInstance object of this AgentClass.
-        AgentInstance * createInstance( AgentId && id );
+        std::unique_ptr<AgentInstance> createInstance( AgentId && id );
         /// Returns current Lua State for this AgentClass.
         lua_State * getLua() const;
         /** Add a new variable to the list of out variables. Out variables are
@@ -83,8 +84,8 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    inline AgentInstance * AgentClass::createInstance( AgentId && id ){
-        return new (std::nothrow) AgentInstance( this, std::move(id) );
+    inline std::unique_ptr<AgentInstance> AgentClass::createInstance( AgentId && id ){
+        return std::unique_ptr<AgentInstance>( new (std::nothrow) AgentInstance( this, std::move(id) ));
     }
 
     //--------------------------------------------------------------------------

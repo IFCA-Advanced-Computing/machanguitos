@@ -75,7 +75,7 @@ namespace Engine{
                 if( obj ){
                     m_nextID += 1;
                     obj->init();
-                    m_objects.push_back( obj );
+                    m_objects.push_back( std::move(obj) );
                 }else{
                     cerr << "can't create more instances of '"
                          << name << "'\n";
@@ -89,13 +89,13 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientLocal::runAgents( const double delta ){
-        for( auto obj: m_objects ){
+        for( auto & obj: m_objects ){
             obj->update( delta );
         }
 
         m_totalTime += delta;
 
-        for( auto obj: m_objects ){
+        for( auto & obj: m_objects ){
             obj->outVars( m_startTime + m_totalTime );
         }
     }

@@ -25,12 +25,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <vector>
+#include <memory>
 #include "client.hpp"
-
-//------------------------------------------------------------------------------
-namespace Agent{
-    class AgentInstance;
-}
+#include "agentinstance.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -58,7 +55,7 @@ namespace Engine{
 
     private:
         /// list of Agents in this Client instance.
-        std::vector<Agent::AgentInstance *> m_objects;
+        std::vector<std::unique_ptr<Agent::AgentInstance>> m_objects;
         /// simulation start time
         double m_startTime;
         /// actual simulation time
