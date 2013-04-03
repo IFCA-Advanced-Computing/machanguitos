@@ -25,16 +25,15 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <string>
+#include <memory>
 #include <map>
 #include <vector>
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
+#include "client.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    class Client;
-
     //--------------------------------------------------------------------------
     /** Singleton Class that controls teh simulation execution.
         @ingroup Engine
@@ -107,7 +106,7 @@ namespace Engine{
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
         /// list of Clients used during simulation.
-        std::vector<Client*> m_clients;
+        std::vector<std::unique_ptr<Client>> m_clients;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.

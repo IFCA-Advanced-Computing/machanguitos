@@ -45,11 +45,11 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
         if( nprocs == 1 ){
-            m_clients.push_back( new Engine::ClientLocal( 0 ) );
+            m_clients.emplace_back( new Engine::ClientLocal( 0 ) );
         }
 
         for( int i = 1 ; i < nprocs ; ++i ){
-            m_clients.push_back( new Engine::ClientRemote( i ) );
+            m_clients.emplace_back( new Engine::ClientRemote( i ) );
         }
     }
 
@@ -79,7 +79,7 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
-        for( auto c: m_clients ){
+        for( auto & c: m_clients ){
             c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
@@ -95,7 +95,9 @@ namespace Engine{
             for( const auto p: m_numAgents ){
                 // sort, first the clients with less agents
                 sort( m_clients.begin(), m_clients.end(),
-                      [](Client * a, Client * b){
+                      []( const std::unique_ptr<Client> & a,
+                          const std::unique_ptr<Client> & b)
+                      {
                           return a->numAgents() < b->numAgents();
                       } );
 
@@ -106,7 +108,7 @@ namespace Engine{
                 // put more agents in the first clients
                 decltype(nClients) i;
                 for( i = 0 ; i < rem ; ++i ){
-                    auto c = m_clients[i];
+                    auto & c = m_clients[i];
                     if( c->createClass( p.first ) ){
                         c->createAgents( p.first, nPerClient+1 );
                     }else{
@@ -116,7 +118,7 @@ namespace Engine{
 
                 // then put the rest
                 for( i = rem ; i < m_clients.size() ; ++i ){
-                    auto c = m_clients[i];
+                    auto & c = m_clients[i];
                     if( c->createClass( p.first ) ){
                         c->createAgents( p.first, nPerClient );
                     }else{
@@ -179,14 +181,14 @@ namespace Engine{
         cout << "\nSERVER: Start Simulation\n\n";
         for( int i = 0 ; i < iters ; i++ ){
             cout << "SERVER: iteration " << i+1 << endl;
-            for( auto c: m_clients ){
+            for( auto & c: m_clients ){
                 c->runAgents( delta );
             }
 
             waitClients();
         }
 
-        for( auto c: m_clients ){
+        for( auto & c: m_clients ){
             c->end();
         }
         cout << "\nSERVER: End Simulation\n\n";
