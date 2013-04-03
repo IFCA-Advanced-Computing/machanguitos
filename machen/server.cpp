@@ -36,7 +36,7 @@ namespace Engine{
     using namespace std;
 
     //--------------------------------------------------------------------------
-    void Server::setDatadir( const std::string & filename ){
+    void Server::setDatadir( const string & filename ){
         boost::filesystem::path datadir( filename );
         datadir.remove_filename();
         m_datadir = datadir.c_str();
@@ -94,9 +94,9 @@ namespace Engine{
         if( nClients > 0 ){
             for( const auto p: m_numAgents ){
                 // sort, first the clients with less agents
-                sort( m_clients.begin(), m_clients.end(),
-                      []( const std::unique_ptr<Client> & a,
-                          const std::unique_ptr<Client> & b)
+                sort( begin(m_clients), end(m_clients),
+                      []( const unique_ptr<Client> & a,
+                          const unique_ptr<Client> & b)
                       {
                           return a->numAgents() < b->numAgents();
                       } );
@@ -158,7 +158,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    string Server::getConfigString( const std::string & key, const std::string & d ) const{
+    string Server::getConfigString( const string & key, const string & d ) const{
         const auto i = m_config.find( key );
         if( i != m_config.end() ){
             if( i->second.getType() != Util::ScriptValue::ValueType::STRING ){
