@@ -100,11 +100,11 @@ namespace Engine{
                       } );
 
                 cout << "Creating: " << p.second << " of " << p.first << endl;
-                size_t nPerClient = p.second / nClients;
-                size_t rem = p.second % nClients;
+                decltype(nClients) nPerClient = p.second / nClients;
+                decltype(nClients) rem = p.second % nClients;
 
                 // put more agents in the first clients
-                size_t i;
+                decltype(nClients) i;
                 for( i = 0 ; i < rem ; ++i ){
                     auto c = m_clients[i];
                     if( c->createClass( p.first ) ){
