@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <lua.hpp>
 #include "common/util.hpp"
 #include "config.h"
+#include "datalib.hpp"
 #include "server.hpp"
 #include "agentfactory.hpp"
 
@@ -155,6 +156,7 @@ namespace Config{
         lua_gc(L, LUA_GCSTOP, 0);
         luaL_openlibs( L );
         Config::openlib( L );
+        Data::openlib( L );
         lua_gc(L, LUA_GCRESTART, 0);
 
         // execute config file
