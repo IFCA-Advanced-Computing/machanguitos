@@ -24,10 +24,11 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MPIWORKER_HPP
 
 //------------------------------------------------------------------------------
-namespace Engine{
-    //--------------------------------------------------------------------------
-    class Client;
+#include <memory>
+#include "clientlocal.hpp"
 
+//------------------------------------------------------------------------------
+namespace Engine{
     //--------------------------------------------------------------------------
     /** Define a MPI Process main loop to run as a Worker in a MPI program.
 
@@ -39,7 +40,6 @@ namespace Engine{
             @param r MPI rank
         */
         MPIWorker( const int r );
-        ~MPIWorker();
 
         /// run loop of the MPI worker waiting for Server orders.
         void run();
@@ -63,7 +63,7 @@ namespace Engine{
         /// Own MPI rank value.
         int m_rank;
         /// Client instance that runs the real code.
-        Client * m_local;
+        std::unique_ptr<ClientLocal> m_local;
     };
 }
 

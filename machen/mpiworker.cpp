@@ -33,17 +33,10 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     MPIWorker::MPIWorker( const int r ) : m_rank{r} {
-        m_local = new (std::nothrow) Engine::ClientLocal( m_rank );
+        m_local = unique_ptr<ClientLocal>( new (nothrow) ClientLocal( m_rank ) );
         if( !m_local ){
             cerr << "ERROR: can't create local agents on worker\n";
             MPI_Abort( MPI_COMM_WORLD, 0 );
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    MPIWorker::~MPIWorker(){
-        if( m_local ){
-            delete m_local;
         }
     }
 
@@ -106,9 +99,7 @@ namespace Engine{
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
-        if( m_local ){
-            m_local->setStartTime( val );
-        }
+        m_local->setStartTime( val );
     }
 
     //--------------------------------------------------------------------------
@@ -125,9 +116,7 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         cname[count] = 0;
 
-        if( m_local ){
-            m_local->setDataDir( cname );
-        }
+        m_local->setDataDir( cname );
     }
 
     //--------------------------------------------------------------------------
@@ -154,9 +143,7 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         chost[count] = 0;
 
-        if( m_local ){
-            m_local->setDataStore( cname, chost, num );
-        }
+        m_local->setDataStore( cname, chost, num );
     }
 
     //--------------------------------------------------------------------------
@@ -173,10 +160,8 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         val[count] = 0;
 
-        if( m_local ){
-            if( !m_local->createClass( val ) ){
-                cerr << "WARNING: Class '" << val << "' can't be created\n";
-            }
+        if( !m_local->createClass( val ) ){
+            cerr << "WARNING: Class '" << val << "' can't be created\n";
         }
     }
 
@@ -194,9 +179,7 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         val[count] = 0;
 
-        if( m_local ){
-            m_local->createAgents( val, num );
-        }
+        m_local->createAgents( val, num );
     }
 
     //--------------------------------------------------------------------------
@@ -209,9 +192,7 @@ namespace Engine{
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
-        if( m_local ){
-            m_local->runAgents( val );
-        }
+        m_local->runAgents( val );
 
         MPI_Barrier( MPI_COMM_WORLD );
     }
