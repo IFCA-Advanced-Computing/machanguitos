@@ -7,3 +7,5 @@ add_executable(test_mongo test_mongo.cpp)
 target_link_libraries(test_mongo mongoc)
 
 add_executable(test_uuid test_uuid.cpp)
+
+add_executable(test_cpp11 test_cpp11.cpp)
