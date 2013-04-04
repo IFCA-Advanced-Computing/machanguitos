@@ -82,11 +82,13 @@ namespace IO {
             @param port host port.
          */
         void setDataStorePort( const uint16_t port );
-
-    private:
         /// connect with datastore.
         /// retval true if connection was ok.
         bool connect();
+        /// disconnect with datastore, if connected.
+        void disconnect();
+
+    private:
 
         /// datastore name.
         std::string m_dbname;
@@ -96,6 +98,8 @@ namespace IO {
         uint16_t m_dbport;
         /// mongo connection attribute.
         mongo m_conn;
+        /// flag if is connected with mongo.
+        bool m_isConnected;
     };
 
     //--------------------------------------------------------------------------

@@ -95,8 +95,15 @@ namespace Engine{
 
         m_totalTime += delta;
 
-        for( auto & obj: m_objects ){
-            obj->outVars( m_startTime + m_totalTime );
+        auto db = IO::DataStore::instance();
+
+        if( db->connect() ){
+            for( auto & obj: m_objects ){
+                obj->outVars( m_startTime + m_totalTime );
+            }
+            db->disconnect();
+        }else{
+            cerr << "Can't save client agent instances\n";
         }
     }
 

@@ -45,7 +45,8 @@ namespace IO {
 
     //--------------------------------------------------------------------------
     DataStore::DataStore()
-        : m_dbname{"_ds"}, m_dbhost{DEFAULT_HOSTNAME}, m_dbport{DEFAULT_PORT}
+        : m_dbname{"_ds"}, m_dbhost{DEFAULT_HOSTNAME}, m_dbport{DEFAULT_PORT},
+        m_isConnected{false}
     {
         mongo_init( &m_conn );
     }
@@ -81,12 +82,23 @@ namespace IO {
 
     //--------------------------------------------------------------------------
     bool DataStore::connect() {
-        if( mongo_client( &m_conn , m_dbhost.c_str(), m_dbport ) != MONGO_OK ) {
-            cout << "failed to connect '" << m_dbhost << ":" << m_dbport << "'\n";
-            cout << "  mongo error: " << m_conn.err << endl;
-            return false;
+        if( !m_isConnected ){
+            m_isConnected = mongo_client( &m_conn , m_dbhost.c_str(), m_dbport )
+                == MONGO_OK;
+            if( !m_isConnected ) {
+                cout << "failed to connect '" << m_dbhost << ":" << m_dbport << "'\n";
+                cout << "  mongo error: " << m_conn.err << endl;
+            }
         }
-        return true;
+        return m_isConnected;
+    }
+
+    //--------------------------------------------------------------------------
+    void DataStore::disconnect() {
+        if( m_isConnected ){
+            mongo_disconnect( &m_conn );
+            m_isConnected = false;
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -102,7 +114,7 @@ namespace IO {
             return false;
         }
 
-        mongo_disconnect( &m_conn );
+        disconnect();
 
         return true;
     }
@@ -111,11 +123,7 @@ namespace IO {
     void DataStore::saveAgentInstance( const double time, const AgentId & id,
                                        const map<string, const ScriptValue *> & vars )
     {
-        if( vars.size() == 0 ){
-            return;
-        }
-
-        if( !connect() ) {
+        if( vars.size() == 0 || !m_isConnected ){
             return;
         }
 
@@ -157,8 +165,6 @@ namespace IO {
         }
 
         bson_destroy( &b );
-
-        mongo_disconnect( &m_conn );
     }
 
 }//namespace IO
