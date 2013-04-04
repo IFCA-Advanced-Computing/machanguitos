@@ -35,7 +35,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     AgentInstance::AgentInstance( AgentClass * c, AgentId && id )
-        : m_class{c}, m_id{std::move(id)}
+        : m_class{c}, m_id{move(id)}
     {
         assert( m_class && "Invalid Agent Class" );
     }
@@ -140,7 +140,7 @@ namespace Agent{
 
         auto db = IO::DataStore::instance();
 
-        std::map<std::string, const ScriptValue *> ovars;
+        map<string, const ScriptValue *> ovars;
         for( const auto key: outKeys ){
             const auto variable = m_vals.find( key );
             if( variable != m_vals.end() ){

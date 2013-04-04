@@ -30,13 +30,16 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
+using namespace std;
+
+//------------------------------------------------------------------------------
 /** Output application how to message
     @param name application name
  */
-void printHelp( const std::string & name ){
-    std::cerr << name << " " << VERSION_MAJOR << "." << VERSION_MINOR
-              << std::endl << std::endl;
-    std::cerr << "Usage: " << name << " <config.lua>\n\n";
+void printHelp( const string & name ){
+    cerr << name << " " << VERSION_MAJOR << "." << VERSION_MINOR
+              << endl << endl;
+    cerr << "Usage: " << name << " <config.lua>\n\n";
 }
 
 //------------------------------------------------------------------------------
@@ -69,7 +72,7 @@ int main( int argc, char * argv[] ){
             return mainAbort();
         }
 
-        std::string filename{ argv[1] };
+        string filename{ argv[1] };
         if( !Config::load( filename ) ){
             return mainAbort();
         }

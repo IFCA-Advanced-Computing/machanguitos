@@ -32,6 +32,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine{
+    using namespace std;
+
     //--------------------------------------------------------------------------
     ClientRemote::ClientRemote( int dest ) : m_dest{dest}, m_numAgents{0} {
         // empty
@@ -43,7 +45,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    bool ClientRemote::createClass( const std::string & name ){
+    bool ClientRemote::createClass( const string & name ){
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{0};
         char * cname = new char [name.length()+1];
@@ -63,7 +65,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::setDataDir( const std::string & filename ){
+    void ClientRemote::setDataDir( const string & filename ){
         assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
         int32_t val{0};
         char * cname = new char [filename.length()+1];
@@ -74,8 +76,8 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::setDataStore( const std::string & name,
-                                     const std::string & host, const uint16_t port )
+    void ClientRemote::setDataStore( const string & name,
+                                     const string & host, const uint16_t port )
     {
         assert( name.length() <= MAX_DB_NAME && "name too long" );
         assert( name.length() <= MAX_HOST_NAME && "hostname too long" );
@@ -91,7 +93,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::createAgents( const std::string & name, int n ){
+    void ClientRemote::createAgents( const string & name, int n ){
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val = n;
         char * cname = new char [name.length()+1];

@@ -82,7 +82,7 @@ namespace Config{
         // push first key
         lua_pushnil( L );
         while( lua_next( L, 1 ) != 0 ) {
-            std::string key( luaL_checkstring( L, -2 ) );
+            string key( luaL_checkstring( L, -2 ) );
             auto ltype = lua_type( L, -1 );
             switch( ltype ){
             case LUA_TNIL:

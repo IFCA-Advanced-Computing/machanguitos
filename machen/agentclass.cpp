@@ -106,8 +106,8 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    void AgentClass::insertOutVariable( std::string && key ){
-        m_outVars.insert( std::move(key) );
+    void AgentClass::insertOutVariable( string && key ){
+        m_outVars.insert( move(key) );
     }
 }
 

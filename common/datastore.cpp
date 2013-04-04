@@ -57,7 +57,7 @@ namespace IO {
     }
 
     //--------------------------------------------------------------------------
-    void DataStore::setDataStoreHost( const std::string & host ){
+    void DataStore::setDataStoreHost( const string & host ){
         if( host.length() < MAX_HOST_NAME ){
             m_dbhost = host;
         }else{
@@ -102,7 +102,7 @@ namespace IO {
     }
 
     //--------------------------------------------------------------------------
-    bool DataStore::createStore( const std::string & name ){
+    bool DataStore::createStore( const string & name ){
         m_dbname = name;
 
         if( !connect() ) {

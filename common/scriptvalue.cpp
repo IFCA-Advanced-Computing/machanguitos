@@ -27,6 +27,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Util {
+    using namespace std;
+
     //--------------------------------------------------------------------------
     ScriptValue::ScriptValue() : m_type(ValueType::NIL) {
         // empty
@@ -58,13 +60,13 @@ namespace Util {
             break;
         case ValueType::STRING:
             assert( val.m_val.vals && "Error null string" );
-            m_val.vals = new std::string(*val.m_val.vals);
+            m_val.vals = new string(*val.m_val.vals);
             break;
         }
     }
 
     //--------------------------------------------------------------------------
-    ScriptValue::ScriptValue( ScriptValue && val ) noexcept : m_type{val.m_type} {
+    ScriptValue::ScriptValue( ScriptValue && val ) noexcept : m_type{move(val.m_type)} {
         switch( m_type ){
         case ValueType::NIL: // empty
             break;
@@ -75,7 +77,7 @@ namespace Util {
             m_val.valn = val.m_val.valn;
             break;
         case ValueType::STRING:
-            m_val.vals = std::move(val.m_val.vals);
+            m_val.vals = move(val.m_val.vals);
             val.m_val.vals = nullptr;
             break;
         }
@@ -96,7 +98,7 @@ namespace Util {
             break;
         case ValueType::STRING:
             assert( val.m_val.vals && "Error null string" );
-            m_val.vals = new std::string(*val.m_val.vals);
+            m_val.vals = new string(*val.m_val.vals);
             break;
         }
         return (*this);
@@ -116,7 +118,7 @@ namespace Util {
             m_val.valn = val.m_val.valn;
             break;
         case ValueType::STRING:
-            m_val.vals = std::move(val.m_val.vals);
+            m_val.vals = move(val.m_val.vals);
             val.m_val.vals = nullptr;
             break;
         }
@@ -124,7 +126,7 @@ namespace Util {
     }
 
     //--------------------------------------------------------------------------
-    std::ostream & operator<<( std::ostream &out, const ScriptValue &val ){
+    ostream & operator<<( ostream &out, const ScriptValue &val ){
         switch( val.getType() ){
         case ScriptValue::ValueType::NIL:
             out << "<NIL>";

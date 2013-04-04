@@ -105,7 +105,7 @@ namespace Agent{
         lua_gc( L, LUA_GCRESTART, 0 );
 
         // create Agent class on Lua
-        AgentClass * aclass = new (std::nothrow) AgentClass( L );
+        AgentClass * aclass = new (nothrow) AgentClass( L );
         if( !aclass ){
             cerr << "ERROR: Can't create agent class '" << name << "' instance\n";
             return nullptr;

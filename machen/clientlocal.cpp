@@ -45,13 +45,13 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientLocal::setDataDir( const std::string & path ){
+    void ClientLocal::setDataDir( const string & path ){
         Agent::AgentFactory::instance()->setDatadir( path );
     }
 
     //--------------------------------------------------------------------------
-    void ClientLocal::setDataStore( const std::string & name,
-                                    const std::string & host, const uint16_t port )
+    void ClientLocal::setDataStore( const string & name,
+                                    const string & host, const uint16_t port )
     {
         auto db = IO::DataStore::instance();
 
@@ -75,7 +75,7 @@ namespace Engine{
                 if( obj ){
                     m_nextID += 1;
                     obj->init();
-                    m_objects.push_back( std::move(obj) );
+                    m_objects.push_back( move(obj) );
                 }else{
                     cerr << "can't create more instances of '"
                          << name << "'\n";
