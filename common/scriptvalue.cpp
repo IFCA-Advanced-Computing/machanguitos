@@ -71,10 +71,10 @@ namespace Util {
         case ValueType::NIL: // empty
             break;
         case ValueType::BOOLEAN:
-            m_val.valb = val.m_val.valb;
+            m_val.valb = move(val.m_val.valb);
             break;
         case ValueType::NUMBER:
-            m_val.valn = val.m_val.valn;
+            m_val.valn = move(val.m_val.valn);
             break;
         case ValueType::STRING:
             m_val.vals = move(val.m_val.vals);
@@ -107,15 +107,15 @@ namespace Util {
     //--------------------------------------------------------------------------
     ScriptValue & ScriptValue::operator=( ScriptValue && val ) noexcept {
         erase();
-        m_type = val.m_type;
+        m_type = move(val.m_type);
         switch( m_type ){
         case ValueType::NIL: // empty
             break;
         case ValueType::BOOLEAN:
-            m_val.valb = val.m_val.valb;
+            m_val.valb = move(val.m_val.valb);
             break;
         case ValueType::NUMBER:
-            m_val.valn = val.m_val.valn;
+            m_val.valn = move(val.m_val.valn);
             break;
         case ValueType::STRING:
             m_val.vals = move(val.m_val.vals);
