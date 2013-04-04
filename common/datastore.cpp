@@ -119,7 +119,7 @@ namespace IO {
             return;
         }
 
-        string ns{ m_dbname + AGENT_COLL_PREFIX + id.idstr() };
+        string ns{ m_dbname + AGENT_COLL_PREFIX + "m" + to_string(id.m_mayor) };
 
         bson b;
 
@@ -130,6 +130,7 @@ namespace IO {
             return;
         }
 
+        bson_append_int( &b, "minor", id.m_minor );
         bson_append_double( &b, "time", time );
 
         for( const auto i: vars ){
