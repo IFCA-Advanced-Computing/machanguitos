@@ -28,7 +28,7 @@ namespace Engine{
     //--------------------------------------------------------------------------
     MPI_Comm createClientsComm(){
         MPI_Group MPI_GROUP_WORLD, clients;
-        int datarank = 1;
+        int datarank = DATASERVER_RANK;
 
         MPI_Comm_group( MPI_COMM_WORLD, &MPI_GROUP_WORLD );
         MPI_Group_excl( MPI_GROUP_WORLD, 1, &datarank, &clients );

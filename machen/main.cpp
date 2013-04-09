@@ -22,11 +22,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include <cstdlib>
 #include <cassert>
+#include <mpi.h>
 #include "config.h"
 #include "configlib.hpp"
 #include "agentfactory.hpp"
 #include "server.hpp"
-#include "mpi.h"
+#include "mpidefs.hpp"
 #include "mpiworker.hpp"
 
 //------------------------------------------------------------------------------
@@ -65,7 +66,7 @@ int main( int argc, char * argv[] ){
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // MPI SERVER
-    if( rank == 0 ){
+    if( rank == Engine::SERVER_RANK ){
         if( argc != 2 ){
             assert( argc > 0 && "Error in command args" );
             printHelp( argv[0] );

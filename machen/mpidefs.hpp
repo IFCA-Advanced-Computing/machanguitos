@@ -48,6 +48,11 @@ namespace Engine{
         END = 66,
     };
 
+    /// MPI Rank identifier of server.
+    constexpr int SERVER_RANK = 0;
+    /// MPI Rank identifier of data server.
+    constexpr int DATASERVER_RANK = 1;
+
     /** Create a communication group for clients.
         @returns MPI communication value.
      */
