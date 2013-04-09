@@ -27,7 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstring>
 #include <mpi.h>
 #include "config.h"
-#include "mpitags.hpp"
+#include "mpidefs.hpp"
 
 
 //------------------------------------------------------------------------------

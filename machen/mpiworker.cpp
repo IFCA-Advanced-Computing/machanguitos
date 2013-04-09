@@ -25,7 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config.h"
 #include "clientlocal.hpp"
 #include <mpi.h>
-#include "mpitags.hpp"
+#include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{

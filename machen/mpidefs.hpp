@@ -15,13 +15,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpitags.hpp
-    @brief Declaration of MPI message tags.
+/** @file mpidefs.hpp
+    @brief Declaration of MPI definitions and utils.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef MPITAGS_HPP
-#define MPITAGS_HPP
+#ifndef MPIDEFS_HPP
+#define MPIDEFS_HPP
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -48,6 +48,6 @@ namespace Engine{
 }
 
 //------------------------------------------------------------------------------
-#endif//MPITAGS_HPP
+#endif//MPIDEFS_HPP
 
 //------------------------------------------------------------------------------
