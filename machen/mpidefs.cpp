@@ -27,6 +27,13 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     MPI_Comm createClientsComm(){
+        int nprocs;
+        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+
+        if( nprocs < 2 ){
+            return MPI_COMM_WORLD;
+        }
+
         MPI_Group MPI_GROUP_WORLD, clients;
         int datarank = DATASERVER_RANK;
 
