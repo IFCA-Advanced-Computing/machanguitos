@@ -48,11 +48,11 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
         if( nprocs <= 2 ){
-            m_clients.emplace_back( new Engine::ClientLocal( 0 ) );
+            m_clients.emplace_back( new ClientLocal( 0 ) );
         }
 
         for( int i = 2 ; i < nprocs ; ++i ){
-            m_clients.emplace_back( new Engine::ClientRemote( i ) );
+            m_clients.emplace_back( new ClientRemote( i ) );
         }
     }
 
