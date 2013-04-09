@@ -31,6 +31,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
 #include "mpidefs.hpp"
+#include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -194,6 +195,11 @@ namespace Engine{
         for( auto && c: m_clients ){
             c->end();
         }
+
+        if( m_dataServer ){
+            m_dataServer->end();
+        }
+
         cout << "\nSERVER: End Simulation\n\n";
     }
 

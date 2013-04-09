@@ -32,6 +32,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
+#include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -108,6 +109,8 @@ namespace Engine{
         std::map<std::string, unsigned> m_numAgents;
         /// list of Clients used during simulation.
         std::vector<std::unique_ptr<Client>> m_clients;
+        /// data server proxy.
+        std::unique_ptr<DataServer> m_dataServer;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.
