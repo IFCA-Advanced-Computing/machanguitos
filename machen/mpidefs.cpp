@@ -15,46 +15,30 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpidefs.hpp
-    @brief Declaration of MPI definitions and utils.
+/** @file mpidefs.cpp
+    @brief Definitions of MPI utils.
     @author Luis Cabellos
- */
+*/
 //------------------------------------------------------------------------------
-#ifndef MPIDEFS_HPP
-#define MPIDEFS_HPP
-
-//------------------------------------------------------------------------------
-#include <mpi.h>
+#include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    /** MPI message Tags.
-        @ingroup Engine
-     */
-    enum MpiTag {
-        /// Create Class Message Tag.
-        CREATECLASS = 1,
-        /// Create Agents Message Tag.
-        CREATEAGENTS = 2,
-        /// Run Agents Message Tag.
-        RUNAGENTS = 3,
-        /// Set Start Time Message Tag.
-        SETSTARTTIME = 4,
-        /// Set Data Store info.
-        SETDATASTORE = 5,
-        /// Set Data Path Tag.
-        SETDATAPATH = 6,
-        /// End Simulation Message Tag.
-        END = 66,
-    };
 
-    /** Create a communication group for clients.
-        @returns MPI communication value.
-     */
-    MPI_Comm createClientsComm();
+    //--------------------------------------------------------------------------
+    MPI_Comm createClientsComm(){
+        MPI_Group MPI_GROUP_WORLD, clients;
+        int datarank = 1;
+
+        MPI_Comm_group( MPI_COMM_WORLD, &MPI_GROUP_WORLD );
+        MPI_Group_excl( MPI_GROUP_WORLD, 1, &datarank, &clients );
+
+        MPI_Comm comm;
+        MPI_Comm_create( MPI_COMM_WORLD, clients, &comm );
+
+        return comm;
+    }
+
 }
-
-//------------------------------------------------------------------------------
-#endif//MPIDEFS_HPP
 
 //------------------------------------------------------------------------------
