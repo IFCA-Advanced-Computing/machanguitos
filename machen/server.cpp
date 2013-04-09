@@ -66,6 +66,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     bool Server::initialize(){
+        int nprocs;
+        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+
+        createClients( nprocs );
+
         m_comm = createClientsComm();
 
         auto db = IO::DataStore::instance();

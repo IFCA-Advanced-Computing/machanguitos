@@ -61,9 +61,7 @@ int main( int argc, char * argv[] ){
                    "Double type isn't 64 bits" );
     MPI_Init( &argc, &argv );
 
-    int nprocs, rank;
-
-    MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+    int rank;
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // MPI SERVER
@@ -82,7 +80,6 @@ int main( int argc, char * argv[] ){
         cout << "Creating Server\n";
         auto server = Engine::Server::instance();
         server->setDatadir( filename );
-        server->createClients( nprocs );
         if( !server->initialize() ){
             return mainAbort();
         }

@@ -46,10 +46,6 @@ namespace Engine{
             @param filename filename to get the path from.
          */
         void setDatadir( const std::string & filename );
-        /** Create the expectect number of clients.
-            @param nprocs number of MPI proccesses.
-         */
-        void createClients( const int nprocs );
         /** Add agents number to create them in the future.
 
             This method don't create the agent rigth now. It only adds to an
@@ -84,6 +80,10 @@ namespace Engine{
         void run();
 
     private:
+        /** Create the expectect number of clients.
+            @param nprocs number of MPI proccesses.
+         */
+        void createClients( const int nprocs );
         /** Returns the Integer value of a config parameter.
             @param key name of the parameter.
             @param d default value.
