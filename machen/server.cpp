@@ -30,6 +30,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.hpp"
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
+#include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -44,11 +45,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
-        if( nprocs == 1 ){
+        if( nprocs <= 2 ){
             m_clients.emplace_back( new Engine::ClientLocal( 0 ) );
         }
 
-        for( int i = 1 ; i < nprocs ; ++i ){
+        for( int i = 2 ; i < nprocs ; ++i ){
             m_clients.emplace_back( new Engine::ClientRemote( i ) );
         }
     }
@@ -64,6 +65,8 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     bool Server::initialize(){
+        m_comm = createClientsComm();
+
         auto db = IO::DataStore::instance();
         auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
         auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
@@ -196,7 +199,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::waitClients() const{
-        MPI_Barrier( MPI_COMM_WORLD );
+        MPI_Barrier( m_comm );
     }
 }
 

@@ -38,6 +38,8 @@ namespace Engine{
             cerr << "ERROR: can't create local agents on worker\n";
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
+        cout << "Creating worker: " << m_rank << endl;
+        m_comm = createClientsComm();
     }
 
     //--------------------------------------------------------------------------
@@ -194,7 +196,7 @@ namespace Engine{
 
         m_local->runAgents( val );
 
-        MPI_Barrier( MPI_COMM_WORLD );
+        MPI_Barrier( m_comm );
     }
 
 }

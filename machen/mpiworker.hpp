@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <memory>
+#include <mpi.h>
 #include "clientlocal.hpp"
 
 //------------------------------------------------------------------------------
@@ -64,6 +65,8 @@ namespace Engine{
         int m_rank;
         /// Client instance that runs the real code.
         std::unique_ptr<ClientLocal> m_local;
+        /// clients comm group
+        MPI_Comm m_comm;
     };
 }
 

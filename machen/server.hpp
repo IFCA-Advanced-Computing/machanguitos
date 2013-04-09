@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <memory>
 #include <map>
 #include <vector>
+#include <mpi.h>
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
@@ -111,6 +112,8 @@ namespace Engine{
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.
         std::string m_datadir;
+        /// clients comm group
+        MPI_Comm m_comm;
     };
 
     //--------------------------------------------------------------------------

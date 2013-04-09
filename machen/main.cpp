@@ -88,6 +88,9 @@ int main( int argc, char * argv[] ){
         server->createAgents();
         server->run();
 
+    // MPI DATA SERVER
+    }else if( rank == Engine::DATASERVER_RANK ) {
+        MPI_Comm comm = Engine::createClientsComm();
     // MPI CLIENTS
     }else{
         Engine::MPIWorker worker(rank);
