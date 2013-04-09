@@ -29,6 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include "mpidefs.hpp"
 #include "mpiworker.hpp"
+#include "mpidataserver.hpp"
 
 //------------------------------------------------------------------------------
 using namespace std;
@@ -90,7 +91,9 @@ int main( int argc, char * argv[] ){
 
     // MPI DATA SERVER
     }else if( rank == Engine::DATASERVER_RANK ) {
-        MPI_Comm comm = Engine::createClientsComm();
+        Engine::MPIDataServer dserver;
+        dserver.run();
+
     // MPI CLIENTS
     }else{
         Engine::MPIWorker worker(rank);
