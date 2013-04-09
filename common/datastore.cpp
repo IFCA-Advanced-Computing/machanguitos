@@ -71,7 +71,7 @@ namespace IO {
         uuids::uuid u = gen();
 
         ostringstream strval;
-        for( auto i: u ){
+        for( const auto& i: u ){
             strval.fill('0');
             strval.width(2);
             strval << uppercase << hex << static_cast<unsigned>(i);
@@ -141,7 +141,7 @@ namespace IO {
         bson_append_int( &b, "minor", id.m_minor );
         bson_append_double( &b, "time", time );
 
-        for( const auto i: vars ){
+        for( const auto& i: vars ){
             const ScriptValue & val = *(i.second);
             switch( val.getType() ){
             case ScriptValue::ValueType::NIL: // empty

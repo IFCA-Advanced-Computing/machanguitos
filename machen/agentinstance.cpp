@@ -141,7 +141,7 @@ namespace Agent{
         auto db = IO::DataStore::instance();
 
         map<string, const ScriptValue *> ovars;
-        for( const auto key: outKeys ){
+        for( const auto& key: outKeys ){
             const auto variable = m_vals.find( key );
             if( variable != m_vals.end() ){
                 ovars[key] = &variable->second;

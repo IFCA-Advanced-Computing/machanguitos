@@ -79,7 +79,7 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
-        for( auto & c: m_clients ){
+        for( auto && c: m_clients ){
             c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
@@ -92,7 +92,7 @@ namespace Engine{
     void Server::createAgents(){
         auto nClients = m_clients.size();
         if( nClients > 0 ){
-            for( const auto p: m_numAgents ){
+            for( const auto & p: m_numAgents ){
                 // sort, first the clients with less agents
                 sort( begin(m_clients), end(m_clients),
                       []( const unique_ptr<Client> & a,
@@ -181,14 +181,14 @@ namespace Engine{
         cout << "\nSERVER: Start Simulation\n\n";
         for( int i = 0 ; i < iters ; i++ ){
             cout << "SERVER: iteration " << i+1 << endl;
-            for( auto & c: m_clients ){
+            for( auto && c: m_clients ){
                 c->runAgents( delta );
             }
 
             waitClients();
         }
 
-        for( auto & c: m_clients ){
+        for( auto && c: m_clients ){
             c->end();
         }
         cout << "\nSERVER: End Simulation\n\n";
