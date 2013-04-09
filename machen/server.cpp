@@ -71,7 +71,7 @@ namespace Engine{
         db->setDataStorePort( port );
 
         auto name = db->mkName();
-        cout << "creating datastore: " << name << endl;
+        cout << "Creating datastore: " << name << endl;
         if( !db->createStore( name ) ){
             cerr << "ERROR: Can't create DataStore '" << name << "'\n";
             return false;
@@ -101,7 +101,7 @@ namespace Engine{
                           return a->numAgents() < b->numAgents();
                       } );
 
-                cout << "Creating: " << p.second << " of " << p.first << endl;
+                cout << "Spawning: " << p.second << " of " << p.first << endl;
                 decltype(nClients) nPerClient = p.second / nClients;
                 decltype(nClients) rem = p.second % nClients;
 

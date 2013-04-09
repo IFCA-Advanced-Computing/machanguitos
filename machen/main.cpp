@@ -77,6 +77,7 @@ int main( int argc, char * argv[] ){
             return mainAbort();
         }
 
+        cout << "Creating Server\n";
         auto server = Engine::Server::instance();
         server->setDatadir( filename );
         server->createClients( nprocs );
