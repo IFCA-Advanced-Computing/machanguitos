@@ -23,10 +23,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentclass.hpp"
 #include <iostream>
 #include "agentinstance.hpp"
+#include "common/util.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     /** Define the indexing access of Agent intances metatable.
@@ -75,6 +77,17 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define the indexing access of raster table.
+        @param L lua_State.
+        @ingroup Agent
+        @retval 0 No return values to Lua.
+     */
+    int raster_index( lua_State *L ){
+        luaL_warn( L, "Raster Index" );
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     AgentClass::AgentClass( lua_State * L ) : m_L{L} {
         if( !m_L ){
             cerr << "AgentClass creation with invalid Lua State\n";
@@ -95,6 +108,14 @@ namespace Agent{
             lua_settable( m_L, -3 );                                  // 2
             lua_setmetatable( m_L, -2 );                              // 1
             lua_pop( m_L, 1 );                                        // 0
+            // set "raster" data
+            lua_newtable( m_L );                                      // 1
+            luaL_newmetatable( m_L, "raster" );                       // 2
+            lua_pushstring( m_L, "__index");                          // 3
+            lua_pushcfunction( m_L, raster_index );                   // 4
+            lua_settable( m_L, -3 );                                  // 2
+            lua_setmetatable( m_L, -2 );                              // 1
+            lua_setfield( m_L, LUA_GLOBALSINDEX, "raster");           // 0
         }
     }
 
