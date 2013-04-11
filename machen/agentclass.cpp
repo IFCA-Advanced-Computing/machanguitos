@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include "agentinstance.hpp"
 #include "common/util.hpp"
+#include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -83,7 +84,16 @@ namespace Agent{
         @retval 0 No return values to Lua.
      */
     int raster_index( lua_State *L ){
-        luaL_warn( L, "Raster Index" );
+        if( lua_isstring( L, -1 ) ){
+            string key = lua_tostring( L, -1 );
+            auto && ds = Engine::DataServer::instance();
+
+            auto && layer = ds->getRaster( key );
+            if( layer ){
+            }else{
+                luaL_error( L, ("Invalid raster layer '" + key + "'").c_str() );
+            }
+        }
         return 0;
     }
 
