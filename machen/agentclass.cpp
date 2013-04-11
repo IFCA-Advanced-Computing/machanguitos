@@ -90,6 +90,7 @@ namespace Agent{
 
             auto && layer = ds->getRaster( key );
             if( layer ){
+                luaL_warn( L, ("raster layer '" + key + "'").c_str() );
             }else{
                 luaL_error( L, ("Invalid raster layer '" + key + "'").c_str() );
             }
