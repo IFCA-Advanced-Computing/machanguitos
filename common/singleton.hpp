@@ -23,6 +23,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SINGLETON_HPP
 #define SINGLETON_HPP
 
+#include <memory>
+
 //------------------------------------------------------------------------------
 /** Singleton behaviour to add to a Class.
 
@@ -35,25 +37,25 @@ template<class T>
 class Singleton{
 public:
     /// Returns the singleton instance of a Class.
-    static T * instance();
+    static std::shared_ptr<T> instance();
 
 private:
     /// singleton instance of a Class.
-    static T * s_singleton;
+    static std::shared_ptr<T> s_singleton;
 };
 
 //------------------------------------------------------------------------------
 template<class T>
-inline T * Singleton<T>::instance(){
-    if( nullptr == s_singleton ){
-        s_singleton = new T();
+inline std::shared_ptr<T> Singleton<T>::instance(){
+    if( ! s_singleton ){
+        s_singleton = std::make_shared<T>();
     }
 
     return s_singleton;
 }
 
 //------------------------------------------------------------------------------
-template<class T> T * Singleton<T>::s_singleton = nullptr;
+template<class T> std::shared_ptr<T> Singleton<T>::s_singleton = nullptr;
 
 //------------------------------------------------------------------------------
 #endif//SINGLETON_HPP
