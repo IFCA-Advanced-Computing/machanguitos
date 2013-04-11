@@ -33,11 +33,11 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 template<class T>
 class Singleton{
- public:
+public:
     /// Returns the singleton instance of a Class.
     static T * instance();
 
- private:
+private:
     /// singleton instance of a Class.
     static T * s_singleton;
 };
