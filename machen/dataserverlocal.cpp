@@ -15,38 +15,22 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file dataserverlocal.hpp
-    @brief Engine::DataServerLocal declaration.
+/** @file dataserverlocal.cpp
+    @brief Engine::DataServerLocal Definitions.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#ifndef DATASERVERLOCAL_H
-#define DATASERVERLOCAL_H
-
-//------------------------------------------------------------------------------
-#include "dataserver.hpp"
+#include "dataserverlocal.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
-    //--------------------------------------------------------------------------
-    /** DataServer instance that runs in local proccess.
-        @ingroup Engine
-     */
-    class DataServerLocal : public DataServer{
-    public:
-        void end() override;
-        std::shared_ptr<Util::Raster> getRaster( const std::string & key ) const override;
-    };
+    using namespace std;
 
     //--------------------------------------------------------------------------
-    inline void DataServerLocal::end(){
-        // empty
+    shared_ptr<Util::Raster> DataServerLocal::getRaster( const string & key ) const{
+        return nullptr;
     }
 
 }//namespace Engine
-
-
-//------------------------------------------------------------------------------
-#endif//DATASERVERLOCAL_H
 
 //------------------------------------------------------------------------------

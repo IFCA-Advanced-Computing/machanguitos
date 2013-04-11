@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <memory>
+#include "raster.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -39,6 +40,12 @@ namespace Engine {
 
         /// End the Data Server.
         virtual void end()=0;
+        /** Returns a Raster object.
+            @param key name of the raster
+            @returns a pointer to the raster
+         */
+        virtual std::shared_ptr<Util::Raster> getRaster( const std::string & key ) const =0;
+
     private:
         /// singleton instance of a DataServer.
         static std::shared_ptr<DataServer> s_singleton;

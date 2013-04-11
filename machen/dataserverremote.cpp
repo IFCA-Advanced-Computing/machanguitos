@@ -26,10 +26,17 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine {
+    using namespace std;
+
     //--------------------------------------------------------------------------
     void DataServerRemote::end(){
         int32_t val{0};
         MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK, MpiTag::END, MPI_COMM_WORLD);
+    }
+
+    //--------------------------------------------------------------------------
+    shared_ptr<Util::Raster> DataServerRemote::getRaster( const string & key ) const{
+        return nullptr;
     }
 
 }//namespace Engine

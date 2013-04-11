@@ -30,6 +30,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Engine {
     class DataServerRemote : public DataServer{
         void end() override;
+        std::shared_ptr<Util::Raster> getRaster( const std::string & key ) const override;
     };
 
 }//namespace Engine
