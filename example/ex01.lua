@@ -1,7 +1,7 @@
 io.write( "Cow Example (Machen " .. config.VERSION_MAJOR .. "." .. config.VERSION_MINOR .. ")\n" );
 
-data.createLayer( {
-                     name = "grass",
+data.createLayer( "grass", 
+                  {
                      x0 = 0.0,
                      x1 = 1.0,
                      y0 = 0.0,
