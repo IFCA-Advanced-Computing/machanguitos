@@ -110,7 +110,7 @@ namespace Engine{
         /// list of Clients used during simulation.
         std::vector<std::unique_ptr<Client>> m_clients;
         /// data server proxy.
-        std::unique_ptr<DataServer> m_dataServer;
+        std::shared_ptr<DataServer> m_dataServer;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.

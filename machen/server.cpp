@@ -31,8 +31,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
 #include "mpidefs.hpp"
-#include "dataserverlocal.hpp"
-#include "dataserverremote.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -74,11 +72,7 @@ namespace Engine{
 
         m_comm = createClientsComm();
 
-        if( nprocs == 1 ){
-            m_dataServer = unique_ptr<DataServer>(new DataServerLocal());
-        }else{
-            m_dataServer = unique_ptr<DataServer>(new DataServerRemote());
-        }
+        m_dataServer = DataServer::instance();
 
         auto db = IO::DataStore::instance();
         auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );

@@ -15,38 +15,40 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file dataserver.hpp
-    @brief Engine::DataServer Declaration.
+/** @file dataserver.cpp
+    @brief DataServer Definition.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#ifndef DATASERVER_H
-#define DATASERVER_H
+#include "dataserver.hpp"
+#include <mpi.h>
+#include "dataserverlocal.hpp"
+#include "dataserverremote.hpp"
+#include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------
-#include <memory>
-
-//------------------------------------------------------------------------------
-namespace Engine {
+namespace Engine{
     //--------------------------------------------------------------------------
-    /** Class that controls the simulation global data.
-        @ingroup Engine
-     */
-    class DataServer{
-    public:
-        /// Returns the singleton instance of a DataServer.
-        static std::shared_ptr<DataServer> instance();
+    std::shared_ptr<DataServer> DataServer::s_singleton = nullptr;
 
-        /// End the Data Server.
-        virtual void end()=0;
-    private:
-        /// singleton instance of a DataServer.
-        static std::shared_ptr<DataServer> s_singleton;
-    };
+    //--------------------------------------------------------------------------
+    std::shared_ptr<DataServer> DataServer::instance(){
+        if( ! s_singleton ){
+            int nprocs, rank;
+            MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+            MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+            if( (nprocs == 1) || (rank == Engine::DATASERVER_RANK) ){
+                s_singleton = std::make_shared<DataServerLocal>();
+            }else{
+                s_singleton = std::make_shared<DataServerRemote>();
+            }
+        }
+
+        return s_singleton;
+    }
+
+    //--------------------------------------------------------------------------
 
 }//namespace Engine
-
-//------------------------------------------------------------------------------
-#endif//DATASERVER_H
 
 //------------------------------------------------------------------------------
