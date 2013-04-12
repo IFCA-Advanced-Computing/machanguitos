@@ -34,42 +34,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
 #include "dataserver.hpp"
+#include "raster.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    /** Data for used when create a New Raster.
-        @ingroup Data
-     */
-    class RasterNewData{
-    public:
-        RasterNewData( const std::string & key, int w, int h,
-                       double x0, double x1, double y0, double y1 );
-
-        /// name of the raster.
-        std::string key;
-        /// width of the raster.
-        int w;
-        /// height of the raster.
-        int h;
-        /// left value of the raster.
-        double x0;
-        /// right value of the raster.
-        double x1;
-        /// top value of the raster.
-        double y0;
-        /// bottom value of the raster.
-        double y1;
-    };
-
-    //--------------------------------------------------------------------------
-    inline RasterNewData::RasterNewData( const std::string & key, int w, int h,
-                                         double x0, double x1, double y0, double y1 )
-        : key{ key }, w{ w }, h{ h }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }
-    {
-        // empty
-    }
-
     //--------------------------------------------------------------------------
     /** Singleton Class that controls teh simulation execution.
         @ingroup Engine
@@ -143,7 +111,7 @@ namespace Engine{
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
-        std::forward_list<RasterNewData> m_newRaster;
+        std::forward_list<Data::RasterNewData> m_newRaster;
         /// list of Clients used during simulation.
         std::vector<std::unique_ptr<Client>> m_clients;
         /// data server proxy.

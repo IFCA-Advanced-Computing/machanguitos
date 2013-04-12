@@ -23,7 +23,45 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef RASTER_H
 #define RASTER_H
 
+//------------------------------------------------------------------------------
+#include <string>
+
+//------------------------------------------------------------------------------
 namespace Data {
+    //--------------------------------------------------------------------------
+    /** Data for used when create a New Raster.
+        @ingroup Data
+     */
+    class RasterNewData{
+    public:
+        RasterNewData( const std::string & key, int w, int h,
+                       double x0, double x1, double y0, double y1 );
+
+        /// name of the raster.
+        std::string key;
+        /// width of the raster.
+        int w;
+        /// height of the raster.
+        int h;
+        /// left value of the raster.
+        double x0;
+        /// right value of the raster.
+        double x1;
+        /// top value of the raster.
+        double y0;
+        /// bottom value of the raster.
+        double y1;
+    };
+
+    //--------------------------------------------------------------------------
+    inline RasterNewData::RasterNewData( const std::string & key, int w, int h,
+                                         double x0, double x1, double y0, double y1 )
+        : key{ key }, w{ w }, h{ h }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }
+    {
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     /** Raster Layer Data
         @ingroup Data
      */
