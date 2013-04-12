@@ -53,6 +53,7 @@ namespace Engine{
 
         MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
+        delete[] cname;
         return true;
     }
 
@@ -73,6 +74,7 @@ namespace Engine{
 
         MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
         MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
+        delete[] cname;
     }
 
     //--------------------------------------------------------------------------
@@ -90,6 +92,8 @@ namespace Engine{
         MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
         MPI_Send( chost, host.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
+        delete[] cname;
+        delete[] chost;
     }
 
     //--------------------------------------------------------------------------
@@ -103,6 +107,7 @@ namespace Engine{
         MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATEAGENTS, MPI_COMM_WORLD );
 
         m_numAgents += n;
+        delete[] cname;
     }
 
     //--------------------------------------------------------------------------
