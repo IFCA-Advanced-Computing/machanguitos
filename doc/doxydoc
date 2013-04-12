@@ -30,5 +30,8 @@ cmake -DCMAKE_PREFIX_PATH=/gpfs/res_apps/MACHANGUITOS/0.4
 /** @defgroup Config Configuration classes.
  */
 
+/** @defgroup Data Data classes.
+ */
+
 /** @defgroup IO Input Output classes.
  */
