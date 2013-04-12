@@ -61,6 +61,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void ClientLocal::createRaster( const Data::RasterNewData & /*raster*/ ){
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     bool ClientLocal::createClass( const string & name ){
         auto agentClass = Agent::AgentFactory::instance()->createClass( name );
         return (agentClass != nullptr);

@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <string>
+#include "raster.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -56,6 +57,8 @@ namespace Engine{
          */
         virtual void setDataStore( const std::string & name,
                                    const std::string & host, const uint16_t port )=0;
+        virtual void createRaster( const Data::RasterNewData & raster )=0;
+
         /** Create a AgentClass and save it.
             @param name name of the AgentClass.
             @retval true if it can create the AgentClass instance.

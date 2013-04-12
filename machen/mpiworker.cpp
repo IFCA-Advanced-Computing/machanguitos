@@ -80,6 +80,10 @@ namespace Engine{
                 runSetDataPath();
                 break;
 
+            case MpiTag::CREATERASTERCLIENT:
+                runCreateRasterClient( val );
+                break;
+
             case MpiTag::END:
                 running = false;
                 break;
@@ -199,6 +203,41 @@ namespace Engine{
         MPI_Barrier( m_comm );
     }
 
+    //--------------------------------------------------------------------------
+    void MPIWorker::runCreateRasterClient( const int w ){
+        char ckey[MAX_DB_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_DB_NAME, MPI_CHAR, 0,
+                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        int32_t ival;
+        MPI_Recv( &ival, 1, MPI_INT, 0,
+                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        double dval[4];
+        MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
+                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on " << m_rank << endl;
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        cout << "Create Raster '" << ckey << "', " << w << ", " << ival;
+        cout << ", ( " << dval[0] << ", " << dval[1] << " )";
+        cout << ", ( " << dval[2] << ", " << dval[3] << " )\n";
+    }
 }
 
 //------------------------------------------------------------------------------

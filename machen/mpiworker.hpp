@@ -56,8 +56,12 @@ namespace Engine{
         void runCreateClass();
         /** Execute a Create Agents command.
             @param num number of agents to create.
-        */
+         */
         void runCreateAgents( const int num );
+        /** Execute a Create Raster command.
+            @param w width of the raster layer.
+         */
+        void runCreateRasterClient( const int w );
         /// Execute a End command.
         void runAgents();
 

@@ -44,6 +44,8 @@ namespace Engine{
         SETDATASTORE = 5,
         /// Set Data Path Tag.
         SETDATAPATH = 6,
+        /// create a Raster Layer Tag.
+        CREATERASTERCLIENT = 7,
         /// End Simulation Message Tag.
         END = 66,
     };

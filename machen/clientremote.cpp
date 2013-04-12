@@ -97,6 +97,24 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void ClientRemote::createRaster( const Data::RasterNewData & raster ){
+        assert( raster.key.length() <= MAX_CLASS_NAME && "name too long" );
+        int32_t val{raster.w};
+        char * ckey = new char [raster.key.length()+1];
+        strcpy( ckey, raster.key.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        MPI_Send( ckey, raster.key.length(), MPI_CHAR, m_dest,
+                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        int32_t ival{raster.h};
+        MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1};
+        MPI_Send( dvals, 4, MPI_DOUBLE, m_dest,
+                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        delete[] ckey;
+    }
+
+    //--------------------------------------------------------------------------
     void ClientRemote::createAgents( const string & name, int n ){
         assert( name.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val = n;
