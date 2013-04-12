@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <iostream>
 #include <lua.hpp>
+#include "server.hpp"
 #include "dataserver.hpp"
 #include "common/util.hpp"
 
@@ -55,7 +56,7 @@ namespace Data {
 
         int w{ 10 };
         int h{ 10 };
-        double x0{ 0 }, x1{ 1 }, y0{ 0}, y1{ 1 };
+        double x0{ 0 }, x1{ 1 }, y0{ 0 }, y1{ 1 };
 
         if( lua_istable( L, 2 ) ){            // 0
             lua_getfield( L, 2, "w" );        // 1
@@ -83,11 +84,8 @@ namespace Data {
             lua_pop( L, 1 );                  // 0
         }
 
-        std::cout << "new raster \n";
-        std::cout << "  w = " << w << std::endl;
-        std::cout << "  h = " << h << std::endl;
-        std::cout << "  x = ( " << x0 << ", " << x1 << " )\n";
-        std::cout << "  y = ( " << y0 << ", " << y1 << " )\n";
+        auto && engine = Engine::Server::instance();
+        engine->createRaster( key, w, h, x0, x1, y0, y1 );
 
         return 0;
     }

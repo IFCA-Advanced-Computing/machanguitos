@@ -27,8 +27,13 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
-    shared_ptr<Util::Raster> DataServerLocal::getRaster( const string & key ) const{
+    shared_ptr<Data::Raster> DataServerLocal::getRaster( const string & key ) const{
         return nullptr;
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerLocal::createRaster( const string & key, int w, int h,
+                       double x0, double x1, double y0, double y1 ){
     }
 
 }//namespace Engine

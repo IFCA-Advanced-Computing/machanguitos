@@ -64,6 +64,17 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void Server::createRaster( const string & key, int w, int h,
+                       double x0, double x1, double y0, double y1 ){
+        if( key.length() > MAX_CLASS_NAME ){
+            cerr << "WARNING: raster name '" << key << "' too long\n";
+        }else{
+            cout  << "creating raster named '" << key << "'\n";
+            m_newRaster.emplace_front( key, w, h, x0, x1, y0, y1 );
+        }
+    }
+
+    //--------------------------------------------------------------------------
     bool Server::initialize(){
         int nprocs;
         MPI_Comm_size( MPI_COMM_WORLD, &nprocs );

@@ -35,8 +35,13 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    shared_ptr<Util::Raster> DataServerRemote::getRaster( const string & key ) const{
+    shared_ptr<Data::Raster> DataServerRemote::getRaster( const string & key ) const{
         return nullptr;
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerRemote::createRaster( const string & key, int w, int h,
+                                         double x0, double x1, double y0, double y1 ){
     }
 
 }//namespace Engine

@@ -23,10 +23,13 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef RASTER_H
 #define RASTER_H
 
-namespace Util {
+namespace Data {
+    /** Raster Layer Data
+        @ingroup Data
+     */
     class Raster {
     };
-}//namespace Util
+}//namespace Data
 
 
 //------------------------------------------------------------------------------
