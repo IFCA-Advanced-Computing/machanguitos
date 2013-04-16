@@ -21,6 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "dataserverlocal.hpp"
+#include <iostream>
+#include <cassert>
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -34,6 +36,13 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerLocal::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
+        assert( false && "DataServerLocal::createRaster can't be called" );
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerLocal::createRasterProxy( const string & key, int w, int h,
+                                              double x0, double x1, double y0, double y1 ){
+        cout << "DataServerLocal::createRasterProxy " << key << endl;
     }
 
 }//namespace Engine

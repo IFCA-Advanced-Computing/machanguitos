@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include <mpi.h>
 #include "mpidefs.hpp"
+#include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -234,9 +235,8 @@ namespace Engine{
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
-        cout << "Create Raster '" << ckey << "', " << w << ", " << ival;
-        cout << ", ( " << dval[0] << ", " << dval[1] << " )";
-        cout << ", ( " << dval[2] << ", " << dval[3] << " )\n";
+        auto && ds = Engine::DataServer::instance();
+        ds->createRasterProxy( ckey, w, ival, dval[0], dval[1], dval[2], dval[3] );
     }
 }
 
