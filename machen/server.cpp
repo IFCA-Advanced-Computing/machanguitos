@@ -104,6 +104,16 @@ namespace Engine{
             c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
+
+            for( auto && nr: m_newRaster ){
+                c->createRaster( nr );
+            }
+        }
+
+        auto && ds = Engine::DataServer::instance();
+
+        for( auto && nr: m_newRaster ){
+            ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1 );
         }
 
         return true;
