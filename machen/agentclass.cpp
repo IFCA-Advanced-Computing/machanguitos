@@ -74,6 +74,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    int raster_set( lua_State *L ){
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     /** Define the indexing assignment of Agent intances metatable.
         @param L lua_State.
         @ingroup Agent
@@ -116,6 +121,9 @@ namespace Agent{
                 lua_rawset( L, -3 );                            // 1
                 lua_pushstring( L, "get");                      // 2
                 lua_pushcfunction( L, raster_get );             // 3
+                lua_settable( L, -3 );                          // 1
+                lua_pushstring( L, "set");                      // 2
+                lua_pushcfunction( L, raster_set );             // 3
                 lua_settable( L, -3 );                          // 1
                 return 1;
             }else{
