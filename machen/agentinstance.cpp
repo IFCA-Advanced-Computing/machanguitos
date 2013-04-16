@@ -114,19 +114,19 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     void AgentInstance::newData( lua_State * L, const string & key ){
-        auto ltype = lua_type( L, -2 );
+        auto ltype = lua_type( L, -1 );
         switch( ltype ){
         case LUA_TNIL:
             m_vals[key] = ScriptValue();
             break;
         case LUA_TNUMBER:
-            m_vals[key] = ScriptValue(lua_tonumber( L, -2 ));
+            m_vals[key] = ScriptValue(lua_tonumber( L, -1 ));
             break;
         case LUA_TBOOLEAN:
-            m_vals[key] = ScriptValue(lua_toboolean( L, -2 )==1);
+            m_vals[key] = ScriptValue(lua_toboolean( L, -1 )==1);
             break;
         case LUA_TSTRING:
-            m_vals[key] = ScriptValue(lua_tostring( L, -2));
+            m_vals[key] = ScriptValue(lua_tostring( L, -1));
             break;
         default:
             cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
