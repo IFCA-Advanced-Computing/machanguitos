@@ -31,6 +31,8 @@ namespace Agent{
     using namespace std;
     using namespace Util;
 
+    constexpr const char * RASTER_OBJ = "__rt";
+
     //--------------------------------------------------------------------------
     /** Define the indexing access of Agent intances metatable.
         @param L lua_State.
@@ -90,7 +92,14 @@ namespace Agent{
 
             auto && layer = ds->getRaster( key );
             if( layer ){
-                luaL_warn( L, ("raster layer '" + key + "'").c_str() );
+                lua_newtable( L );                              // 1
+                lua_pushstring( L, RASTER_OBJ );                // 2
+                lua_pushlightuserdata( L, (void*)layer.get() ); // 3
+                lua_rawset( L, -3 );                            // 1
+                lua_pushstring( L, "get");                      // 2
+                lua_pushcfunction( L, raster_get );             // 3
+                lua_settable( L, -3 );                          // 1
+                return 1;
             }else{
                 luaL_error( L, ("Invalid raster layer '" + key + "'").c_str() );
             }
