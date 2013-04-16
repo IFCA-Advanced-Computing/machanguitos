@@ -10,7 +10,11 @@ end
 function Agent:update( delta )
    self.x = self.x + 0.1*delta;
    self.y = self.y + 0.1*delta;
-   io.write( " cow pos = (" .. self.x .. "," .. self.y .. ")\n" )
+   io.write( " cow pos = (" .. self.x .. "," .. self.y .. ")\n" );
+   local rst = raster.grass;
+   local grass = rst:get( self.x, self.y );
+   rst:set( self.x, self.y, grass - 1 );
+   io.write( " cow grass = " .. grass .. "\n" );
 end
 
 function Agent:test()
