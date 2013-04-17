@@ -21,8 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include <mpi.h>
+#include <cassert>
 #include "dataserverremote.hpp"
 #include "mpidefs.hpp"
+#include "config.h"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -46,7 +48,22 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerRemote::createRaster( const string & key, int w, int h,
                                          double x0, double x1, double y0, double y1 ){
-        cout << "DataServerRemote::createRaster " << key << endl;
+        assert( key.length() <= MAX_CLASS_NAME && "name too long" );
+        int32_t val{w};
+        char * ckey = new char [key.length()+1];
+        strcpy( ckey, key.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
+        MPI_Send( ckey, key.length(), MPI_CHAR, DATASERVER_RANK,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
+        int32_t ival{h};
+        MPI_Send( &ival, 1, MPI_INT, DATASERVER_RANK,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
+        double dvals[]{x0, x1, y0, y1};
+        MPI_Send( dvals, 4, MPI_DOUBLE, DATASERVER_RANK,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
+        delete[] ckey;
     }
 
     //--------------------------------------------------------------------------

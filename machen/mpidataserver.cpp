@@ -24,10 +24,47 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidataserver.hpp"
 #include <mpi.h>
 #include "mpidefs.hpp"
+#include "config.h"
+#include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
     using namespace std;
+
+    //--------------------------------------------------------------------------
+    void runCreateRaster( const int w ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on data server\n";
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        int32_t ival;
+        MPI_Recv( &ival, 1, MPI_INT, 0,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on data server\n";
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        double dval[4];
+        MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
+                  MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            cerr << "ERROR: Received on data server\n";
+            MPI_Abort( MPI_COMM_WORLD, 0 );
+        }
+
+        auto && ds = Engine::DataServer::instance();
+        ds->createRaster( ckey, w, ival, dval[0], dval[1], dval[2], dval[3] );
+    }
 
     //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
@@ -49,6 +86,10 @@ namespace Engine {
             }
 
             switch( status.MPI_TAG ){
+            case MpiTagDS::CREATERASTER:
+                runCreateRaster( val );
+                break;
+
             case MpiTag::END:
                 running = false;
                 break;
@@ -60,7 +101,7 @@ namespace Engine {
         }
 
     }
-    
+
 }//namespace Engine
 
 //------------------------------------------------------------------------------
