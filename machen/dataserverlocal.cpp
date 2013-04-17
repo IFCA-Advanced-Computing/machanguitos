@@ -29,15 +29,6 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
-    shared_ptr<Data::Raster> DataServerLocal::getRaster( const string & key ) const{
-        const auto it = m_rasters.find( key );
-        if( it != m_rasters.cend() ){
-            return it->second;
-        }
-        return nullptr;
-    }
-
-    //--------------------------------------------------------------------------
     void DataServerLocal::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
         cout << "DataServerLocal::createRaster " << key << endl;

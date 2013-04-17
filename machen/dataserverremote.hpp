@@ -33,14 +33,10 @@ namespace Engine {
     class DataServerRemote : public DataServer{
     public:
         void end() override;
-        std::shared_ptr<Data::Raster> getRaster( const std::string & key ) const override;
         void createRaster( const std::string & key, int w, int h,
                            double x0, double x1, double y0, double y1 ) override;
         void createRasterProxy( const std::string & key, int w, int h,
                                 double x0, double x1, double y0, double y1 ) override;
-
-    private:
-        std::map<std::string,std::shared_ptr<Data::Raster>> m_rasters;
     };
 
 }//namespace Engine

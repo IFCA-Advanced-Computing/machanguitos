@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <memory>
+#include <map>
 #include "raster.hpp"
 
 //------------------------------------------------------------------------------
@@ -44,11 +45,14 @@ namespace Engine {
             @param key name of the raster
             @returns a pointer to the raster
          */
-        virtual std::shared_ptr<Data::Raster> getRaster( const std::string & key ) const =0;
+        std::shared_ptr<Data::Raster> getRaster( const std::string & key ) const;
         virtual void createRaster( const std::string & key, int w, int h,
                                    double x0, double x1, double y0, double y1 )=0;
         virtual void createRasterProxy( const std::string & key, int w, int h,
                                         double x0, double x1, double y0, double y1 )=0;
+
+    protected:
+        std::map<std::string,std::shared_ptr<Data::Raster>> m_rasters;
 
     private:
         /// singleton instance of a DataServer.

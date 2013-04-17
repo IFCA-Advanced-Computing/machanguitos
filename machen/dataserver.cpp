@@ -50,6 +50,15 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    shared_ptr<Data::Raster> DataServer::getRaster( const string & key ) const{
+        const auto it = m_rasters.find( key );
+        if( it != m_rasters.cend() ){
+            return it->second;
+        }
+        return nullptr;
+    }
+
+    //--------------------------------------------------------------------------
 
 }//namespace Engine
 
