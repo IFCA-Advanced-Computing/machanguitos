@@ -206,9 +206,9 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void MPIWorker::runCreateRasterClient( const int w ){
-        char ckey[MAX_DB_NAME+1];
+        char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &ckey, MAX_DB_NAME, MPI_CHAR, 0,
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
                   MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             cerr << "ERROR: Received on " << m_rank << endl;
