@@ -50,6 +50,11 @@ namespace Engine{
         END = 66,
     };
 
+    enum MpiTagDS {
+        /// create a Raster Layer Tag.
+        CREATERASTER = 1,
+    };
+
     /// MPI Rank identifier of server.
     constexpr int SERVER_RANK = 0;
     /// MPI Rank identifier of data server.
