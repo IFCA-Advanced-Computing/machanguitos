@@ -28,19 +28,21 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine{
-    //--------------------------------------------------------------------------
-    std::shared_ptr<DataServer> DataServer::s_singleton = nullptr;
+    using namespace std;
 
     //--------------------------------------------------------------------------
-    std::shared_ptr<DataServer> DataServer::instance(){
+    shared_ptr<DataServer> DataServer::s_singleton = nullptr;
+
+    //--------------------------------------------------------------------------
+    shared_ptr<DataServer> DataServer::instance(){
         if( ! s_singleton ){
             int nprocs, rank;
             MPI_Comm_rank( MPI_COMM_WORLD, &rank );
             MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
             if( (nprocs == 1) || (rank == Engine::DATASERVER_RANK) ){
-                s_singleton = std::make_shared<DataServerLocal>();
+                s_singleton = make_shared<DataServerLocal>();
             }else{
-                s_singleton = std::make_shared<DataServerRemote>();
+                s_singleton = make_shared<DataServerRemote>();
             }
         }
 
