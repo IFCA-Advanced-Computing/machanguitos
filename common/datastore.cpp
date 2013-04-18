@@ -29,6 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <boost/uuid/uuid_generators.hpp>
 #include "config.h"
 #include "scriptvalue.hpp"
+#include "log.hpp"
 
 //------------------------------------------------------------------------------
 namespace IO {
@@ -61,7 +62,7 @@ namespace IO {
         if( host.length() < MAX_HOST_NAME ){
             m_dbhost = host;
         }else{
-            cerr << "WARNING: datastore host too long '" << host << "'\n";
+            LOGW( "Datastore host too long '", host, "'" );
         }
     }
 
@@ -86,8 +87,8 @@ namespace IO {
             m_isConnected = mongo_client( &m_conn , m_dbhost.c_str(), m_dbport )
                 == MONGO_OK;
             if( !m_isConnected ) {
-                cout << "failed to connect '" << m_dbhost << ":" << m_dbport << "'\n";
-                cout << "  mongo error: " << m_conn.err << endl;
+                LOGE( "failed to connect ", m_dbhost, ":", m_dbport );
+                LOGE( "  mongo error: ", m_conn.err );
             }
         }
         return m_isConnected;
@@ -110,7 +111,7 @@ namespace IO {
         }
 
         if( mongo_cmd_drop_db( &m_conn, name.c_str() ) != MONGO_OK ){
-            cout << "failed to drop database" << name << endl;
+            LOGE( "failed to drop database ", name );
             return false;
         }
 
@@ -133,7 +134,7 @@ namespace IO {
 
         bson_init( &b );
         if( bson_append_new_oid( &b, "_id" ) != BSON_OK ){
-            cout << "failed to create bson id\n";
+            LOGE( "failed to create bson id" );
             mongo_disconnect( &m_conn );
             return;
         }
@@ -161,7 +162,7 @@ namespace IO {
         bson_finish( &b );
 
         if( mongo_insert( &m_conn , ns.c_str() , &b, NULL ) != MONGO_OK ){
-            cout << "failed to insert in mongo\n";
+            LOGE( "failed to insert in mongo" );
         }
 
         bson_destroy( &b );

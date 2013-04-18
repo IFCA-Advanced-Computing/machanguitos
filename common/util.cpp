@@ -21,10 +21,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "util.hpp"
-
 #include <iostream>
-
 #include "lua.hpp"
+#include "log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Util{
@@ -35,9 +34,9 @@ namespace Util{
         if( ret != 0 ){
             auto msg = lua_tostring(L, -1);
             if( msg == nullptr ){
-                cerr << "Error: (error object is not a string)\n";
+                Util::LOGE( "Lua error object is not a string" );
             }else{
-                cerr << "Error: " << msg << endl;
+                Util::LOGE( "Lua: ", msg );
             }
             return false;
         }
@@ -52,7 +51,7 @@ namespace Util{
         lua_pushvfstring( L, fmt, argp );
         va_end( argp );
         lua_concat( L, 2 );
-        printf("Warning: %s\n", lua_tostring( L,-1 ) );
+        Util::LOGW( "Lua: ", lua_tostring( L, -1 ) );
         lua_pop( L, 1 );
     }
 }
