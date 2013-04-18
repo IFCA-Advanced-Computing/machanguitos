@@ -23,6 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "mpidataserver.hpp"
 #include <mpi.h>
+#include "common/log.hpp"
 #include "mpidefs.hpp"
 #include "config.h"
 #include "dataserver.hpp"
@@ -30,6 +31,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Engine {
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     void runCreateRaster( const int w ){
@@ -38,7 +40,7 @@ namespace Engine {
         MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on data server\n";
+            LOGE( "Received on data server" );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -50,7 +52,7 @@ namespace Engine {
         MPI_Recv( &ival, 1, MPI_INT, 0,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on data server\n";
+            LOGE( "Received on data server" );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -58,7 +60,7 @@ namespace Engine {
         MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on data server\n";
+            LOGE( "Received on data server" );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -69,7 +71,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         /*MPI_Comm comm = */createClientsComm();
-        cout << "Creating Data Server\n";
+        LOGV( "Creating Data Server" );
     }
 
     //--------------------------------------------------------------------------
@@ -81,7 +83,7 @@ namespace Engine {
         while( running ){
             MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
-                cerr << "ERROR: Received on data server\n";
+                LOGE( "Received on data server" );
                 MPI_Abort( MPI_COMM_WORLD, 0 );
             }
 
@@ -95,8 +97,7 @@ namespace Engine {
                 break;
 
             default:
-                    cerr << "ERROR: not-implemented message[" << status.MPI_TAG
-                         << "] on data server\n";
+                LOGE( "Not-implemented message[", status.MPI_TAG, "] on data server" );
             }
         }
 

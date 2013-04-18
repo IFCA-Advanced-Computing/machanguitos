@@ -22,10 +22,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "agentfactory.hpp"
 #include <cassert>
-#include <iostream>
 #include <boost/filesystem.hpp>
 #include "lua.hpp"
 #include "common/util.hpp"
+#include "common/log.hpp"
 #include "agentclass.hpp"
 
 //------------------------------------------------------------------------------
@@ -87,14 +87,14 @@ namespace Agent{
 
         path filename = path(m_dir) /= (name + ".lua");
         if( !is_regular_file(filename) ){
-            cerr << "ERROR: not file for class '" << name << "'\n";
+            LOGE( "Not file for class '", name, "'" );
             return nullptr;
         }
 
         // Lua Initialization
         auto L = luaL_newstate();
         if( !L ){
-            cerr << "ERROR: Can't create Lua State\n";
+            LOGE( "Can't create Lua State" );
             return nullptr;
         }
 
@@ -107,7 +107,7 @@ namespace Agent{
         // create Agent class on Lua
         AgentClass * aclass = new (nothrow) AgentClass( L );
         if( !aclass ){
-            cerr << "ERROR: Can't create agent class '" << name << "' instance\n";
+            LOGE( "Can't create agent class '", name, "' instance" );
             return nullptr;
         }
 

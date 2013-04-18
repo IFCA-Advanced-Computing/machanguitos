@@ -21,10 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "server.hpp"
-#include <iostream>
 #include <algorithm>
 #include <boost/filesystem.hpp>
 #include <mpi.h>
+#include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "config.h"
 #include "agentfactory.hpp"
@@ -35,6 +35,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     void Server::setDatadir( const string & filename ){
@@ -57,7 +58,7 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void Server::addAgents( const string & name, const unsigned n ){
         if( name.length() > MAX_CLASS_NAME ){
-            cerr << "WARNING: Class name '" << name << "' too long\n";
+            LOGW( "Class name '", name, "' too long" );
         }else{
             m_numAgents[name] = m_numAgents[name] + n;
         }
@@ -67,9 +68,9 @@ namespace Engine{
     void Server::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
         if( key.length() > MAX_CLASS_NAME ){
-            cerr << "WARNING: raster name '" << key << "' too long\n";
+            LOGW( "Raster name '", key, "' too long" );
         }else{
-            cout  << "creating raster named '" << key << "'\n";
+            LOGI( "Creating raster named '", key, "'" );
             m_newRaster.emplace_front( key, w, h, x0, x1, y0, y1 );
         }
     }
@@ -92,9 +93,9 @@ namespace Engine{
         db->setDataStorePort( port );
 
         auto name = db->mkName();
-        cout << "Creating datastore: " << name << endl;
+        LOGI( "Creating datastore: ", name );
         if( !db->createStore( name ) ){
-            cerr << "ERROR: Can't create DataStore '" << name << "'\n";
+            LOGE( "Can't create DataStore ", name );
             return false;
         }
 
@@ -132,7 +133,7 @@ namespace Engine{
                           return a->numAgents() < b->numAgents();
                       } );
 
-                cout << "Spawning: " << p.second << " of " << p.first << endl;
+                LOGI( "Spawning: ", p.second, " of '", p.first, "'" );
                 decltype(nClients) nPerClient = p.second / nClients;
                 decltype(nClients) rem = p.second % nClients;
 
@@ -143,7 +144,7 @@ namespace Engine{
                     if( c->createClass( p.first ) ){
                         c->createAgents( p.first, nPerClient+1 );
                     }else{
-                        cerr << "WARNING: Class " << p.first << " can't be created" << endl;
+                        LOGW( "Class '", p.first, "' can't be created" );
                     }
                 }
 
@@ -153,12 +154,12 @@ namespace Engine{
                     if( c->createClass( p.first ) ){
                         c->createAgents( p.first, nPerClient );
                     }else{
-                        cerr << "WARNING: Class " << p.first << " can't be created" << endl;
+                        LOGW( "Class '", p.first, "' can't be created" );
                     }
                 }
             }
         }else{
-            cerr << "WARNING: No clients" << endl;
+            LOGW( "No clients" );
         }
     }
 
@@ -166,8 +167,8 @@ namespace Engine{
     int Server::getConfigInt( const string & key, const int d ) const{
         const auto i = m_config.find( key );
         if( i != m_config.end() ){
-            if( i->second.getType() != Util::ScriptValue::ValueType::NUMBER ){
-                cerr << "WARNING: '" << key << "' is not a number\n";
+            if( i->second.getType() != ScriptValue::ValueType::NUMBER ){
+                LOGW( "Config '", key, "' is not a number" );
             }
             return static_cast<int>(i->second.getNumber(d));
         }else{
@@ -179,8 +180,8 @@ namespace Engine{
     double Server::getConfigNumber( const string & key, const double d ) const{
         const auto i = m_config.find( key );
         if( i != m_config.end() ){
-            if( i->second.getType() != Util::ScriptValue::ValueType::NUMBER ){
-                cerr << "WARNING: '" << key << "' is not a number\n";
+            if( i->second.getType() != ScriptValue::ValueType::NUMBER ){
+                LOGW( "Config '", key, "' is not a number" );
             }
             return i->second.getNumber(d);
         }else{
@@ -192,8 +193,8 @@ namespace Engine{
     string Server::getConfigString( const string & key, const string & d ) const{
         const auto i = m_config.find( key );
         if( i != m_config.end() ){
-            if( i->second.getType() != Util::ScriptValue::ValueType::STRING ){
-                cerr << "WARNING: '" << key << "' is not a string\n";
+            if( i->second.getType() != ScriptValue::ValueType::STRING ){
+                LOGW( "Config '", key, "' is not a string" );
             }
             return i->second.getString(d);
         }else{
@@ -209,9 +210,9 @@ namespace Engine{
 
         double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
 
-        cout << "\nSERVER: Start Simulation\n\n";
+        LOGI( "SERVER: Start Simulation\n" );
         for( int i = 0 ; i < iters ; i++ ){
-            cout << "SERVER: iteration " << i+1 << endl;
+            LOGI( "SERVER: iteration ", i+1 );
             for( auto && c: m_clients ){
                 c->runAgents( delta );
             }
@@ -227,7 +228,7 @@ namespace Engine{
             m_dataServer->end();
         }
 
-        cout << "\nSERVER: End Simulation\n\n";
+        LOGI( "SERVER: End Simulation\n" );
     }
 
     //--------------------------------------------------------------------------

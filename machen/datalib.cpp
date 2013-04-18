@@ -22,7 +22,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "datalib.hpp"
 #include <string>
-#include <iostream>
 #include <lua.hpp>
 #include "server.hpp"
 #include "dataserver.hpp"

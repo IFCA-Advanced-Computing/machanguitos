@@ -21,7 +21,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "agentclass.hpp"
-#include <iostream>
+#include <cassert>
 #include "agentinstance.hpp"
 #include "common/util.hpp"
 #include "dataserver.hpp"
@@ -146,9 +146,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     AgentClass::AgentClass( lua_State * L ) : m_L{L} {
-        if( !m_L ){
-            cerr << "AgentClass creation with invalid Lua State\n";
-        }
+        assert( m_L && "AgentClass creation with invalid Lua State" );
     }
 
     //--------------------------------------------------------------------------

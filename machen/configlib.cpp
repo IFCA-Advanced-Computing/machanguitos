@@ -21,11 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "configlib.hpp"
-#include <iostream>
-#include <cassert>
 #include <boost/filesystem.hpp>
 #include <lua.hpp>
 #include "common/util.hpp"
+#include "common/log.hpp"
 #include "config.h"
 #include "datalib.hpp"
 #include "server.hpp"
@@ -143,25 +142,26 @@ namespace Config{
     bool load( const string & filename ){
         // check file
         if( !exists( filename ) || !is_regular_file( filename ) ){
-            cerr << "Error: There is no config file " << filename << endl;
+            LOGE( "There is no config file '", filename, "'" );
             return false;
         }
 
         // Lua Initialization
-        bool is_ok{true};
-
         auto L = luaL_newstate();
-        assert( L && "Can't create Lua State" );
+        if( !L ){
+            LOGE( "Can't create Lua State" );
+            return false;
+        }
 
-        lua_gc(L, LUA_GCSTOP, 0);
+        lua_gc( L, LUA_GCSTOP, 0 );
         luaL_openlibs( L );
         Config::openlib( L );
         Data::openlib( L );
-        lua_gc(L, LUA_GCRESTART, 0);
+        lua_gc( L, LUA_GCRESTART, 0 );
 
         // execute config file
         auto ret = luaL_dofile( L, filename.c_str() );
-        is_ok = Util::checkLuaReturn( L, ret );
+        auto is_ok = Util::checkLuaReturn( L, ret );
 
         lua_close( L );
 

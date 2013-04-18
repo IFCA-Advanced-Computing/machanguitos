@@ -21,25 +21,26 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "mpiworker.hpp"
-#include <cassert>
+#include <mpi.h>
+#include "common/log.hpp"
 #include "config.h"
 #include "clientlocal.hpp"
-#include <mpi.h>
 #include "mpidefs.hpp"
 #include "dataserver.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     MPIWorker::MPIWorker( const int r ) : m_rank{r} {
         m_local = unique_ptr<ClientLocal>( new (nothrow) ClientLocal( m_rank ) );
         if( !m_local ){
-            cerr << "ERROR: can't create local agents on worker\n";
+            LOGE( "Can't create local agents on worker" );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
-        cout << "Creating worker: " << m_rank << endl;
+        LOGV( "Creating worker: ", m_rank );
         m_comm = createClientsComm();
     }
 
@@ -52,7 +53,7 @@ namespace Engine{
         while( running ){
             MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
-                cerr << "ERROR: Received on " << m_rank << endl;
+                LOGE( "Received on ", m_rank );
                 MPI_Abort( MPI_COMM_WORLD, 0 );
             }
 
@@ -90,8 +91,7 @@ namespace Engine{
                 break;
 
             default:
-                    cerr << "ERROR: not-implemented message[" << status.MPI_TAG
-                         << "] on " << m_rank << endl;
+                LOGE( "Not-implemented message[", status.MPI_TAG, "] on ", m_rank );
             }
         }
     }
@@ -102,7 +102,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTag::SETSTARTTIME, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -115,7 +115,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -132,7 +132,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -143,7 +143,7 @@ namespace Engine{
         char chost[MAX_HOST_NAME+1];
         MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -159,7 +159,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTag::CREATECLASS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -168,7 +168,7 @@ namespace Engine{
         val[count] = 0;
 
         if( !m_local->createClass( val ) ){
-            cerr << "WARNING: Class '" << val << "' can't be created\n";
+            LOGW( "Class '", val, "' can't be created" );
         }
     }
 
@@ -178,7 +178,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTag::CREATEAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -195,7 +195,7 @@ namespace Engine{
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTag::RUNAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -211,7 +211,7 @@ namespace Engine{
         MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
                   MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -223,7 +223,7 @@ namespace Engine{
         MPI_Recv( &ival, 1, MPI_INT, 0,
                   MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 
@@ -231,7 +231,7 @@ namespace Engine{
         MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
                   MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
-            cerr << "ERROR: Received on " << m_rank << endl;
+            LOGE( "Received on ", m_rank );
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
 

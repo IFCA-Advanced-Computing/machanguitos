@@ -22,7 +22,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "clientremote.hpp"
 #include <cstdint>
-#include <iostream>
 #include <cassert>
 #include <cstring>
 #include <mpi.h>

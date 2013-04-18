@@ -21,8 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "dataserverlocal.hpp"
-#include <iostream>
 #include <cassert>
+#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -31,7 +31,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerLocal::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
-        cout << "DataServerLocal::createRaster " << key << endl;
+        Util::LOGV( "DataServerLocal::createRaster ", key );
         m_rasters[key] = std::make_shared<Data::Raster>();
     }
 

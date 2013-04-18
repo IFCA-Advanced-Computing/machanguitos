@@ -21,10 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "agentinstance.hpp"
-#include <iostream>
 #include <cassert>
 #include "lua.hpp"
 #include "common/util.hpp"
+#include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "agentclass.hpp"
 
@@ -129,8 +129,8 @@ namespace Agent{
             m_vals[key] = ScriptValue(lua_tostring( L, -1));
             break;
         default:
-            cerr << "WARNING: type not implemented '" << lua_typename( L, ltype )
-                 << "' on key '" << key << "'\n";
+            LOGW( "Lua type not implemented '", lua_typename( L, ltype ),
+                  "' on key '", key, "'" );
         }
     }
 

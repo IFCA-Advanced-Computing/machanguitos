@@ -21,8 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "clientlocal.hpp"
-#include <iostream>
 #include <cassert>
+#include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "agentfactory.hpp"
 #include "agentclass.hpp"
@@ -31,6 +31,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     ClientLocal::ClientLocal( const int id )
@@ -82,13 +83,12 @@ namespace Engine{
                     obj->init();
                     m_objects.push_back( move(obj) );
                 }else{
-                    cerr << "can't create more instances of '"
-                         << name << "'\n";
+                    LOGE( "Can't create more instances of '", name, "'" );
                     break;
                 }
             }
         }else{
-            cerr << "Class '" << name << "' doen't exist\n";
+            LOGE( "Class '", name, "' doen't exist" );
         }
     }
 
@@ -108,7 +108,7 @@ namespace Engine{
             }
             db->disconnect();
         }else{
-            cerr << "Can't save client agent instances\n";
+            LOGE( "Can't save client agent instances" );
         }
     }
 

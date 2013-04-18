@@ -21,8 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include <cstdlib>
-#include <cassert>
 #include <mpi.h>
+#include "common/log.hpp"
 #include "config.h"
 #include "configlib.hpp"
 #include "agentfactory.hpp"
@@ -67,7 +67,6 @@ int main( int argc, char * argv[] ){
     // MPI SERVER
     if( rank == Engine::SERVER_RANK ){
         if( argc != 2 ){
-            assert( argc > 0 && "Error in command args" );
             printHelp( argv[0] );
             return mainAbort();
         }
@@ -77,7 +76,7 @@ int main( int argc, char * argv[] ){
             return mainAbort();
         }
 
-        cout << "Creating Server\n";
+        Util::LOGV( "Creating Server " );
         auto server = Engine::Server::instance();
         server->setDatadir( filename );
         if( !server->initialize() ){

@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include "dataserverremote.hpp"
 #include "mpidefs.hpp"
+#include "common/log.hpp"
 #include "config.h"
 
 //------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerRemote::createRasterProxy( const string & key, int w, int h,
                                               double x0, double x1, double y0, double y1 ){
-        cout << "DataServerRemote::createRasterProxy " << key << endl;
+        Util::LOGV( "DataServerRemote::createRasterProxy '", key, "'" );
         m_rasters[key] = std::make_shared<Data::Raster>();
     }
 
