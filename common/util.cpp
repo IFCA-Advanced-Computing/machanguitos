@@ -21,7 +21,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "util.hpp"
-#include <iostream>
 #include "lua.hpp"
 #include "log.hpp"
 

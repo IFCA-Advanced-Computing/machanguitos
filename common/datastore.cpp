@@ -22,7 +22,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "datastore.hpp"
 
-#include <iostream>
 #include <string>
 #include <sstream>
 #include <boost/uuid/uuid.hpp>
