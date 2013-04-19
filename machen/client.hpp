@@ -46,13 +46,6 @@ namespace Engine{
             @param time start time in seconds.
          */
         virtual void setStartTime( const double time )=0;
-        /** Set the Data Store info.
-            @param name datastore name.
-            @param host datastore host name.
-            @param port datastore host port.
-         */
-        virtual void setDataStore( const std::string & name,
-                                   const std::string & host, const uint16_t port )=0;
         virtual void createRaster( const Data::RasterNewData & raster )=0;
 
         /** Create a AgentClass and save it.

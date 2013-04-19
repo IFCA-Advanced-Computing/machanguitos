@@ -66,25 +66,6 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::setDataStore( const string & name,
-                                     const string & host, const uint16_t port )
-    {
-        assert( name.length() <= MAX_DB_NAME && "name too long" );
-        assert( name.length() <= MAX_HOST_NAME && "hostname too long" );
-        int32_t val{port};
-        char * cname = new char [name.length()+1];
-        strcpy( cname, name.c_str() );
-        char * chost = new char [host.length()+1];
-        strcpy( chost, host.c_str() );
-
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( chost, host.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
-        delete[] cname;
-        delete[] chost;
-    }
-
-    //--------------------------------------------------------------------------
     void ClientRemote::createRaster( const Data::RasterNewData & raster ){
         Util::LOGD( "ClientRemote::createRaster ", raster.key );
         assert( raster.key.length() <= MAX_CLASS_NAME && "name too long" );

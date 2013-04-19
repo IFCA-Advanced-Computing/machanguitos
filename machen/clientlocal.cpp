@@ -47,17 +47,6 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientLocal::setDataStore( const string & name,
-                                    const string & host, const uint16_t port )
-    {
-        auto db = IO::DataStore::instance();
-
-        db->setDataStoreName( name );
-        db->setDataStoreHost( host );
-        db->setDataStorePort( port );
-    }
-
-    //--------------------------------------------------------------------------
     void ClientLocal::createRaster( const Data::RasterNewData & nr ){
         LOGD( "ClientLocal::createRaster ", nr.key );
         auto && ds = Engine::DataServer::instance();
