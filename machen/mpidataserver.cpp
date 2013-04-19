@@ -92,6 +92,10 @@ namespace Engine {
                 runCreateRaster( val );
                 break;
 
+            case MpiTag::SETLOGLEVEL:
+                setLogLevel( val );
+                break;
+
             case MpiTag::END:
                 running = false;
                 break;

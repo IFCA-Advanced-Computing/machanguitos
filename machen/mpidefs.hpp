@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <mpi.h>
+#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -46,6 +47,8 @@ namespace Engine{
         SETDATAPATH = 6,
         /// create a Raster Layer Tag.
         CREATERASTERCLIENT = 7,
+        /// send a new log level Tag.
+        SETLOGLEVEL = 8,
         /// End Simulation Message Tag.
         END = 66,
     };
@@ -64,6 +67,10 @@ namespace Engine{
         @returns MPI communication value.
      */
     MPI_Comm createClientsComm();
+    /** Set the log level of all clients.
+        @param ll new Log Level
+     */
+    void setRemoteLogLevel( Util::LogLevel ll );
 }
 
 //------------------------------------------------------------------------------

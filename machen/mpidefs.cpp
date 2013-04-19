@@ -46,6 +46,18 @@ namespace Engine{
         return comm;
     }
 
+    //--------------------------------------------------------------------------
+    void setRemoteLogLevel( Util::LogLevel ll ){
+        int nprocs;
+        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+        int32_t val{static_cast<int>(ll)};
+
+        for( auto i = 0 ; i < nprocs ; ++i ){
+            if( i != SERVER_RANK ){
+                MPI_Send( &val, 1, MPI_INT, i, MpiTag::SETLOGLEVEL, MPI_COMM_WORLD);
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------------

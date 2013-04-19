@@ -100,6 +100,9 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
+        auto ll = getLogLevel();
+        setRemoteLogLevel( ll );
+
         for( auto && c: m_clients ){
             c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
