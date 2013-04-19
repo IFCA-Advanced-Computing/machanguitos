@@ -41,7 +41,7 @@ namespace Engine {
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -53,7 +53,7 @@ namespace Engine {
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         double dval[4];
@@ -61,7 +61,7 @@ namespace Engine {
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         auto && ds = Engine::DataServer::instance();
@@ -83,7 +83,7 @@ namespace Engine {
             MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
                 LOGE( "Received on data server" );
-                MPI_Abort( MPI_COMM_WORLD, 0 );
+                Engine::abort();
             }
 
             switch( status.MPI_TAG ){

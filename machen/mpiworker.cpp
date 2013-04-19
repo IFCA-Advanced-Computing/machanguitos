@@ -39,7 +39,7 @@ namespace Engine{
         m_local = unique_ptr<ClientLocal>( new (nothrow) ClientLocal( m_rank ) );
         if( !m_local ){
             LOGE( "Can't create local agents on worker" );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
         LOGV( "Creating worker: ", m_rank );
     }
@@ -54,7 +54,7 @@ namespace Engine{
             MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
                 LOGE( "Received on ", m_rank );
-                MPI_Abort( MPI_COMM_WORLD, 0 );
+                Engine::abort();
             }
 
             switch( status.MPI_TAG ){
@@ -107,7 +107,7 @@ namespace Engine{
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         m_local->setStartTime( val );
@@ -120,7 +120,7 @@ namespace Engine{
         MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -137,7 +137,7 @@ namespace Engine{
         MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -148,7 +148,7 @@ namespace Engine{
         MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         MPI_Get_count( &status, MPI_CHAR, &count );
@@ -164,7 +164,7 @@ namespace Engine{
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATECLASS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -183,7 +183,7 @@ namespace Engine{
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -200,7 +200,7 @@ namespace Engine{
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         m_local->runAgents( val );
@@ -216,7 +216,7 @@ namespace Engine{
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         int count;
@@ -228,7 +228,7 @@ namespace Engine{
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         double dval[4];
@@ -236,7 +236,7 @@ namespace Engine{
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
-            MPI_Abort( MPI_COMM_WORLD, 0 );
+            Engine::abort();
         }
 
         auto && ds = Engine::DataServer::instance();
