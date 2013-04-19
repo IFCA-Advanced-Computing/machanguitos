@@ -39,11 +39,6 @@ namespace Agent{
      */
     class AgentFactory : public Singleton<AgentFactory>{
     public:
-        /** Set the directory that use to lookup Lua files for Agent classes.
-            @param dir directory to set.
-         */
-        void setDatadir( const std::string & dir );
-
         /** Create a new AgentClass instance.
 
             It will execute the Lua file that contains the AgentClass
@@ -59,8 +54,6 @@ namespace Agent{
         AgentClass * getClass( const std::string & name ) const;
 
     private:
-        /// Directory where this class lookup for Lua files.
-        std::string m_dir{""};
         /// List of already created AgentClass instances.
         std::map<std::string, AgentClass *> m_classes;
     };

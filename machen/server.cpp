@@ -27,7 +27,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "config.h"
-#include "agentfactory.hpp"
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
 #include "dataserver.hpp"
@@ -96,7 +95,6 @@ namespace Engine{
         auto datadir = getDataDir();
         remoteSetLogLevel( ll );
         remoteSetDataDir( datadir );
-        Agent::AgentFactory::instance()->setDatadir( datadir );
 
         for( auto && c: m_clients ){
             c->setDataStore( name, host, port );

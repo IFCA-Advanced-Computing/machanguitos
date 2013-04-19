@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/util.hpp"
 #include "common/log.hpp"
 #include "agentclass.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -85,7 +86,9 @@ namespace Agent{
             return el->second;
         }
 
-        path filename = path(m_dir) /= (name + ".lua");
+        auto dir = Engine::getDataDir();
+        path filename = path(dir) /= (name + ".lua");
+
         if( !is_regular_file(filename) ){
             LOGE( "Not file for class '", name, "'" );
             return nullptr;
@@ -140,11 +143,6 @@ namespace Agent{
         return nullptr;
     }
 
-    //--------------------------------------------------------------------------
-    void AgentFactory::setDatadir( const string & dir ){
-        assert( is_directory(dir) && "not directory" );
-        m_dir = dir;
-    }
 }
 
 //------------------------------------------------------------------------------
