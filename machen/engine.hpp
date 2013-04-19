@@ -26,7 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine {
-    
+
     /** initialize engine.
         @param argc the number of arguments.
         @param argv Argument vector.
@@ -42,6 +42,10 @@ namespace Engine {
         @ingroup Engine
      */
     void clientsBarrier();
+    /** Terminates engine execution environment.
+        @ingroup Engine
+     */
+    void end();
 
 }//namespace Engine
 

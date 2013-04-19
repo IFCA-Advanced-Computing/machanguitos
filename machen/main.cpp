@@ -91,7 +91,7 @@ int main( int argc, char * argv[] ){
         worker.run();
     }
 
-    MPI_Finalize();
+    Engine::end();
 
     return EXIT_SUCCESS;
 }
