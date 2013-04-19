@@ -221,13 +221,7 @@ namespace Engine{
             waitClients();
         }
 
-        for( auto && c: m_clients ){
-            c->end();
-        }
-
-
-        auto && ds = DataServer::instance();
-        ds->end();
+        remoteEnd();
 
         LOGI( "SERVER: End Simulation\n" );
     }
