@@ -29,6 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidefs.hpp"
 #include "mpiworker.hpp"
 #include "mpidataserver.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 using namespace std;
@@ -58,7 +59,8 @@ inline int mainAbort(){
 int main( int argc, char * argv[] ){
     static_assert( sizeof(double) == sizeof(int64_t),
                    "Double type isn't 64 bits" );
-    MPI_Init( &argc, &argv );
+
+    Engine::initialize( argc, argv );
 
     int rank;
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );

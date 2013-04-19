@@ -70,7 +70,6 @@ namespace Engine {
 
     //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
-        /*MPI_Comm comm = */createClientsComm();
         LOGV( "Creating Data Server" );
     }
 

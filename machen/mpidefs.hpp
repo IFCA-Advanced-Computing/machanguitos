@@ -24,7 +24,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MPIDEFS_HPP
 
 //------------------------------------------------------------------------------
-#include <mpi.h>
 #include "common/log.hpp"
 
 //------------------------------------------------------------------------------
@@ -72,10 +71,6 @@ namespace Engine{
     /// MPI Rank identifier of data server.
     constexpr int DATASERVER_RANK = 1;
 
-    /** Create a communication group for clients.
-        @returns MPI communication value.
-     */
-    MPI_Comm createClientsComm();
     /** Set the log level of all clients.
         @param ll new Log Level
      */

@@ -29,7 +29,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <map>
 #include <vector>
 #include <forward_list>
-#include <mpi.h>
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
@@ -105,8 +104,6 @@ namespace Engine{
             @returns the value, or default if this variable is not string type.
          */
         std::string getConfigString( const std::string & key, const std::string & d ) const;
-        /// Wait the clients end its simulation step
-        void waitClients() const;
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
@@ -117,8 +114,6 @@ namespace Engine{
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.
         std::string m_datadir;
-        /// clients comm group
-        MPI_Comm m_comm;
     };
 
     //--------------------------------------------------------------------------

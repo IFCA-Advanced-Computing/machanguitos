@@ -32,6 +32,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientremote.hpp"
 #include "dataserver.hpp"
 #include "mpidefs.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -82,8 +83,6 @@ namespace Engine{
         MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
 
         createClients( nprocs );
-
-        m_comm = createClientsComm();
 
         auto db = IO::DataStore::instance();
         auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
@@ -218,17 +217,12 @@ namespace Engine{
                 c->runAgents( delta );
             }
 
-            waitClients();
+            clientsBarrier();
         }
 
         remoteEnd();
 
         LOGI( "SERVER: End Simulation\n" );
-    }
-
-    //--------------------------------------------------------------------------
-    void Server::waitClients() const{
-        MPI_Barrier( m_comm );
     }
 }
 

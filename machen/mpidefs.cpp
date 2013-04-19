@@ -21,30 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "mpidefs.hpp"
+#include <mpi.h>
 
 //------------------------------------------------------------------------------
 namespace Engine{
-
-    //--------------------------------------------------------------------------
-    MPI_Comm createClientsComm(){
-        int nprocs;
-        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
-
-        if( nprocs < 2 ){
-            return MPI_COMM_WORLD;
-        }
-
-        MPI_Group MPI_GROUP_WORLD, clients;
-        int datarank = DATASERVER_RANK;
-
-        MPI_Comm_group( MPI_COMM_WORLD, &MPI_GROUP_WORLD );
-        MPI_Group_excl( MPI_GROUP_WORLD, 1, &datarank, &clients );
-
-        MPI_Comm comm;
-        MPI_Comm_create( MPI_COMM_WORLD, clients, &comm );
-
-        return comm;
-    }
 
     //--------------------------------------------------------------------------
     void setRemoteLogLevel( Util::LogLevel ll ){

@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include "mpidefs.hpp"
 #include "dataserver.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -41,7 +42,6 @@ namespace Engine{
             MPI_Abort( MPI_COMM_WORLD, 0 );
         }
         LOGV( "Creating worker: ", m_rank );
-        m_comm = createClientsComm();
     }
 
     //--------------------------------------------------------------------------
@@ -205,7 +205,7 @@ namespace Engine{
 
         m_local->runAgents( val );
 
-        MPI_Barrier( m_comm );
+        clientsBarrier();
     }
 
     //--------------------------------------------------------------------------
