@@ -130,6 +130,7 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         cname[count] = 0;
 
+        setDataDir( cname );
         Agent::AgentFactory::instance()->setDatadir( cname );
     }
 
