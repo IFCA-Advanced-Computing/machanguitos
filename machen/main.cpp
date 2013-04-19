@@ -21,12 +21,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include <cstdlib>
-#include <mpi.h>
 #include "common/log.hpp"
 #include "config.h"
 #include "configlib.hpp"
 #include "server.hpp"
-#include "mpidefs.hpp"
 #include "mpiworker.hpp"
 #include "mpidataserver.hpp"
 #include "engine.hpp"
@@ -56,11 +54,8 @@ int main( int argc, char * argv[] ){
 
     Engine::initialize( argc, argv );
 
-    int rank;
-    MPI_Comm_rank( MPI_COMM_WORLD, &rank );
-
     // MPI SERVER
-    if( rank == Engine::SERVER_RANK ){
+    if( Engine::isServer() ){
         if( argc != 2 ){
             printHelp( argv[0] );
             return Engine::abort();
@@ -81,7 +76,7 @@ int main( int argc, char * argv[] ){
         server->run();
 
     // MPI DATA SERVER
-    }else if( rank == Engine::DATASERVER_RANK ) {
+    }else if( Engine::isDataServer() ) {
         Engine::MPIDataServer dserver;
         dserver.run();
 
