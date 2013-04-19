@@ -40,13 +40,6 @@ namespace Engine{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    void Server::setDatadirFromFile( const string & filename ){
-        boost::filesystem::path datadir( filename );
-        datadir.remove_filename();
-        m_datadir = datadir.c_str();
-    }
-
-    //--------------------------------------------------------------------------
     void Server::createClients( const int nprocs ){
         if( nprocs <= 2 ){
             m_clients.emplace_back( new ClientLocal( 0 ) );
@@ -100,10 +93,10 @@ namespace Engine{
         auto startt = getConfigNumber( "starttime", 0 );
 
         auto ll = getLogLevel();
+        auto datadir = getDataDir();
         remoteSetLogLevel( ll );
-        remoteSetDataDir( m_datadir );
-        Engine::setDataDir( m_datadir );
-        Agent::AgentFactory::instance()->setDatadir( m_datadir );
+        remoteSetDataDir( datadir );
+        Agent::AgentFactory::instance()->setDatadir( datadir );
 
         for( auto && c: m_clients ){
             c->setDataStore( name, host, port );

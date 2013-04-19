@@ -42,10 +42,6 @@ namespace Engine{
      */
     class Server : public Singleton<Server> {
     public:
-        /** Set the directory that use to lookup data files.
-            @param filename filename to get the path from.
-         */
-        void setDatadirFromFile( const std::string & filename );
         /** Add agents number to create them in the future.
 
             This method don't create the agent rigth now. It only adds to an
@@ -112,8 +108,6 @@ namespace Engine{
         std::vector<std::unique_ptr<Client>> m_clients;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
-        /// data path.
-        std::string m_datadir;
     };
 
     //--------------------------------------------------------------------------
