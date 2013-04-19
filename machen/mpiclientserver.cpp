@@ -15,12 +15,12 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpiworker.cpp
-    @brief Engine::MPIWorker Definition.
+/** @file mpiclientserver.cpp
+    @brief Engine::MPIClientServer Definition.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#include "mpiworker.hpp"
+#include "mpiclientserver.hpp"
 #include <mpi.h>
 #include "common/log.hpp"
 #include "common/datastore.hpp"
@@ -36,7 +36,7 @@ namespace Engine{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    MPIWorker::MPIWorker() {
+    MPIClientServer::MPIClientServer() {
         MPI_Comm_rank( MPI_COMM_WORLD, &m_rank );
 
         m_local = unique_ptr<ClientLocal>( new (nothrow) ClientLocal( m_rank ) );
@@ -48,7 +48,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::run(){
+    void MPIClientServer::run(){
         int32_t val{0};
         MPI_Status status;
         bool running = true;
@@ -104,7 +104,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetStartTime(){
+    void MPIClientServer::runSetStartTime(){
         double val;
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD, &status );
@@ -117,7 +117,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataPath(){
+    void MPIClientServer::runSetDataPath(){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
         MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
@@ -134,7 +134,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataStore( const int port ){
+    void MPIClientServer::runSetDataStore( const int port ){
         char cname[MAX_DB_NAME+1];
         MPI_Status status;
         MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
@@ -165,7 +165,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runCreateClass(){
+    void MPIClientServer::runCreateClass(){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATECLASS, MPI_COMM_WORLD, &status );
@@ -184,7 +184,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runCreateAgents( const int num ){
+    void MPIClientServer::runCreateAgents( const int num ){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD, &status );
@@ -201,7 +201,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runAgents(){
+    void MPIClientServer::runAgents(){
         double val;
         MPI_Status status;
         MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD, &status );
@@ -216,7 +216,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runCreateRasterClient( const int w ){
+    void MPIClientServer::runCreateRasterClient( const int w ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,

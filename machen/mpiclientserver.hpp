@@ -15,13 +15,14 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file mpiworker.hpp
-    @brief Engine::MPIWorker Declaration.
+/** @file mpiclientserver.hpp
+    @brief Engine::MPIClientServer Declaration.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
-#ifndef MPIWORKER_HPP
-#define MPIWORKER_HPP
+//------------------------------------------------------------------------------
+#ifndef MPICLIENTSERVER_HPP
+#define MPICLIENTSERVER_HPP
 
 //------------------------------------------------------------------------------
 #include <memory>
@@ -30,14 +31,14 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Engine{
     //--------------------------------------------------------------------------
-    /** Define a MPI Process main loop to run as a Worker in a MPI program.
+    /** Define a MPI Worker main loop to run as a Client in a MPI program.
 
         @ingroup Engine
      */
-    class MPIWorker {
+    class MPIClientServer {
     public:
-        /// Construct a MPI worker
-        MPIWorker();
+        /// Construct a MPI Client Server
+        MPIClientServer();
 
         /// run loop of the MPI worker waiting for Server orders.
         void run();
@@ -70,6 +71,6 @@ namespace Engine{
 }
 
 //------------------------------------------------------------------------------
-#endif//MPIWORKER_HPP
+#endif//MPICLIENTSERVER_HPP
 
 //------------------------------------------------------------------------------

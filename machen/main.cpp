@@ -25,7 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config.h"
 #include "configlib.hpp"
 #include "server.hpp"
-#include "mpiworker.hpp"
+#include "mpiclientserver.hpp"
 #include "mpidataserver.hpp"
 #include "engine.hpp"
 
@@ -83,8 +83,8 @@ int main( int argc, char * argv[] ){
 
     // MPI CLIENTS
     }else{
-        Engine::MPIWorker worker;
-        worker.run();
+        Engine::MPIClientServer cserver;
+        cserver.run();
     }
 
     Engine::end();
