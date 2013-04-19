@@ -21,7 +21,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "engine.hpp"
-#include <cassert>
 #include <boost/filesystem.hpp>
 #include <mpi.h>
 #include "mpidefs.hpp"
@@ -34,7 +33,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     MPI_Comm m_clientsComm = MPI_COMM_WORLD;
     int m_rank, m_nprocs;
-    std::string m_dir{""};
+    std::string m_datadir{""};
 
     //--------------------------------------------------------------------------
     int abort(){
@@ -87,8 +86,13 @@ namespace Engine {
 
     //--------------------------------------------------------------------------
     void setDataDir( const string & dir ){
-        assert( is_directory(dir) && "not directory" );
-        m_dir = dir;
+        if( is_directory(dir) ){
+            m_datadir = dir;
+        }else{
+            boost::filesystem::path datadir( dir );
+            datadir.remove_filename();
+            m_datadir = datadir.c_str();
+        }
     }
 
 //------------------------------------------------------------------------------
