@@ -56,6 +56,11 @@ namespace Engine {
         @ingroup Engine
      */
     bool isDataServer();
+    /** Check if current process is single process.
+        @retval true if current process is single.
+        @ingroup Engine
+     */
+    bool isSingleProcess();
 
 }//namespace Engine
 
