@@ -21,7 +21,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "dataserver.hpp"
-#include <mpi.h>
 #include "dataserverlocal.hpp"
 #include "dataserverremote.hpp"
 #include "engine.hpp"
