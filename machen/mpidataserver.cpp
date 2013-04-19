@@ -71,97 +71,22 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void runSetDataStore( const int port ){
-        char cname[MAX_DB_NAME+1];
-        MPI_Status status;
-        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on data server" );
-            Engine::abort();
-        }
-
-        int count;
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        cname[count] = 0;
-
-        char chost[MAX_HOST_NAME+1];
-        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on data server" );
-            Engine::abort();
-        }
-
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        chost[count] = 0;
-
-        auto db = IO::DataStore::instance();
-
-        db->setDataStoreName( cname );
-        db->setDataStoreHost( chost );
-        db->setDataStorePort( port );
-    }
-
-    //--------------------------------------------------------------------------
-    void runSetDataPath(){
-        char cname[MAX_PATH_NAME+1];
-        MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on data server" );
-            Engine::abort();
-        }
-
-        int count;
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        cname[count] = 0;
-
-        Engine::setDataDir( cname );
-    }
-
-    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
 
     //--------------------------------------------------------------------------
-    void MPIDataServer::run(){
-        int32_t val{0};
-        MPI_Status status;
-        bool running = true;
+    bool MPIDataServer::doTags( int tag, int32_t val ){
+        switch( tag ){
+        case MpiTagDS::CREATERASTER:
+            runCreateRaster( val );
+            break;
 
-        while( running ){
-            MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
-            if( status.MPI_ERROR != MPI_SUCCESS ){
-                LOGE( "Received on data server" );
-                Engine::abort();
-            }
-
-            switch( status.MPI_TAG ){
-            case MpiTagDS::CREATERASTER:
-                runCreateRaster( val );
-                break;
-
-            case MpiTag::SETLOGLEVEL:
-                setLogLevel( val );
-                break;
-
-            case MpiTag::SETDATASTORE:
-                runSetDataStore( val );
-                break;
-
-            case MpiTag::SETDATAPATH:
-                runSetDataPath();
-                break;
-
-            case MpiTag::END:
-                running = false;
-                break;
-
-            default:
-                LOGE( "Not-implemented message[", status.MPI_TAG, "] on data server" );
-            }
+        default:
+            return false;
         }
 
+        return true;
     }
 
 }//namespace Engine

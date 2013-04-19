@@ -38,8 +38,8 @@ namespace Engine{
         /// Construct a MPI Data Server
         MPIDataServer();
 
-        /// run loop of the MPI Data Server waiting for orders.
-        void run();
+    private:
+        bool doTags( int tag, int32_t val  ) override;
     };
 
 }//namespace Engine

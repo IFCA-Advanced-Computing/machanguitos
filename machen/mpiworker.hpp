@@ -22,7 +22,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #ifndef MPIWORKER_HPP
 #define MPIWORKER_HPP
+//------------------------------------------------------------------------------
+#include <cstdint>
 
+//------------------------------------------------------------------------------
 namespace Engine {
 
     //--------------------------------------------------------------------------
@@ -33,10 +36,25 @@ namespace Engine {
     public:
         MPIWorker();
         virtual ~MPIWorker();
+        /// run loop of the MPI Data Server waiting for orders.
+        void run();
 
     protected:
         /// Own MPI rank value.
         int m_rank;
+
+    private:
+        /// do particular tags on derived workers.
+        virtual bool doTags( int tag, int32_t val )=0;
+        /// do common tags from mpi workers.
+        bool doCommonTags( int tag, int32_t val );
+        /// Execute a Set DataStore info command.
+        void runSetDataStore( const int num );
+        /// Execute a Set DataPath info command.
+        void runSetDataPath();
+
+        /// flag to continue running the loop.
+        bool m_running{false};
     };
 
     //--------------------------------------------------------------------------

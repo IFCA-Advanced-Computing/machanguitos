@@ -41,16 +41,10 @@ namespace Engine{
         /// Construct a MPI Client Server
         MPIClientServer();
 
-        /// run loop of the MPI worker waiting for Server orders.
-        void run();
-
     private:
+        bool doTags( int tag, int32_t val ) override;
         /// Execute a Set Start Time command.
         void runSetStartTime();
-        /// Execute a Set DataStore info command.
-        void runSetDataStore( const int num );
-        /// Execute a Set DataPath info command.
-        void runSetDataPath();
         /// Execute a Create Class command.
         void runCreateClass();
         /** Execute a Create Agents command.

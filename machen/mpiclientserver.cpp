@@ -46,59 +46,33 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::run(){
-        int32_t val{0};
-        MPI_Status status;
-        bool running = true;
+    bool MPIClientServer::doTags( int tag, int32_t val ){
+        switch( tag ){
+        case MpiTagCS::CREATECLASS:
+            runCreateClass();
+            break;
 
-        while( running ){
-            MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
-            if( status.MPI_ERROR != MPI_SUCCESS ){
-                LOGE( "Received on ", m_rank );
-                Engine::abort();
-            }
+        case MpiTagCS::CREATEAGENTS:
+            runCreateAgents( val );
+            break;
 
-            switch( status.MPI_TAG ){
-            case MpiTagCS::CREATECLASS:
-                runCreateClass();
-                break;
+        case MpiTagCS::RUNAGENTS:
+            runAgents();
+            break;
 
-            case MpiTagCS::CREATEAGENTS:
-                runCreateAgents( val );
-                break;
+        case MpiTagCS::SETSTARTTIME:
+            runSetStartTime();
+            break;
 
-            case MpiTagCS::RUNAGENTS:
-                runAgents();
-                break;
+        case MpiTagCS::CREATERASTERCLIENT:
+            runCreateRasterClient( val );
+            break;
 
-            case MpiTagCS::SETSTARTTIME:
-                runSetStartTime();
-                break;
-
-            case MpiTagCS::CREATERASTERCLIENT:
-                runCreateRasterClient( val );
-                break;
-
-            case MpiTag::SETDATASTORE:
-                runSetDataStore( val );
-                break;
-
-            case MpiTag::SETDATAPATH:
-                runSetDataPath();
-                break;
-
-            case MpiTag::SETLOGLEVEL:
-                setLogLevel( val );
-                break;
-
-            case MpiTag::END:
-                running = false;
-                break;
-
-            default:
-                LOGE( "Not-implemented message[", status.MPI_TAG, "] on ", m_rank );
-            }
+        default:
+            return false;
         }
+
+        return true;
     }
 
     //--------------------------------------------------------------------------
@@ -112,54 +86,6 @@ namespace Engine{
         }
 
         m_local->setStartTime( val );
-    }
-
-    //--------------------------------------------------------------------------
-    void MPIClientServer::runSetDataPath(){
-        char cname[MAX_PATH_NAME+1];
-        MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on ", m_rank );
-            Engine::abort();
-        }
-
-        int count;
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        cname[count] = 0;
-
-        setDataDir( cname );
-    }
-
-    //--------------------------------------------------------------------------
-    void MPIClientServer::runSetDataStore( const int port ){
-        char cname[MAX_DB_NAME+1];
-        MPI_Status status;
-        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on ", m_rank );
-            Engine::abort();
-        }
-
-        int count;
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        cname[count] = 0;
-
-        char chost[MAX_HOST_NAME+1];
-        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on ", m_rank );
-            Engine::abort();
-        }
-
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        chost[count] = 0;
-
-        auto db = IO::DataStore::instance();
-
-        db->setDataStoreName( cname );
-        db->setDataStoreHost( chost );
-        db->setDataStorePort( port );
     }
 
     //--------------------------------------------------------------------------
