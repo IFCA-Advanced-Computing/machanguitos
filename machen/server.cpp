@@ -102,6 +102,7 @@ namespace Engine{
         auto ll = getLogLevel();
         setRemoteLogLevel( ll );
         remoteSetDataDir( m_datadir );
+        Agent::AgentFactory::instance()->setDatadir( m_datadir );
 
         for( auto && c: m_clients ){
             c->setDataStore( name, host, port );
