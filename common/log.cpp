@@ -22,6 +22,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "log.hpp"
 #include <ctime>
+#include <algorithm>
+#include <cctype>
 
 //------------------------------------------------------------------------------
 namespace Util{
@@ -55,6 +57,23 @@ namespace Util{
              << ":" << timeinfo->tm_min << ":" << timeinfo->tm_sec;
 
         cout << s_tags[static_cast<unsigned char>(ll)];
+    }
+
+    //--------------------------------------------------------------------------
+    void setLogLevel( const string & str ){
+        string low {str};
+        transform( begin(str), end(str), begin(low), [](char x){ return tolower(x); } );
+        if( low == "error" ){
+            s_currentLevel = LogLevel::LOG_ERROR;
+        }else if( low == "warning" ){
+            s_currentLevel = LogLevel::LOG_WARNING;
+        }else if( low == "info" ){
+            s_currentLevel = LogLevel::LOG_INFO;
+        }else if( low == "verbose" ){
+            s_currentLevel = LogLevel::LOG_VERBOSE;
+        }else if( low == "debug" ){
+            s_currentLevel = LogLevel::LOG_DEBUG;
+        }
     }
 }
 

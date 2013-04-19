@@ -50,6 +50,11 @@ namespace Util{
         @ingroup Util
      */
     void printLogStamp( LogLevel ll );
+    /** Sets the application log level.
+        @param str Log Level Name. One of "error", "warning", "info", "verbose", "debug".
+        @ingroup Util
+     */
+    void setLogLevel( const std::string & str );
 
     //--------------------------------------------------------------------------
     /** Print a type in the log.
