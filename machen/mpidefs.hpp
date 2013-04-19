@@ -33,29 +33,38 @@ namespace Engine{
         @ingroup Engine
      */
     enum MpiTag {
-        /// Create Class Message Tag.
-        CREATECLASS = 1,
-        /// Create Agents Message Tag.
-        CREATEAGENTS = 2,
-        /// Run Agents Message Tag.
-        RUNAGENTS = 3,
-        /// Set Start Time Message Tag.
-        SETSTARTTIME = 4,
-        /// Set Data Store info.
-        SETDATASTORE = 5,
-        /// Set Data Path Tag.
-        SETDATAPATH = 6,
-        /// create a Raster Layer Tag.
-        CREATERASTERCLIENT = 7,
         /// send a new log level Tag.
-        SETLOGLEVEL = 8,
+        SETLOGLEVEL = 1,
         /// End Simulation Message Tag.
-        END = 66,
+        END = 20,
     };
 
+    /** MPI message Tags for Client Server.
+        @ingroup Engine
+     */
+    enum MpiTagCS {
+        /// Create Class Message Tag.
+        CREATECLASS = 21,
+        /// Create Agents Message Tag.
+        CREATEAGENTS = 22,
+        /// Run Agents Message Tag.
+        RUNAGENTS = 23,
+        /// Set Start Time Message Tag.
+        SETSTARTTIME = 24,
+        /// Set Data Store info.
+        SETDATASTORE = 25,
+        /// Set Data Path Tag.
+        SETDATAPATH = 26,
+        /// create a Raster Layer Tag.
+        CREATERASTERCLIENT = 27,
+    };
+
+    /** MPI message Tags for Data Server.
+        @ingroup Engine
+     */
     enum MpiTagDS {
         /// create a Raster Layer Tag.
-        CREATERASTER = 1,
+        CREATERASTER = 41,
     };
 
     /// MPI Rank identifier of server.

@@ -51,8 +51,8 @@ namespace Engine{
         char * cname = new char [name.length()+1];
         strcpy( cname, name.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATECLASS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::CREATECLASS, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTagCS::CREATECLASS, MPI_COMM_WORLD );
         delete[] cname;
         return true;
     }
@@ -61,8 +61,8 @@ namespace Engine{
     void ClientRemote::setStartTime( const double time ){
         int32_t val{0};
         double t{time};
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETSTARTTIME, MPI_COMM_WORLD );
-        MPI_Send( &t, 1, MPI_DOUBLE, m_dest, MpiTag::SETSTARTTIME, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD );
+        MPI_Send( &t, 1, MPI_DOUBLE, m_dest, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
@@ -72,8 +72,8 @@ namespace Engine{
         char * cname = new char [filename.length()+1];
         strcpy( cname, filename.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
-        MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, MpiTag::SETDATAPATH, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
+        MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
         delete[] cname;
     }
 
@@ -89,9 +89,9 @@ namespace Engine{
         char * chost = new char [host.length()+1];
         strcpy( chost, host.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
-        MPI_Send( chost, host.length(), MPI_CHAR, m_dest, MpiTag::SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
+        MPI_Send( chost, host.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD );
         delete[] cname;
         delete[] chost;
     }
@@ -104,14 +104,14 @@ namespace Engine{
         char * ckey = new char [raster.key.length()+1];
         strcpy( ckey, raster.key.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         MPI_Send( ckey, raster.key.length(), MPI_CHAR, m_dest,
-                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+                  MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         int32_t ival{raster.h};
-        MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1};
         MPI_Send( dvals, 4, MPI_DOUBLE, m_dest,
-                  MpiTag::CREATERASTERCLIENT, MPI_COMM_WORLD );
+                  MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         delete[] ckey;
     }
 
@@ -122,8 +122,8 @@ namespace Engine{
         char * cname = new char [name.length()+1];
         strcpy( cname, name.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::CREATEAGENTS, MPI_COMM_WORLD );
-        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTag::CREATEAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD );
+        MPI_Send( cname, name.length(), MPI_CHAR, m_dest, MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD );
 
         m_numAgents += n;
         delete[] cname;
@@ -133,8 +133,8 @@ namespace Engine{
     void ClientRemote::runAgents( const double delta ){
         int32_t val{0};
         double d{delta};
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::RUNAGENTS, MPI_COMM_WORLD );
-        MPI_Send( &d, 1, MPI_DOUBLE, m_dest, MpiTag::RUNAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD );
+        MPI_Send( &d, 1, MPI_DOUBLE, m_dest, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
