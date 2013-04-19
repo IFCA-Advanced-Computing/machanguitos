@@ -30,6 +30,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "agentfactory.hpp"
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
+#include "dataserver.hpp"
 #include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------
@@ -84,8 +85,6 @@ namespace Engine{
 
         m_comm = createClientsComm();
 
-        m_dataServer = DataServer::instance();
-
         auto db = IO::DataStore::instance();
         auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
         auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
@@ -112,7 +111,6 @@ namespace Engine{
         }
 
         auto && ds = Engine::DataServer::instance();
-
         for( auto && nr: m_newRaster ){
             ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1 );
         }
@@ -224,9 +222,9 @@ namespace Engine{
             c->end();
         }
 
-        if( m_dataServer ){
-            m_dataServer->end();
-        }
+
+        auto && ds = DataServer::instance();
+        ds->end();
 
         LOGI( "SERVER: End Simulation\n" );
     }

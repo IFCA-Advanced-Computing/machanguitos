@@ -33,7 +33,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
-#include "dataserver.hpp"
 #include "raster.hpp"
 
 //------------------------------------------------------------------------------
@@ -114,8 +113,6 @@ namespace Engine{
         std::forward_list<Data::RasterNewData> m_newRaster;
         /// list of Clients used during simulation.
         std::vector<std::unique_ptr<Client>> m_clients;
-        /// data server proxy.
-        std::shared_ptr<DataServer> m_dataServer;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
         /// data path.
