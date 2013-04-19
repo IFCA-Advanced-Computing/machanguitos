@@ -80,12 +80,12 @@ namespace Engine{
                 runSetDataStore( val );
                 break;
 
-            case MpiTagCS::SETDATAPATH:
-                runSetDataPath();
-                break;
-
             case MpiTagCS::CREATERASTERCLIENT:
                 runCreateRasterClient( val );
+                break;
+
+            case MpiTag::SETDATAPATH:
+                runSetDataPath();
                 break;
 
             case MpiTag::SETLOGLEVEL:
@@ -119,7 +119,7 @@ namespace Engine{
     void MPIWorker::runSetDataPath(){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();

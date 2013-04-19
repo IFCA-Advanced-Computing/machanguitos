@@ -66,9 +66,9 @@ namespace Engine{
         for( auto i = 0 ; i < nprocs ; ++i ){
             if( i != SERVER_RANK ){
                 MPI_Send( &val, 1, MPI_INT, i,
-                          MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
+                          MpiTag::SETDATAPATH, MPI_COMM_WORLD );
                 MPI_Send( cname, filename.length(), MPI_CHAR, i,
-                          MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
+                          MpiTag::SETDATAPATH, MPI_COMM_WORLD );
             }
         }
         delete[] cname;

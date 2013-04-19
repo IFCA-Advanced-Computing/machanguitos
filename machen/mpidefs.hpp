@@ -34,6 +34,8 @@ namespace Engine{
     enum MpiTag {
         /// send a new log level Tag.
         SETLOGLEVEL = 1,
+        /// Set Data Path Tag.
+        SETDATAPATH = 2,
         /// End Simulation Message Tag.
         END = 20,
     };
@@ -52,10 +54,8 @@ namespace Engine{
         SETSTARTTIME = 24,
         /// Set Data Store info.
         SETDATASTORE = 25,
-        /// Set Data Path Tag.
-        SETDATAPATH = 26,
         /// create a Raster Layer Tag.
-        CREATERASTERCLIENT = 27,
+        CREATERASTERCLIENT = 26,
     };
 
     /** MPI message Tags for Data Server.

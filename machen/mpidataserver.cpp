@@ -73,7 +73,7 @@ namespace Engine {
     void runSetDataPath(){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
             Engine::abort();
@@ -113,7 +113,7 @@ namespace Engine {
                 setLogLevel( val );
                 break;
 
-            case MpiTagCS::SETDATAPATH:
+            case MpiTag::SETDATAPATH:
                 runSetDataPath();
                 break;
 
