@@ -69,6 +69,11 @@ namespace Engine {
         @ingroup Engine
     */
     void setDataDir( const std::string & dir );
+    /** Get the directory to lookup for data files.
+        @returns data dir.
+        @ingroup Engine
+    */
+    const std::string & getDataDir();
 
 }//namespace Engine
 
