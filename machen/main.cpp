@@ -25,7 +25,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/log.hpp"
 #include "config.h"
 #include "configlib.hpp"
-#include "agentfactory.hpp"
 #include "server.hpp"
 #include "mpidefs.hpp"
 #include "mpiworker.hpp"
