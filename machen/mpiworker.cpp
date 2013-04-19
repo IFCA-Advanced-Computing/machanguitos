@@ -21,10 +21,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "mpiworker.hpp"
+#include <mpi.h>
 
 //------------------------------------------------------------------------------
 namespace Engine {
     MPIWorker::MPIWorker(){
+        MPI_Comm_rank( MPI_COMM_WORLD, &m_rank );
     }
 
 }//namespace Engine

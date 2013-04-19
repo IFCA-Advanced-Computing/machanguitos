@@ -33,6 +33,10 @@ namespace Engine {
     public:
         MPIWorker();
         virtual ~MPIWorker();
+
+    protected:
+        /// Own MPI rank value.
+        int m_rank;
     };
 
     //--------------------------------------------------------------------------

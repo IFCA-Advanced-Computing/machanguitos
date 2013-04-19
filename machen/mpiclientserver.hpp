@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include <memory>
+#include "mpiworker.hpp"
 #include "clientlocal.hpp"
 
 //------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ namespace Engine{
 
         @ingroup Engine
      */
-    class MPIClientServer {
+    class MPIClientServer : public MPIWorker {
     public:
         /// Construct a MPI Client Server
         MPIClientServer();
@@ -63,8 +64,6 @@ namespace Engine{
         /// Execute a End command.
         void runAgents();
 
-        /// Own MPI rank value.
-        int m_rank;
         /// Client instance that runs the real code.
         std::unique_ptr<ClientLocal> m_local;
     };

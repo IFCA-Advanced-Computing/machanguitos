@@ -24,13 +24,16 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MPIDATASERVER_H
 
 //------------------------------------------------------------------------------
+#include "mpiworker.hpp"
+
+//------------------------------------------------------------------------------
 namespace Engine{
     //--------------------------------------------------------------------------
     /** Define a MPI Process main loop to run as a Data Server in a MPI program.
 
         @ingroup Engine
      */
-    class MPIDataServer{
+    class MPIDataServer : public MPIWorker {
     public:
         /// Construct a MPI Data Server
         MPIDataServer();

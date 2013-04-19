@@ -120,7 +120,7 @@ namespace Engine {
 
     //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
-        LOGV( "Creating Data Server" );
+        LOGV( "Creating Data Server ", m_rank );
     }
 
     //--------------------------------------------------------------------------
