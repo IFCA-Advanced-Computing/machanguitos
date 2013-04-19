@@ -31,8 +31,13 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
+    /// Clients communicator.
     MPI_Comm m_clientsComm = MPI_COMM_WORLD;
-    int m_rank, m_nprocs;
+    /// rank of current process.
+    int m_rank;
+    /// number of mpi processes.
+    int m_nprocs;
+    /// Data Files directory.
     std::string m_datadir{""};
 
     //--------------------------------------------------------------------------
