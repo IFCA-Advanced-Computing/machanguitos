@@ -25,6 +25,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ENGINE_HPP
 
 //------------------------------------------------------------------------------
+#include <string>
+
+//------------------------------------------------------------------------------
 namespace Engine {
 
     /** initialize engine.
@@ -61,6 +64,11 @@ namespace Engine {
         @ingroup Engine
      */
     bool isSingleProcess();
+    /** Set the directory that use to lookup for data files.
+        @param dir directory to set.
+        @ingroup Engine
+    */
+    void setDataDir( const std::string & dir );
 
 }//namespace Engine
 
