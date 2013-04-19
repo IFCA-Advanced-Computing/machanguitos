@@ -69,6 +69,23 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runSetDataPath(){
+        char cname[MAX_PATH_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cname[count] = 0;
+
+        //m_local->setDataDir( cname );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server" );
     }
@@ -93,6 +110,10 @@ namespace Engine {
 
             case MpiTag::SETLOGLEVEL:
                 setLogLevel( val );
+                break;
+
+            case MpiTagCS::SETDATAPATH:
+                runSetDataPath();
                 break;
 
             case MpiTag::END:

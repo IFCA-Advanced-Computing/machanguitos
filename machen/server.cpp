@@ -101,6 +101,7 @@ namespace Engine{
 
         auto ll = getLogLevel();
         setRemoteLogLevel( ll );
+        remoteSetDataDir( m_datadir );
 
         for( auto && c: m_clients ){
             c->setDataDir( m_datadir );

@@ -22,6 +22,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "mpidefs.hpp"
 #include <mpi.h>
+#include <cassert>
+#include "config.h"
 
 //------------------------------------------------------------------------------
 namespace Engine{
@@ -51,6 +53,27 @@ namespace Engine{
             }
         }
     }
+
+    //--------------------------------------------------------------------------
+    void remoteSetDataDir( const std::string & filename ){
+        assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
+        int nprocs;
+        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+        int32_t val{0};
+        char * cname = new char [filename.length()+1];
+        strcpy( cname, filename.c_str() );
+
+        for( auto i = 0 ; i < nprocs ; ++i ){
+            if( i != SERVER_RANK ){
+                MPI_Send( &val, 1, MPI_INT, i,
+                          MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
+                MPI_Send( cname, filename.length(), MPI_CHAR, i,
+                          MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
+            }
+        }
+        delete[] cname;
+    }
+
 }
 
 //------------------------------------------------------------------------------

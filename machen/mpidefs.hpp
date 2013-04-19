@@ -71,11 +71,19 @@ namespace Engine{
     /// MPI Rank identifier of data server.
     constexpr int DATASERVER_RANK = 1;
 
+    /** Sets the directory to use for load data files.
+        @param path path of the data files.
+        @ingroup Engine
+    */
+    void remoteSetDataDir( const std::string & path );
     /** Set the log level of all clients.
         @param ll new Log Level
+        @ingroup Engine
      */
     void setRemoteLogLevel( Util::LogLevel ll );
-    /// End the Remote Servers.
+    /** End the Remote Servers.
+        @ingroup Engine
+     */
     void remoteEnd();
 }
 
