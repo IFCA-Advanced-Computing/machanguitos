@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidefs.hpp"
 #include "config.h"
 #include "dataserver.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -82,7 +83,7 @@ namespace Engine {
         MPI_Get_count( &status, MPI_CHAR, &count );
         cname[count] = 0;
 
-        //m_local->setDataDir( cname );
+        Engine::setDataDir( cname );
     }
 
     //--------------------------------------------------------------------------
