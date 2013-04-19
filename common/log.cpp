@@ -22,6 +22,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "log.hpp"
 #include <ctime>
+#include <map>
 #include <algorithm>
 #include <cctype>
 
@@ -60,19 +61,36 @@ namespace Util{
     }
 
     //--------------------------------------------------------------------------
+    LogLevel getLogLevel(){
+        return s_currentLevel;
+    }
+
+    //--------------------------------------------------------------------------
+    void setLogLevel( int ll ){
+        auto minll = static_cast<decltype(ll)>( LogLevel::LOG_ERROR );
+        auto maxll = static_cast<decltype(ll)>( LogLevel::LOG_DEBUG );
+        if( ll >= minll and ll <= maxll ){
+            s_currentLevel = static_cast<LogLevel>(ll);
+        }else{
+            LOGD( "Invalid Log Level ", ll );
+        }
+    }
+
+    //--------------------------------------------------------------------------
     void setLogLevel( const string & str ){
+        const static map<string, LogLevel> s_names {
+            {"error", LogLevel::LOG_ERROR},
+            {"warning", LogLevel::LOG_WARNING},
+            {"info", LogLevel::LOG_INFO},
+            {"verbose", LogLevel::LOG_VERBOSE},
+            {"debug", LogLevel::LOG_DEBUG},
+        };
+
         string low {str};
         transform( begin(str), end(str), begin(low), [](char x){ return tolower(x); } );
-        if( low == "error" ){
-            s_currentLevel = LogLevel::LOG_ERROR;
-        }else if( low == "warning" ){
-            s_currentLevel = LogLevel::LOG_WARNING;
-        }else if( low == "info" ){
-            s_currentLevel = LogLevel::LOG_INFO;
-        }else if( low == "verbose" ){
-            s_currentLevel = LogLevel::LOG_VERBOSE;
-        }else if( low == "debug" ){
-            s_currentLevel = LogLevel::LOG_DEBUG;
+        const auto && got = s_names.find( low );
+        if( got != s_names.cend() ){
+            s_currentLevel = got->second;
         }
     }
 }
