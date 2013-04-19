@@ -35,7 +35,9 @@ namespace Engine{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    MPIWorker::MPIWorker( const int r ) : m_rank{r} {
+    MPIWorker::MPIWorker() {
+        MPI_Comm_rank( MPI_COMM_WORLD, &m_rank );
+
         m_local = unique_ptr<ClientLocal>( new (nothrow) ClientLocal( m_rank ) );
         if( !m_local ){
             LOGE( "Can't create local agents on worker" );

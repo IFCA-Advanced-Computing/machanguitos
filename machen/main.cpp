@@ -87,7 +87,7 @@ int main( int argc, char * argv[] ){
 
     // MPI CLIENTS
     }else{
-        Engine::MPIWorker worker(rank);
+        Engine::MPIWorker worker;
         worker.run();
     }
 

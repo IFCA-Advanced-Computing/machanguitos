@@ -36,10 +36,8 @@ namespace Engine{
      */
     class MPIWorker {
     public:
-        /** Construct a MPI worker
-            @param r MPI rank
-        */
-        MPIWorker( const int r );
+        /// Construct a MPI worker
+        MPIWorker();
 
         /// run loop of the MPI worker waiting for Server orders.
         void run();
