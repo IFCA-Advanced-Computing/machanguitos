@@ -37,6 +37,21 @@ namespace Config{
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** Define config.setLogLevel library function.
+
+        This function sets the application log level.
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
+    int config_setLogLevel( lua_State *L ){
+        auto level = luaL_checkstring( L, 1 );
+        Util::setLogLevel( level );
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     /** Define config.addAgent library function.
 
         This function sets the number of agents to simulate of a AgentClass.
@@ -112,6 +127,7 @@ namespace Config{
         @ingroup Config
      */
     const luaL_Reg configlib[] = {
+        {"setLogLevel",   config_setLogLevel},
         {"addAgent",   config_addAgent},
         {"setvars",   config_setvars},
         {nullptr, nullptr}

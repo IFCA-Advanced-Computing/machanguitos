@@ -1,5 +1,7 @@
 io.write( "Cow Example (Machen " .. config.VERSION_MAJOR .. "." .. config.VERSION_MINOR .. ")\n" );
 
+config.setLogLevel( "debug" );
+
 data.createLayer( "grass", 
                   {
                      x0 = 0.0,
