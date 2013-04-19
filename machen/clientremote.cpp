@@ -137,12 +137,6 @@ namespace Engine{
         MPI_Send( &d, 1, MPI_DOUBLE, m_dest, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD );
     }
 
-    //--------------------------------------------------------------------------
-    void ClientRemote::end(){
-        int32_t val{0};
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTag::END, MPI_COMM_WORLD);
-    }
-
 }
 
 //------------------------------------------------------------------------------

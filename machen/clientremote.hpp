@@ -48,7 +48,6 @@ namespace Engine{
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;
         int numAgents() const override;
-        void end() override;
 
     private:
         /// MPI rank of remote worker.

@@ -76,8 +76,6 @@ namespace Engine{
         virtual void runAgents( const double delta )=0;
         /// Returns the number of agents in this Client instance.
         virtual int numAgents() const =0;
-        /// End the Agent simulation.
-        virtual void end()=0;
     };
 }
 

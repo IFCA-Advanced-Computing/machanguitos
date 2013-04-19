@@ -52,7 +52,6 @@ namespace Engine{
         void createAgents( const std::string & name, int n ) override;
         void runAgents( const double delta ) override;
         int numAgents() const override;
-        void end() override;
 
     private:
         /// list of Agents in this Client instance.
