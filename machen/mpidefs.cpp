@@ -58,6 +58,19 @@ namespace Engine{
             }
         }
     }
+
+    //--------------------------------------------------------------------------
+    void remoteEnd(){
+        int nprocs;
+        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+        int32_t val{0};
+
+        for( auto i = 0 ; i < nprocs ; ++i ){
+            if( i != SERVER_RANK ){
+                MPI_Send( &val, 1, MPI_INT, i, MpiTag::END, MPI_COMM_WORLD);
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------------

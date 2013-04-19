@@ -80,6 +80,8 @@ namespace Engine{
         @param ll new Log Level
      */
     void setRemoteLogLevel( Util::LogLevel ll );
+    /// End the Remote Servers.
+    void remoteEnd();
 }
 
 //------------------------------------------------------------------------------
