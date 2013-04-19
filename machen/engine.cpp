@@ -31,6 +31,12 @@ namespace Engine {
     MPI_Comm m_clientsComm = MPI_COMM_WORLD;
 
     //--------------------------------------------------------------------------
+    int abort(){
+        MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
+        return EXIT_FAILURE;
+    }
+
+    //--------------------------------------------------------------------------
     void clientsBarrier(){
         MPI_Barrier( m_clientsComm );
     }

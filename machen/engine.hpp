@@ -33,6 +33,11 @@ namespace Engine {
         @ingroup Engine
      */
     void initialize( int argc, char * argv[] );
+    /** Ends the application.
+        @returns Error Exit Code.
+        @ingroup Engine
+     */
+    int abort();
     /** Blocks until all clients have call this function.
         @ingroup Engine
      */

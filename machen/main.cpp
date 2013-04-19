@@ -45,12 +45,6 @@ void printHelp( const string & name ){
 }
 
 //------------------------------------------------------------------------------
-inline int mainAbort(){
-    MPI_Abort( MPI_COMM_WORLD, EXIT_FAILURE );
-    return EXIT_FAILURE;
-}
-
-//------------------------------------------------------------------------------
 /** Main application function.
     @param argc argument count.
     @param argv argument vector.
@@ -69,19 +63,19 @@ int main( int argc, char * argv[] ){
     if( rank == Engine::SERVER_RANK ){
         if( argc != 2 ){
             printHelp( argv[0] );
-            return mainAbort();
+            return Engine::abort();
         }
 
         string filename{ argv[1] };
         if( !Config::load( filename ) ){
-            return mainAbort();
+            return Engine::abort();
         }
 
         Util::LOGV( "Creating Server " );
         auto server = Engine::Server::instance();
         server->setDatadir( filename );
         if( !server->initialize() ){
-            return mainAbort();
+            return Engine::abort();
         }
         server->createAgents();
         server->run();
