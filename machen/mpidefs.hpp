@@ -36,6 +36,8 @@ namespace Engine{
         SETLOGLEVEL = 1,
         /// Set Data Path Tag.
         SETDATAPATH = 2,
+        /// Set Data Store info.
+        SETDATASTORE = 3,
         /// End Simulation Message Tag.
         END = 20,
     };
@@ -52,10 +54,8 @@ namespace Engine{
         RUNAGENTS = 23,
         /// Set Start Time Message Tag.
         SETSTARTTIME = 24,
-        /// Set Data Store info.
-        SETDATASTORE = 25,
         /// create a Raster Layer Tag.
-        CREATERASTERCLIENT = 26,
+        CREATERASTERCLIENT = 25,
     };
 
     /** MPI message Tags for Data Server.
@@ -81,6 +81,13 @@ namespace Engine{
         @ingroup Engine
      */
     void remoteSetLogLevel( Util::LogLevel ll );
+    /** Set the Data Store info.
+        @param name datastore name.
+        @param host datastore host name.
+        @param port datastore host port.
+    */
+    void remoteSetDataStore( const std::string & name, const std::string & host,
+                             const uint16_t port );
     /** End the Remote Servers.
         @ingroup Engine
      */

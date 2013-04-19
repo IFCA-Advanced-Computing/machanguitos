@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidataserver.hpp"
 #include <mpi.h>
 #include "common/log.hpp"
+#include "common/datastore.hpp"
 #include "mpidefs.hpp"
 #include "config.h"
 #include "dataserver.hpp"
@@ -70,6 +71,37 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runSetDataStore( const int port ){
+        char cname[MAX_DB_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cname[count] = 0;
+
+        char chost[MAX_HOST_NAME+1];
+        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        chost[count] = 0;
+
+        auto db = IO::DataStore::instance();
+
+        db->setDataStoreName( cname );
+        db->setDataStoreHost( chost );
+        db->setDataStorePort( port );
+    }
+
+    //--------------------------------------------------------------------------
     void runSetDataPath(){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
@@ -111,6 +143,10 @@ namespace Engine {
 
             case MpiTag::SETLOGLEVEL:
                 setLogLevel( val );
+                break;
+
+            case MpiTag::SETDATASTORE:
+                runSetDataStore( val );
                 break;
 
             case MpiTag::SETDATAPATH:

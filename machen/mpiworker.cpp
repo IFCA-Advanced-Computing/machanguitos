@@ -23,6 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpiworker.hpp"
 #include <mpi.h>
 #include "common/log.hpp"
+#include "common/datastore.hpp"
 #include "config.h"
 #include "clientlocal.hpp"
 #include "mpidefs.hpp"
@@ -76,12 +77,12 @@ namespace Engine{
                 runSetStartTime();
                 break;
 
-            case MpiTagCS::SETDATASTORE:
-                runSetDataStore( val );
-                break;
-
             case MpiTagCS::CREATERASTERCLIENT:
                 runCreateRasterClient( val );
+                break;
+
+            case MpiTag::SETDATASTORE:
+                runSetDataStore( val );
                 break;
 
             case MpiTag::SETDATAPATH:
@@ -133,10 +134,10 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataStore( const int num ){
+    void MPIWorker::runSetDataStore( const int port ){
         char cname[MAX_DB_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD, &status );
+        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -147,7 +148,7 @@ namespace Engine{
         cname[count] = 0;
 
         char chost[MAX_HOST_NAME+1];
-        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTagCS::SETDATASTORE, MPI_COMM_WORLD, &status );
+        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -156,7 +157,11 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         chost[count] = 0;
 
-        m_local->setDataStore( cname, chost, num );
+        auto db = IO::DataStore::instance();
+
+        db->setDataStoreName( cname );
+        db->setDataStoreHost( chost );
+        db->setDataStorePort( port );
     }
 
     //--------------------------------------------------------------------------
