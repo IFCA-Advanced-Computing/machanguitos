@@ -38,9 +38,6 @@ namespace Engine {
     public:
         /// Returns the singleton instance of a DataServer.
         static std::shared_ptr<DataServer> instance();
-
-        /// End the Data Server.
-        virtual void end()=0;
         /** Returns a Raster object.
             @param key name of the raster
             @returns a pointer to the raster

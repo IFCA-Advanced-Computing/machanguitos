@@ -32,12 +32,6 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
-    void DataServerRemote::end(){
-        int32_t val{0};
-        MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK, MpiTag::END, MPI_COMM_WORLD);
-    }
-
-    //--------------------------------------------------------------------------
     void DataServerRemote::createRaster( const string & key, int w, int h,
                                          double x0, double x1, double y0, double y1 ){
         Util::LOGD( "DataServerRemote::createRaster ", key );
