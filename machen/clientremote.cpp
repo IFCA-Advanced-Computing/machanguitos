@@ -66,18 +66,6 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void ClientRemote::setDataDir( const string & filename ){
-        assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
-        int32_t val{0};
-        char * cname = new char [filename.length()+1];
-        strcpy( cname, filename.c_str() );
-
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
-        MPI_Send( cname, filename.length(), MPI_CHAR, m_dest, MpiTagCS::SETDATAPATH, MPI_COMM_WORLD );
-        delete[] cname;
-    }
-
-    //--------------------------------------------------------------------------
     void ClientRemote::setDataStore( const string & name,
                                      const string & host, const uint16_t port )
     {

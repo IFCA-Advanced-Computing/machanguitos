@@ -46,10 +46,6 @@ namespace Engine{
             @param time start time in seconds.
          */
         virtual void setStartTime( const double time )=0;
-        /** Sets the directory to use for load data files.
-            @param path path of the data files.
-        */
-        virtual void setDataDir( const std::string & path )=0;
         /** Set the Data Store info.
             @param name datastore name.
             @param host datastore host name.

@@ -104,7 +104,6 @@ namespace Engine{
         remoteSetDataDir( m_datadir );
 
         for( auto && c: m_clients ){
-            c->setDataDir( m_datadir );
             c->setDataStore( name, host, port );
             c->setStartTime( startt );
 

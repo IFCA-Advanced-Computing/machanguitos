@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "clientlocal.hpp"
 #include "mpidefs.hpp"
 #include "dataserver.hpp"
+#include "agentfactory.hpp"
 #include "engine.hpp"
 
 //------------------------------------------------------------------------------
@@ -129,7 +130,7 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         cname[count] = 0;
 
-        m_local->setDataDir( cname );
+        Agent::AgentFactory::instance()->setDatadir( cname );
     }
 
     //--------------------------------------------------------------------------
