@@ -29,6 +29,7 @@ namespace Engine {
 
     //--------------------------------------------------------------------------
     MPI_Comm m_clientsComm = MPI_COMM_WORLD;
+    int m_rank;
 
     //--------------------------------------------------------------------------
     int abort(){
@@ -47,6 +48,7 @@ namespace Engine {
 
         int nprocs;
         MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
+        MPI_Comm_rank( MPI_COMM_WORLD, &m_rank );
 
         if( nprocs > 1 ){
             MPI_Group MPI_GROUP_WORLD, clients;
@@ -62,6 +64,16 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void end(){
         MPI_Finalize();
+    }
+
+    //--------------------------------------------------------------------------
+    bool isServer(){
+        return m_rank == Engine::SERVER_RANK;
+    }
+
+    //--------------------------------------------------------------------------
+    bool isDataServer(){
+        return m_rank == Engine::DATASERVER_RANK;
     }
 
 //------------------------------------------------------------------------------

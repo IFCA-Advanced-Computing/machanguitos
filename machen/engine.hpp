@@ -46,6 +46,16 @@ namespace Engine {
         @ingroup Engine
      */
     void end();
+    /** Check if current process is the main server.
+        @retval true if current process is the main server.
+        @ingroup Engine
+     */
+    bool isServer();
+    /** Check if current process is the data server.
+        @retval true if current process is the data server.
+        @ingroup Engine
+     */
+    bool isDataServer();
 
 }//namespace Engine
 
