@@ -23,12 +23,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "mpidataserver.hpp"
 #include <mpi.h>
-#include "common/log.hpp"
-#include "common/datastore.hpp"
 #include "mpidefs.hpp"
 #include "config.h"
 #include "dataserver.hpp"
-#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
