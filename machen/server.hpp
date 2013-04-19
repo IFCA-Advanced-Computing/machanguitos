@@ -45,7 +45,7 @@ namespace Engine{
         /** Set the directory that use to lookup data files.
             @param filename filename to get the path from.
          */
-        void setDatadir( const std::string & filename );
+        void setDatadirFromFile( const std::string & filename );
         /** Add agents number to create them in the future.
 
             This method don't create the agent rigth now. It only adds to an

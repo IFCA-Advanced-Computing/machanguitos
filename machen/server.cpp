@@ -40,7 +40,7 @@ namespace Engine{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    void Server::setDatadir( const string & filename ){
+    void Server::setDatadirFromFile( const string & filename ){
         boost::filesystem::path datadir( filename );
         datadir.remove_filename();
         m_datadir = datadir.c_str();

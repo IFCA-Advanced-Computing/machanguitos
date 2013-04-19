@@ -68,7 +68,7 @@ int main( int argc, char * argv[] ){
 
         Util::LOGV( "Creating Server " );
         auto server = Engine::Server::instance();
-        server->setDatadir( filename );
+        server->setDatadirFromFile( filename );
         if( !server->initialize() ){
             return Engine::abort();
         }
