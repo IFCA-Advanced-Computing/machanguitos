@@ -31,14 +31,14 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerLocal::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
-        Util::LOGV( "DataServerLocal::createRaster ", key );
+        Util::LOGD( "DataServerLocal::createRaster ", key );
         m_rasters[key] = std::make_shared<Data::Raster>();
     }
 
     //--------------------------------------------------------------------------
     void DataServerLocal::createRasterProxy( const string & key, int w, int h,
                                               double x0, double x1, double y0, double y1 ){
-        assert( false && "DataServerLocal::createRasterProxy can't be called" );
+        Util::LOGD( "DataServerLocal::createRasterProxy ", key );
     }
 
 }//namespace Engine

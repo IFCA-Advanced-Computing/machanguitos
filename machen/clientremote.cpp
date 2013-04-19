@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include <cstring>
 #include <mpi.h>
+#include "common/log.hpp"
 #include "config.h"
 #include "mpidefs.hpp"
 
@@ -97,6 +98,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientRemote::createRaster( const Data::RasterNewData & raster ){
+        Util::LOGD( "ClientRemote::createRaster ", raster.key );
         assert( raster.key.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{raster.w};
         char * ckey = new char [raster.key.length()+1];

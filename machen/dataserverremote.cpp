@@ -40,6 +40,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerRemote::createRaster( const string & key, int w, int h,
                                          double x0, double x1, double y0, double y1 ){
+        Util::LOGD( "DataServerRemote::createRaster ", key );
         assert( key.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{w};
         char * ckey = new char [key.length()+1];
@@ -61,7 +62,7 @@ namespace Engine {
     //--------------------------------------------------------------------------
     void DataServerRemote::createRasterProxy( const string & key, int w, int h,
                                               double x0, double x1, double y0, double y1 ){
-        Util::LOGV( "DataServerRemote::createRasterProxy '", key, "'" );
+        Util::LOGD( "DataServerRemote::createRasterProxy '", key, "'" );
         m_rasters[key] = std::make_shared<Data::Raster>();
     }
 
