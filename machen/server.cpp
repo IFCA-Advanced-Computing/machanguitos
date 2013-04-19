@@ -95,9 +95,9 @@ namespace Engine{
         auto datadir = getDataDir();
         remoteSetLogLevel( ll );
         remoteSetDataDir( datadir );
+        remoteSetDataStore( name, host, port );
 
         for( auto && c: m_clients ){
-            c->setDataStore( name, host, port );
             c->setStartTime( startt );
 
             for( auto && nr: m_newRaster ){
