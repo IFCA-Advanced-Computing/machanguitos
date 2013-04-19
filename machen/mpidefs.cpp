@@ -29,7 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Engine{
 
     //--------------------------------------------------------------------------
-    void setRemoteLogLevel( Util::LogLevel ll ){
+    void remoteSetLogLevel( Util::LogLevel ll ){
         int nprocs;
         MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
         int32_t val{static_cast<int>(ll)};

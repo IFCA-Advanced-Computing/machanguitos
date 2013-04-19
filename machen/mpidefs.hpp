@@ -80,7 +80,7 @@ namespace Engine{
         @param ll new Log Level
         @ingroup Engine
      */
-    void setRemoteLogLevel( Util::LogLevel ll );
+    void remoteSetLogLevel( Util::LogLevel ll );
     /** End the Remote Servers.
         @ingroup Engine
      */

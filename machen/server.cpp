@@ -100,7 +100,7 @@ namespace Engine{
         auto startt = getConfigNumber( "starttime", 0 );
 
         auto ll = getLogLevel();
-        setRemoteLogLevel( ll );
+        remoteSetLogLevel( ll );
         remoteSetDataDir( m_datadir );
         Agent::AgentFactory::instance()->setDatadir( m_datadir );
 
