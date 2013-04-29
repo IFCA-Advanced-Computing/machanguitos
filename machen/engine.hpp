@@ -69,6 +69,11 @@ namespace Engine {
         @ingroup Engine
     */
     void setDataDir( const std::string & dir );
+    /** Get the number of processes.
+        @returns number of processes.
+        @ingroup Engine
+     */
+    int getNumProcesses();
     /** Get the directory to lookup for data files.
         @returns data dir.
         @ingroup Engine
