@@ -23,7 +23,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include <algorithm>
 #include <boost/filesystem.hpp>
-#include <mpi.h>
 #include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "config.h"
@@ -39,7 +38,8 @@ namespace Engine{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    void Server::createClients( const int nprocs ){
+    void Server::createClients(){
+        const int nprocs = Engine::getNumProcesses();
         if( nprocs <= 2 ){
             m_clients.emplace_back( new ClientLocal( 0 ) );
         }
@@ -71,10 +71,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     bool Server::initialize(){
-        int nprocs;
-        MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
-
-        createClients( nprocs );
+        createClients();
 
         auto db = IO::DataStore::instance();
         auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );

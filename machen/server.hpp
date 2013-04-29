@@ -78,10 +78,8 @@ namespace Engine{
         void run();
 
     private:
-        /** Create the expectect number of clients.
-            @param nprocs number of MPI proccesses.
-         */
-        void createClients( const int nprocs );
+        /// Create the expectect number of clients.
+        void createClients();
         /** Returns the Integer value of a config parameter.
             @param key name of the parameter.
             @param d default value.
