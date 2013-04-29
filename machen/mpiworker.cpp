@@ -44,7 +44,7 @@ namespace Engine {
         m_running = true;
 
         while( m_running ){
-            MPI_Recv( &val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
+            MPI_Recv( &val, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
             if( status.MPI_ERROR != MPI_SUCCESS ){
                 LOGE( "Received on ", m_rank );
                 Engine::abort();
