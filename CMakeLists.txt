@@ -41,6 +41,8 @@ find_package( MPI REQUIRED)
 set(CMAKE_CXX_COMPILE_FLAGS ${CMAKE_CXX_COMPILE_FLAGS} ${MPI_COMPILE_FLAGS})
 set(CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS})
 
+find_package( GDAL REQUIRED )
+
 include(CheckIncludeFile)
 check_include_file("getopt.h" HAVE_GETOPT_H)
 if(NOT HAVE_GETOPT_H)
