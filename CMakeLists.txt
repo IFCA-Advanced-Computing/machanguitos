@@ -64,6 +64,7 @@ add_subdirectory(test)
 
 #data files
 install(DIRECTORY "example" DESTINATION ${DATADIR})
+install(DIRECTORY "data" DESTINATION ${DATADIR})
 
 # documentation
 find_package(Doxygen)
