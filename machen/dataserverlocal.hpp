@@ -35,6 +35,7 @@ namespace Engine {
      */
     class DataServerLocal : public DataServer{
     public:
+        DataServerLocal();
         void createRaster( const std::string & key, int w, int h,
                            double x0, double x1, double y0, double y1 ) override;
         void createRasterProxy( const std::string & key, int w, int h,

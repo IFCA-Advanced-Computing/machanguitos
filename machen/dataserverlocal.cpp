@@ -22,11 +22,28 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "dataserverlocal.hpp"
 #include <cassert>
+#include "gdal_priv.h"
 #include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
     using namespace std;
+
+    //--------------------------------------------------------------------------
+    DataServerLocal::DataServerLocal(){
+        GDALAllRegister();
+        auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
+        if( ! driver ){
+            Util::LOGE(  "GDAL Mem Driver not found" );
+            std::terminate();
+        }
+
+        auto metadata = driver->GetMetadata();
+        if( ! CSLFetchBoolean( metadata, GDAL_DCAP_CREATE, FALSE ) ){
+            Util::LOGE( "Driver Mem not supports Create() method." );
+            std::terminate();
+        }
+    }
 
     //--------------------------------------------------------------------------
     void DataServerLocal::createRaster( const string & key, int w, int h,
