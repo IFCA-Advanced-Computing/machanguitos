@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include "gdal_priv.h"
 #include "common/log.hpp"
+#include "rastergdal.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -49,7 +50,7 @@ namespace Engine {
     void DataServerLocal::createRaster( const string & key, int w, int h,
                        double x0, double x1, double y0, double y1 ){
         Util::LOGD( "DataServerLocal::createRaster ", key );
-        m_rasters[key] = std::make_shared<Data::Raster>();
+        m_rasters[key] = std::make_shared<Data::RasterGDAL>( w, h, x0, x1, y0, y1 );
     }
 
     //--------------------------------------------------------------------------
