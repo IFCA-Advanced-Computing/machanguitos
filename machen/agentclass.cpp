@@ -59,13 +59,17 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     int raster_get( lua_State *L ){
+        auto l = luaL_checknumber( L, -3 );
         auto x = luaL_checknumber( L, -2 );
         auto y = luaL_checknumber( L, -1 );
-        lua_getfield( L, -3, RASTER_OBJ );        // 1
+        lua_getfield( L, -4, RASTER_OBJ );        // 1
         if( lua_islightuserdata( L, -1 ) ){
             auto raster = (Data::Raster*) lua_topointer( L, -1 );
             lua_pop( L, 1 );                 // 0
             if( raster ){
+                auto val = raster->getValue( l, x , y );
+                lua_pushnumber( L, val );  // 1
+                return 1;
             }else{
                 luaL_error( L, "Invalid raster object" );
             }
