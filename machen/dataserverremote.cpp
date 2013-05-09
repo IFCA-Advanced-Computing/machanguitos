@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidefs.hpp"
 #include "common/log.hpp"
 #include "config.h"
+#include "rasterproxy.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine {
@@ -57,7 +58,7 @@ namespace Engine {
     void DataServerRemote::createRasterProxy( const string & key, int w, int h,
                                               double x0, double x1, double y0, double y1 ){
         Util::LOGD( "DataServerRemote::createRasterProxy '", key, "'" );
-        m_rasters[key] = std::make_shared<Data::Raster>();
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1, y0, y1 );
     }
 
 }//namespace Engine

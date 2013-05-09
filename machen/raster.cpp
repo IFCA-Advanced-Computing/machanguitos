@@ -15,41 +15,25 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file rastergdal.hpp
-    @brief Data::RastarGDAL declarations.
+/** @file raster.cpp
+    @brief Data::Raster definition.
     @author Luis Cabellos
 */
-//------------------------------------------------------------------------------
-#ifndef RASTERGDAL_HPP
-#define RASTERGDAL_HPP
-
 //------------------------------------------------------------------------------
 #include "raster.hpp"
 
 //------------------------------------------------------------------------------
-class GDALDataset;
-
-//------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    class RasterGDAL : public Raster {
-    public:
-        RasterGDAL( int w, int h, double x0, double x1, double y0, double y1 );
-        ~RasterGDAL();
-
-        double getValue( int layer, double x, double y ) override;
-
-    private:
-        GDALDataset * m_data;
-        double m_x0;
-        double m_x1;
-        double m_y0;
-        double m_y1;
-    };
+    Raster::Raster(){
+        // empty
+    }
+    
+    //--------------------------------------------------------------------------
+    Raster::~Raster(){
+        // empty
+    }
 
 }//namespace Data
-
-//------------------------------------------------------------------------------
-#endif//RASTERGDAL_HPP
 
 //------------------------------------------------------------------------------

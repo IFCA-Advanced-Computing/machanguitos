@@ -15,41 +15,30 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
-/** @file rastergdal.hpp
-    @brief Data::RastarGDAL declarations.
+/** @file rasterproxy.hpp
+    @brief Data::RasterProxy declaration.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#ifndef RASTERGDAL_HPP
-#define RASTERGDAL_HPP
+#ifndef RASTERPROXY_HPP
+#define RASTERPROXY_HPP
 
 //------------------------------------------------------------------------------
 #include "raster.hpp"
 
 //------------------------------------------------------------------------------
-class GDALDataset;
-
-//------------------------------------------------------------------------------
 namespace Data {
+
     //--------------------------------------------------------------------------
-    class RasterGDAL : public Raster {
+    class RasterProxy : public Raster {
     public:
-        RasterGDAL( int w, int h, double x0, double x1, double y0, double y1 );
-        ~RasterGDAL();
-
+        RasterProxy( const std::string name, int w, int h, double x0, double x1, double y0, double y1 );
         double getValue( int layer, double x, double y ) override;
-
-    private:
-        GDALDataset * m_data;
-        double m_x0;
-        double m_x1;
-        double m_y0;
-        double m_y1;
     };
 
 }//namespace Data
 
 //------------------------------------------------------------------------------
-#endif//RASTERGDAL_HPP
+#endif//RASTERPROXY_HPP
 
 //------------------------------------------------------------------------------

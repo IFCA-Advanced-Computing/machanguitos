@@ -46,6 +46,11 @@ namespace Data {
         GDALClose( m_data );
     }
 
+    //--------------------------------------------------------------------------
+    double RasterGDAL::getValue( int layer, double x, double y ){
+        return 0;
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------

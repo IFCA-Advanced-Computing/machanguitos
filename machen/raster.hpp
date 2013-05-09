@@ -66,6 +66,11 @@ namespace Data {
         @ingroup Data
      */
     class Raster {
+    public:
+        Raster();
+        virtual ~Raster();
+
+        virtual double getValue( int layer, double x, double y )=0;
     };
 }//namespace Data
 
