@@ -46,23 +46,23 @@ namespace Engine{
     bool MPIClientServer::doTags( int tag, int src, int32_t val ){
         switch( tag ){
         case MpiTagCS::CREATECLASS:
-            runCreateClass();
+            runCreateClass( src );
             break;
 
         case MpiTagCS::CREATEAGENTS:
-            runCreateAgents( val );
+            runCreateAgents( src, val );
             break;
 
         case MpiTagCS::RUNAGENTS:
-            runAgents();
+            runAgents( src );
             break;
 
         case MpiTagCS::SETSTARTTIME:
-            runSetStartTime();
+            runSetStartTime( src );
             break;
 
         case MpiTagCS::CREATERASTERCLIENT:
-            runCreateRasterClient( val );
+            runCreateRasterClient( src, val );
             break;
 
         default:
@@ -73,10 +73,10 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::runSetStartTime(){
+    void MPIClientServer::runSetStartTime( int src ){
         double val;
         MPI_Status status;
-        MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, 1, MPI_DOUBLE, src, MpiTagCS::SETSTARTTIME, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -86,10 +86,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::runCreateClass(){
+    void MPIClientServer::runCreateClass( int src ){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATECLASS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagCS::CREATECLASS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -105,10 +106,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::runCreateAgents( const int num ){
+    void MPIClientServer::runCreateAgents( int src, const int num ){
         char val[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, 0, MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagCS::CREATEAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -122,10 +124,11 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::runAgents(){
+    void MPIClientServer::runAgents( int src ){
         double val;
         MPI_Status status;
-        MPI_Recv( &val, 1, MPI_DOUBLE, 0, MpiTagCS::RUNAGENTS, MPI_COMM_WORLD, &status );
+        MPI_Recv( &val, 1, MPI_DOUBLE, src,
+                  MpiTagCS::RUNAGENTS, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
             Engine::abort();
@@ -137,10 +140,10 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void MPIClientServer::runCreateRasterClient( const int w ){
+    void MPIClientServer::runCreateRasterClient( int src, const int w ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
@@ -152,7 +155,7 @@ namespace Engine{
         ckey[count] = 0;
 
         int32_t ival;
-        MPI_Recv( &ival, 1, MPI_INT, 0,
+        MPI_Recv( &ival, 1, MPI_INT, src,
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
@@ -160,7 +163,7 @@ namespace Engine{
         }
 
         double dval[4];
-        MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
+        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );

@@ -44,19 +44,19 @@ namespace Engine{
     private:
         bool doTags( int tag, int src, int32_t val ) override;
         /// Execute a Set Start Time command.
-        void runSetStartTime();
+        void runSetStartTime( int src );
         /// Execute a Create Class command.
-        void runCreateClass();
+        void runCreateClass( int src );
         /** Execute a Create Agents command.
             @param num number of agents to create.
          */
-        void runCreateAgents( const int num );
+        void runCreateAgents( int src, const int num );
         /** Execute a Create Raster command.
             @param w width of the raster layer.
          */
-        void runCreateRasterClient( const int w );
+        void runCreateRasterClient( int src, const int w );
         /// Execute a End command.
-        void runAgents();
+        void runAgents( int src );
 
         /// Client instance that runs the real code.
         std::unique_ptr<ClientLocal> m_local;
