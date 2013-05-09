@@ -45,13 +45,13 @@ namespace Engine {
 
     private:
         /// do particular tags on derived workers.
-        virtual bool doTags( int tag, int32_t val )=0;
+        virtual bool doTags( int tag, int src, int32_t val )=0;
         /// do common tags from mpi workers.
-        bool doCommonTags( int tag, int32_t val );
+        bool doCommonTags( int tag, int src, int32_t val );
         /// Execute a Set DataStore info command.
-        void runSetDataStore( const int num );
+        void runSetDataStore( int src, const int num );
         /// Execute a Set DataPath info command.
-        void runSetDataPath();
+        void runSetDataPath( int src );
 
         /// flag to continue running the loop.
         bool m_running{false};

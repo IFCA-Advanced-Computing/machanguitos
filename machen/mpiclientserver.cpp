@@ -43,7 +43,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    bool MPIClientServer::doTags( int tag, int32_t val ){
+    bool MPIClientServer::doTags( int tag, int src, int32_t val ){
         switch( tag ){
         case MpiTagCS::CREATECLASS:
             runCreateClass();

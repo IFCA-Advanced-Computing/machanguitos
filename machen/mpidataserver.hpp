@@ -39,7 +39,7 @@ namespace Engine{
         MPIDataServer();
 
     private:
-        bool doTags( int tag, int32_t val  ) override;
+        bool doTags( int tag, int src, int32_t val  ) override;
     };
 
 }//namespace Engine

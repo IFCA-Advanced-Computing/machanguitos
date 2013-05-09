@@ -73,7 +73,7 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    bool MPIDataServer::doTags( int tag, int32_t val ){
+    bool MPIDataServer::doTags( int tag, int src, int32_t val ){
         switch( tag ){
         case MpiTagDS::CREATERASTER:
             runCreateRaster( val );

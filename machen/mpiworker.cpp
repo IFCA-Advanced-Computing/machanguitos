@@ -52,9 +52,9 @@ namespace Engine {
 
             LOGD( "Message[", status.MPI_TAG, "] on ", m_rank, " from ", status.MPI_SOURCE );
 
-            bool is_checked = doCommonTags( status.MPI_TAG, val );
+            bool is_checked = doCommonTags( status.MPI_TAG, status.MPI_SOURCE, val );
             if( not is_checked ){
-                is_checked = doTags( status.MPI_TAG, val );
+                is_checked = doTags( status.MPI_TAG, status.MPI_SOURCE, val );
             }
 
             if( not is_checked ){
@@ -66,14 +66,14 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    bool MPIWorker::doCommonTags( int tag, int32_t val ){
+    bool MPIWorker::doCommonTags( int tag, int source, int32_t val ){
         switch( tag ){
         case MpiTag::SETDATASTORE:
-            runSetDataStore( val );
+            runSetDataStore( source, val );
             break;
 
         case MpiTag::SETDATAPATH:
-            runSetDataPath();
+            runSetDataPath( source );
             break;
 
         case MpiTag::SETLOGLEVEL:
@@ -92,10 +92,10 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataPath(){
+    void MPIWorker::runSetDataPath( int src ){
         char cname[MAX_PATH_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, 0, MpiTag::SETDATAPATH,
+        MPI_Recv( &cname, MAX_PATH_NAME, MPI_CHAR, src, MpiTag::SETDATAPATH,
                   MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
@@ -110,10 +110,10 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void MPIWorker::runSetDataStore( const int port ){
+    void MPIWorker::runSetDataStore( int src, const int port ){
         char cname[MAX_DB_NAME+1];
         MPI_Status status;
-        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE,
+        MPI_Recv( &cname, MAX_DB_NAME, MPI_CHAR, src, MpiTag::SETDATASTORE,
                   MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
@@ -125,7 +125,7 @@ namespace Engine {
         cname[count] = 0;
 
         char chost[MAX_HOST_NAME+1];
-        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, 0, MpiTag::SETDATASTORE,
+        MPI_Recv( &chost, MAX_HOST_NAME, MPI_CHAR, src, MpiTag::SETDATASTORE,
                   MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );

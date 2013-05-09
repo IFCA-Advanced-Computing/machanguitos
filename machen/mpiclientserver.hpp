@@ -42,7 +42,7 @@ namespace Engine{
         MPIClientServer();
 
     private:
-        bool doTags( int tag, int32_t val ) override;
+        bool doTags( int tag, int src, int32_t val ) override;
         /// Execute a Set Start Time command.
         void runSetStartTime();
         /// Execute a Create Class command.
