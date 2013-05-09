@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include <iostream>
 #include "gdal_priv.h"
+#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
@@ -48,6 +49,7 @@ namespace Data {
 
     //--------------------------------------------------------------------------
     double RasterGDAL::getValue( int layer, double x, double y ){
+        Util::LOGD( "RasterGDAL::getValue" );
         return 0;
     }
 

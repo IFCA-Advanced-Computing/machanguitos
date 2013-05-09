@@ -64,6 +64,8 @@ namespace Engine{
     enum MpiTagDS {
         /// create a Raster Layer Tag.
         CREATERASTER = 41,
+        /// get a raster value.
+        GETRASTERVALUE = 42,
     };
 
     /// MPI Rank identifier of server.

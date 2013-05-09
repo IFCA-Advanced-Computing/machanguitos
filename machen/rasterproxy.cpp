@@ -21,16 +21,46 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "rasterproxy.hpp"
+#include "common/mpi.hpp"
+#include <cassert>
+#include <memory>
+#include <cstring>
+#include "common/log.hpp"
+#include "config.h"
+#include "mpidefs.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    RasterProxy::RasterProxy( const std::string name, int w, int h, double x0, double x1, double y0, double y1 ){
+    RasterProxy::RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 ){
+        assert( key.length() <= MAX_CLASS_NAME && "name too long" );
+        m_keyLength = key.length();
+        m_key = std::move( std::unique_ptr<char[]>( new char [m_keyLength+1] ) );
+        strcpy( m_key.get(), key.c_str() );
     }
 
     //--------------------------------------------------------------------------
     double RasterProxy::getValue( int layer, double x, double y ){
-        return 0;
+        int32_t val{layer};
+        MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
+        MPI_Send( m_key.get(), m_keyLength, MPI_CHAR, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
+        double dvals[]{x, y};
+        MPI_Send( dvals, 2, MPI_DOUBLE, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
+        
+        MPI_Status status;
+        double dval;
+        MPI_Recv( &dval, 1, MPI_DOUBLE, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            Util::LOGE( "Return Received on RasterProxy" );
+            Engine::abort();
+        }
+
+        return dval;
     }
 
 }//namespace Data

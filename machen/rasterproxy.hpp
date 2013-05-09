@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include "raster.hpp"
+#include <memory>
 
 //------------------------------------------------------------------------------
 namespace Data {
@@ -32,8 +33,12 @@ namespace Data {
     //--------------------------------------------------------------------------
     class RasterProxy : public Raster {
     public:
-        RasterProxy( const std::string name, int w, int h, double x0, double x1, double y0, double y1 );
+        RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         double getValue( int layer, double x, double y ) override;
+        
+    private:
+        std::unique_ptr<char[]> m_key;
+        size_t m_keyLength;
     };
 
 }//namespace Data

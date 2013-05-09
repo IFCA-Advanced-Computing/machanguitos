@@ -33,10 +33,10 @@ namespace Engine {
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    void runCreateRaster( const int w ){
+    void runCreateRaster( int src, const int w ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
-        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, 0,
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
@@ -48,7 +48,7 @@ namespace Engine {
         ckey[count] = 0;
 
         int32_t ival;
-        MPI_Recv( &ival, 1, MPI_INT, 0,
+        MPI_Recv( &ival, 1, MPI_INT, src,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
@@ -56,7 +56,7 @@ namespace Engine {
         }
 
         double dval[4];
-        MPI_Recv( &dval, 4, MPI_DOUBLE, 0,
+        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
@@ -68,6 +68,42 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runGetRasterValue( int src, const int layer ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        double dval[2];
+        MPI_Recv( &dval, 2, MPI_DOUBLE, src,
+                  MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        auto && ds = Engine::DataServer::instance();
+        auto && raster = ds->getRaster( ckey );
+        double val;
+        if( raster ){
+            val = raster->getValue( layer, dval[0], dval[1] );
+        }else{
+            val = 0;
+        }
+
+        MPI_Send( &val, 1, MPI_DOUBLE, src,
+                  Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -76,7 +112,11 @@ namespace Engine {
     bool MPIDataServer::doTags( int tag, int src, int32_t val ){
         switch( tag ){
         case MpiTagDS::CREATERASTER:
-            runCreateRaster( val );
+            runCreateRaster( src, val );
+            break;
+
+        case MpiTagDS::GETRASTERVALUE:
+            runGetRasterValue( src, val );
             break;
 
         default:
