@@ -66,6 +66,8 @@ namespace Engine{
         CREATERASTER = 41,
         /// get a raster value.
         GETRASTERVALUE = 42,
+        /// set a raster value.
+        SETRASTERVALUE = 43,
     };
 
     /// MPI Rank identifier of server.
