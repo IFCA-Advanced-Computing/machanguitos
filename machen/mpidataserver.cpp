@@ -22,7 +22,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 #include "mpidataserver.hpp"
-#include <mpi.h>
+#include "common/mpi.hpp"
 #include "mpidefs.hpp"
 #include "config.h"
 #include "dataserver.hpp"

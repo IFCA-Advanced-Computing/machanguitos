@@ -22,7 +22,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "engine.hpp"
 #include <boost/filesystem.hpp>
-#include <mpi.h>
+#include "common/mpi.hpp"
 #include "mpidefs.hpp"
 
 //------------------------------------------------------------------------------

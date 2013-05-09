@@ -21,9 +21,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "mpiworker.hpp"
-#include <mpi.h>
 #include "common/log.hpp"
 #include "common/datastore.hpp"
+#include "common/mpi.hpp"
 #include "mpidefs.hpp"
 #include "engine.hpp"
 #include "config.h"

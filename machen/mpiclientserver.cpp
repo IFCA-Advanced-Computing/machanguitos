@@ -21,8 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "mpiclientserver.hpp"
-#include <mpi.h>
 #include "config.h"
+#include "common/mpi.hpp"
 #include "mpidefs.hpp"
 #include "dataserver.hpp"
 #include "engine.hpp"

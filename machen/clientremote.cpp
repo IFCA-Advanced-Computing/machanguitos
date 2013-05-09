@@ -24,7 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdint>
 #include <cassert>
 #include <cstring>
-#include <mpi.h>
+#include "common/mpi.hpp"
 #include "common/log.hpp"
 #include "config.h"
 #include "mpidefs.hpp"

@@ -21,8 +21,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "mpidefs.hpp"
-#include <mpi.h>
 #include <cassert>
+#include "common/mpi.hpp"
 #include "config.h"
 
 //------------------------------------------------------------------------------

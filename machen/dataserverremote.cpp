@@ -20,8 +20,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
-#include <mpi.h>
 #include <cassert>
+#include "common/mpi.hpp"
 #include "dataserverremote.hpp"
 #include "mpidefs.hpp"
 #include "common/log.hpp"
