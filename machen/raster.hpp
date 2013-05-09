@@ -71,6 +71,7 @@ namespace Data {
         virtual ~Raster();
 
         virtual double getValue( int layer, double x, double y )=0;
+        virtual bool setValue( int layer, double x, double y, double val )=0;
     };
 }//namespace Data
 

@@ -63,6 +63,12 @@ namespace Data {
         return dval;
     }
 
+    //--------------------------------------------------------------------------
+    bool RasterProxy::setValue( int layer, double x, double y, double val ){
+        Util::LOGD( "RasterProxy::setValue" );
+        return true;
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------

@@ -38,6 +38,7 @@ namespace Data {
         ~RasterGDAL();
 
         double getValue( int layer, double x, double y ) override;
+        bool setValue( int layer, double x, double y, double val ) override;
 
     private:
         GDALDataset * m_data;

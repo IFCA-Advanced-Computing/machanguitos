@@ -35,6 +35,7 @@ namespace Data {
     public:
         RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         double getValue( int layer, double x, double y ) override;
+        bool setValue( int layer, double x, double y, double val ) override;
         
     private:
         std::unique_ptr<char[]> m_key;
