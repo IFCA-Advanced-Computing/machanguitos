@@ -39,12 +39,12 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::createClients(){
-        const int nprocs = Engine::getNumProcesses();
+        const auto nprocs = Engine::getNumProcesses();
         if( nprocs <= 2 ){
             m_clients.emplace_back( new ClientLocal( 0 ) );
         }
 
-        for( int i = 2 ; i < nprocs ; ++i ){
+        for( auto i = 2 ; i < nprocs ; ++i ){
             m_clients.emplace_back( new ClientRemote( i ) );
         }
     }
@@ -201,7 +201,7 @@ namespace Engine{
         double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
 
         LOGI( "SERVER: Start Simulation\n" );
-        for( int i = 0 ; i < iters ; i++ ){
+        for( auto i = 0 ; i < iters ; i++ ){
             LOGI( "SERVER: iteration ", i+1 );
             for( auto && c: m_clients ){
                 c->runAgents( delta );
