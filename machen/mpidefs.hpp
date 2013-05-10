@@ -68,6 +68,8 @@ namespace Engine{
         GETRASTERVALUE = 42,
         /// set a raster value.
         SETRASTERVALUE = 43,
+        /// clears raster caches.
+        CLEARCACHE = 44,
     };
 
     /// MPI Rank identifier of server.

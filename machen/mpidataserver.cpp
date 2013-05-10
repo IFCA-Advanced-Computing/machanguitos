@@ -140,6 +140,12 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runClearCache(){
+        auto && ds = Engine::DataServer::instance();
+        ds->clearCache();
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -157,6 +163,10 @@ namespace Engine {
 
         case MpiTagDS::SETRASTERVALUE:
             runSetRasterValue( src, val );
+            break;
+
+        case MpiTagDS::CLEARCACHE:
+            runClearCache();
             break;
 
         default:
