@@ -25,8 +25,8 @@ constexpr unsigned VERSION_RELEASE{@MACHANGUITOS_VERSION_RELEASE@};
 constexpr unsigned MAX_CLASS_NAME{200};
 // A DB_NAME is a Hexadecimal UUID.
 constexpr unsigned MAX_DB_NAME{1 + (16*2)};
-constexpr unsigned MAX_HOST_NAME{255};
-constexpr unsigned MAX_PATH_NAME{4096};
+constexpr unsigned MAX_HOST_NAME{@OBJECT_NAME_MAX@};
+constexpr unsigned MAX_PATH_NAME{@OBJECT_PATH_MAX@};
 
 constexpr const char * const g_datapath = "@DATADIR@";
 
