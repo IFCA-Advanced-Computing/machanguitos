@@ -59,11 +59,6 @@ namespace Engine {
         Util::LOGD( "DataServerLocal::createRasterProxy ", key );
     }
 
-    //--------------------------------------------------------------------------
-    void DataServerLocal::clearCache(){
-        Util::LOGD( "DataServerLocal::clearCache " );
-    }
-
 }//namespace Engine
 
 //------------------------------------------------------------------------------

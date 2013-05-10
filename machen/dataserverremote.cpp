@@ -61,13 +61,6 @@ namespace Engine {
         m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1, y0, y1 );
     }
 
-    //--------------------------------------------------------------------------
-    void DataServerRemote::clearCache(){
-        int32_t val{0};
-        MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK,
-                  MpiTagDS::CLEARCACHE, MPI_COMM_WORLD );
-    }
-
 }//namespace Engine
 
 //------------------------------------------------------------------------------

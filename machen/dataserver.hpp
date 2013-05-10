@@ -48,8 +48,6 @@ namespace Engine {
         virtual void createRasterProxy( const std::string & key, int w, int h,
                                         double x0, double x1, double y0, double y1 )=0;
 
-        virtual void clearCache()=0;
-
     protected:
         std::map<std::string,std::shared_ptr<Data::Raster>> m_rasters;
 
