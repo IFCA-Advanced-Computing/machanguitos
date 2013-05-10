@@ -48,9 +48,8 @@ namespace Agent{
             lua_getfield( L, -1, "init");                               // 2
             if( lua_isfunction( L, -1 ) ){
                 lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME ); // 3
-                lua_pushstring( L, SCRIPT_AGENT_OBJ );                  // 4
-                lua_pushlightuserdata( L, (void*)this );                // 5
-                lua_rawset( L, -3 );                                    // 3
+                lua_pushlightuserdata( L, (void*)this );                // 4
+                lua_setglobal( L, SCRIPT_GLOBAL_AGENT_OBJ );            // 3
                 auto ret = lua_pcall( L, 1, 0, 0 );                     // 1
                 checkLuaReturn( L, ret );
                 lua_pop( L, 1 );                                        // 0
@@ -68,9 +67,8 @@ namespace Agent{
             lua_getfield( L, -1, "update");                             // 2
             if( lua_isfunction( L, -1 ) ){
                 lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME ); // 3
-                lua_pushstring( L, SCRIPT_AGENT_OBJ );                  // 4
-                lua_pushlightuserdata( L, (void*)this );                // 5
-                lua_rawset( L, -3 );                                    // 3
+                lua_pushlightuserdata( L, (void*)this );                // 4
+                lua_setglobal( L, SCRIPT_GLOBAL_AGENT_OBJ );            // 3
                 lua_pushnumber( L, delta );                             // 4
                 auto ret = lua_pcall( L, 2, 0, 0 );                     // 1
                 checkLuaReturn( L, ret );

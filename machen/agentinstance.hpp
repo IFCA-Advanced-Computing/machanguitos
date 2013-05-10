@@ -38,7 +38,7 @@ namespace Agent{
     /** private name of AgentInstance objects in Lua tables.
         @ingroup Agent
      */
-    constexpr const char * SCRIPT_AGENT_OBJ = "__o";
+    constexpr const char * SCRIPT_GLOBAL_AGENT_OBJ = "__go";
 
     //--------------------------------------------------------------------------
     class AgentClass;

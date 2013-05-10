@@ -42,8 +42,7 @@ namespace Agent{
     int agent_newindex( lua_State *L ){
         if( lua_isstring( L, -2 ) ){
             string key = lua_tostring( L, -2 );
-            lua_pushstring( L, SCRIPT_AGENT_OBJ );   // 1
-            lua_rawget( L, -4 );                     // 1
+            lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
             if( lua_islightuserdata( L, -1 ) ){
                 auto agent = (AgentInstance*) lua_topointer( L, -1 );
                 lua_pop( L, 1 );                     // 0
@@ -107,8 +106,7 @@ namespace Agent{
     int agent_index( lua_State *L ){
         if( lua_isstring( L, -1 ) ){
             string key = lua_tostring( L, -1 );
-            lua_pushstring( L, SCRIPT_AGENT_OBJ );  // 1
-            lua_rawget( L, -3 );                    // 1
+            lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
             if( lua_islightuserdata( L, -1 ) ){
                 AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
                 lua_pop( L, 1 );                    // 0
