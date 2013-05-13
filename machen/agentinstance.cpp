@@ -43,6 +43,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     void AgentInstance::init(){
+        m_state = AgentState::AS_INIT;
         auto L = m_class->getLua();
         if( L ){
             lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );     // 1
@@ -58,10 +59,12 @@ namespace Agent{
                 lua_pop( L, 2 );                                        // 0
             }
         }
+        m_state = AgentState::AS_NORMAL;
     }
 
     //--------------------------------------------------------------------------
     void AgentInstance::update( const double delta ){
+        m_state = AgentState::AS_UPDATE;
         auto L = m_class->getLua();
         if( L ){
             lua_getfield( L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );     // 1
@@ -78,6 +81,7 @@ namespace Agent{
                 lua_pop( L, 2 );                                        // 0
             }
         }
+        m_state = AgentState::AS_NORMAL;
     }
 
     //--------------------------------------------------------------------------
