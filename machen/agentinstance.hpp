@@ -78,6 +78,7 @@ namespace Agent{
          */
         void newData( lua_State * L, const std::string & key );
         double getRasterValue( Data::Raster & raster, int layer, double x, double y );
+        bool setRasterValue( Data::Raster & raster, int layer, double x, double y, double v );
     private:
         /// Agent::AgentInstance internal state.
         enum class AgentState{ AS_NORMAL, AS_INIT, AS_UPDATE };

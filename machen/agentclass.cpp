@@ -93,12 +93,23 @@ namespace Agent{
         auto x = luaL_checknumber( L, -3 );
         auto y = luaL_checknumber( L, -2 );
         auto v = luaL_checknumber( L, -1 );
-        lua_getfield( L, -5, RASTER_OBJ );        // 1
+
+        AgentInstance * agent {nullptr};
+        lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
+        if( lua_islightuserdata( L, -1 ) ){
+            agent = (decltype(agent)) lua_topointer( L, -1 );
+            lua_pop( L, 1 );                         // 0
+        }
+        if( ! agent ){
+            luaL_error( L, "Invalid agent object" );
+        }
+
+        lua_getfield( L, -5, RASTER_OBJ );           // 1
         if( lua_islightuserdata( L, -1 ) ){
             auto raster = (Data::Raster*) lua_topointer( L, -1 );
-            lua_pop( L, 1 );                 // 0
+            lua_pop( L, 1 );                         // 0
             if( raster ){
-                if( ! raster->setValue( l, x , y, v ) ){
+                if( ! agent->setRasterValue( *raster, l, x, y, v ) ){
                     luaL_error( L, "Can't SET Raster value" );
                 }
             }else{

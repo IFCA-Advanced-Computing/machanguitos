@@ -160,6 +160,13 @@ namespace Agent{
         return val;
     }
 
+    //--------------------------------------------------------------------------
+    bool AgentInstance::setRasterValue( Data::Raster & raster, int l,
+                                        double x, double y, double v )
+    {
+        return raster.setValue( l, x, y, v );
+    }
+
 }
 
 //------------------------------------------------------------------------------
