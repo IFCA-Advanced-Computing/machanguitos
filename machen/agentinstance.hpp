@@ -31,6 +31,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 struct lua_State;
+namespace Data{
+    class Raster;
+}
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -74,6 +77,7 @@ namespace Agent{
             @param key name of the variable to save.
          */
         void newData( lua_State * L, const std::string & key );
+        double getRasterValue( Data::Raster & raster, int layer, double x, double y );
     private:
         /// AgentClass instance of this Agent.
         AgentClass * m_class;

@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/log.hpp"
 #include "common/datastore.hpp"
 #include "agentclass.hpp"
+#include "raster.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -148,6 +149,13 @@ namespace Agent{
 
         db->saveAgentInstance( t, m_id, ovars );
     }
+
+    //--------------------------------------------------------------------------
+    double AgentInstance::getRasterValue( Data::Raster & raster, int l, double x, double y ){
+        auto val = raster.getValue( l, x, y );
+        return val;
+    }
+
 }
 
 //------------------------------------------------------------------------------
