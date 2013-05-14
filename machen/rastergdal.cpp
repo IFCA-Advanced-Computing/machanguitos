@@ -59,6 +59,12 @@ namespace Data {
         return true;
     }
 
+    //--------------------------------------------------------------------------
+    bool RasterGDAL::updateValue( int layer, double x, double y, double old, double val ){
+        Util::LOGD( "RasterGDAL::updateValue" );
+        return true;
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------
