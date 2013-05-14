@@ -34,7 +34,7 @@ namespace Data {
     //--------------------------------------------------------------------------
     class RasterGDAL : public Raster {
     public:
-        RasterGDAL( int w, int h, double x0, double x1, double y0, double y1 );
+        RasterGDAL( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         ~RasterGDAL();
 
         double getValue( int layer, double x, double y ) override;
@@ -42,10 +42,6 @@ namespace Data {
 
     private:
         GDALDataset * m_data;
-        double m_x0;
-        double m_x1;
-        double m_y0;
-        double m_y1;
     };
 
 }//namespace Data

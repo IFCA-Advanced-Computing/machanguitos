@@ -30,8 +30,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    RasterGDAL::RasterGDAL( int w, int h, double x0, double x1, double y0, double y1 )
-        : m_x0{ x0 }, m_x1{ x1 }, m_y0{ y0 }, m_y1{ y1 }
+    RasterGDAL::RasterGDAL( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 )
+        : Raster{key, w, h, x0, x1, y0, y1 }
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 

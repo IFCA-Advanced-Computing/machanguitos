@@ -21,17 +21,49 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //------------------------------------------------------------------------------
 #include "raster.hpp"
+#include <tuple>
+#include <cmath>
+#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    Raster::Raster(){
-        // empty
+    Raster::Raster( const std::string & k, int w, int h,
+                    double x0, double x1, double y0, double y1 )
+        : key{k}, m_w{w}, m_h{h}, m_x0{x0}, m_x1{x1}, m_y0{y0}, m_y1{y1}
+    {
+        if( m_w <= 0 or m_h <= 0 ){
+            Util::LOGW( "Invalid Raster dimensions ", w, ", ", h );
+            std::terminate();
+        }
+        m_hx = (m_x1 - m_x0) / m_w;
+        m_hy = (m_y1 - m_y0) / m_h;
+
+        if( m_hx == 0 or m_hy == 0 ){
+            Util::LOGW( "Invalid Raster dimensions ", w, ", ", h );
+            std::terminate();
+        }
     }
-    
+
     //--------------------------------------------------------------------------
     Raster::~Raster(){
         // empty
+    }
+
+    //--------------------------------------------------------------------------
+    bool Raster::validPosition( double x, double y ){
+        if( x < m_x0 or x >= m_x1 ){
+            return false;
+        }
+
+        return (y >= m_y0 and y < m_y1);
+    }
+
+    //--------------------------------------------------------------------------
+    std::tuple<int,int> Raster::getPosition( double x, double y ){
+        int i = round( (x - m_x0) / m_hx );
+        int j = round( (y - m_y0) / m_hy );
+        return std::make_tuple( i, j );
     }
 
 }//namespace Data

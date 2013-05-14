@@ -67,11 +67,32 @@ namespace Data {
      */
     class Raster {
     public:
-        Raster();
+        Raster( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         virtual ~Raster();
+
+        bool validPosition( double x, double y );
+        std::tuple<int,int> getPosition( double x, double y );
 
         virtual double getValue( int layer, double x, double y )=0;
         virtual bool setValue( int layer, double x, double y, double val )=0;
+
+        std::string key;
+
+    protected:
+        /// width of the raster.
+        int m_w;
+        /// height of the raster.
+        int m_h;
+        /// left value of the raster.
+        double m_x0;
+        /// right value of the raster.
+        double m_x1;
+        /// top value of the raster.
+        double m_y0;
+        /// bottom value of the raster.
+        double m_y1;
+        double m_hx;
+        double m_hy;
     };
 }//namespace Data
 

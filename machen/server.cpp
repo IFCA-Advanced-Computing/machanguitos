@@ -201,7 +201,7 @@ namespace Engine{
         double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
 
         LOGI( "SERVER: Start Simulation\n" );
-        for( auto i = 0 ; i < iters ; i++ ){
+        for( auto i = 0 ; i < iters ; ++i ){
             LOGI( "SERVER: iteration ", i+1 );
             for( auto && c: m_clients ){
                 c->runAgents( delta );

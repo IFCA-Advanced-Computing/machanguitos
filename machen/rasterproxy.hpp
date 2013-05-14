@@ -38,8 +38,8 @@ namespace Data {
         bool setValue( int layer, double x, double y, double val ) override;
         
     private:
-        std::unique_ptr<char[]> m_key;
-        size_t m_keyLength;
+        std::unique_ptr<char[]> m_ckey;
+        size_t m_ckeyLength;
     };
 
 }//namespace Data

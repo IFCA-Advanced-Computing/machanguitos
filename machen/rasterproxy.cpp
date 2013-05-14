@@ -33,11 +33,13 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    RasterProxy::RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 ){
+    RasterProxy::RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 )
+        : Raster{key, w, h, x0, x1, y0, y1}
+    {
         assert( key.length() <= MAX_CLASS_NAME && "name too long" );
-        m_keyLength = key.length();
-        m_key = std::move( std::unique_ptr<char[]>( new char [m_keyLength+1] ) );
-        strcpy( m_key.get(), key.c_str() );
+        m_ckeyLength = key.length();
+        m_ckey = std::move( std::unique_ptr<char[]>( new char [m_ckeyLength+1] ) );
+        strcpy( m_ckey.get(), key.c_str() );
     }
 
     //--------------------------------------------------------------------------
@@ -45,7 +47,7 @@ namespace Data {
         int32_t val{layer};
         MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
-        MPI_Send( m_key.get(), m_keyLength, MPI_CHAR, Engine::DATASERVER_RANK,
+        MPI_Send( m_ckey.get(), m_ckeyLength, MPI_CHAR, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::GETRASTERVALUE, MPI_COMM_WORLD );
         double dvals[]{x, y};
         MPI_Send( dvals, 2, MPI_DOUBLE, Engine::DATASERVER_RANK,
@@ -68,7 +70,7 @@ namespace Data {
         int32_t val{layer};
         MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
-        MPI_Send( m_key.get(), m_keyLength, MPI_CHAR, Engine::DATASERVER_RANK,
+        MPI_Send( m_ckey.get(), m_ckeyLength, MPI_CHAR, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
         double dvals[]{x, y, v};
         MPI_Send( dvals, 3, MPI_DOUBLE, Engine::DATASERVER_RANK,

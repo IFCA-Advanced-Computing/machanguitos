@@ -59,7 +59,7 @@ namespace Agent{
             lua_pop( L, 2 );
             if( aclass ){
                 auto n = lua_gettop( L );
-                for( int i = 1 ; i <= n ; i++ ){
+                for( int i = 1 ; i <= n ; ++i ){
                     aclass->insertOutVariable( luaL_checkstring( L, i ) );
                 }
             }else{
