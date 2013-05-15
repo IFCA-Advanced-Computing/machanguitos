@@ -46,6 +46,19 @@ namespace Agent{
     //--------------------------------------------------------------------------
     class AgentClass;
 
+    class RasterLoc{
+    public:
+        int layer;
+        int i;
+        int j;
+
+        bool operator <(const RasterLoc & b) const;
+    };
+
+    inline bool RasterLoc::operator <( const RasterLoc & b ) const{
+        return (layer < b.layer) or (i < b.i) or (j < b.j);
+    }
+
     //--------------------------------------------------------------------------
     /** Instance of an AgentClass.
         @ingroup Agent
@@ -80,7 +93,9 @@ namespace Agent{
         double getRasterValue( Data::Raster & raster, int layer, double x, double y );
         bool setRasterValue( Data::Raster & raster, int layer, double x, double y, double v );
     private:
-        /// Agent::AgentInstance internal state.
+        void insertCache( std::string id, int l, int i, int j, double v );
+        std::tuple<bool,double> findCache( std::string id, int l, int i, int j );
+       /// Agent::AgentInstance internal state.
         enum class AgentState{ AS_NORMAL, AS_INIT, AS_UPDATE };
 
         /// AgentClass instance of this Agent.
@@ -91,7 +106,10 @@ namespace Agent{
         AgentId m_id;
         /// AgentInstante run state.
         AgentState m_state {AgentState::AS_NORMAL};
+        /// cache variables of rasters.
+        std::map< std::string, std::map< RasterLoc, double> > m_cache;
     };
+
 }
 
 //------------------------------------------------------------------------------

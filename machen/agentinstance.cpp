@@ -157,6 +157,10 @@ namespace Agent{
     //--------------------------------------------------------------------------
     double AgentInstance::getRasterValue( Data::Raster & raster, int l, double x, double y ){
         auto val = raster.getValue( l, x, y );
+        if( raster.validPosition( x, y ) ){
+            auto pos = raster.getPosition( x, y );
+            insertCache( raster.key, l, get<0>(pos), get<1>(pos), val );
+        }
         return val;
     }
 
@@ -164,9 +168,37 @@ namespace Agent{
     bool AgentInstance::setRasterValue( Data::Raster & raster, int l,
                                         double x, double y, double v )
     {
-        return raster.setValue( l, x, y, v );
+        if( raster.validPosition( x, y ) ){
+            auto pos = raster.getPosition( x, y );
+            auto it = findCache( raster.key, l, get<0>(pos), get<1>(pos) );
+            if( std::get<0>(it) ){
+                auto old = std::get<1>(it);
+                return raster.updateValue( l, x, y, old, v );
+            }else{
+                raster.setValue( l, x, y, v );
+            }
+        }
+        return true;
     }
 
+    //--------------------------------------------------------------------------
+    void AgentInstance::insertCache( string id, int l, int i, int j, double v ){
+        auto & rmap = m_cache[ id ];
+        rmap[ {l,i,j} ] = v;
+    }
+
+    //--------------------------------------------------------------------------
+    tuple<bool,double> AgentInstance::findCache( string id, int l, int i, int j ){
+        const auto it = m_cache.find( id );
+        if( it != end(m_cache) ){
+            const auto jt = it->second.find( {l,i,j} );
+            if( jt != end(it->second) ){
+                return make_tuple( true, jt->second );
+            }
+        }
+
+        return make_tuple( false, 0 );
+    }
 }
 
 //------------------------------------------------------------------------------
