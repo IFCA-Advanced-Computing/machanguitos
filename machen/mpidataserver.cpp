@@ -128,15 +128,9 @@ namespace Engine {
 
         auto && ds = Engine::DataServer::instance();
         auto && raster = ds->getRaster( ckey );
-        uint8_t val;
         if( raster ){
-            val = raster->setValue( layer, dval[0], dval[1], dval[2] ) ? 1 : 0;
-        }else{
-            val = 0;
+            raster->setValue( layer, dval[0], dval[1], dval[2] );
         }
-
-        MPI_Send( &val, 1, MPI_BYTE, src,
-                  Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------
@@ -144,7 +138,7 @@ namespace Engine {
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
         MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
-                  MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD, &status );
+                  MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
             Engine::abort();
@@ -156,7 +150,7 @@ namespace Engine {
 
         double dval[4];
         MPI_Recv( &dval, 4, MPI_DOUBLE, src,
-                  MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD, &status );
+                  MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
             Engine::abort();
@@ -172,7 +166,7 @@ namespace Engine {
         }
 
         MPI_Send( &val, 1, MPI_BYTE, src,
-                  Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
+                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------

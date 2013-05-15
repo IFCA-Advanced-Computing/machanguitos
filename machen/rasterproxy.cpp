@@ -66,7 +66,7 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    bool RasterProxy::setValue( int layer, double x, double y, double v ){
+    void RasterProxy::setValue( int layer, double x, double y, double v ){
         int32_t val{layer};
         MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
@@ -75,17 +75,6 @@ namespace Data {
         double dvals[]{x, y, v};
         MPI_Send( dvals, 3, MPI_DOUBLE, Engine::DATASERVER_RANK,
                   Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD );
-
-        MPI_Status status;
-        uint8_t ret;
-        MPI_Recv( &ret, 1, MPI_BYTE, Engine::DATASERVER_RANK,
-                  Engine::MpiTagDS::SETRASTERVALUE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            Util::LOGE( "Return Received on RasterProxy" );
-            Engine::abort();
-        }
-
-        return (ret == 1);
     }
 
     //--------------------------------------------------------------------------

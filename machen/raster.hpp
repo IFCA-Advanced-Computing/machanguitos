@@ -74,7 +74,7 @@ namespace Data {
         std::tuple<int,int> getPosition( double x, double y );
 
         virtual double getValue( int layer, double x, double y )=0;
-        virtual bool setValue( int layer, double x, double y, double val )=0;
+        virtual void setValue( int layer, double x, double y, double val )=0;
         virtual bool updateValue( int layer, double x, double y, double old, double val )=0;
 
         std::string key;
