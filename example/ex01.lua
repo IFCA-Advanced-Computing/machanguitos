@@ -5,9 +5,9 @@ config.setLogLevel( "debug" );
 data.createLayer( "grass", 
                   {
                      x0 = 0.0,
-                     x1 = 1.0,
+                     x1 = 20.0,
                      y0 = 0.0,
-                     y1 = 1.0,
+                     y1 = 20.0,
                      w = 100,
                      h = 100,
                   } );
