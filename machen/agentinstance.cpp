@@ -171,8 +171,8 @@ namespace Agent{
         if( raster.validPosition( x, y ) ){
             auto pos = raster.getPosition( x, y );
             auto it = findCache( raster.key, l, get<0>(pos), get<1>(pos) );
-            if( std::get<0>(it) ){
-                auto old = std::get<1>(it);
+            if( get<0>(it) ){
+                auto old = get<1>(it);
                 return raster.updateValue( l, x, y, old, v );
             }else{
                 raster.setValue( l, x, y, v );
