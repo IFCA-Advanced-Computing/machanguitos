@@ -70,7 +70,7 @@ namespace Util{
     /** Print a type in the log.
         @ingroup Util
      */
-    template<typename X> void printLog( X x ){
+    template<typename X> void printLog( const X & x ){
         std::cout << x << std::endl;
     }
 
@@ -78,7 +78,7 @@ namespace Util{
     /** print a type list in the log.
         @ingroup Util
      */
-    template<typename X, typename... XS> void printLog( X x, XS... xs ){
+    template<typename X, typename... XS> void printLog( const X & x, XS... xs ){
         std::cout << x;
         printLog( xs... );
     }
