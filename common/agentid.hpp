@@ -38,7 +38,7 @@ namespace Agent{
             @param mayor mayor number of AgentId.
             @param minor minor number of AgentId.
          */
-        AgentId( const int mayor, const int minor );
+        explicit AgentId( const int mayor = 0, const int minor = 0 );
 
         /// Returns the string representation of ID.
         std::string str() const;
@@ -50,7 +50,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     inline AgentId::AgentId( const int my, const int mn )
-        : m_mayor(my), m_minor(mn)
+        : m_mayor{my}, m_minor{mn}
     {
         // empty
     }

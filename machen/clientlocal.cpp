@@ -64,7 +64,7 @@ namespace Engine{
         auto agentClass = Agent::AgentFactory::instance()->getClass( name );
         if( agentClass ){
             for( int i = 0 ; i < n ; ++i ){
-                auto obj = agentClass->createInstance( {m_ID, m_nextID} );
+                auto obj = agentClass->createInstance( Agent::AgentId{m_ID, m_nextID} );
                 if( obj ){
                     m_nextID += 1;
                     obj->init();
