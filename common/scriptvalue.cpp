@@ -41,7 +41,7 @@ namespace Util {
 
     //--------------------------------------------------------------------------
     void ScriptValue::erase(){
-        if( (m_type == ValueType::STRING) and (m_val.vals != nullptr) ){
+        if( m_type == ValueType::STRING ){
             delete m_val.vals;
             m_val.vals = nullptr;
         }
@@ -59,7 +59,6 @@ namespace Util {
             m_val.valn = val.m_val.valn;
             break;
         case ValueType::STRING:
-            assert( val.m_val.vals && "Error null string" );
             m_val.vals = new string(*val.m_val.vals);
             break;
         }
@@ -78,6 +77,7 @@ namespace Util {
             break;
         case ValueType::STRING:
             m_val.vals = move(val.m_val.vals);
+            val.m_type = ValueType::NIL;
             val.m_val.vals = nullptr;
             break;
         }
@@ -97,7 +97,6 @@ namespace Util {
             m_val.valn = val.m_val.valn;
             break;
         case ValueType::STRING:
-            assert( val.m_val.vals && "Error null string" );
             m_val.vals = new string(*val.m_val.vals);
             break;
         }
@@ -119,6 +118,7 @@ namespace Util {
             break;
         case ValueType::STRING:
             m_val.vals = move(val.m_val.vals);
+            val.m_type = ValueType::NIL;
             val.m_val.vals = nullptr;
             break;
         }
