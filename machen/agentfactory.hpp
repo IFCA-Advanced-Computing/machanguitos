@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <map>
 #include "common/singleton.hpp"
+#include "agentinstance.hpp"
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -46,17 +47,26 @@ namespace Agent{
 
             @param name name of the AgentClass. Used as Lua filename also.
          */
-        AgentClass * createClass( const std::string & name );
+        std::shared_ptr<AgentClass> createClass( const std::string & name );
 
         /** Get an already create AgentClass, if it exists.
             @param name name of the AgentClass.
          */
-        AgentClass * getClass( const std::string & name ) const;
+        std::shared_ptr<AgentClass> getClass( const std::string & name ) const;
 
+        /// Create a AgentInstance object of this AgentClass.
+        std::unique_ptr<AgentInstance> createInstance( std::shared_ptr<AgentClass> aclass, AgentId && id );
     private:
         /// List of already created AgentClass instances.
-        std::map<std::string, AgentClass *> m_classes;
+        std::map<std::string, std::shared_ptr<AgentClass>> m_classes;
     };
+
+    //--------------------------------------------------------------------------
+    inline std::unique_ptr<AgentInstance> AgentFactory::createInstance(
+          std::shared_ptr<AgentClass> aclass, AgentId && id )
+    {
+        return std::unique_ptr<AgentInstance>( new (std::nothrow) AgentInstance( aclass, std::move(id) ));
+    }
 
 }
 

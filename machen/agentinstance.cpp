@@ -35,7 +35,7 @@ namespace Agent{
     using namespace Util;
 
     //--------------------------------------------------------------------------
-    AgentInstance::AgentInstance( AgentClass * c, AgentId && id )
+    AgentInstance::AgentInstance( std::shared_ptr<AgentClass> c, AgentId && id )
         : m_class{c}, m_id{move(id)}
     {
         assert( m_class && "Invalid Agent Class" );

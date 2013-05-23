@@ -61,10 +61,11 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientLocal::createAgents( const string & name, int n ){
-        auto agentClass = Agent::AgentFactory::instance()->getClass( name );
+        auto factory = Agent::AgentFactory::instance();
+        auto agentClass = factory->getClass( name );
         if( agentClass ){
             for( int i = 0 ; i < n ; ++i ){
-                auto obj = agentClass->createInstance( Agent::AgentId{m_ID, m_nextID} );
+                auto obj = factory->createInstance( agentClass, Agent::AgentId{m_ID, m_nextID} );
                 if( obj ){
                     m_nextID += 1;
                     obj->init();

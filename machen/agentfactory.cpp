@@ -80,7 +80,7 @@ namespace Agent{
     };
 
     //--------------------------------------------------------------------------
-    AgentClass * AgentFactory::createClass( const string & name ){
+    shared_ptr<AgentClass> AgentFactory::createClass( const string & name ){
         auto el = m_classes.find( name );
         if( el != m_classes.end() ){
             return el->second;
@@ -108,7 +108,7 @@ namespace Agent{
         lua_gc( L, LUA_GCRESTART, 0 );
 
         // create Agent class on Lua
-        AgentClass * aclass = new (nothrow) AgentClass( L );
+        auto aclass = make_shared<AgentClass>( L );
         if( !aclass ){
             LOGE( "Can't create agent class '", name, "' instance" );
             return nullptr;
@@ -116,7 +116,7 @@ namespace Agent{
 
         // set functions
         luaL_register( L, SCRIPT_AGENTCLASS_NAME, agentclasslib );
-        lua_pushlightuserdata( L, (void*)aclass );
+        lua_pushlightuserdata( L, (void*)aclass.get() );
         lua_setfield( L, -2, SCRIPT_AGENTCLASS_OBJ );
         // removes table
         lua_pop( L, 1 );
@@ -124,7 +124,6 @@ namespace Agent{
         // execute class file
         auto ret = luaL_dofile( L, filename.c_str() );
         if( !checkLuaReturn( L, ret ) ){
-            delete aclass;
             return nullptr;
         }
 
@@ -135,7 +134,7 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    AgentClass * AgentFactory::getClass( const string & name ) const{
+    shared_ptr<AgentClass> AgentFactory::getClass( const string & name ) const{
         auto el = m_classes.find( name );
         if( el != m_classes.end() ){
             return el->second;

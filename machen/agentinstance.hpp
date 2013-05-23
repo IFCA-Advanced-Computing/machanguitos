@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <map>
 #include "common/scriptvalue.hpp"
 #include "common/agentid.hpp"
+#include "agentclass.hpp"
 
 //------------------------------------------------------------------------------
 struct lua_State;
@@ -44,8 +45,6 @@ namespace Agent{
     constexpr const char * SCRIPT_GLOBAL_AGENT_OBJ = "__go";
 
     //--------------------------------------------------------------------------
-    class AgentClass;
-
     class RasterLoc{
     public:
         int layer;
@@ -69,7 +68,7 @@ namespace Agent{
             @param c AgentClass instance of the Agent.
             @param id AgentInstance identifier.
          */
-        AgentInstance( AgentClass * c, AgentId && id );
+        AgentInstance( std::shared_ptr<AgentClass> c, AgentId && id );
         /// initialize the Agent calling its 'init' function on Lua.
         void init();
         /** Update the Agent calling its 'update' fuction on Lua.
@@ -99,7 +98,7 @@ namespace Agent{
         enum class AgentState{ AS_NORMAL, AS_INIT, AS_UPDATE };
 
         /// AgentClass instance of this Agent.
-        AgentClass * m_class;
+        std::shared_ptr<AgentClass> m_class;
         /// list of variables of the Agent.
         std::map<std::string, Util::ScriptValue> m_vals;
         /// identifier of instance.
