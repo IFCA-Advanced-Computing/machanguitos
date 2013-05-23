@@ -23,22 +23,25 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include "rastergdal.hpp"
 #include <cassert>
+#include <cfloat>
 #include <iostream>
 #include "gdal_priv.h"
 #include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
+    using namespace std;
+
     //--------------------------------------------------------------------------
-    RasterGDAL::RasterGDAL( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 )
+    RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1 )
         : Raster{key, w, h, x0, x1, y0, y1 }
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 
         m_data = driver->Create( "", w, h, 1, GDT_Float32,  nullptr );
         if( ! m_data ){
-            std::cout << "ERRROR Creating data\n";
-            std::terminate();
+            Util::LOGE( "ERROR Creating data" );
+            terminate();
         }
     }
 
@@ -49,18 +52,58 @@ namespace Data {
 
     //--------------------------------------------------------------------------
     double RasterGDAL::getValue( int layer, double x, double y ){
-        Util::LOGD( "RasterGDAL::getValue" );
+        auto rasterBand = m_data->GetRasterBand( layer + 1 );
+        if( rasterBand ){
+            auto pos = getPosition( x, y );
+            float pixel;
+
+            rasterBand->RasterIO( GF_Read, get<0>(pos), get<1>(pos), 1, 1,
+                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
+
+            return pixel;
+        }else{
+            Util::LOGE( "Invalid raster layer ", layer );
+        }
+
         return 0;
     }
 
     //--------------------------------------------------------------------------
     void RasterGDAL::setValue( int layer, double x, double y, double val ){
-        Util::LOGD( "RasterGDAL::setValue" );
+        auto rasterBand = m_data->GetRasterBand( layer + 1 );
+        if( rasterBand ){
+            auto pos = getPosition( x, y );
+            float pixel = val;
+
+            rasterBand->RasterIO( GF_Write, get<0>(pos), get<1>(pos), 1, 1,
+                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
+        }else{
+            Util::LOGE( "Invalid raster layer ", layer );
+        }
     }
 
     //--------------------------------------------------------------------------
     bool RasterGDAL::updateValue( int layer, double x, double y, double old, double val ){
-        Util::LOGD( "RasterGDAL::updateValue" );
+        auto rasterBand = m_data->GetRasterBand( layer + 1 );
+        if( rasterBand ){
+            auto pos = getPosition( x, y );
+            float pixel;
+
+            rasterBand->RasterIO( GF_Read, get<0>(pos), get<1>(pos), 1, 1,
+                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
+            if( fabs(pixel - old) <= FLT_EPSILON ){
+                float pixel = val;
+
+                rasterBand->RasterIO( GF_Write, get<0>(pos), get<1>(pos), 1, 1,
+                                      &pixel, 1, 1, GDT_Float32, 0, 0 );
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            Util::LOGE( "Invalid raster layer ", layer );
+        }
+
         return true;
     }
 
