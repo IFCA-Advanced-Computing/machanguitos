@@ -40,12 +40,13 @@ namespace Engine {
         void run();
 
     protected:
+        /// do particular tags on derived workers.
+        virtual bool doTags( int tag, int src, int32_t val )=0;
+
         /// Own MPI rank value.
         int m_rank;
 
     private:
-        /// do particular tags on derived workers.
-        virtual bool doTags( int tag, int src, int32_t val )=0;
         /// do common tags from mpi workers.
         bool doCommonTags( int tag, int src, int32_t val );
         /// Execute a Set DataStore info command.

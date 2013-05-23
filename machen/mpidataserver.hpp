@@ -33,7 +33,7 @@ namespace Engine{
 
         @ingroup Engine
      */
-    class MPIDataServer : public MPIWorker {
+    class MPIDataServer final : public MPIWorker {
     public:
         /// Construct a MPI Data Server
         MPIDataServer();

@@ -33,7 +33,7 @@ namespace Engine {
     /** DataServer instance that runs in local proccess.
         @ingroup Engine
      */
-    class DataServerLocal : public DataServer{
+    class DataServerLocal final : public DataServer{
     public:
         DataServerLocal();
         void createRaster( const std::string & key, int w, int h,

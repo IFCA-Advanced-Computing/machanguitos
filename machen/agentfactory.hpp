@@ -38,7 +38,7 @@ namespace Agent{
     /** Singleton Class that will create Agent objects.
         @ingroup Agent
      */
-    class AgentFactory : public Singleton<AgentFactory>{
+    class AgentFactory final : public Singleton<AgentFactory>{
     public:
         /** Create a new AgentClass instance.
 

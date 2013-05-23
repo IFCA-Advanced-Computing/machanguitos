@@ -36,7 +36,7 @@ namespace Engine{
 
         @ingroup Engine
      */
-    class MPIClientServer : public MPIWorker {
+    class MPIClientServer final : public MPIWorker {
     public:
         /// Construct a MPI Client Server
         MPIClientServer();

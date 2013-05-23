@@ -41,7 +41,7 @@ namespace IO {
     /** Singleton Class that servers as proxy of Data Store.
         @ingroup IO
      */
-    class DataStore : public Singleton<DataStore> {
+    class DataStore final : public Singleton<DataStore> {
     public:
         /// Default Hostname of Data Store.
         constexpr static const char * const DEFAULT_HOSTNAME{"localhost"};

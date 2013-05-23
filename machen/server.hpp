@@ -40,7 +40,7 @@ namespace Engine{
     /** Singleton Class that controls teh simulation execution.
         @ingroup Engine
      */
-    class Server : public Singleton<Server> {
+    class Server final : public Singleton<Server> {
     public:
         /** Add agents number to create them in the future.
 

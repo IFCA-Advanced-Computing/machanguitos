@@ -32,7 +32,7 @@ class GDALDataset;
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    class RasterGDAL : public Raster {
+    class RasterGDAL final : public Raster {
     public:
         RasterGDAL( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         ~RasterGDAL();

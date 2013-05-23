@@ -31,7 +31,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Data {
 
     //--------------------------------------------------------------------------
-    class RasterProxy : public Raster {
+    class RasterProxy final : public Raster {
     public:
         RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
         double getValue( int layer, double x, double y ) override;
