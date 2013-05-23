@@ -39,10 +39,19 @@ public:
     /// Returns the singleton instance of a Class.
     static std::shared_ptr<T> instance();
 
+protected:
+    ~Singleton();
+
 private:
     /// singleton instance of a Class.
     static std::shared_ptr<T> s_singleton;
 };
+
+//------------------------------------------------------------------------------
+template<class T>
+inline Singleton<T>::~Singleton(){
+    // empty
+}
 
 //------------------------------------------------------------------------------
 template<class T>
