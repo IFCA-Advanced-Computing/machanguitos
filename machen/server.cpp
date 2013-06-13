@@ -32,10 +32,13 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "dataserver.hpp"
 #include "mpidefs.hpp"
 #include "engine.hpp"
+#include "configlib.hpp"
+#include "datalib.hpp"
 
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
+    using namespace boost::filesystem;
     using namespace Util;
 
     //--------------------------------------------------------------------------
@@ -71,7 +74,34 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    bool Server::initialize(){
+    bool Server::initialize( const string & filename ){
+        // Lua Initialization
+        m_L = luaL_newstate();
+        if( !m_L ){
+            LOGE( "Can't create Lua State" );
+            return false;
+        }
+
+        lua_gc( m_L, LUA_GCSTOP, 0 );
+        luaL_openlibs( m_L );
+        Config::openlib( m_L );
+        Data::openlib( m_L );
+        lua_gc( m_L, LUA_GCRESTART, 0 );
+
+        // check file
+        if( !exists( filename ) || !is_regular_file( filename ) ){
+            LOGE( "There is no config file '", filename, "'" );
+            return false;
+        }
+
+        // execute config file
+        auto ret = luaL_dofile( m_L, filename.c_str() );
+        if( not checkLuaReturn( m_L, ret ) ){
+            LOGE( "Server Script not loaded" );
+            return false;
+        }
+
+        initializeScript();
         createClients();
 
         auto db = IO::DataStore::instance();

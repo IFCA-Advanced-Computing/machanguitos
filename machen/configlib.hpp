@@ -27,13 +27,16 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 
 //------------------------------------------------------------------------------
+struct lua_State;
+
+//------------------------------------------------------------------------------
 namespace Config{
-    //--------------------------------------------------------------------------
-    /** Load a configure file.
-        @param filename name of the file to load.
+    /** Load config lib in Lua State
+        @param L lua_State.
         @ingroup Config
+        @retval 0 No return values to Lua.
      */
-    bool load( const std::string & filename );
+    int openlib( lua_State *L );
 }
 
 //------------------------------------------------------------------------------

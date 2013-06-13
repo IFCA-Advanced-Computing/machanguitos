@@ -64,8 +64,10 @@ namespace Engine{
             @param n number of Agents to create.
          */
         void addAgents( const std::string & name, const unsigned n );
-        /// configure clients and world.
-        bool initialize();
+        /** Configure clients and world.
+            @param filename name of the server script to load.
+        */
+        bool initialize( const std::string & filename );
         /// create the agents for the simulation.
         void createAgents();
         void createRaster( const std::string & key, int w, int h,

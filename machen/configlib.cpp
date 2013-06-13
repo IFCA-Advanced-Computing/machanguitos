@@ -33,7 +33,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Config{
     using namespace std;
-    using namespace boost::filesystem;
     using namespace Util;
 
     //--------------------------------------------------------------------------
@@ -152,36 +151,6 @@ namespace Config{
         // removes table
         lua_pop( L, 1 );
         return 0;
-    }
-
-    //--------------------------------------------------------------------------
-    bool load( const string & filename ){
-        // check file
-        if( !exists( filename ) || !is_regular_file( filename ) ){
-            LOGE( "There is no config file '", filename, "'" );
-            return false;
-        }
-
-        // Lua Initialization
-        auto L = luaL_newstate();
-        if( !L ){
-            LOGE( "Can't create Lua State" );
-            return false;
-        }
-
-        lua_gc( L, LUA_GCSTOP, 0 );
-        luaL_openlibs( L );
-        Config::openlib( L );
-        Data::openlib( L );
-        lua_gc( L, LUA_GCRESTART, 0 );
-
-        // execute config file
-        auto ret = luaL_dofile( L, filename.c_str() );
-        auto is_ok = Util::checkLuaReturn( L, ret );
-
-        lua_close( L );
-
-        return is_ok;
     }
 }
 

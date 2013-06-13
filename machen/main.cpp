@@ -62,15 +62,11 @@ int main( int argc, char * argv[] ){
         }
 
         string filename{ argv[1] };
-        if( !Config::load( filename ) ){
-            return Engine::abort();
-        }
-
         Engine::setDataDir( filename );
 
         Util::LOGV( "Creating Server " );
         auto server = Engine::Server::instance();
-        if( !server->initialize() ){
+        if( !server->initialize( filename ) ){
             return Engine::abort();
         }
         server->createAgents();

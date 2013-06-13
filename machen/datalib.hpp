@@ -28,7 +28,7 @@ struct lua_State;
 
 //------------------------------------------------------------------------------
 namespace Data {
-    /** Load config lib in Lua State
+    /** Load data lib in Lua State
         @param L lua_State.
         @ingroup Config
         @retval 0 No return values to Lua.
