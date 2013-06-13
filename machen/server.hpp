@@ -29,6 +29,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <map>
 #include <vector>
 #include <forward_list>
+#include "lua.hpp"
 #include "common/singleton.hpp"
 #include "common/scriptvalue.hpp"
 #include "client.hpp"
@@ -99,6 +100,10 @@ namespace Engine{
          */
         std::string getConfigString( const std::string & key, const std::string & d ) const;
 
+        void startIteration( const int n );
+        void endIteration( const int n );
+        void endSimulation();
+
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
         std::forward_list<Data::RasterNewData> m_newRaster;
@@ -106,6 +111,8 @@ namespace Engine{
         std::vector<std::unique_ptr<Client>> m_clients;
         /// parameters loaded from config file.
         std::map<std::string, Util::ScriptValue> m_config;
+        /// Lua State
+        lua_State * m_L;
     };
 
     //--------------------------------------------------------------------------
