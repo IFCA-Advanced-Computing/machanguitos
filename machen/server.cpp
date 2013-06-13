@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <boost/filesystem.hpp>
 #include "common/log.hpp"
 #include "common/datastore.hpp"
+#include "common/util.hpp"
 #include "config.h"
 #include "clientlocal.hpp"
 #include "clientremote.hpp"
@@ -202,22 +203,33 @@ namespace Engine{
 
         LOGI( "SERVER: Start Simulation\n" );
         for( auto i = 0 ; i < iters ; ++i ){
-            startIteration( i+1 );
+            startIterationScript( i+1 );
             for( auto && c: m_clients ){
                 c->runAgents( delta );
             }
 
             clientsBarrier();
-            endIteration( i+1 );
+            endIterationScript( i+1 );
         }
 
         remoteEnd();
 
-        endSimulation();
+        endSimulationScript();
     }
 
     //--------------------------------------------------------------------------
-    void Server::startIteration( const int n ){
+    void Server::initializeScript(){
+        lua_getfield( m_L, LUA_GLOBALSINDEX, "initialize" );        // 1
+        if( lua_isfunction( m_L, -1 ) ){
+            auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 1
+            checkLuaReturn( m_L, ret );
+            lua_pop( m_L, 1 );                                      // 0
+        }else{
+            lua_pop( m_L, 1 );                                      // 0
+        }
+    }
+    //--------------------------------------------------------------------------
+    void Server::startIterationScript( const int n ){
         lua_getfield( m_L, LUA_GLOBALSINDEX, "startIteration" );    // 1
         if( lua_isfunction( m_L, -1 ) ){
             lua_pushnumber( m_L, n );                               // 2
@@ -230,7 +242,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void Server::endIteration( const int n ){
+    void Server::endIterationScript( const int n ){
         lua_getfield( m_L, LUA_GLOBALSINDEX, "endIteration" );      // 1
         if( lua_isfunction( m_L, -1 ) ){
             lua_pushnumber( m_L, n );                               // 2
@@ -243,7 +255,7 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
-    void Server::endSimulation(){
+    void Server::endSimulationScript(){
         lua_getfield( m_L, LUA_GLOBALSINDEX, "endSimulation" );     // 1
         if( lua_isfunction( m_L, -1 ) ){
             auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 1

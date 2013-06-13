@@ -100,9 +100,10 @@ namespace Engine{
          */
         std::string getConfigString( const std::string & key, const std::string & d ) const;
 
-        void startIteration( const int n );
-        void endIteration( const int n );
-        void endSimulation();
+        void initializeScript();
+        void startIterationScript( const int n );
+        void endIterationScript( const int n );
+        void endSimulationScript();
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
