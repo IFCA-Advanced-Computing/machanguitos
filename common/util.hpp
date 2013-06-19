@@ -24,6 +24,9 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define UTIL_HPP
 
 //------------------------------------------------------------------------------
+#include <memory>
+
+//------------------------------------------------------------------------------
 struct lua_State;
 
 //------------------------------------------------------------------------------
@@ -41,6 +44,12 @@ namespace Util{
         @ingrop Util
      */
     void luaL_warn( lua_State *L, const char *fmt, ... );
+    /** Obtain the GDAL Driver Name for a file name
+        @param filename file name.
+        @returns the GDAL Driver Name or null pointer.
+        @ingrop Util
+     */
+    std::unique_ptr<std::string> getGDALDriverName( const std::string & filename );
 }
 
 //------------------------------------------------------------------------------

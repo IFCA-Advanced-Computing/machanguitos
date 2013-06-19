@@ -21,12 +21,15 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //------------------------------------------------------------------------------
 #include "util.hpp"
+#include <vector>
+#include <boost/filesystem.hpp>
 #include "lua.hpp"
 #include "log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Util{
     using namespace std;
+    using namespace boost::filesystem;
 
     //--------------------------------------------------------------------------
     bool checkLuaReturn( lua_State * const L, const int ret ){
@@ -52,6 +55,42 @@ namespace Util{
         lua_concat( L, 2 );
         Util::LOGW( "Lua: ", lua_tostring( L, -1 ) );
         lua_pop( L, 1 );
+    }
+
+    //--------------------------------------------------------------------------
+    class DriverInfo{
+    public:
+        string driverName;
+        vector<string> driverExts;
+    };
+
+    const vector<DriverInfo> s_driverNames = {
+        {"BMP", {".bmp",".dib"} },
+        {"GIF", {".gif"} },
+        {"JPEG", {".jpg", ".jpeg"} },
+        {"PNG", {".png"} },
+    };
+
+    //--------------------------------------------------------------------------
+    unique_ptr<string> getGDALDriverName( const string & filename ){
+        using Value = string::value_type;
+        auto lower = [](const Value c){ return (Value)tolower(c); };
+
+        // get the lowercase extension of filename
+        auto fileext = path( filename ).extension().generic_string();
+        string normext;
+        normext.resize( fileext.size() );
+        transform( begin(fileext), end(fileext), begin(normext), lower );
+
+        // search the extension in the driver list
+        for( const auto di: s_driverNames ){
+            auto el = find( begin(di.driverExts), end(di.driverExts), normext);
+            if( el != end(di.driverExts) ){
+                return unique_ptr<string>(new string(di.driverName));
+            }
+        }
+
+        return nullptr;
     }
 }
 
