@@ -19,6 +19,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <iostream>
 #include "gdal_priv.h"
+#include "common/util.hpp"
 #include "config.h"
 
 //------------------------------------------------------------------------------
@@ -43,16 +44,21 @@ int main( int /*argc*/, char */*argv*/[] ){
             std::cout << "Projection is '" << pref << "'\n";
         }
 
-        auto driver = GetGDALDriverManager()->GetDriverByName( "JPEG" );
-        if( driver ){
-            auto dstfile = "test.jpg";
-            std::cout << "Copy file to '" << dstfile << "'\n";
+        auto dstfile = "test.png";
+        auto type = Util::getGDALDriverName( dstfile );
+        if( type ){
+            auto driver = GetGDALDriverManager()->GetDriverByName( (*type).c_str() );
+            if( driver ){
+                std::cout << "Copy file to '" << dstfile << "'\n";
 
-            auto dstDS = driver->CreateCopy( dstfile, dataset, false,
+                auto dstDS = driver->CreateCopy( dstfile, dataset, false,
                                              nullptr, nullptr, nullptr );
-            if( dstDS ){
-                GDALClose( dstDS );
+                if( dstDS ){
+                    GDALClose( dstDS );
+                }
             }
+        }else{
+            std::cout << "Can't get filetype for '" << dstfile << "'\n";
         }
 
         GDALClose( dataset );
