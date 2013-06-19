@@ -23,7 +23,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 int main( int /*argc*/, char */*argv*/[] ){
-    std::string filename = std::string(g_datapath) + "/data/test.png";
+    auto filename = std::string(g_datapath) + "/data/test.png";
 
     GDALAllRegister();
 
@@ -31,16 +31,28 @@ int main( int /*argc*/, char */*argv*/[] ){
     if( dataset ){
         std::cout << "DataSet opened\n";
         std::cout << "Driver: " << dataset->GetDriver()->GetDescription()
-                  << dataset->GetDriver()->GetMetadataItem( GDAL_DMD_LONGNAME ) 
+                  << dataset->GetDriver()->GetMetadataItem( GDAL_DMD_LONGNAME )
                   << std::endl;
-        std::cout << "Size is " << dataset->GetRasterXSize() 
-                  << "x" << dataset->GetRasterYSize() 
-                  << ", " << dataset->GetRasterCount() 
+        std::cout << "Size is " << dataset->GetRasterXSize()
+                  << "x" << dataset->GetRasterYSize()
+                  << ", " << dataset->GetRasterCount()
                   << " raster/s\n";
 
         const auto pref = dataset->GetProjectionRef();
         if( pref ){
             std::cout << "Projection is '" << pref << "'\n";
+        }
+
+        auto driver = GetGDALDriverManager()->GetDriverByName( "JPEG" );
+        if( driver ){
+            auto dstfile = "test.jpg";
+            std::cout << "Copy file to '" << dstfile << "'\n";
+
+            auto dstDS = driver->CreateCopy( dstfile, dataset, false,
+                                             nullptr, nullptr, nullptr );
+            if( dstDS ){
+                GDALClose( dstDS );
+            }
         }
 
         GDALClose( dataset );
