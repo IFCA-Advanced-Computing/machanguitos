@@ -251,9 +251,8 @@ namespace Engine{
     void Server::initializeScript(){
         lua_getfield( m_L, LUA_GLOBALSINDEX, "initialize" );        // 1
         if( lua_isfunction( m_L, -1 ) ){
-            auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 1
+            auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 0
             checkLuaReturn( m_L, ret );
-            lua_pop( m_L, 1 );                                      // 0
         }else{
             lua_pop( m_L, 1 );                                      // 0
         }
@@ -263,9 +262,8 @@ namespace Engine{
         lua_getfield( m_L, LUA_GLOBALSINDEX, "startIteration" );    // 1
         if( lua_isfunction( m_L, -1 ) ){
             lua_pushnumber( m_L, n );                               // 2
-            auto ret = lua_pcall( m_L, 1, 0, 0 );                   // 1
+            auto ret = lua_pcall( m_L, 1, 0, 0 );                   // 0
             checkLuaReturn( m_L, ret );
-            lua_pop( m_L, 1 );                                      // 0
         }else{
             lua_pop( m_L, 1 );                                      // 0
         }
@@ -276,9 +274,8 @@ namespace Engine{
         lua_getfield( m_L, LUA_GLOBALSINDEX, "endIteration" );      // 1
         if( lua_isfunction( m_L, -1 ) ){
             lua_pushnumber( m_L, n );                               // 2
-            auto ret = lua_pcall( m_L, 1, 0, 0 );                   // 1
+            auto ret = lua_pcall( m_L, 1, 0, 0 );                   // 0
             checkLuaReturn( m_L, ret );
-            lua_pop( m_L, 1 );                                      // 0
         }else{
             lua_pop( m_L, 1 );                                      // 0
         }
@@ -288,9 +285,8 @@ namespace Engine{
     void Server::endSimulationScript(){
         lua_getfield( m_L, LUA_GLOBALSINDEX, "endSimulation" );     // 1
         if( lua_isfunction( m_L, -1 ) ){
-            auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 1
+            auto ret = lua_pcall( m_L, 0, 0, 0 );                   // 0
             checkLuaReturn( m_L, ret );
-            lua_pop( m_L, 1 );                                      // 0
         }else{
             lua_pop( m_L, 1 );                                      // 0
         }
