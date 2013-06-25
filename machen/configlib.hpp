@@ -16,15 +16,12 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 /** @file configlib.hpp
-    @brief Configuration functions.
+    @brief Configuration Lua functions.
     @author Luis Cabellos
  */
 //------------------------------------------------------------------------------
 #ifndef CONFIGLIB_HPP
 #define CONFIGLIB_HPP
-
-//------------------------------------------------------------------------------
-#include <string>
 
 //------------------------------------------------------------------------------
 struct lua_State;
