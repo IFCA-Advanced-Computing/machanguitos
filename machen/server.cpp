@@ -135,9 +135,9 @@ namespace Engine{
             }
         }
 
-        auto && ds = Engine::DataServer::instance();
-        for( auto && nr: m_newRaster ){
-            ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1 );
+        auto ds = Engine::DataServer::instance();
+        for( const auto nr: m_newRaster ){
+            ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
         }
 
         return true;

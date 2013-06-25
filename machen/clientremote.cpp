@@ -78,8 +78,8 @@ namespace Engine{
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         int32_t ival{raster.h};
         MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
-        double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1};
-        MPI_Send( dvals, 4, MPI_DOUBLE, m_dest,
+        double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1, raster.d};
+        MPI_Send( dvals, 5, MPI_DOUBLE, m_dest,
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
         delete[] ckey;
     }

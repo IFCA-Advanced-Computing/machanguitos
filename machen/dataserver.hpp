@@ -44,9 +44,9 @@ namespace Engine {
          */
         std::shared_ptr<Data::Raster> getRaster( const std::string & key ) const;
         virtual void createRaster( const std::string & key, int w, int h,
-                                   double x0, double x1, double y0, double y1 )=0;
+                                   double x0, double x1, double y0, double y1, double d )=0;
         virtual void createRasterProxy( const std::string & key, int w, int h,
-                                        double x0, double x1, double y0, double y1 )=0;
+                                        double x0, double x1, double y0, double y1, double d )=0;
 
     protected:
         std::map<std::string,std::shared_ptr<Data::Raster>> m_rasters;

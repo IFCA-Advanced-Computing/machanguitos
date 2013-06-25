@@ -55,8 +55,8 @@ namespace Engine {
             Engine::abort();
         }
 
-        double dval[4];
-        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
+        double dval[5];
+        MPI_Recv( &dval, 5, MPI_DOUBLE, src,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on data server" );
@@ -64,7 +64,7 @@ namespace Engine {
         }
 
         auto && ds = Engine::DataServer::instance();
-        ds->createRaster( ckey, w, ival, dval[0], dval[1], dval[2], dval[3] );
+        ds->createRaster( ckey, w, ival, dval[0], dval[1], dval[2], dval[3], dval[4] );
     }
 
     //--------------------------------------------------------------------------

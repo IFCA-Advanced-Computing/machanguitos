@@ -34,8 +34,8 @@ namespace Data {
     using namespace std;
 
     //--------------------------------------------------------------------------
-    RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1 )
-        : Raster{key, w, h, x0, x1, y0, y1 }
+    RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1, double d )
+        : Raster{key, w, h, x0, x1, y0, y1, d }
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 
@@ -43,6 +43,17 @@ namespace Data {
         if( ! m_data ){
             Util::LOGE( "ERROR Creating data" );
             terminate();
+        }
+
+        auto rasterBand = m_data->GetRasterBand( 1 );
+        if( rasterBand ){
+            float pixel = d;
+            for( int j = 0 ; j < h ; ++j ){
+                for( int i = 0 ; i < w ; ++i ){
+                    rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                          &pixel, 1, 1, GDT_Float32, 0, 0 );
+                }
+            }
         }
     }
 

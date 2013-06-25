@@ -50,7 +50,7 @@ namespace Engine{
     void ClientLocal::createRaster( const Data::RasterNewData & nr ){
         LOGD( "ClientLocal::createRaster ", nr.key );
         auto && ds = Engine::DataServer::instance();
-        ds->createRasterProxy( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1 );
+        ds->createRasterProxy( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
     }
 
     //--------------------------------------------------------------------------

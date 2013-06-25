@@ -29,8 +29,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Data {
     //--------------------------------------------------------------------------
     Raster::Raster( const std::string & k, int w, int h,
-                    double x0, double x1, double y0, double y1 )
-        : key{k}, m_w{w}, m_h{h}, m_x0{x0}, m_x1{x1}, m_y0{y0}, m_y1{y1}
+                    double x0, double x1, double y0, double y1, double d )
+        : key{k}, m_w{w}, m_h{h}, m_x0{x0}, m_x1{x1}, m_y0{y0}, m_y1{y1}, m_d{d}
     {
         if( m_w <= 0 or m_h <= 0 ){
             Util::LOGW( "Invalid Raster dimensions ", w, ", ", h );

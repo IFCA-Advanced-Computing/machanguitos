@@ -33,7 +33,7 @@ namespace Data {
     //--------------------------------------------------------------------------
     class RasterProxy final : public Raster {
     public:
-        RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
+        RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1, double d );
         double getValue( int layer, double x, double y ) override;
         void setValue( int layer, double x, double y, double val ) override;
         bool updateValue( int layer, double x, double y, double old, double val ) override;

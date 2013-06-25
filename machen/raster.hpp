@@ -70,7 +70,8 @@ namespace Data {
      */
     class Raster {
     public:
-        Raster( const std::string & key, int w, int h, double x0, double x1, double y0, double y1 );
+        Raster( const std::string & key, int w, int h,
+                double x0, double x1, double y0, double y1, double d );
         virtual ~Raster();
 
         bool validPosition( double x, double y );
@@ -98,6 +99,7 @@ namespace Data {
         double m_y1;
         double m_hx;
         double m_hy;
+        double m_d;
     };
 }//namespace Data
 
