@@ -40,6 +40,8 @@ namespace Util{
             }else{
                 Util::LOGE( "Lua: ", msg );
             }
+            // remove error message from stack
+            lua_pop( L, 1 );
             return false;
         }
         return true;
