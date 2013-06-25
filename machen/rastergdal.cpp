@@ -108,8 +108,8 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::save( const std::string & key ){
-        Util::LOGE( "SAVING RASTER DATA ", key );
+    void RasterGDAL::save( const std::string & filename ){
+        Util::LOGE( "SAVING RASTER DATA ", filename );
     }
 
 }//namespace Data
