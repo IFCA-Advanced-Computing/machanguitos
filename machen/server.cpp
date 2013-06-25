@@ -65,12 +65,12 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void Server::createRaster( const string & key, int w, int h,
-                       double x0, double x1, double y0, double y1 ){
+                               double x0, double x1, double y0, double y1, double d ){
         if( key.length() > MAX_CLASS_NAME ){
             LOGW( "Raster name '", key, "' too long" );
         }else{
             LOGI( "Creating raster named '", key, "'" );
-            m_newRaster.emplace_front( key, w, h, x0, x1, y0, y1 );
+            m_newRaster.emplace_front( key, w, h, x0, x1, y0, y1, d );
         }
     }
 

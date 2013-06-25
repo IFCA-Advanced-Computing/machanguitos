@@ -43,6 +43,7 @@ namespace Data {
                      y1 = 1.0,
                      w = 100,
                      h = 100,
+                     default = 250,
                   } );
         @endcode
 
@@ -55,7 +56,7 @@ namespace Data {
 
         int w{ 10 };
         int h{ 10 };
-        double x0{ 0 }, x1{ 1 }, y0{ 0 }, y1{ 1 };
+        double x0{ 0 }, x1{ 1 }, y0{ 0 }, y1{ 1 }, def{0};
 
         if( lua_istable( L, 2 ) ){            // 0
             lua_getfield( L, 2, "w" );        // 1
@@ -81,10 +82,14 @@ namespace Data {
             lua_getfield( L, 2, "y1" );       // 1
             y1 = luaL_optnumber( L, -1, y1 ); // 1
             lua_pop( L, 1 );                  // 0
+
+            lua_getfield( L, 2, "default" );  // 1
+            def = luaL_optnumber( L, -1, def );// 1
+            lua_pop( L, 1 );                  // 0
         }
 
-        auto && engine = Engine::Server::instance();
-        engine->createRaster( key, w, h, x0, x1, y0, y1 );
+        auto engine = Engine::Server::instance();
+        engine->createRaster( key, w, h, x0, x1, y0, y1, def );
 
         return 0;
     }

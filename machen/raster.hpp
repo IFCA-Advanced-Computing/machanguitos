@@ -36,7 +36,7 @@ namespace Data {
     class RasterNewData{
     public:
         RasterNewData( const std::string & key, int w, int h,
-                       double x0, double x1, double y0, double y1 );
+                       double x0, double x1, double y0, double y1, double d );
 
         /// name of the raster.
         std::string key;
@@ -52,12 +52,14 @@ namespace Data {
         double y0;
         /// bottom value of the raster.
         double y1;
+        /// default value of the raster.
+        double d;
     };
 
     //--------------------------------------------------------------------------
     inline RasterNewData::RasterNewData( const std::string & key, int w, int h,
-                                         double x0, double x1, double y0, double y1 )
-        : key{ key }, w{ w }, h{ h }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }
+                                         double x0, double x1, double y0, double y1, double d )
+        : key{ key }, w{ w }, h{ h }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }
     {
         // empty
     }

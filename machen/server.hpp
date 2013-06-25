@@ -71,7 +71,7 @@ namespace Engine{
         /// create the agents for the simulation.
         void createAgents();
         void createRaster( const std::string & key, int w, int h,
-                           double x0, double x1, double y0, double y1 );
+                           double x0, double x1, double y0, double y1, double d );
         /** Insert a config parameter.
             @param key name of the parameter.
             @param val value of the parameter.
