@@ -101,8 +101,22 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterProxy::save( const std::string & key ){
-        Util::LOGE( "SAVING RASTER DATA ", key );
+    void RasterProxy::save( const std::string & filename ){
+        Util::LOGD( "RasterProxy::save ", filename );
+        assert( filename.length() <= MAX_PATH_NAME && "name too long" );
+
+        int32_t val;
+        char * cfilename = new char [filename.length()+1];
+        strcpy( cfilename, filename.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::SAVERASTER, MPI_COMM_WORLD );
+        MPI_Send( m_ckey.get(), m_ckeyLength, MPI_CHAR, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::SAVERASTER, MPI_COMM_WORLD );
+        MPI_Send( cfilename, filename.length(), MPI_CHAR, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::SAVERASTER, MPI_COMM_WORLD );
+
+        delete[] cfilename;
     }
 
 }//namespace Data

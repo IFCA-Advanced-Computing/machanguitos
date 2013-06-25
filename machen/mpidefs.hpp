@@ -70,6 +70,8 @@ namespace Engine{
         SETRASTERVALUE = 43,
         /// update a raster value.
         UPDATERASTERVALUE = 44,
+        /// save a raster layer.
+        SAVERASTER = 45,
     };
 
     /// MPI Rank identifier of server.
