@@ -43,7 +43,7 @@ namespace Raster {
             auto raster = (Data::Raster*) lua_topointer( L, -1 );
             lua_pop( L, 1 );                         // 0
             if( raster ){
-        //         raster->save( name );
+                raster->save( name );
             }else{
                 luaL_error( L, "Invalid raster object" );
             }

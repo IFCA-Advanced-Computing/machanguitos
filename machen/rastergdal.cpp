@@ -107,6 +107,11 @@ namespace Data {
         return true;
     }
 
+    //--------------------------------------------------------------------------
+    void RasterGDAL::save( const std::string & key ){
+        Util::LOGE( "SAVING RASTER DATA ", key );
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------

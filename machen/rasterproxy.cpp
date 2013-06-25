@@ -100,6 +100,11 @@ namespace Data {
         return (ret == 1);
     }
 
+    //--------------------------------------------------------------------------
+    void RasterProxy::save( const std::string & key ){
+        Util::LOGE( "SAVING RASTER DATA ", key );
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------
