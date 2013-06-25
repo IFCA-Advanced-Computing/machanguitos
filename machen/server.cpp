@@ -33,6 +33,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mpidefs.hpp"
 #include "engine.hpp"
 #include "configlib.hpp"
+#include "rasterlib.hpp"
 #include "datalib.hpp"
 
 //------------------------------------------------------------------------------
@@ -86,6 +87,7 @@ namespace Engine{
         luaL_openlibs( m_L );
         Config::openlib( m_L );
         Data::openlib( m_L );
+        Raster::openlib( m_L );
         lua_gc( m_L, LUA_GCRESTART, 0 );
 
         // check file
