@@ -38,7 +38,7 @@ namespace Raster {
         string name = luaL_checkstring( L, -1 );
         LOGI( "saving raster into '", name, "'" );
 
-        lua_getfield( L, -4, RASTER_OBJ );           // 1
+        lua_getfield( L, -2, RASTER_OBJ );           // 1
         if( lua_islightuserdata( L, -1 ) ){
             auto raster = (Data::Raster*) lua_topointer( L, -1 );
             lua_pop( L, 1 );                         // 0
