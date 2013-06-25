@@ -195,7 +195,13 @@ namespace Engine {
         MPI_Get_count( &status, MPI_CHAR, &count );
         cfilename[count] = 0;
 
-        LOGI( "Saving raster ", ckey, " -> ", cfilename );
+        auto ds = Engine::DataServer::instance();
+        auto raster = ds->getRaster( ckey );
+        if( raster ){
+            raster->save( cfilename );
+        }else{
+            LOGE( "Invalid Raster '", ckey, "'" );
+        }
     }
 
     //--------------------------------------------------------------------------

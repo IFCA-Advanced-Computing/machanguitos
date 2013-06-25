@@ -27,6 +27,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include "gdal_priv.h"
 #include "common/log.hpp"
+#include "common/util.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
@@ -108,8 +109,20 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::save( const std::string & filename ){
-        Util::LOGE( "SAVING RASTER DATA ", filename );
+    void RasterGDAL::save( const string & filename ){
+        auto type = Util::getGDALDriverName( filename );
+        if( type ){
+            auto driver = GetGDALDriverManager()->GetDriverByName( (*type).c_str() );
+            if( driver ){
+                auto dstDS = driver->CreateCopy( filename.c_str(), m_data, false,
+                                                 nullptr, nullptr, nullptr );
+                if( dstDS ){
+                    GDALClose( dstDS );
+                }
+            }
+        }else{
+            Util::LOGE( "Can't get filetype for '", filename, "'" );
+        }
     }
 
 }//namespace Data
