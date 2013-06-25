@@ -52,6 +52,8 @@ namespace Engine {
         MPI_Send( dvals, 4, MPI_DOUBLE, DATASERVER_RANK,
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
         delete[] ckey;
+
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1, y0, y1 );
     }
 
     //--------------------------------------------------------------------------
