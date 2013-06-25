@@ -54,8 +54,9 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void DataServerLocal::createRasterProxy( const string & key, int w, int h,
-                                              double x0, double x1, double y0, double y1 ){
+    void DataServerLocal::createRasterProxy( const string & key, int /*w*/, int /*h*/,
+                                             double /*x0*/, double /*x1*/,
+                                             double /*y0*/, double /*y1*/ ){
         Util::LOGD( "DataServerLocal::createRasterProxy ", key );
     }
 
