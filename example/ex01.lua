@@ -10,8 +10,9 @@ function initialize()
                         x1 = 20.0,
                         y0 = 0.0,
                         y1 = 20.0,
-                        w = 100,
-                        h = 100,
+                        w = 200,
+                        h = 200,
+                        default = 250,
                      } );
 
    config.addAgent( "cow", 10 );
@@ -32,6 +33,7 @@ end
 
 function endIteration( num )
    io.write( "End iteration " .. num .. "\n" )
+   raster.grass:save( "output"..num..".png" )
 end
 
 function endSimulation()
