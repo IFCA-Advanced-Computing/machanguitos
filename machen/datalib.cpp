@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include "dataserver.hpp"
 #include "common/util.hpp"
+#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
@@ -95,11 +96,63 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    /** Define data.loadLayer library function.
+
+        This function create a layer in the datastore and load its contents from
+        file.
+
+        @code{.lua}
+        data.loadLayer( "area", "area.png",
+                  {
+                     x0 = 0.0,
+                     x1 = 1.0,
+                     y0 = 0.0,
+                     y1 = 1.0,
+                  } );
+        @endcode
+
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
+    int data_loadLayer( lua_State *L ){
+        std::string key = luaL_checkstring( L , 1 );
+        std::string file = luaL_checkstring( L , 2 );
+
+        double x0{ 0 }, x1{ 1 }, y0{ 0 }, y1{ 1 };
+
+        if( lua_istable( L, 3 ) ){            // 0
+            lua_getfield( L, 3, "x0" );       // 1
+            x0 = luaL_optnumber( L, -1, x0 ); // 1
+            lua_pop( L, 1 );                  // 0
+
+            lua_getfield( L, 3, "x1" );       // 1
+            x1 = luaL_optnumber( L, -1, x1 ); // 1
+            lua_pop( L, 1 );                  // 0
+
+            lua_getfield( L, 3, "y0" );       // 1
+            y0 = luaL_optnumber( L, -1, y0 ); // 1
+            lua_pop( L, 1 );                  // 0
+
+            lua_getfield( L, 3, "y1" );       // 1
+            y1 = luaL_optnumber( L, -1, y1 ); // 1
+            lua_pop( L, 1 );                  // 0
+        }
+
+        Util::LOGI( "load layer ", key, " -> ", file );
+        //auto engine = Engine::Server::instance();
+        //engine->createRaster( key, w, h, x0, x1, y0, y1, def );
+
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     /** List of functions of data lua library for Agent Config file.
         @ingroup Config
      */
     const luaL_Reg datalib[] = {
         {"createLayer",   data_createLayer},
+        {"loadLayer",   data_loadLayer},
         {nullptr, nullptr}
     };
 
