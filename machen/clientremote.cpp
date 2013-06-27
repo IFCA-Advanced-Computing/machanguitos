@@ -70,17 +70,26 @@ namespace Engine{
         Util::LOGD( "ClientRemote::createRaster ", raster.key );
         assert( raster.key.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{raster.w};
+        int32_t ival{raster.h};
+        double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1, raster.d};
         char * ckey = new char [raster.key.length()+1];
         strcpy( ckey, raster.key.c_str() );
 
-        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
-        MPI_Send( ckey, raster.key.length(), MPI_CHAR, m_dest,
-                  MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
-        int32_t ival{raster.h};
-        MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
-        double dvals[]{raster.x0, raster.x1, raster.y0, raster.y1, raster.d};
-        MPI_Send( dvals, 5, MPI_DOUBLE, m_dest,
-                  MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
+        switch( raster.rasterType ){
+        case Data::RasterNewType::RNT_EMPTY:
+            MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
+            MPI_Send( ckey, raster.key.length(), MPI_CHAR, m_dest,
+                      MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
+            MPI_Send( &ival, 1, MPI_INT, m_dest, MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
+            MPI_Send( dvals, 5, MPI_DOUBLE, m_dest,
+                      MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD );
+            break;
+
+        case Data::RasterNewType::RNT_FILE:
+            assert( false && "ClientRemote unimplemented" );
+            break;
+        }
+
         delete[] ckey;
     }
 

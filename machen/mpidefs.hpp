@@ -72,6 +72,8 @@ namespace Engine{
         UPDATERASTERVALUE = 44,
         /// save a raster layer.
         SAVERASTER = 45,
+        /// load a raster layer.
+        LOADRASTER = 46,
     };
 
     /// MPI Rank identifier of server.

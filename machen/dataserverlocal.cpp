@@ -54,6 +54,12 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void DataServerLocal::loadRaster( const string & key, const string & filename,
+                                      double x0, double x1, double y0, double y1 ){
+        assert( false && "implemented" );
+    }
+
+    //--------------------------------------------------------------------------
     void DataServerLocal::createRasterProxy( const string & key, int /*w*/, int /*h*/,
                                              double /*x0*/, double /*x1*/,
                                              double /*y0*/, double /*y1*/, double /*d*/ ){

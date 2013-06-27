@@ -26,7 +26,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include "dataserver.hpp"
 #include "common/util.hpp"
-#include "common/log.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
@@ -139,9 +138,8 @@ namespace Data {
             lua_pop( L, 1 );                  // 0
         }
 
-        Util::LOGI( "load layer ", key, " -> ", file );
-        //auto engine = Engine::Server::instance();
-        //engine->createRaster( key, w, h, x0, x1, y0, y1, def );
+        auto engine = Engine::Server::instance();
+        engine->loadRaster( key, file, x0, x1, y0, y1 );
 
         return 0;
     }

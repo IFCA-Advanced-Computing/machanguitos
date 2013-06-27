@@ -75,6 +75,23 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void Server::loadRaster( const string & key, const string & file,
+                             double x0, double x1, double y0, double y1 ){
+        if( key.length() > MAX_CLASS_NAME ){
+            LOGW( "Raster name '", key, "' too long" );
+            return;
+        }
+
+        if( file.length() > MAX_PATH_NAME ){
+            LOGW( "Raster filename '", file, "' too long" );
+            return;
+        }
+
+        LOGI( "Loading raster named '", key, "' <- '", file, "'" );
+        m_newRaster.emplace_front( key, file, x0, x1, y0, y1 );
+    }
+
+    //--------------------------------------------------------------------------
     bool Server::initialize( const string & filename ){
         // Lua Initialization
         m_L = luaL_newstate();
@@ -137,7 +154,15 @@ namespace Engine{
 
         auto ds = Engine::DataServer::instance();
         for( const auto nr: m_newRaster ){
-            ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
+            switch( nr.rasterType ){
+            case Data::RasterNewType::RNT_EMPTY:
+                ds->createRaster( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
+                break;
+
+            case Data::RasterNewType::RNT_FILE:
+                ds->loadRaster( nr.key, nr.filename, nr.x0, nr.x1, nr.y0, nr.y1 );
+                break;
+            }
         }
 
         return true;

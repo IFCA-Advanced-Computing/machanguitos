@@ -29,17 +29,28 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Data {
+    enum class RasterNewType : unsigned char {
+        RNT_EMPTY,
+            RNT_FILE,
+    };
+
     //--------------------------------------------------------------------------
     /** Data for used when create a New Raster.
         @ingroup Data
      */
     class RasterNewData{
     public:
-        RasterNewData( const std::string & key, int w, int h,
+        explicit RasterNewData( const std::string & key, int w, int h,
                        double x0, double x1, double y0, double y1, double d );
+        explicit RasterNewData( const std::string & key, const std::string & file,
+                       double x0, double x1, double y0, double y1 );
 
+        /// type of new raster data.
+        RasterNewType rasterType;
         /// name of the raster.
         std::string key;
+        /// filename of the raster.
+        std::string filename;
         /// width of the raster.
         int w;
         /// height of the raster.
@@ -59,7 +70,17 @@ namespace Data {
     //--------------------------------------------------------------------------
     inline RasterNewData::RasterNewData( const std::string & key, int w, int h,
                                          double x0, double x1, double y0, double y1, double d )
-        : key{ key }, w{ w }, h{ h }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }
+        : rasterType{RasterNewType::RNT_EMPTY}, key{ key }, w{ w }, h{ h },
+        x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }
+    {
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
+    inline RasterNewData::RasterNewData( const std::string & key, const std::string & file,
+                                         double x0, double x1, double y0, double y1 )
+        : rasterType{RasterNewType::RNT_FILE}, key{ key }, filename{ file }, w{ 1 }, h{ 1 },
+        x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ 0 }
     {
         // empty
     }

@@ -72,6 +72,8 @@ namespace Engine{
         void createAgents();
         void createRaster( const std::string & key, int w, int h,
                            double x0, double x1, double y0, double y1, double d );
+        void loadRaster( const std::string & key, const std::string & file,
+                         double x0, double x1, double y0, double y1 );
         /** Insert a config parameter.
             @param key name of the parameter.
             @param val value of the parameter.

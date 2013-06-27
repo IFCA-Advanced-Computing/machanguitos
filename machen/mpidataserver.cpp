@@ -205,6 +205,44 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runLoadRaster( int src ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagDS::LOADRASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        char cfilename[MAX_PATH_NAME+1];
+        MPI_Recv( &cfilename, MAX_PATH_NAME, MPI_CHAR, src,
+                  MpiTagDS::LOADRASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cfilename[count] = 0;
+
+        double dval[4];
+        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
+                  MpiTagDS::LOADRASTER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        auto ds = Engine::DataServer::instance();
+        ds->loadRaster( ckey, cfilename, dval[0], dval[1], dval[2], dval[3] );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -230,6 +268,10 @@ namespace Engine {
 
         case MpiTagDS::SAVERASTER:
             runSaveRaster( src );
+            break;
+
+        case MpiTagDS::LOADRASTER:
+            runLoadRaster( src );
             break;
 
         default:
