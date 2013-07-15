@@ -29,7 +29,6 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config.h"
 #include "mpidefs.hpp"
 
-
 //------------------------------------------------------------------------------
 namespace Engine{
     using namespace std;
@@ -86,7 +85,20 @@ namespace Engine{
             break;
 
         case Data::RasterNewType::RNT_FILE:
-            assert( false && "ClientRemote unimplemented" );
+            MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::LOADRASTERCLIENT,
+                      MPI_COMM_WORLD );
+            MPI_Send( ckey, raster.key.length(), MPI_CHAR, m_dest,
+                      MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD );
+
+            char * cfile = new char [raster.filename.length()+1];
+            strcpy( cfile, raster.filename.c_str() );
+
+            MPI_Send( cfile, raster.filename.length(), MPI_CHAR, m_dest,
+                      MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD );
+            MPI_Send( dvals, 4, MPI_DOUBLE, m_dest,
+                      MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD );
+
+            delete[] cfile;
             break;
         }
 

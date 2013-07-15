@@ -56,6 +56,8 @@ namespace Engine{
         SETSTARTTIME = 24,
         /// create a Raster Layer Tag.
         CREATERASTERCLIENT = 25,
+        /// load a Raster Layer Tag.
+        LOADRASTERCLIENT = 26,
     };
 
     /** MPI message Tags for Data Server.
