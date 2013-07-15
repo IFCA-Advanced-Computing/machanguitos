@@ -55,6 +55,8 @@ namespace Engine{
             @param w width of the raster layer.
          */
         void runCreateRasterClient( int src, const int w );
+        /// Execute a Create Raster command.
+        void runLoadRasterClient( int src );
         /// Execute a End command.
         void runAgents( int src );
 

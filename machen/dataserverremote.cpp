@@ -34,7 +34,9 @@ namespace Engine {
 
     //--------------------------------------------------------------------------
     void DataServerRemote::createRaster( const string & key, int w, int h,
-                                         double x0, double x1, double y0, double y1, double d ){
+                                         double x0, double x1,
+                                         double y0, double y1, double d )
+    {
         Util::LOGD( "DataServerRemote::createRaster ", key );
         assert( key.length() <= MAX_CLASS_NAME && "name too long" );
         int32_t val{w};
@@ -53,12 +55,16 @@ namespace Engine {
                   MpiTagDS::CREATERASTER, MPI_COMM_WORLD );
         delete[] ckey;
 
-        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1, y0, y1, d );
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1,
+                                                              y0, y1, d );
     }
 
     //--------------------------------------------------------------------------
-    void DataServerRemote::loadRaster( const std::string & key, const std::string & filename,
-                                       double x0, double x1, double y0, double y1 ){
+    void DataServerRemote::loadRaster( const std::string & key,
+                                       const std::string & filename,
+                                       double x0, double x1,
+                                       double y0, double y1 )
+    {
         Util::LOGD( "DataServerRemote::loadRaster ", key, " ", filename );
         assert( key.length() <= MAX_CLASS_NAME && "name too long" );
         assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
@@ -81,14 +87,31 @@ namespace Engine {
         delete[] ckey;
         delete[] cfilename;
 
-        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, 1, 1, x0, x1, y0, y1, 0 );
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, 1, 1, x0, x1,
+                                                              y0, y1, 0 );
     }
 
     //--------------------------------------------------------------------------
     void DataServerRemote::createRasterProxy( const string & key, int w, int h,
-                                              double x0, double x1, double y0, double y1, double d ){
+                                              double x0, double x1,
+                                              double y0, double y1, double d )
+    {
         Util::LOGD( "DataServerRemote::createRasterProxy '", key, "'" );
-        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1, y0, y1, d );
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, w, h, x0, x1,
+                                                              y0, y1, d );
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerRemote::createRasterProxy( const string & key,
+                                              const string & filename,
+                                              double x0, double x1,
+                                              double y0, double y1 )
+    {
+        Util::LOGD( "DataServerRemote::createRasterProxy '", key, "' ",
+                    filename );
+        m_rasters[key] = std::make_shared<Data::RasterProxy>( key, 1, 1,
+                                                              x0, x1, y0, y1,
+                                                              0 );
     }
 
 }//namespace Engine

@@ -65,6 +65,10 @@ namespace Engine{
             runCreateRasterClient( src, val );
             break;
 
+        case MpiTagCS::LOADRASTERCLIENT:
+            runLoadRasterClient( src );
+            break;
+
         default:
             return false;
         }
@@ -172,6 +176,45 @@ namespace Engine{
 
         auto && ds = Engine::DataServer::instance();
         ds->createRasterProxy( ckey, w, ival, dval[0], dval[1], dval[2], dval[3], dval[4] );
+    }
+
+    //--------------------------------------------------------------------------
+    void MPIClientServer::runLoadRasterClient( int src ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on ", m_rank );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        char cfilename[MAX_PATH_NAME+1];
+        MPI_Recv( &cfilename, MAX_PATH_NAME, MPI_CHAR, src,
+                  MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cfilename[count] = 0;
+
+        double dval[4];
+        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
+                  MpiTagCS::LOADRASTERCLIENT, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on ", m_rank );
+            Engine::abort();
+        }
+
+        auto && ds = Engine::DataServer::instance();
+        ds->createRasterProxy( ckey, cfilename,
+                               dval[0], dval[1], dval[2], dval[3] );
     }
 }
 
