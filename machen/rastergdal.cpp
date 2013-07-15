@@ -25,12 +25,15 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cassert>
 #include <cfloat>
 #include <iostream>
+#include <boost/filesystem.hpp>
 #include "gdal_priv.h"
 #include "common/log.hpp"
 #include "common/util.hpp"
+#include "engine.hpp"
 
 //------------------------------------------------------------------------------
 namespace Data {
+    using namespace boost::filesystem;
     using namespace std;
 
     //--------------------------------------------------------------------------
@@ -55,6 +58,29 @@ namespace Data {
                 }
             }
         }
+    }
+
+    //--------------------------------------------------------------------------
+    RasterGDAL::RasterGDAL( const string & key, const string & filename,
+                            double x0, double x1, double y0, double y1 )
+        : Raster{key, 1, 1, x0, x1, y0, y1, 0.0 }
+    {
+        auto dir = Engine::getDataDir();
+        path fullpath = path(dir) /= filename;
+
+        if( !is_regular_file(fullpath) ){
+            Util::LOGE( "Not file for raster '", fullpath, "'" );
+            terminate();
+        }
+
+        m_data = (GDALDataset *) GDALOpen( fullpath.c_str(), GA_ReadOnly );
+        if( ! m_data ){
+            Util::LOGE( "ERROR Loading data" );
+            terminate();
+        }
+
+        m_w = m_data->GetRasterXSize();
+        m_h = m_data->GetRasterYSize();
     }
 
     //--------------------------------------------------------------------------
