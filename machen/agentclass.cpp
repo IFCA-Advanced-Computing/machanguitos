@@ -174,6 +174,28 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define the  io.write funcion.
+        @param L lua_State.
+        @ingroup Agent
+        @retval 0 No return values to Lua.
+     */
+    int io_write( lua_State * L ){
+        auto msg = luaL_checkstring( L, 1 );
+        lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
+        if( lua_islightuserdata( L, -1 ) ){
+            auto agent = (AgentInstance*) lua_topointer( L, -1 );
+            lua_pop( L, 1 );                     // 0
+            if( agent ){
+                agent->newMessage( msg );
+            }else{
+                luaL_error( L, "Invalid agent object" );
+            }
+        }
+
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     AgentClass::AgentClass( lua_State * L ) : m_L{L} {
         assert( m_L && "AgentClass creation with invalid Lua State" );
     }
@@ -200,6 +222,12 @@ namespace Agent{
             lua_settable( m_L, -3 );                                  // 2
             lua_setmetatable( m_L, -2 );                              // 1
             lua_setfield( m_L, LUA_GLOBALSINDEX, "raster");           // 0
+            // set "io" data
+            lua_newtable( m_L );                                      // 1
+            lua_pushstring( m_L, "write");                            // 2
+            lua_pushcfunction( m_L, io_write );                       // 3
+            lua_settable( m_L, -3 );                                  // 1
+            lua_setfield( m_L, LUA_GLOBALSINDEX, "io" );              // 0
         }
     }
 

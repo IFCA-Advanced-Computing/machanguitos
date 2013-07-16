@@ -138,6 +138,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    void AgentInstance::newMessage( string && msg ){
+        LOGW( "IO : ", msg );
+    }
+
+    //--------------------------------------------------------------------------
     void AgentInstance::outVars( const double t ) const{
         auto outKeys = m_class->getOutVars();
 

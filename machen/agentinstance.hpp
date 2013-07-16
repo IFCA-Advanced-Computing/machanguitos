@@ -89,6 +89,10 @@ namespace Agent{
             @param key name of the variable to save.
          */
         void newData( lua_State * L, const std::string & key );
+        /** Save a output message of Agent Instance.
+            @param msg output message.
+         */
+        void newMessage( std::string && msg );
         double getRasterValue( Data::Raster & raster, int layer, double x, double y );
         bool setRasterValue( Data::Raster & raster, int layer, double x, double y, double v );
     private:

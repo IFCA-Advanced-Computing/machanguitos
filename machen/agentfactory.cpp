@@ -102,7 +102,11 @@ namespace Agent{
         }
 
         lua_gc( L, LUA_GCSTOP, 0 );
-        luaL_openlibs( L );
+        //luaL_openlibs( L );
+        luaopen_base( L );
+        luaopen_string( L );
+        luaopen_math( L );
+        luaopen_table( L );
         lua_newtable( L );
         lua_setfield(L, LUA_GLOBALSINDEX, SCRIPT_AGENT_NAME );
         lua_gc( L, LUA_GCRESTART, 0 );
