@@ -90,7 +90,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     void ClientLocal::runAgents( const double delta ){
-        for( auto && obj: m_objects ){
+        for( auto & obj: m_objects ){
             obj->update( delta );
         }
 
@@ -99,7 +99,7 @@ namespace Engine{
         auto db = IO::DataStore::instance();
 
         if( db->connect() ){
-            for( auto && obj: m_objects ){
+            for( auto & obj: m_objects ){
                 obj->outVars( m_startTime + m_totalTime );
             }
             db->disconnect();
