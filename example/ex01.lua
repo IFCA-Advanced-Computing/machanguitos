@@ -15,6 +15,14 @@ function initialize()
                         default = 250,
                      } );
 
+   data.loadLayer( "area", "area.png",
+                   {
+                      x0 = 0.0,
+                      x1 = 20.0,
+                      y0 = 0.0,
+                      y1 = 20.0,
+                   } );
+
    config.addAgent( "cow", 10 );
    config.addAgent( "cat", 3 );
 
