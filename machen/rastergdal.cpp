@@ -121,31 +121,6 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    bool RasterGDAL::updateValue( int layer, double x, double y, double old, double val ){
-        auto rasterBand = m_data->GetRasterBand( layer + 1 );
-        if( rasterBand ){
-            auto pos = getPosition( x, y );
-            float pixel;
-
-            rasterBand->RasterIO( GF_Read, get<0>(pos), get<1>(pos), 1, 1,
-                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
-            if( fabs(pixel - old) <= FLT_EPSILON ){
-                float pixel = val;
-
-                rasterBand->RasterIO( GF_Write, get<0>(pos), get<1>(pos), 1, 1,
-                                      &pixel, 1, 1, GDT_Float32, 0, 0 );
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            Util::LOGE( "Invalid raster layer ", layer );
-        }
-
-        return true;
-    }
-
-    //--------------------------------------------------------------------------
     void RasterGDAL::save( const string & filename ){
         auto type = Util::getGDALDriverName( filename );
         if( type ){

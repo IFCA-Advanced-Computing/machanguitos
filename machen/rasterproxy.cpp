@@ -78,29 +78,6 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    bool RasterProxy::updateValue( int layer, double x, double y, double old, double v ){
-        int32_t val{layer};
-        MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
-                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD );
-        MPI_Send( m_ckey.get(), m_ckeyLength, MPI_CHAR, Engine::DATASERVER_RANK,
-                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD );
-        double dvals[]{x, y, old, v};
-        MPI_Send( dvals, 4, MPI_DOUBLE, Engine::DATASERVER_RANK,
-                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD );
-
-        MPI_Status status;
-        uint8_t ret;
-        MPI_Recv( &ret, 1, MPI_BYTE, Engine::DATASERVER_RANK,
-                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            Util::LOGE( "Return Received on RasterProxy" );
-            Engine::abort();
-        }
-
-        return (ret == 1);
-    }
-
-    //--------------------------------------------------------------------------
     void RasterProxy::save( const std::string & filename ){
         Util::LOGD( "RasterProxy::save ", filename );
         assert( filename.length() <= MAX_PATH_NAME && "name too long" );
