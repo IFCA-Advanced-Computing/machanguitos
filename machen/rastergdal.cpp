@@ -93,12 +93,61 @@ namespace Data {
         auto rasterBand = m_data->GetRasterBand( layer + 1 );
         if( rasterBand ){
             auto pos = getPosition( x, y );
-            float pixel;
+            auto x = get<0>(pos);
+            auto y = get<1>(pos);
+            auto datatype = rasterBand->GetRasterDataType();
+            double ret = 0;
+            uint8_t pixel_byte;
+            uint16_t pixel_uint16;
+            int16_t pixel_int16;
+            uint32_t pixel_uint32;
+            int32_t pixel_int32;
+            float pixel_float32;
 
-            rasterBand->RasterIO( GF_Read, get<0>(pos), get<1>(pos), 1, 1,
-                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
+            switch( datatype ){
+            case GDT_Byte:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_byte, 1, 1, datatype, 0, 0 );
+                ret = pixel_byte;
+                break;
 
-            return pixel;
+            case GDT_UInt16:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_uint16, 1, 1, datatype, 0, 0 );
+                ret = pixel_uint16;
+                break;
+
+            case GDT_Int16:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_int16, 1, 1, datatype, 0, 0 );
+                ret = pixel_int16;
+                break;
+
+            case GDT_UInt32:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_uint32, 1, 1, datatype, 0, 0 );
+                ret = pixel_uint32;
+                break;
+
+            case GDT_Int32:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_int32, 1, 1, datatype, 0, 0 );
+                ret = pixel_int32;
+                break;
+
+            case GDT_Float32:
+                rasterBand->RasterIO( GF_Read, x, y, 1, 1,
+                                      &pixel_float32, 1, 1, datatype, 0, 0 );
+                ret = pixel_float32;
+                break;
+
+            default:
+                Util::LOGE( "Raster Unknown type" );
+                break;
+
+            }
+
+            return ret;
         }else{
             Util::LOGE( "Invalid raster layer ", layer );
         }
@@ -111,10 +160,57 @@ namespace Data {
         auto rasterBand = m_data->GetRasterBand( layer + 1 );
         if( rasterBand ){
             auto pos = getPosition( x, y );
-            float pixel = val;
+            auto x = get<0>(pos);
+            auto y = get<1>(pos);
+            auto datatype = rasterBand->GetRasterDataType();
+            uint8_t pixel_byte;
+            uint16_t pixel_uint16;
+            int16_t pixel_int16;
+            uint32_t pixel_uint32;
+            int32_t pixel_int32;
+            float pixel_float32;
 
-            rasterBand->RasterIO( GF_Write, get<0>(pos), get<1>(pos), 1, 1,
-                                  &pixel, 1, 1, GDT_Float32, 0, 0 );
+            switch( datatype ){
+            case GDT_Byte:
+                pixel_byte = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_byte, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_UInt16:
+                pixel_uint16 = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_uint16, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Int16:
+                pixel_int16 = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_int16, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_UInt32:
+                pixel_uint32 = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_uint32, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Int32:
+                pixel_int32 = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_int32, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Float32:
+                pixel_float32 = val;
+                rasterBand->RasterIO( GF_Write, x, y, 1, 1,
+                                      &pixel_float32, 1, 1, datatype, 0, 0 );
+                break;
+
+            default:
+                Util::LOGE( "Raster Unknown type" );
+                break;
+            }
         }else{
             Util::LOGE( "Invalid raster layer ", layer );
         }
