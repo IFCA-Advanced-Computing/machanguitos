@@ -50,7 +50,8 @@ namespace Engine {
                                 double y0, double y1 ) override;
         void setRasterUpdate( const std::string & key,
                               const std::string & filename ) override;
-        void updateLayers() override;
+        void updateLayers( const double delta ) override;
+
     };
 
 }//namespace Engine

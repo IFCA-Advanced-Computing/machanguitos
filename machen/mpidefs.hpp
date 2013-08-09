@@ -76,6 +76,8 @@ namespace Engine{
         LOADRASTER = 46,
         /// setups raster layer update script.
         SETRASTERUPDATE = 47,
+        /// update layers Message Tag.
+        UPDATELAYERS = 48,
     };
 
     /// MPI Rank identifier of server.

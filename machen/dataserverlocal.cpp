@@ -87,7 +87,7 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void DataServerLocal::updateLayers(){
+    void DataServerLocal::updateLayers( const double delta ){
         Util::LOGD( "DataServerLocal::updateLayers" );
     }
 

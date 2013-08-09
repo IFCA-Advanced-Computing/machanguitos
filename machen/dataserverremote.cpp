@@ -139,8 +139,14 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void DataServerRemote::updateLayers(){
+    void DataServerRemote::updateLayers( const double delta ){
         Util::LOGD( "DataServerRemote::updateLayers" );
+        int32_t val{0};
+        double d{delta};
+        MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK, MpiTagDS::UPDATELAYERS,
+                  MPI_COMM_WORLD );
+        MPI_Send( &d, 1, MPI_DOUBLE, DATASERVER_RANK, MpiTagDS::UPDATELAYERS,
+                  MPI_COMM_WORLD );
     }
 
 }//namespace Engine

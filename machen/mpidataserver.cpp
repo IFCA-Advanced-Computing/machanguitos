@@ -238,6 +238,21 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runUpdateLayers( int src ){
+        double val;
+        MPI_Status status;
+        MPI_Recv( &val, 1, MPI_DOUBLE, src,
+                  MpiTagDS::UPDATELAYERS, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        auto ds = Engine::DataServer::instance();
+        ds->updateLayers( val );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -267,6 +282,10 @@ namespace Engine {
 
         case MpiTagDS::SETRASTERUPDATE:
             runSetRasterUpdate( src );
+            break;
+
+        case MpiTagDS::UPDATELAYERS:
+            runUpdateLayers( src );
             break;
 
         default:

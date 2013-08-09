@@ -293,7 +293,7 @@ namespace Engine{
             }
 
             clientsBarrier();
-            ds->updateLayers();
+            ds->updateLayers( delta );
             endIterationScript( i+1 );
         }
 
