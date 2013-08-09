@@ -96,6 +96,16 @@ namespace Data {
         delete[] cfilename;
     }
 
+    //--------------------------------------------------------------------------
+    void RasterProxy::setRasterUpdate( const std::string & /*filename*/ ){
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
+    void RasterProxy::update( const double /*delta*/ ){
+        // empty
+    }
+
 }//namespace Data
 
 //------------------------------------------------------------------------------
