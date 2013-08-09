@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RASTERGDAL_HPP
 
 //------------------------------------------------------------------------------
+#include "lua.hpp"
 #include "raster.hpp"
 
 //------------------------------------------------------------------------------
@@ -31,6 +32,18 @@ class GDALDataset;
 
 //------------------------------------------------------------------------------
 namespace Data {
+    //--------------------------------------------------------------------------
+    /** Raster Table Name for Lua files.
+        @ingroup Agent
+     */
+    constexpr const char * SCRIPT_RASTER_NAME = "Raster";
+
+    //--------------------------------------------------------------------------
+    /** private name of RasterGDAL objects in Lua tables.
+        @ingroup Agent
+     */
+    constexpr const char * SCRIPT_GLOBAL_RASTER_OBJ = "__gro";
+
     //--------------------------------------------------------------------------
     class RasterGDAL final : public Raster {
     public:
@@ -46,6 +59,9 @@ namespace Data {
 
     private:
         GDALDataset * m_data;
+
+        /// Lua State
+        lua_State * m_L = nullptr;
     };
 
 }//namespace Data

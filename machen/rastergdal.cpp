@@ -234,11 +234,26 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::setRasterUpdate( const std::string & /*filename*/ ){
+    void RasterGDAL::setRasterUpdate( const std::string & filename ){
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::update( const double /*delta*/ ){
+    void RasterGDAL::update( const double delta ){
+        if( m_L ){
+            lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );    // 1
+            lua_getfield( m_L, -1, "update");                             // 2
+            if( lua_isfunction( m_L, -1 ) ){
+                lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );// 3
+                lua_pushlightuserdata( m_L, (void*)this );                // 4
+                lua_setglobal( m_L, SCRIPT_GLOBAL_RASTER_OBJ );           // 3
+                lua_pushnumber( m_L, delta );                             // 4
+                auto ret = lua_pcall( m_L, 2, 0, 0 );                     // 1
+                Util::checkLuaReturn( m_L, ret );
+                lua_pop( m_L, 1 );                                        // 0
+            }else{
+                lua_pop( m_L, 2 );                                        // 0
+            }
+        }
     }
 
 }//namespace Data
