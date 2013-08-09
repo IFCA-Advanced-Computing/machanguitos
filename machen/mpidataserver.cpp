@@ -1,3 +1,4 @@
+
 /*******************************************************************************
 Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
 Institute of Physics of Cantabria (IFCA).
@@ -207,6 +208,36 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runSetRasterUpdate( int src ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        char cfilename[MAX_PATH_NAME+1];
+        MPI_Recv( &cfilename, MAX_PATH_NAME, MPI_CHAR, src,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cfilename[count] = 0;
+
+        auto ds = Engine::DataServer::instance();
+        ds->setRasterUpdate( ckey, cfilename );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -232,6 +263,10 @@ namespace Engine {
 
         case MpiTagDS::LOADRASTER:
             runLoadRaster( src );
+            break;
+
+        case MpiTagDS::SETRASTERUPDATE:
+            runSetRasterUpdate( src );
             break;
 
         default:

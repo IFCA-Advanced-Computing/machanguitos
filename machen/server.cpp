@@ -185,6 +185,10 @@ namespace Engine{
                 ds->loadRaster( nr.key, nr.filename, nr.x0, nr.x1, nr.y0, nr.y1 );
                 break;
             }
+
+            if( nr.updatescript.length() > 0 ){
+                ds->setRasterUpdate( nr.key, nr.updatescript );
+            }
         }
 
         return true;
@@ -277,6 +281,7 @@ namespace Engine{
         auto iters = getConfigInt( "iters", 10 );
         auto startt = getConfigNumber( "starttime", 0 );
         auto endt = getConfigNumber( "endtime", 10 );
+        auto ds = Engine::DataServer::instance();
 
         double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
 
@@ -288,6 +293,7 @@ namespace Engine{
             }
 
             clientsBarrier();
+            ds->updateLayers();
             endIterationScript( i+1 );
         }
 

@@ -114,6 +114,35 @@ namespace Engine {
                                                               0 );
     }
 
+    //--------------------------------------------------------------------------
+    void DataServerRemote::setRasterUpdate( const string & key,
+                                            const string & filename )
+    {
+        Util::LOGD( "DataServerRemote::setRasterUpdate ", key, " ", filename );
+        assert( key.length() <= MAX_CLASS_NAME && "name too long" );
+        assert( filename.length() <= MAX_PATH_NAME && "filename too long" );
+        int32_t val;
+        char * ckey = new char [key.length()+1];
+        strcpy( ckey, key.c_str() );
+        char * cfilename = new char [filename.length()+1];
+        strcpy( cfilename, filename.c_str() );
+
+        MPI_Send( &val, 1, MPI_INT, DATASERVER_RANK,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD );
+        MPI_Send( ckey, key.length(), MPI_CHAR, DATASERVER_RANK,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD );
+        MPI_Send( cfilename, filename.length(), MPI_CHAR, DATASERVER_RANK,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD );
+
+        delete[] ckey;
+        delete[] cfilename;
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerRemote::updateLayers(){
+        Util::LOGD( "DataServerRemote::updateLayers" );
+    }
+
 }//namespace Engine
 
 //------------------------------------------------------------------------------

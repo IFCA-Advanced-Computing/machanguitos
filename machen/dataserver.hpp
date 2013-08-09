@@ -56,7 +56,9 @@ namespace Engine {
                                         const std::string & filename,
                                         double x0, double x1,
                                         double y0, double y1 )=0;
-
+        virtual void setRasterUpdate( const std::string & key,
+                                      const std::string & filename )=0;
+        virtual void updateLayers()=0;
     protected:
         std::map<std::string,std::shared_ptr<Data::Raster>> m_rasters;
 
