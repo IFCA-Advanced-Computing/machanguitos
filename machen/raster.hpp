@@ -51,6 +51,8 @@ namespace Data {
         std::string key;
         /// filename of the raster.
         std::string filename;
+        /// updatescript
+        std::string updatescript;
         /// width of the raster.
         int w;
         /// height of the raster.

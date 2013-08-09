@@ -92,6 +92,28 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void Server::setRasterLayerUpdate( const string & key,
+                                       const string & file )
+    {
+        if( file.length() > MAX_PATH_NAME ){
+            LOGW( "Raster filename script '", file, "' too long" );
+            return;
+        }
+
+        auto raster = find_if( m_newRaster.begin(), m_newRaster.end(),
+                            [&](const Data::RasterNewData &x){
+                                   return x.key == key; } );
+
+        if( raster == m_newRaster.end() ){
+            LOGW( "Raster name '", key, "' doesn't exist" );
+            return;
+        }
+
+        LOGI( "Set raster named '", key, "' update script '", file, "'" );
+        raster->updatescript = file;
+    }
+
+    //--------------------------------------------------------------------------
     bool Server::initialize( const string & filename ){
         // Lua Initialization
         m_L = luaL_newstate();

@@ -74,6 +74,8 @@ namespace Engine{
                            double x0, double x1, double y0, double y1, double d );
         void loadRaster( const std::string & key, const std::string & file,
                          double x0, double x1, double y0, double y1 );
+        void setRasterLayerUpdate( const std::string & key,
+                                   const std::string & file );
         /** Insert a config parameter.
             @param key name of the parameter.
             @param val value of the parameter.
