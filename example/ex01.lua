@@ -15,6 +15,8 @@ function initialize()
                         default = 250,
                      } )
 
+   data.setLayerUpdate( "grass", "grassupdate" )
+
    data.loadLayer( "area", "area.png",
                    {
                       x0 = 0.0,
