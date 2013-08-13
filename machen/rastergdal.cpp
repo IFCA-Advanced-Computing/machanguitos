@@ -235,7 +235,38 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::setRasterUpdate( const std::string & filename ){
+    void RasterGDAL::setRasterUpdate( const std::string & name ){
+        LOGD( "RasterGDAL::setRasterUpdate '", name, "'" );
+        auto dir = Engine::getDataDir();
+        path filename = path(dir) /= (name + ".lua");
+
+        if( !is_regular_file(filename) ){
+            LOGE( "Not file for raster '", key, "'" );
+            return;
+        }
+
+        // Lua Initialization
+        m_L = luaL_newstate();
+        if( !m_L ){
+            LOGE( "Can't create Lua State" );
+            return;
+        }
+
+        lua_gc( m_L, LUA_GCSTOP, 0 );
+        luaL_openlibs( m_L );
+        lua_newtable( m_L );
+        lua_setfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );
+        lua_gc( m_L, LUA_GCRESTART, 0 );
+
+        // execute update file
+        auto ret = luaL_dofile( m_L, filename.c_str() );
+        if( !checkLuaReturn( m_L, ret ) ){
+            LOGE( "Error executing update file" );
+            lua_close( m_L );
+            m_L = nullptr;
+            return;
+        }
+
     }
 
     //--------------------------------------------------------------------------
