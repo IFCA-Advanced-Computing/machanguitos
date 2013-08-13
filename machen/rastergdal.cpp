@@ -35,6 +35,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace Data {
     using namespace boost::filesystem;
     using namespace std;
+    using namespace Util;
 
     //--------------------------------------------------------------------------
     RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1, double d )
@@ -44,7 +45,7 @@ namespace Data {
 
         m_data = driver->Create( "", w, h, 1, GDT_Float32,  nullptr );
         if( ! m_data ){
-            Util::LOGE( "ERROR Creating data" );
+            LOGE( "ERROR Creating data" );
             terminate();
         }
 
@@ -69,13 +70,13 @@ namespace Data {
         path fullpath = path(dir) /= filename;
 
         if( !is_regular_file(fullpath) ){
-            Util::LOGE( "Not file for raster '", fullpath, "'" );
+            LOGE( "Not file for raster '", fullpath, "'" );
             terminate();
         }
 
         m_data = (GDALDataset *) GDALOpen( fullpath.c_str(), GA_ReadOnly );
         if( ! m_data ){
-            Util::LOGE( "ERROR Loading data" );
+            LOGE( "ERROR Loading data" );
             terminate();
         }
 
@@ -142,14 +143,14 @@ namespace Data {
                 break;
 
             default:
-                Util::LOGE( "Raster Unknown type" );
+                LOGE( "Raster Unknown type" );
                 break;
 
             }
 
             return ret;
         }else{
-            Util::LOGE( "Invalid raster layer ", layer );
+            LOGE( "Invalid raster layer ", layer );
         }
 
         return 0;
@@ -208,17 +209,17 @@ namespace Data {
                 break;
 
             default:
-                Util::LOGE( "Raster Unknown type" );
+                LOGE( "Raster Unknown type" );
                 break;
             }
         }else{
-            Util::LOGE( "Invalid raster layer ", layer );
+            LOGE( "Invalid raster layer ", layer );
         }
     }
 
     //--------------------------------------------------------------------------
     void RasterGDAL::save( const string & filename ){
-        auto type = Util::getGDALDriverName( filename );
+        auto type = getGDALDriverName( filename );
         if( type ){
             auto driver = GetGDALDriverManager()->GetDriverByName( (*type).c_str() );
             if( driver ){
@@ -229,7 +230,7 @@ namespace Data {
                 }
             }
         }else{
-            Util::LOGE( "Can't get filetype for '", filename, "'" );
+            LOGE( "Can't get filetype for '", filename, "'" );
         }
     }
 
@@ -239,6 +240,7 @@ namespace Data {
 
     //--------------------------------------------------------------------------
     void RasterGDAL::update( const double delta ){
+        LOGD( "RasterGDAL::update(", delta, ")" );
         if( m_L ){
             lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );    // 1
             lua_getfield( m_L, -1, "update");                             // 2
@@ -248,7 +250,7 @@ namespace Data {
                 lua_setglobal( m_L, SCRIPT_GLOBAL_RASTER_OBJ );           // 3
                 lua_pushnumber( m_L, delta );                             // 4
                 auto ret = lua_pcall( m_L, 2, 0, 0 );                     // 1
-                Util::checkLuaReturn( m_L, ret );
+                checkLuaReturn( m_L, ret );
                 lua_pop( m_L, 1 );                                        // 0
             }else{
                 lua_pop( m_L, 2 );                                        // 0
