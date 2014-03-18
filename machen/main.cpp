@@ -52,7 +52,9 @@ int main( int argc, char * argv[] ){
     static_assert( sizeof(double) == sizeof(int64_t),
                    "Double type isn't 64 bits" );
 
-    Engine::initialize( argc, argv );
+    if( not Engine::initialize( argc, argv ) ){
+        return EXIT_FAILURE;
+    }
 
     // MPI SERVER
     if( Engine::isServer() ){

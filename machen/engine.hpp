@@ -35,7 +35,7 @@ namespace Engine {
         @param argv Argument vector.
         @ingroup Engine
      */
-    void initialize( int argc, char * argv[] );
+    bool initialize( int argc, char * argv[] );
     /** Ends the application.
         @returns Error Exit Code.
         @ingroup Engine

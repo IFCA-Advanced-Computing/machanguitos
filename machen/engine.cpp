@@ -31,6 +31,9 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
+    constexpr int MIN_MPI_PROCS = 3;
+
+    //--------------------------------------------------------------------------
     /// Clients communicator.
     MPI_Comm m_clientsComm = MPI_COMM_WORLD;
     /// rank of current process.
@@ -52,11 +55,23 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void initialize( int argc, char * argv[] ){
+    bool initialize( int argc, char * argv[] ){
         MPI_Init( &argc, &argv );
+        int initflag;
+        MPI_Initialized( &initflag );
+        if( not initflag ){
+            Util::LOGE( "Error Initializing MPI" );
+            Util::LOGE( "Error  Did you use mpirun?" );
+            return false;
+        }
 
         MPI_Comm_size( MPI_COMM_WORLD, &m_nprocs );
         MPI_Comm_rank( MPI_COMM_WORLD, &m_rank );
+
+        if( m_nprocs < MIN_MPI_PROCS ){
+            Util::LOGE( "Erroneous number of process. Minimum : ", MIN_MPI_PROCS );
+            return false;
+        }
 
         if( m_nprocs > 1 ){
             MPI_Group MPI_GROUP_WORLD, clients;
@@ -67,6 +82,7 @@ namespace Engine {
 
             MPI_Comm_create( MPI_COMM_WORLD, clients, &m_clientsComm );
         }
+        return true;
     }
 
     //--------------------------------------------------------------------------
