@@ -1,3 +1,4 @@
+
 /*******************************************************************************
 Machanguitos is The Easiest Multi-Agent System in the world. Work done at The
 Institute of Physics of Cantabria (IFCA).
@@ -134,42 +135,6 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void runUpdateRasterValue( int src, const int layer ){
-        char ckey[MAX_CLASS_NAME+1];
-        MPI_Status status;
-        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
-                  MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on data server" );
-            Engine::abort();
-        }
-
-        int count;
-        MPI_Get_count( &status, MPI_CHAR, &count );
-        ckey[count] = 0;
-
-        double dval[4];
-        MPI_Recv( &dval, 4, MPI_DOUBLE, src,
-                  MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD, &status );
-        if( status.MPI_ERROR != MPI_SUCCESS ){
-            LOGE( "Received on data server" );
-            Engine::abort();
-        }
-
-        auto && ds = Engine::DataServer::instance();
-        auto && raster = ds->getRaster( ckey );
-        uint8_t val;
-        if( raster ){
-            val = raster->updateValue( layer, dval[0], dval[1], dval[2], dval[3] ) ? 1 : 0;
-        }else{
-            val = 0;
-        }
-
-        MPI_Send( &val, 1, MPI_BYTE, src,
-                  Engine::MpiTagDS::UPDATERASTERVALUE, MPI_COMM_WORLD );
-    }
-
-    //--------------------------------------------------------------------------
     void runSaveRaster( int src ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -243,6 +208,51 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    void runSetRasterUpdate( int src ){
+        char ckey[MAX_CLASS_NAME+1];
+        MPI_Status status;
+        MPI_Recv( &ckey, MAX_CLASS_NAME, MPI_CHAR, src,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        int count;
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        ckey[count] = 0;
+
+        char cfilename[MAX_PATH_NAME+1];
+        MPI_Recv( &cfilename, MAX_PATH_NAME, MPI_CHAR, src,
+                  MpiTagDS::SETRASTERUPDATE, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        MPI_Get_count( &status, MPI_CHAR, &count );
+        cfilename[count] = 0;
+
+        auto ds = Engine::DataServer::instance();
+        ds->setRasterUpdate( ckey, cfilename );
+    }
+
+    //--------------------------------------------------------------------------
+    void runUpdateLayers( int src ){
+        double val;
+        MPI_Status status;
+        MPI_Recv( &val, 1, MPI_DOUBLE, src,
+                  MpiTagDS::UPDATELAYERS, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        auto ds = Engine::DataServer::instance();
+        ds->updateLayers( val );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -262,16 +272,20 @@ namespace Engine {
             runSetRasterValue( src, val );
             break;
 
-        case MpiTagDS::UPDATERASTERVALUE:
-            runUpdateRasterValue( src, val );
-            break;
-
         case MpiTagDS::SAVERASTER:
             runSaveRaster( src );
             break;
 
         case MpiTagDS::LOADRASTER:
             runLoadRaster( src );
+            break;
+
+        case MpiTagDS::SETRASTERUPDATE:
+            runSetRasterUpdate( src );
+            break;
+
+        case MpiTagDS::UPDATELAYERS:
+            runUpdateLayers( src );
             break;
 
         default:

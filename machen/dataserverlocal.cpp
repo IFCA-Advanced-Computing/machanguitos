@@ -79,6 +79,28 @@ namespace Engine {
         Util::LOGD( "DataServerLocal::createRasterProxy ", key, filename );
     }
 
+    //--------------------------------------------------------------------------
+    void DataServerLocal::setRasterUpdate( const string & key,
+                                           const string & filename )
+    {
+        Util::LOGD( "DataServerLocal::setRasterUpdate ", key );
+        auto r = m_rasters.find( key );
+        if( r == m_rasters.end() ){
+            Util::LOGW( "Raster name '", key, "' doesn't exist" );
+            return;
+        }
+
+        r->second->setRasterUpdate( filename );
+    }
+
+    //--------------------------------------------------------------------------
+    void DataServerLocal::updateLayers( const double delta ){
+        Util::LOGD( "DataServerLocal::updateLayers" );
+        for( auto r: m_rasters ){
+            r.second->update( delta );
+        }
+    }
+
 }//namespace Engine
 
 //------------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 function initialize()
-   io.write( "Cow Example\n" );
-   io.write( " Machen " .. config.VERSION_MAJOR .. "." .. config.VERSION_MINOR .. "\n" );
+   io.write( "Cow Example\n" )
+   io.write( " Machen " .. config.VERSION_MAJOR .. "." .. config.VERSION_MINOR .. "\n" )
 
-   config.setLogLevel( "info" );
+   config.setLogLevel( "info" )
 
    data.createLayer( "grass",
                      {
@@ -13,7 +13,9 @@ function initialize()
                         w = 200,
                         h = 200,
                         default = 250,
-                     } );
+                     } )
+
+   data.setLayerUpdate( "grass", "grassupdate" )
 
    data.loadLayer( "area", "area.png",
                    {
@@ -21,10 +23,10 @@ function initialize()
                       x1 = 20.0,
                       y0 = 0.0,
                       y1 = 20.0,
-                   } );
+                   } )
 
-   config.addAgent( "cow", 10 );
-   config.addAgent( "cat", 3 );
+   config.addAgent( "cow", 10 )
+   config.addAgent( "cat", 3 )
 
    config.setvars( {
                       dbhost = "localhost",
@@ -32,7 +34,7 @@ function initialize()
                       starttime = 0.0,
                       endtime = 10.0,
                       iters = 10,
-                   } );
+                   } )
 end
 
 function startIteration( num )

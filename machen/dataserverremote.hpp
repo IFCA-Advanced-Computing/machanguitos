@@ -44,6 +44,9 @@ namespace Engine {
                                 const std::string & filename,
                                 double x0, double x1,
                                 double y0, double y1 ) override;
+        void setRasterUpdate( const std::string & key,
+                              const std::string & filename ) override;
+        void updateLayers( const double delta ) override;
     };
 
 }//namespace Engine

@@ -70,12 +70,14 @@ namespace Engine{
         GETRASTERVALUE = 42,
         /// set a raster value.
         SETRASTERVALUE = 43,
-        /// update a raster value.
-        UPDATERASTERVALUE = 44,
         /// save a raster layer.
         SAVERASTER = 45,
         /// load a raster layer.
         LOADRASTER = 46,
+        /// setups raster layer update script.
+        SETRASTERUPDATE = 47,
+        /// update layers Message Tag.
+        UPDATELAYERS = 48,
     };
 
     /// MPI Rank identifier of server.

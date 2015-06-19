@@ -92,6 +92,28 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void Server::setRasterLayerUpdate( const string & key,
+                                       const string & file )
+    {
+        if( file.length() > MAX_PATH_NAME ){
+            LOGW( "Raster filename script '", file, "' too long" );
+            return;
+        }
+
+        auto raster = find_if( m_newRaster.begin(), m_newRaster.end(),
+                            [&](const Data::RasterNewData &x){
+                                   return x.key == key; } );
+
+        if( raster == m_newRaster.end() ){
+            LOGW( "Raster name '", key, "' doesn't exist" );
+            return;
+        }
+
+        LOGI( "Set raster named '", key, "' update script '", file, "'" );
+        raster->updatescript = file;
+    }
+
+    //--------------------------------------------------------------------------
     bool Server::initialize( const string & filename ){
         // Lua Initialization
         m_L = luaL_newstate();
@@ -162,6 +184,10 @@ namespace Engine{
             case Data::RasterNewType::RNT_FILE:
                 ds->loadRaster( nr.key, nr.filename, nr.x0, nr.x1, nr.y0, nr.y1 );
                 break;
+            }
+
+            if( nr.updatescript.length() > 0 ){
+                ds->setRasterUpdate( nr.key, nr.updatescript );
             }
         }
 
@@ -255,6 +281,7 @@ namespace Engine{
         auto iters = getConfigInt( "iters", 10 );
         auto startt = getConfigNumber( "starttime", 0 );
         auto endt = getConfigNumber( "endtime", 10 );
+        auto ds = Engine::DataServer::instance();
 
         double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
 
@@ -266,6 +293,7 @@ namespace Engine{
             }
 
             clientsBarrier();
+            ds->updateLayers( delta );
             endIterationScript( i+1 );
         }
 
