@@ -84,7 +84,7 @@ namespace Data {
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 
-        m_data = driver->Create( "", w, h, 1, GDT_Float32,  nullptr );
+        m_data = driver->Create( "", w, h, 1, GDT_Byte,  nullptr );
         if( ! m_data ){
             LOGE( "ERROR Creating data" );
             terminate();
@@ -92,11 +92,11 @@ namespace Data {
 
         auto rasterBand = m_data->GetRasterBand( 1 );
         if( rasterBand ){
-            float pixel = d;
+            uint8_t pixel = d;
             for( int j = 0 ; j < h ; ++j ){
                 for( int i = 0 ; i < w ; ++i ){
                     rasterBand->RasterIO( GF_Write, i, j, 1, 1,
-                                          &pixel, 1, 1, GDT_Float32, 0, 0 );
+                                          &pixel, 1, 1, GDT_Byte, 0, 0 );
                 }
             }
         }
