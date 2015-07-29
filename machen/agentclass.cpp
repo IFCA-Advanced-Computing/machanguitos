@@ -44,7 +44,8 @@ namespace Agent{
             string key = lua_tostring( L, -2 );
             lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
             if( lua_islightuserdata( L, -1 ) ){
-                auto agent = (AgentInstance*) lua_topointer( L, -1 );
+                auto agent = static_cast<AgentInstance*>( lua_touserdata( L, -1 ) );
+
                 lua_pop( L, 1 );                     // 0
                 if( agent ){
                     agent->newData( L, key );
@@ -64,7 +65,7 @@ namespace Agent{
 
         lua_getfield( L, -4, RASTER_OBJ );           // 1
         if( lua_islightuserdata( L, -1 ) ){
-            auto raster = (Data::Raster*) lua_topointer( L, -1 );
+            auto raster = static_cast<Data::Raster*>( lua_touserdata( L, -1 ) );
             lua_pop( L, 1 );                         // 0
             if( raster ){
                 auto val = raster->getValue( l, x, y );
@@ -86,7 +87,7 @@ namespace Agent{
 
         lua_getfield( L, -5, RASTER_OBJ );           // 1
         if( lua_islightuserdata( L, -1 ) ){
-            auto raster = (Data::Raster*) lua_topointer( L, -1 );
+            auto raster = static_cast<Data::Raster*>( lua_touserdata( L, -1 ) );
             lua_pop( L, 1 );                         // 0
             if( raster ){
                 if( raster->validPosition( x, y ) ){
@@ -112,7 +113,7 @@ namespace Agent{
             string key = lua_tostring( L, -1 );
             lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
             if( lua_islightuserdata( L, -1 ) ){
-                AgentInstance * agent = (AgentInstance*) lua_topointer( L, -1 );
+                auto agent = static_cast<AgentInstance*>( lua_touserdata( L, -1 ) );
                 lua_pop( L, 1 );                    // 0
                 if( agent ){
                     return agent->pushData( L, key );
@@ -165,7 +166,7 @@ namespace Agent{
         auto msg = luaL_checkstring( L, 1 );
         lua_getglobal( L, SCRIPT_GLOBAL_AGENT_OBJ ); // 1
         if( lua_islightuserdata( L, -1 ) ){
-            auto agent = (AgentInstance*) lua_topointer( L, -1 );
+            auto agent = static_cast<AgentInstance*>( lua_touserdata( L, -1 ) );
             lua_pop( L, 1 );                     // 0
             if( agent ){
                 agent->newMessage( msg );

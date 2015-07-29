@@ -55,7 +55,7 @@ namespace Agent{
         lua_getglobal( L, SCRIPT_AGENTCLASS_NAME );
         lua_getfield( L, -1, SCRIPT_AGENTCLASS_OBJ );
         if( lua_islightuserdata( L, -1 ) ){
-            AgentClass * aclass = (AgentClass*) lua_topointer( L, -1 );
+            auto aclass = static_cast<AgentClass*>( lua_touserdata( L, -1 ) );
             lua_pop( L, 2 );
             if( aclass ){
                 auto n = lua_gettop( L );

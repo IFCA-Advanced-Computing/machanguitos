@@ -74,7 +74,7 @@ namespace Data {
             terminate();
         }
 
-        m_data = (GDALDataset *) GDALOpen( fullpath.c_str(), GA_ReadOnly );
+        m_data = static_cast<GDALDataset*>( GDALOpen( fullpath.c_str(), GA_ReadOnly ) );
         if( ! m_data ){
             LOGE( "ERROR Loading data" );
             terminate();
