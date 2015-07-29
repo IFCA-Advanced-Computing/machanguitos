@@ -469,6 +469,12 @@ namespace Data {
         lua_pushstring( m_L, "setpixel");                          // 2
         lua_pushcfunction( m_L, rastergdal_setpixel );             // 3
         lua_settable( m_L, -3 );                                   // 1
+        lua_pushstring( m_L, "width");                             // 2
+        lua_pushnumber( m_L, m_h );                                // 3
+        lua_settable( m_L, -3 );                                   // 1
+        lua_pushstring( m_L, "height");                            // 2
+        lua_pushnumber( m_L, m_w );                                // 3
+        lua_settable( m_L, -3 );                                   // 1
         lua_pop( m_L, 1 );                                         // 0
     }
 
