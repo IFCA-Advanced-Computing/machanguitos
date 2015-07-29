@@ -78,13 +78,13 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    double RasterProxy::getPixelValue( int layer, int i, int j ){
+    double RasterProxy::getPixelValue( int /*layer*/, int /*i*/, int /*j*/ ){
         // empty
         return 0;
     }
 
     //--------------------------------------------------------------------------
-    void RasterProxy::setPixelValue( int layer, int i, int j, double val ){
+    void RasterProxy::setPixelValue( int /*layer*/, int /*i*/, int /*j*/, double /*val*/ ){
         // empty
     }
 
