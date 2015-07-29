@@ -50,8 +50,6 @@ namespace Engine {
                 Engine::abort();
             }
 
-            LOGD( "Message[", status.MPI_TAG, "] on ", m_rank, " from ", status.MPI_SOURCE );
-
             bool is_checked = doCommonTags( status.MPI_TAG, status.MPI_SOURCE, val );
             if( not is_checked ){
                 is_checked = doTags( status.MPI_TAG, status.MPI_SOURCE, val );
