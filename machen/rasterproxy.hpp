@@ -39,6 +39,8 @@ namespace Data {
         void save( const std::string & filename ) override;
         void setRasterUpdate( const std::string & filename ) override;
         void update( const double delta ) override;
+        double getPixelValue( int layer, int i, int j ) override;
+        void setPixelValue( int layer, int i, int j, double val ) override;
         
     private:
         std::unique_ptr<char[]> m_ckey;

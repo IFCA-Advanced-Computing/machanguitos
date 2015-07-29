@@ -105,6 +105,9 @@ namespace Data {
         virtual void save( const std::string & filename )=0;
         virtual void setRasterUpdate( const std::string & filename )=0;
         virtual void update( const double delta )=0;
+        virtual double getPixelValue( int layer, int i, int j )=0;
+        virtual void setPixelValue( int layer, int i, int j, double val )=0;
+
 
         std::string key;
 

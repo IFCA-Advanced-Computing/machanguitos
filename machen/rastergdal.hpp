@@ -42,7 +42,7 @@ namespace Data {
     /** private name of RasterGDAL objects in Lua tables.
         @ingroup Agent
      */
-    constexpr const char * SCRIPT_GLOBAL_RASTER_OBJ = "__gro";
+    constexpr const char * SCRIPT_RASTER_OBJ = "__ro";
 
     //--------------------------------------------------------------------------
     class RasterGDAL final : public Raster {
@@ -56,6 +56,9 @@ namespace Data {
         void save( const std::string & filename ) override;
         void setRasterUpdate( const std::string & filename ) override;
         void update( const double delta ) override;
+
+        double getPixelValue( int layer, int i, int j ) override;
+        void setPixelValue( int layer, int i, int j, double val ) override;
 
     private:
         GDALDataset * m_data;

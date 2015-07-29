@@ -78,6 +78,17 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    double RasterProxy::getPixelValue( int layer, int i, int j ){
+        // empty
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
+    void RasterProxy::setPixelValue( int layer, int i, int j, double val ){
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     void RasterProxy::save( const std::string & filename ){
         Util::LOGD( "RasterProxy::save ", filename );
         assert( filename.length() <= MAX_PATH_NAME && "name too long" );
