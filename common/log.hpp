@@ -71,7 +71,7 @@ namespace Util{
         @ingroup Util
      */
     template<typename X> void printLog( const X & x ){
-        std::cout << x << std::endl;
+        std::clog << x << std::endl;
     }
 
     //--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ namespace Util{
         @ingroup Util
      */
     template<typename X, typename... XS> void printLog( const X & x, XS... xs ){
-        std::cout << x;
+        std::clog << x;
         printLog( xs... );
     }
 

@@ -28,6 +28,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "common/datastore.hpp"
 #include "agentclass.hpp"
 #include "raster.hpp"
+#include <iostream>
 
 //------------------------------------------------------------------------------
 namespace Agent{
@@ -139,7 +140,7 @@ namespace Agent{
 
     //--------------------------------------------------------------------------
     void AgentInstance::newMessage( string && msg ){
-        LOGW( "IO : ", msg );
+        std::cout << msg;
     }
 
     //--------------------------------------------------------------------------

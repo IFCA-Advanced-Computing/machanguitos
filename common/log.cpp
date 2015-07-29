@@ -53,11 +53,11 @@ namespace Util{
 
         time( &rawtime );
         timeinfo = localtime( &rawtime );
-        
-        cout << timeinfo->tm_mday << " " << timeinfo->tm_hour 
+
+        clog << timeinfo->tm_mday << " " << timeinfo->tm_hour
              << ":" << timeinfo->tm_min << ":" << timeinfo->tm_sec;
 
-        cout << s_tags[static_cast<unsigned char>(ll)];
+        clog << s_tags[static_cast<unsigned char>(ll)];
     }
 
     //--------------------------------------------------------------------------
