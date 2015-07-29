@@ -99,7 +99,7 @@ namespace Data {
             auto isize = rasterBand->GetXSize();
             auto jsize = rasterBand->GetYSize();
             if( i < 0 or i >= isize or j < 0 or j >= jsize ){
-                LOGD( "Out-of-range position at: ", x, ", ", y );
+                LOGD( "Out-of-range position get( ", x, ", ", y, " )" );
                 return 0;
             }
 
@@ -173,7 +173,7 @@ namespace Data {
             auto isize = rasterBand->GetXSize();
             auto jsize = rasterBand->GetYSize();
             if( i < 0 or i >= isize or j < 0 or j >= jsize ){
-                LOGD( "Out-of-range position at: ", x, ", ", y );
+                LOGD( "Out-of-range position set( ", x, ", ", y, " )" );
                 return;
             }
 
