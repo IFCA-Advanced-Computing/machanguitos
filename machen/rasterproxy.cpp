@@ -89,6 +89,11 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    void RasterProxy::loadImage( const std::string & /*filename*/ ){
+        // empty
+    }
+
+    //--------------------------------------------------------------------------
     void RasterProxy::save( const std::string & filename ){
         Util::LOGD( "RasterProxy::save ", filename );
         assert( filename.length() <= MAX_PATH_NAME && "name too long" );

@@ -60,6 +60,8 @@ namespace Data {
         double getPixelValue( int layer, int i, int j ) override;
         void setPixelValue( int layer, int i, int j, double val ) override;
 
+        void loadImage( const std::string & filename ) override;
+
     private:
         GDALDataset * m_data;
 

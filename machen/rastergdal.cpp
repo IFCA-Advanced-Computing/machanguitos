@@ -79,6 +79,23 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    int rastergdal_load( lua_State *L ){
+        auto filename = luaL_checkstring( L, -1 );
+
+        lua_getfield( L, -2, SCRIPT_RASTER_OBJ );           // 1
+        if( lua_islightuserdata( L, -1 ) ){
+            auto raster = static_cast<Data::Raster*>( lua_touserdata( L, -1 ) );
+            lua_pop( L, 1 );                                // 0
+            if( raster ){
+                raster->loadImage( filename );
+            }else{
+                luaL_error( L, "Invalid raster object" );
+            }
+        }
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1, double d )
         : Raster{key, w, h, x0, x1, y0, y1, d }
     {
@@ -409,6 +426,44 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    void RasterGDAL::loadImage( const std::string & filename ){
+        auto dir = Engine::getDataDir();
+        path fullpath = path(dir) /= filename;
+
+        if( !is_regular_file(fullpath) ){
+            LOGE( "Not file for raster '", fullpath, "'" );
+            terminate();
+        }
+
+        auto dataset = static_cast<GDALDataset*>( GDALOpen( fullpath.c_str(), GA_ReadOnly ) );
+        if( ! dataset ){
+            LOGE( "ERROR Loading data" );
+            terminate();
+        }
+
+        if( m_data ){
+            GDALClose( m_data );
+        }
+
+        m_data = dataset;
+
+        m_w = m_data->GetRasterXSize();
+        m_h = m_data->GetRasterYSize();
+
+        // update lua members
+        if( m_L ){
+            lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME ); // 1
+            lua_pushstring( m_L, "width");                             // 2
+            lua_pushnumber( m_L, m_h );                                // 3
+            lua_settable( m_L, -3 );                                   // 1
+            lua_pushstring( m_L, "height");                            // 2
+            lua_pushnumber( m_L, m_w );                                // 3
+            lua_settable( m_L, -3 );                                   // 1
+            lua_pop( m_L, 1 );                                         // 0
+        }
+    }
+
+    //--------------------------------------------------------------------------
     void RasterGDAL::save( const string & filename ){
         auto type = getGDALDriverName( filename );
         if( type ){
@@ -468,6 +523,9 @@ namespace Data {
         lua_settable( m_L, -3 );                                   // 1
         lua_pushstring( m_L, "setpixel");                          // 2
         lua_pushcfunction( m_L, rastergdal_setpixel );             // 3
+        lua_settable( m_L, -3 );                                   // 1
+        lua_pushstring( m_L, "load");                              // 2
+        lua_pushcfunction( m_L, rastergdal_load );                 // 3
         lua_settable( m_L, -3 );                                   // 1
         lua_pushstring( m_L, "width");                             // 2
         lua_pushnumber( m_L, m_h );                                // 3
