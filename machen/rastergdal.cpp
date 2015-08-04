@@ -109,7 +109,7 @@ namespace Data {
 
         float pixel = d;
 
-        for( auto l = 0 ; i < layers ; ++i ){
+        for( auto l = 0 ; l < layers ; ++l ){
             auto rasterBand = m_data->GetRasterBand( l+1 );
             if( rasterBand ){
                 for( int j = 0 ; j < h ; ++j ){
