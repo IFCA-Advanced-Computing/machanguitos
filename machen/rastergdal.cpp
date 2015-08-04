@@ -107,17 +107,10 @@ namespace Data {
             terminate();
         }
 
-        float pixel = d;
-
         for( auto l = 0 ; l < layers ; ++l ){
             auto rasterBand = m_data->GetRasterBand( l+1 );
             if( rasterBand ){
-                for( int j = 0 ; j < h ; ++j ){
-                    for( int i = 0 ; i < w ; ++i ){
-                        rasterBand->RasterIO( GF_Write, i, j, 1, 1,
-                                              &pixel, 1, 1, GDT_Float32, 0, 0 );
-                    }
-                }
+                rasterBand->Fill( d );
             }
         }
     }
