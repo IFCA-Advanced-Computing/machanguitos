@@ -96,24 +96,27 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    RasterGDAL::RasterGDAL( const string & key, int w, int h, double x0, double x1, double y0, double y1, double d )
-        : Raster{key, w, h, x0, x1, y0, y1, d }
+    RasterGDAL::RasterGDAL( const string & key, int layers, int w, int h, double x0, double x1, double y0, double y1, double d )
+        : Raster{key, layers, w, h, x0, x1, y0, y1, d }
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 
-        m_data = driver->Create( "", w, h, 1, GDT_Byte,  nullptr );
+        m_data = driver->Create( "", w, h, layers, GDT_Float32, nullptr );
         if( ! m_data ){
             LOGE( "ERROR Creating data" );
             terminate();
         }
 
-        auto rasterBand = m_data->GetRasterBand( 1 );
-        if( rasterBand ){
-            uint8_t pixel = d;
-            for( int j = 0 ; j < h ; ++j ){
-                for( int i = 0 ; i < w ; ++i ){
-                    rasterBand->RasterIO( GF_Write, i, j, 1, 1,
-                                          &pixel, 1, 1, GDT_Byte, 0, 0 );
+        float pixel = d;
+
+        for( auto l = 0 ; i < layers ; ++i ){
+            auto rasterBand = m_data->GetRasterBand( l+1 );
+            if( rasterBand ){
+                for( int j = 0 ; j < h ; ++j ){
+                    for( int i = 0 ; i < w ; ++i ){
+                        rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                              &pixel, 1, 1, GDT_Float32, 0, 0 );
+                    }
                 }
             }
         }
@@ -122,7 +125,7 @@ namespace Data {
     //--------------------------------------------------------------------------
     RasterGDAL::RasterGDAL( const string & key, const string & filename,
                             double x0, double x1, double y0, double y1 )
-        : Raster{key, 1, 1, x0, x1, y0, y1, 0.0 }
+        : Raster{key, 1, 1, 1, x0, x1, y0, y1, 0.0 }
     {
         auto dir = Engine::getDataDir();
         path fullpath = path(dir) /= filename;
@@ -140,6 +143,8 @@ namespace Data {
 
         m_w = m_data->GetRasterXSize();
         m_h = m_data->GetRasterYSize();
+
+        m_layers = m_data->GetRasterCount();
     }
 
     //--------------------------------------------------------------------------
@@ -450,6 +455,8 @@ namespace Data {
         m_w = m_data->GetRasterXSize();
         m_h = m_data->GetRasterYSize();
 
+        m_layers = m_data->GetRasterCount();
+
         // update lua members
         if( m_L ){
             lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME ); // 1
@@ -458,6 +465,9 @@ namespace Data {
             lua_settable( m_L, -3 );                                   // 1
             lua_pushstring( m_L, "height");                            // 2
             lua_pushnumber( m_L, m_w );                                // 3
+            lua_settable( m_L, -3 );                                   // 1
+            lua_pushstring( m_L, "layers");                            // 2
+            lua_pushnumber( m_L, m_layers );                           // 3
             lua_settable( m_L, -3 );                                   // 1
             lua_pop( m_L, 1 );                                         // 0
         }
@@ -532,6 +542,9 @@ namespace Data {
         lua_settable( m_L, -3 );                                   // 1
         lua_pushstring( m_L, "height");                            // 2
         lua_pushnumber( m_L, m_w );                                // 3
+        lua_settable( m_L, -3 );                                   // 1
+        lua_pushstring( m_L, "layers");                            // 2
+        lua_pushnumber( m_L, m_layers );                           // 3
         lua_settable( m_L, -3 );                                   // 1
         lua_pop( m_L, 1 );                                         // 0
     }

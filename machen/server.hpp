@@ -70,7 +70,7 @@ namespace Engine{
         bool initialize( const std::string & filename );
         /// create the agents for the simulation.
         void createAgents();
-        void createRaster( const std::string & key, int w, int h,
+        void createRaster( const std::string & key, int l, int w, int h,
                            double x0, double x1, double y0, double y1, double d );
         void loadRaster( const std::string & key, const std::string & file,
                          double x0, double x1, double y0, double y1 );

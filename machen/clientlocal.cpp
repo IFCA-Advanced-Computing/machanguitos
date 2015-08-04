@@ -52,7 +52,8 @@ namespace Engine{
         auto && ds = Engine::DataServer::instance();
         switch( nr.rasterType ){
         case Data::RasterNewType::RNT_EMPTY:
-            ds->createRasterProxy( nr.key, nr.w, nr.h, nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
+            ds->createRasterProxy( nr.key, nr.layers, nr.w, nr.h,
+                                   nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
             break;
 
         case Data::RasterNewType::RNT_FILE:

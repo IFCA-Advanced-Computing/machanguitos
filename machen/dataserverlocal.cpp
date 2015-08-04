@@ -47,22 +47,24 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
-    void DataServerLocal::createRaster( const string & key, int w, int h,
+    void DataServerLocal::createRaster( const string & key, int l, int w, int h,
                                         double x0, double x1, double y0, double y1, double d ){
         Util::LOGD( "DataServerLocal::createRaster ", key );
-        m_rasters[key] = std::make_shared<Data::RasterGDAL>( key, w, h, x0, x1, y0, y1, d );
+        m_rasters[key] = std::make_shared<Data::RasterGDAL>( key, l, w, h,
+                                                             x0, x1, y0, y1, d );
     }
 
     //--------------------------------------------------------------------------
     void DataServerLocal::loadRaster( const string & key, const string & filename,
                                       double x0, double x1, double y0, double y1 ){
         Util::LOGD( "DataServerLocal::loadRaster ", key );
-        m_rasters[key] = std::make_shared<Data::RasterGDAL>( key, filename, x0, x1, y0, y1 );
+        m_rasters[key] = std::make_shared<Data::RasterGDAL>( key, filename,
+                                                             x0, x1, y0, y1 );
     }
 
     //--------------------------------------------------------------------------
     void DataServerLocal::createRasterProxy( const string & key,
-                                             int /*w*/, int /*h*/,
+                                             int /*l*/, int /*w*/, int /*h*/,
                                              double /*x0*/, double /*x1*/,
                                              double /*y0*/, double /*y1*/,
                                              double /*d*/ )

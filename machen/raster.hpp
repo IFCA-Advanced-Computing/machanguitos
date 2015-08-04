@@ -40,7 +40,7 @@ namespace Data {
      */
     class RasterNewData{
     public:
-        explicit RasterNewData( const std::string & key, int w, int h,
+        explicit RasterNewData( const std::string & key, int layers, int w, int h,
                        double x0, double x1, double y0, double y1, double d );
         explicit RasterNewData( const std::string & key, const std::string & file,
                        double x0, double x1, double y0, double y1 );
@@ -53,6 +53,8 @@ namespace Data {
         std::string filename;
         /// updatescript
         std::string updatescript;
+        /// number of layers
+        int layers;
         /// width of the raster.
         int w;
         /// height of the raster.
@@ -70,9 +72,10 @@ namespace Data {
     };
 
     //--------------------------------------------------------------------------
-    inline RasterNewData::RasterNewData( const std::string & key, int w, int h,
+    inline RasterNewData::RasterNewData( const std::string & key, int l,
+                                         int w, int h,
                                          double x0, double x1, double y0, double y1, double d )
-        : rasterType{RasterNewType::RNT_EMPTY}, key{ key }, w{ w }, h{ h },
+        : rasterType{RasterNewType::RNT_EMPTY}, key{ key }, layers{l}, w{ w }, h{ h },
         x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }
     {
         // empty
@@ -81,8 +84,8 @@ namespace Data {
     //--------------------------------------------------------------------------
     inline RasterNewData::RasterNewData( const std::string & key, const std::string & file,
                                          double x0, double x1, double y0, double y1 )
-        : rasterType{RasterNewType::RNT_FILE}, key{ key }, filename{ file }, w{ 1 }, h{ 1 },
-        x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ 0 }
+        : rasterType{RasterNewType::RNT_FILE}, key{ key }, filename{ file }, layers{1},
+        w{ 1 }, h{ 1 }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ 0 }
     {
         // empty
     }
@@ -93,7 +96,7 @@ namespace Data {
      */
     class Raster {
     public:
-        Raster( const std::string & key, int w, int h,
+        Raster( const std::string & key, int layers, int w, int h,
                 double x0, double x1, double y0, double y1, double d );
         virtual ~Raster();
 
@@ -112,6 +115,8 @@ namespace Data {
         std::string key;
 
     protected:
+        /// number of layers.
+        int m_layers;
         /// width of the raster.
         int m_w;
         /// height of the raster.

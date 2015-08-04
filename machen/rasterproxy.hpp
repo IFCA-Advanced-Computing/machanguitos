@@ -33,7 +33,8 @@ namespace Data {
     //--------------------------------------------------------------------------
     class RasterProxy final : public Raster {
     public:
-        RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1, double d );
+        RasterProxy( const std::string & key, int l, int w, int h,
+                     double x0, double x1, double y0, double y1, double d );
         double getValue( int layer, double x, double y ) override;
         void setValue( int layer, double x, double y, double val ) override;
         void save( const std::string & filename ) override;
@@ -42,7 +43,7 @@ namespace Data {
         double getPixelValue( int layer, int i, int j ) override;
         void setPixelValue( int layer, int i, int j, double val ) override;
         void loadImage( const std::string & filename ) override;
-        
+
     private:
         std::unique_ptr<char[]> m_ckey;
         size_t m_ckeyLength;

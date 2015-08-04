@@ -33,8 +33,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 namespace Data {
     //--------------------------------------------------------------------------
-    RasterProxy::RasterProxy( const std::string & key, int w, int h, double x0, double x1, double y0, double y1, double d )
-        : Raster{key, w, h, x0, x1, y0, y1, d}
+    RasterProxy::RasterProxy( const std::string & key, int l, int w, int h, double x0, double x1, double y0, double y1, double d )
+        : Raster{key, l, w, h, x0, x1, y0, y1, d}
     {
         assert( key.length() <= MAX_CLASS_NAME && "name too long" );
         m_ckeyLength = key.length();
