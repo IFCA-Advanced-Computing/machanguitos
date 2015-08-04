@@ -64,6 +64,28 @@ namespace Data {
                   } );
         @endcode
 
+        The layers are created with Byte type (range [0..255]) but it is
+        possible to ask to use Float number (32 bits Float) in the layers using
+        the parameter `isFloat`, like:
+
+        @code{.lua}
+        data.createLayer( "grass",
+                  {
+                     x0 = 0.0,
+                     x1 = 1.0,
+                     y0 = 0.0,
+                     y1 = 1.0,
+                     w = 100,
+                     h = 100,
+                     default = 250,
+                     isFloat = true,
+                  } );
+        @endcode
+
+        Float raster layers will be defaulting to byte when saved on formats
+        that don't allow Float types (like png, or jpeg). You can use TIFF files
+        to save them with Float numbers.
+
         @param L lua_State.
         @ingroup Config
         @retval 0 No return values to Lua.
@@ -107,6 +129,10 @@ namespace Data {
 
             lua_getfield( L, 2, "layers" );   // 1
             l = luaL_optnumber( L, -1, l );   // 1
+            lua_pop( L, 1 );                  // 0
+
+            lua_getfield( L, 2, "isFloat" );    // 1
+            bool isFloat = lua_toboolean( L, -1 ); // 1
             lua_pop( L, 1 );                  // 0
         }
 
