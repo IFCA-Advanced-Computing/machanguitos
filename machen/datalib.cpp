@@ -97,6 +97,7 @@ namespace Data {
         int h{ 10 };
         int l{ 1 };
         double x0{ 0 }, x1{ 1 }, y0{ 0 }, y1{ 1 }, def{0};
+        bool isFloat{ false };
 
         if( lua_istable( L, 2 ) ){            // 0
             lua_getfield( L, 2, "w" );        // 1
@@ -132,12 +133,12 @@ namespace Data {
             lua_pop( L, 1 );                  // 0
 
             lua_getfield( L, 2, "isFloat" );    // 1
-            bool isFloat = lua_toboolean( L, -1 ); // 1
+            isFloat = lua_toboolean( L, -1 ); // 1
             lua_pop( L, 1 );                  // 0
         }
 
         auto engine = Engine::Server::instance();
-        engine->createRaster( key, l, w, h, x0, x1, y0, y1, def );
+        engine->createRaster( key, l, w, h, x0, x1, y0, y1, def, isFloat );
 
         return 0;
     }

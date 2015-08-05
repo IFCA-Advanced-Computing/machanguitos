@@ -53,7 +53,7 @@ namespace Engine{
         switch( nr.rasterType ){
         case Data::RasterNewType::RNT_EMPTY:
             ds->createRasterProxy( nr.key, nr.layers, nr.w, nr.h,
-                                   nr.x0, nr.x1, nr.y0, nr.y1, nr.d );
+                                   nr.x0, nr.x1, nr.y0, nr.y1, nr.d, nr.isFloat );
             break;
 
         case Data::RasterNewType::RNT_FILE:

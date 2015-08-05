@@ -33,13 +33,13 @@ namespace Engine {
     class DataServerRemote final : public DataServer{
     public:
         void createRaster( const std::string & key, int l, int w, int h,
-                           double x0, double x1,
-                           double y0, double y1, double d ) override;
+                           double x0, double x1, double y0, double y1,
+                           double d, bool isFloat ) override;
         void loadRaster( const std::string & key, const std::string & filename,
                          double x0, double x1, double y0, double y1 ) override;
         void createRasterProxy( const std::string & key, int l, int w, int h,
-                                double x0, double x1,
-                                double y0, double y1, double d ) override;
+                                double x0, double x1, double y0, double y1,
+                                double d, bool isFloat ) override;
         void createRasterProxy( const std::string & key,
                                 const std::string & filename,
                                 double x0, double x1,

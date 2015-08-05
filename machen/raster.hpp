@@ -41,7 +41,8 @@ namespace Data {
     class RasterNewData{
     public:
         explicit RasterNewData( const std::string & key, int layers, int w, int h,
-                       double x0, double x1, double y0, double y1, double d );
+                                double x0, double x1, double y0, double y1,
+                                double d, bool isf );
         explicit RasterNewData( const std::string & key, const std::string & file,
                        double x0, double x1, double y0, double y1 );
 
@@ -69,14 +70,17 @@ namespace Data {
         double y1;
         /// default value of the raster.
         double d;
+        // is float datatype
+        bool isFloat;
     };
 
     //--------------------------------------------------------------------------
     inline RasterNewData::RasterNewData( const std::string & key, int l,
                                          int w, int h,
-                                         double x0, double x1, double y0, double y1, double d )
+                                         double x0, double x1, double y0, double y1,
+                                         double d, bool isf  )
         : rasterType{RasterNewType::RNT_EMPTY}, key{ key }, layers{l}, w{ w }, h{ h },
-        x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }
+        x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ d }, isFloat{ isf }
     {
         // empty
     }
@@ -85,7 +89,7 @@ namespace Data {
     inline RasterNewData::RasterNewData( const std::string & key, const std::string & file,
                                          double x0, double x1, double y0, double y1 )
         : rasterType{RasterNewType::RNT_FILE}, key{ key }, filename{ file }, layers{1},
-        w{ 1 }, h{ 1 }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ 0 }
+        w{ 1 }, h{ 1 }, x0{ x0 }, x1{ x1 }, y0{ y0 }, y1{ y1 }, d{ 0 }, isFloat{ false }
     {
         // empty
     }
@@ -97,7 +101,8 @@ namespace Data {
     class Raster {
     public:
         Raster( const std::string & key, int layers, int w, int h,
-                double x0, double x1, double y0, double y1, double d );
+                double x0, double x1, double y0, double y1,
+                double d, bool isFloat );
         virtual ~Raster();
 
         bool validPosition( double x, double y );
@@ -132,6 +137,7 @@ namespace Data {
         double m_hx;
         double m_hy;
         double m_d;
+        bool m_isFloat;
     };
 }//namespace Data
 

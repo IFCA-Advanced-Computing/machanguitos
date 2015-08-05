@@ -96,12 +96,16 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    RasterGDAL::RasterGDAL( const string & key, int layers, int w, int h, double x0, double x1, double y0, double y1, double d )
-        : Raster{key, layers, w, h, x0, x1, y0, y1, d }
+    RasterGDAL::RasterGDAL( const string & key, int layers, int w, int h,
+                            double x0, double x1, double y0, double y1,
+                            double d, bool isFloat )
+        : Raster{key, layers, w, h, x0, x1, y0, y1, d, isFloat }
     {
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
 
-        m_data = driver->Create( "", w, h, layers, GDT_Float32, nullptr );
+        auto datatype = isFloat ? GDT_Float32 : GDT_Byte;
+
+        m_data = driver->Create( "", w, h, layers, datatype, nullptr );
         if( ! m_data ){
             LOGE( "ERROR Creating data" );
             terminate();
@@ -118,7 +122,7 @@ namespace Data {
     //--------------------------------------------------------------------------
     RasterGDAL::RasterGDAL( const string & key, const string & filename,
                             double x0, double x1, double y0, double y1 )
-        : Raster{key, 1, 1, 1, x0, x1, y0, y1, 0.0 }
+        : Raster{key, 1, 1, 1, x0, x1, y0, y1, 0.0, false }
     {
         auto dir = Engine::getDataDir();
         path fullpath = path(dir) /= filename;

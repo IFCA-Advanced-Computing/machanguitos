@@ -158,8 +158,8 @@ namespace Engine{
         MPI_Get_count( &status, MPI_CHAR, &count );
         ckey[count] = 0;
 
-        int32_t ivals[2];
-        MPI_Recv( ivals, 2, MPI_INT, src,
+        int32_t ivals[3];
+        MPI_Recv( ivals, 3, MPI_INT, src,
                   MpiTagCS::CREATERASTERCLIENT, MPI_COMM_WORLD, &status );
         if( status.MPI_ERROR != MPI_SUCCESS ){
             LOGE( "Received on ", m_rank );
@@ -176,7 +176,7 @@ namespace Engine{
 
         auto && ds = Engine::DataServer::instance();
         ds->createRasterProxy( ckey, ivals[1], w, ivals[0],
-                               dval[0], dval[1], dval[2], dval[3], dval[4] );
+                               dval[0], dval[1], dval[2], dval[3], dval[4], ivals[2] );
     }
 
     //--------------------------------------------------------------------------
