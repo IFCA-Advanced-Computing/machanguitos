@@ -222,6 +222,18 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    void AgentClass::setRandomSeed( const double seed ){
+        if( m_L ){
+            lua_getglobal( m_L, "math" );                           // 1
+            lua_getfield( m_L, -1, "randomseed" );                  // 2
+            lua_pushnumber( m_L, seed );                            // 3
+            auto ret = lua_pcall( m_L, 1, 0, 0 );                   // 1
+            checkLuaReturn( m_L, ret );
+            lua_pop( m_L, 1 );                                      // 0
+        }
+    }
+
+    //--------------------------------------------------------------------------
     void AgentClass::insertOutVariable( string && key ){
         m_outVars.insert( move(key) );
     }

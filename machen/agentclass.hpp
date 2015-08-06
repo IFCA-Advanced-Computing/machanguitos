@@ -53,6 +53,9 @@ namespace Agent{
         AgentClass( lua_State * L );
         ~AgentClass();
 
+        /// set lua random seed
+        void setRandomSeed( const double seed );
+
         /// init class instance lua state
         void init();
 
