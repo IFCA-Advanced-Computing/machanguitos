@@ -17,7 +17,7 @@ function initialize()
 
    data.setLayerUpdate( "fire", "fireupdate" )
 
-   config.addAgent( "fire", 20 )
+   config.addAgent( "fire", 100 )
 
    config.setvars( {
                       starttime = 0.0,

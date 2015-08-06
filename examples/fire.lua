@@ -1,8 +1,8 @@
 function Agent:init()
-   io.write( ">> Fire init\n" )
    self.x = 1 + math.random( 18 )
-   self.y = 16 + math.random( 10 ) / 10.0
+   self.y = 19 + math.random( 10 ) / 20.0
    self.dx = 0.2 - math.random( 40 ) / 100.0
+   io.write( ">> Fire init (" .. self.x .. "," .. self.y .. ")\n" )
 end
 
 function Agent:update( delta )
@@ -21,5 +21,5 @@ function Agent:update( delta )
    
    raster.fire:set( 0, self.x, self.y, 255 )
 
-   io.write( ">> Fire update (" .. self.x .. "," .. self.y .. ")\n" )
+   --io.write( ">> Fire update (" .. self.x .. "," .. self.y .. ")\n" )
 end
