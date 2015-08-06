@@ -9,3 +9,5 @@
 /doc/*.snm
 /doc/*.toc
 /doc/*.vrb
+
+/examples/*.tiff
