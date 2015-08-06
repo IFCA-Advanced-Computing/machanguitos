@@ -82,6 +82,7 @@ namespace Config{
                    starttime = 0.0,
                    endtime = 10.0,
                    iters = 10,
+                   randomseed = 1,
          } );
         @endcode
 

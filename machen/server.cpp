@@ -161,14 +161,20 @@ namespace Engine{
 
         auto startt = getConfigNumber( "starttime", 0 );
 
+        auto randomseed = getConfigNumber( "randomseed", 0 );
+
         auto ll = getLogLevel();
         auto datadir = getDataDir();
         remoteSetLogLevel( ll );
         remoteSetDataDir( datadir );
         remoteSetDataStore( name, host, port );
 
+        std::mt19937 gen( randomseed );
+        std::uniform_int_distribution<int32_t> dis;
+
         for( auto && c: m_clients ){
             c->setStartTime( startt );
+            c->setRandomSeed( dis(gen) );
 
             for( auto && nr: m_newRaster ){
                 c->createRaster( nr );
