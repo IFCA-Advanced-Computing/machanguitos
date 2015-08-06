@@ -250,6 +250,10 @@ namespace Engine {
 
         auto ds = Engine::DataServer::instance();
         ds->updateLayers( val );
+
+        int ok = true;
+
+        MPI_Send( &ok, 1, MPI_INT, src, MpiTagDS::UPDATELAYERS, MPI_COMM_WORLD );
     }
 
     //--------------------------------------------------------------------------

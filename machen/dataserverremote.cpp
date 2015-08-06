@@ -147,6 +147,17 @@ namespace Engine {
                   MPI_COMM_WORLD );
         MPI_Send( &d, 1, MPI_DOUBLE, DATASERVER_RANK, MpiTagDS::UPDATELAYERS,
                   MPI_COMM_WORLD );
+
+        int ok;
+
+        MPI_Status status;
+        MPI_Recv( &ok, 1, MPI_INT, DATASERVER_RANK,
+                  MpiTagDS::UPDATELAYERS, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            Util::LOGE( "Received on data server response" );
+            Engine::abort();
+        }
+
     }
 
 }//namespace Engine
