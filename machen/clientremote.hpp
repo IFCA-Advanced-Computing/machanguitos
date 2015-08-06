@@ -40,6 +40,7 @@ namespace Engine{
         virtual ~ClientRemote();
 
         void setStartTime( const double time ) override;
+        void setRandomSeed( const int seed ) override;
         void createRaster( const Data::RasterNewData & raster ) override;
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;

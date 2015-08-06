@@ -65,6 +65,10 @@ namespace Engine{
     //--------------------------------------------------------------------------
     bool ClientLocal::createClass( const string & name ){
         auto agentClass = Agent::AgentFactory::instance()->createClass( name );
+        if( agentClass ){
+            std::uniform_real_distribution<> dis;
+            agentClass->setRandomSeed( dis(m_gen) );
+        }
         return (agentClass != nullptr);
     }
 

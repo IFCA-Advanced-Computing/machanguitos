@@ -61,6 +61,11 @@ namespace Engine{
             runSetStartTime( src );
             break;
 
+        case MpiTagCS::SETRANDOMSEED:
+            Util::LOGD( "Set client ", m_rank, " seed ", val );
+            m_local->setRandomSeed( val );
+            break;
+
         case MpiTagCS::CREATERASTERCLIENT:
             runCreateRasterClient( src, val );
             break;

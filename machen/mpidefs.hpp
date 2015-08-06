@@ -54,10 +54,12 @@ namespace Engine{
         RUNAGENTS = 23,
         /// Set Start Time Message Tag.
         SETSTARTTIME = 24,
+        /// Set Random Seed Message Tag.
+        SETRANDOMSEED = 25,
         /// create a Raster Layer Tag.
-        CREATERASTERCLIENT = 25,
+        CREATERASTERCLIENT = 26,
         /// load a Raster Layer Tag.
-        LOADRASTERCLIENT = 26,
+        LOADRASTERCLIENT = 27,
     };
 
     /** MPI message Tags for Data Server.

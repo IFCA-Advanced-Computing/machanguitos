@@ -26,6 +26,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 #include <vector>
 #include <memory>
+#include <random>
 #include "client.hpp"
 #include "agentinstance.hpp"
 
@@ -44,6 +45,7 @@ namespace Engine{
         virtual ~ClientLocal();
 
         void setStartTime( const double time ) override;
+        void setRandomSeed( const int32_t seed ) override;
         void createRaster( const Data::RasterNewData & raster ) override;
         bool createClass( const std::string & name ) override;
         void createAgents( const std::string & name, int n ) override;
@@ -53,6 +55,8 @@ namespace Engine{
     private:
         /// list of Agents in this Client instance.
         std::vector<std::unique_ptr<Agent::AgentInstance>> m_objects;
+        /// random seed generator for lua;
+        std::mt19937 m_gen;
         /// simulation start time
         double m_startTime;
         /// actual simulation time
@@ -71,6 +75,11 @@ namespace Engine{
     //--------------------------------------------------------------------------
     inline void ClientLocal::setStartTime( const double time ){
         m_startTime = time;
+    }
+
+    //--------------------------------------------------------------------------
+    inline void ClientLocal::setRandomSeed( const int32_t seed ){
+        m_gen.seed(seed);
     }
 }
 

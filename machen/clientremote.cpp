@@ -65,6 +65,12 @@ namespace Engine{
     }
 
     //--------------------------------------------------------------------------
+    void ClientRemote::setRandomSeed( const int32_t seed ){
+        int32_t val{seed};
+        MPI_Send( &val, 1, MPI_INT, m_dest, MpiTagCS::SETRANDOMSEED, MPI_COMM_WORLD );
+    }
+
+    //--------------------------------------------------------------------------
     void ClientRemote::createRaster( const Data::RasterNewData & raster ){
         Util::LOGD( "ClientRemote::createRaster ", raster.key );
         assert( raster.key.length() <= MAX_CLASS_NAME && "name too long" );
