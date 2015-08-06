@@ -39,7 +39,7 @@ namespace Util{
     /** Log Level tags for output messages.
         @ingroup Util
      */
-    const char * s_tags[] {" [E] ", " [W] ", " [I] ", " [V] ", " [D] "};
+    const char * s_tags[] {"[E] ", "[W] ", "[I] ", "[V] ", "[D] "};
 
     //--------------------------------------------------------------------------
     bool isEnabled( LogLevel ll ){
@@ -47,17 +47,18 @@ namespace Util{
     }
 
     //--------------------------------------------------------------------------
-    void printLogStamp( LogLevel ll ){
+    void printLogStamp( stringstream & buf, LogLevel ll ){
         time_t rawtime;
         tm * timeinfo;
 
         time( &rawtime );
         timeinfo = localtime( &rawtime );
 
-        clog << timeinfo->tm_mday << " " << timeinfo->tm_hour
-             << ":" << timeinfo->tm_min << ":" << timeinfo->tm_sec;
-
-        clog << s_tags[static_cast<unsigned char>(ll)];
+        buf << s_tags[static_cast<unsigned char>(ll)];
+        buf << to_string(timeinfo->tm_mday);
+        buf << " " << to_string(timeinfo->tm_hour) << ":"
+            << to_string(timeinfo->tm_min) << ":" << to_string(timeinfo->tm_sec)
+            << " - ";
     }
 
     //--------------------------------------------------------------------------

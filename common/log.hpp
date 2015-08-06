@@ -24,6 +24,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOG_H
 
 #include <iostream>
+#include <sstream>
 
 //------------------------------------------------------------------------------
 namespace Util{
@@ -46,10 +47,11 @@ namespace Util{
      */
     bool isEnabled( LogLevel ll );
     /** Print the stamp prefix of a Log using LogLevel info.
+        @param buf stream where the log is writed.
         @param ll Log Level to stamp.
         @ingroup Util
      */
-    void printLogStamp( LogLevel ll );
+    void printLogStamp( std::stringstream & buf, LogLevel ll );
     /** Sets the application log level.
         @param ll new Log Level Name.
         @ingroup Util
@@ -68,19 +70,22 @@ namespace Util{
 
     //--------------------------------------------------------------------------
     /** Print a type in the log.
+        @param buf stream where the log is writed.
         @ingroup Util
      */
-    template<typename X> void printLog( const X & x ){
-        std::clog << x << std::endl;
+    template<class S, typename X> void printLog( S & buf, const X & x ){
+        buf << x;
     }
 
     //--------------------------------------------------------------------------
     /** print a type list in the log.
+        @param buf stream where the log is writed.
         @ingroup Util
      */
-    template<typename X, typename... XS> void printLog( const X & x, XS... xs ){
-        std::clog << x;
-        printLog( xs... );
+    template<class S, typename X, typename... XS>
+    void printLog( S & buf, const X & x, XS... xs ){
+        buf << x;
+        printLog( buf, xs... );
     }
 
     //--------------------------------------------------------------------------
@@ -91,8 +96,10 @@ namespace Util{
      */
     template<typename... XS> void LOG( LogLevel ll, XS... xs ){
         if( isEnabled( ll ) ){
-            printLogStamp( ll );
-            printLog( xs... );
+            std::stringstream buf;
+            printLogStamp( buf, ll );
+            printLog( buf, xs... );
+            std::clog << buf.str() + "\n";
         }
     }
 
