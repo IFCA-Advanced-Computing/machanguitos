@@ -72,6 +72,8 @@ namespace Engine{
         GETRASTERVALUE = 42,
         /// set a raster value.
         SETRASTERVALUE = 43,
+        /// increment a raster value.
+        INCRASTERVALUE = 44,
         /// save a raster layer.
         SAVERASTER = 45,
         /// load a raster layer.

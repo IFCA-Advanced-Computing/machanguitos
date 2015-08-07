@@ -292,6 +292,92 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    void RasterGDAL::incrementValue( int layer, double x, double y, double val ){
+        auto rasterBand = m_data->GetRasterBand( layer + 1 );
+        if( rasterBand ){
+            auto pos = getPosition( x, y );
+            auto i = get<0>(pos);
+            auto j = get<1>(pos);
+            auto isize = rasterBand->GetXSize();
+            auto jsize = rasterBand->GetYSize();
+            if( i < 0 or i >= isize or j < 0 or j >= jsize ){
+                LOGD( "Out-of-range position set( ", x, ", ", y, " )" );
+                return;
+            }
+
+            auto datatype = rasterBand->GetRasterDataType();
+            uint8_t pixel_byte;
+            uint16_t pixel_uint16;
+            int16_t pixel_int16;
+            uint32_t pixel_uint32;
+            int32_t pixel_int32;
+            float pixel_float32;
+
+
+            switch( datatype ){
+            case GDT_Byte:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_byte, 1, 1, datatype, 0, 0 );
+                pixel_byte += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_byte, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_UInt16:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_uint16, 1, 1, datatype, 0, 0 );
+
+                pixel_uint16 += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_uint16, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Int16:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_int16, 1, 1, datatype, 0, 0 );
+
+                pixel_int16 += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_int16, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_UInt32:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_uint32, 1, 1, datatype, 0, 0 );
+
+                pixel_uint32 += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_uint32, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Int32:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_int32, 1, 1, datatype, 0, 0 );
+
+                pixel_int32 += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_int32, 1, 1, datatype, 0, 0 );
+                break;
+
+            case GDT_Float32:
+                rasterBand->RasterIO( GF_Read, i, j, 1, 1,
+                                      &pixel_float32, 1, 1, datatype, 0, 0 );
+
+                pixel_float32 += val;
+                rasterBand->RasterIO( GF_Write, i, j, 1, 1,
+                                      &pixel_float32, 1, 1, datatype, 0, 0 );
+                break;
+
+            default:
+                LOGE( "Raster Unknown type" );
+                break;
+            }
+        }else{
+            LOGE( "Invalid raster layer ", layer );
+        }
+    }
+
+    //--------------------------------------------------------------------------
     double RasterGDAL::getPixelValue( int layer, int i, int j ){
         auto rasterBand = m_data->GetRasterBand( layer + 1 );
         if( rasterBand ){

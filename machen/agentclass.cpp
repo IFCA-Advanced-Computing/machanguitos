@@ -103,6 +103,30 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    int raster_inc( lua_State *L ){
+        auto l = luaL_checknumber( L, -4 );
+        auto x = luaL_checknumber( L, -3 );
+        auto y = luaL_checknumber( L, -2 );
+        auto v = luaL_checknumber( L, -1 );
+
+        lua_getfield( L, -5, RASTER_OBJ );           // 1
+        if( lua_islightuserdata( L, -1 ) ){
+            auto raster = static_cast<Data::Raster*>( lua_touserdata( L, -1 ) );
+            lua_pop( L, 1 );                         // 0
+            if( raster ){
+                if( raster->validPosition( x, y ) ){
+                    raster->incrementValue( l, x, y, v );
+                }else{
+                    luaL_error( L, "Can't SET Raster value" );
+                }
+            }else{
+                luaL_error( L, "Invalid raster object" );
+            }
+        }
+        return 0;
+    }
+
+    //--------------------------------------------------------------------------
     /** Define the indexing assignment of Agent intances metatable.
         @param L lua_State.
         @ingroup Agent
@@ -147,6 +171,9 @@ namespace Agent{
                 lua_settable( L, -3 );                          // 1
                 lua_pushstring( L, "set");                      // 2
                 lua_pushcfunction( L, raster_set );             // 3
+                lua_settable( L, -3 );                          // 1
+                lua_pushstring( L, "increment");                // 2
+                lua_pushcfunction( L, raster_inc );             // 3
                 lua_settable( L, -3 );                          // 1
                 return 1;
             }else{

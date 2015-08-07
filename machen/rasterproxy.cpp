@@ -78,6 +78,18 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    void RasterProxy::incrementValue( int layer, double x, double y, double v ){
+        int32_t val{layer};
+        MPI_Send( &val, 1, MPI_INT, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::INCRASTERVALUE, MPI_COMM_WORLD );
+        MPI_Send( m_ckey.get(), m_ckeyLength, MPI_CHAR, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::INCRASTERVALUE, MPI_COMM_WORLD );
+        double dvals[]{x, y, v};
+        MPI_Send( dvals, 3, MPI_DOUBLE, Engine::DATASERVER_RANK,
+                  Engine::MpiTagDS::INCRASTERVALUE, MPI_COMM_WORLD );
+    }
+
+    //--------------------------------------------------------------------------
     double RasterProxy::getPixelValue( int /*layer*/, int /*i*/, int /*j*/ ){
         // empty
         return 0;
