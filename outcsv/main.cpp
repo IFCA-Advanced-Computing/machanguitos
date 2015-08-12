@@ -25,6 +25,11 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <getopt.h>
 
 //------------------------------------------------------------------------------
+/** Main application function.
+    @param argc argument count.
+    @param argv argument vector.
+    @returns exit status of the process.
+*/
 int main( int argc, char * argv[] ){
     constexpr const char * params = "h:p:";
     std::string hoststr{"localhost"};
