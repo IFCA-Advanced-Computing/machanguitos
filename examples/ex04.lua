@@ -22,6 +22,7 @@ function initialize()
                       endtime = 24*100,
                       iters = 12*100,
                       randomseed = 1,
+                      -- randomseed = os.clock(),
                    } )
 
 end
