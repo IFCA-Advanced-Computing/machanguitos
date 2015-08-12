@@ -12,6 +12,23 @@ end
 function Agent:update( delta )
    self.x = self.x + self.dx*delta;
    self.y = self.y + self.dy*delta;
+   if self.x > 19.5 then
+      self.x = 19.5
+      self.dx = - self.dx
+   end
+   if self.x < 0.5 then
+      self.x = 0.5
+      self.dx = - self.dx
+   end
+   if self.y > 19.5 then
+      self.y = 19.5
+      self.dy = - self.dy
+   end
+   if self.y < 0.5 then
+      self.y = 0.5
+      self.dy = - self.dy
+   end
+
    local rst = raster.grass;
    local grass = rst:get( 0, self.x, self.y );
    rst:set( 0, self.x, self.y, grass - 1 );
