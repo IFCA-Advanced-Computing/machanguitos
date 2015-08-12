@@ -63,8 +63,5 @@ The Fire layer simulates the smoke with a sort-of average of neighbors pixels:
 /** @defgroup Config Configuration classes.
  */
 
-/** @defgroup Data Data classes.
- */
-
-/** @defgroup IO Input Output classes.
+/** @defgroup Data Data and Input/Output classes.
  */
