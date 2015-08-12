@@ -85,21 +85,24 @@ namespace Util {
 
     //--------------------------------------------------------------------------
     ScriptValue & ScriptValue::operator=( const ScriptValue & val ){
-        erase();
-        m_type = val.m_type;
-        switch( m_type ){
-        case ValueType::NIL: // empty
-            break;
-        case ValueType::BOOLEAN:
-            m_val.valb = val.m_val.valb;
-            break;
-        case ValueType::NUMBER:
-            m_val.valn = val.m_val.valn;
-            break;
-        case ValueType::STRING:
-            m_val.vals = new string(*val.m_val.vals);
-            break;
+        if( this != &val ){
+            erase();
+            m_type = val.m_type;
+            switch( m_type ){
+            case ValueType::NIL: // empty
+                break;
+            case ValueType::BOOLEAN:
+                m_val.valb = val.m_val.valb;
+                break;
+            case ValueType::NUMBER:
+                m_val.valn = val.m_val.valn;
+                break;
+            case ValueType::STRING:
+                m_val.vals = new string(*val.m_val.vals);
+                break;
+            }
         }
+
         return (*this);
     }
 
