@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git reset HEAD .
+
 if [ $# == 1 ] ; then
     SOURCEDIR=$1
 else
