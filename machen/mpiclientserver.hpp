@@ -43,21 +43,31 @@ namespace Engine{
 
     private:
         bool doTags( int tag, int src, int32_t val ) override;
-        /// Execute a Set Start Time command.
+        /** Execute a Set Start Time command.
+            @param src caller id.
+        */
         void runSetStartTime( int src );
-        /// Execute a Create Class command.
+        /** Execute a Create Class command.
+            @param src caller id.
+        */
         void runCreateClass( int src );
         /** Execute a Create Agents command.
+            @param src caller id.
             @param num number of agents to create.
          */
         void runCreateAgents( int src, const int num );
         /** Execute a Create Raster command.
+            @param src caller id.
             @param w width of the raster layer.
          */
         void runCreateRasterClient( int src, const int w );
-        /// Execute a Create Raster command.
+        /** Execute a Load Raster command.
+            @param src caller id.
+        */
         void runLoadRasterClient( int src );
-        /// Execute a End command.
+        /** Execute a runAgents command.
+            @param src caller id.
+        */
         void runAgents( int src );
 
         /// Client instance that runs the real code.

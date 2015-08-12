@@ -68,13 +68,42 @@ namespace Engine{
             @param filename name of the server script to load.
         */
         bool initialize( const std::string & filename );
-        /// create the agents for the simulation.
+        /// Create the agents for the simulation.
         void createAgents();
+        /** Create a new Raster object in the simulation.
+            @param key name of the Raster object.
+            @param l number of layers.
+            @param w width in pixels.
+            @param h height in pixels.
+            @param x0 left value of the Raster area.
+            @param x1 rigth value of the Raster area.
+            @param y0 top value of the Raster area.
+            @param y1 bottom value of the Raster area.
+            @param d default value of layer.
+            @param isFloat true if layer values are Float32, else they will be Bytes.
+         */
         void createRaster( const std::string & key, int l, int w, int h,
                            double x0, double x1, double y0, double y1,
                            double d, bool isFloat );
+        /** Load a Raster object from a file.
+            @param key name of the Raster object.
+            @param file filename.
+            @param x0 left value of the Raster area.
+            @param x1 rigth value of the Raster area.
+            @param y0 top value of the Raster area.
+            @param y1 bottom value of the Raster area.
+         */
         void loadRaster( const std::string & key, const std::string & file,
                          double x0, double x1, double y0, double y1 );
+        /** Set a Lua update source for a Raster object.
+
+            The Lua file should implement a 'Raster:update' function like:
+
+            @include fireupdate.lua
+
+            @param key name of the Raster object.
+            @param file lua filename.
+         */
         void setRasterLayerUpdate( const std::string & key,
                                    const std::string & file );
         /** Insert a config parameter.
@@ -105,15 +134,25 @@ namespace Engine{
             @param d default value.
             @returns the value, or default if this variable is not string type.
          */
-        std::string getConfigString( const std::string & key, const std::string & d ) const;
+        std::string getConfigString( const std::string & key,
+                                     const std::string & d ) const;
 
+        /// Call Lua initialize function from the config file.
         void initializeScript();
+        /** Call Lua starIteration function from the config file.
+            @param n number of current iteration.
+         */
         void startIterationScript( const int n );
+        /** Call Lua endIteration function from the config file.
+            @param n number of current iteration.
+         */
         void endIterationScript( const int n );
+        /// Call Lua endSimulation function from the config file.
         void endSimulationScript();
 
         /// list of number of agents to create of each AgentClass.
         std::map<std::string, unsigned> m_numAgents;
+        /// list of raster objects to be created.
         std::forward_list<Data::RasterNewData> m_newRaster;
         /// list of Clients used during simulation.
         std::vector<std::unique_ptr<Client>> m_clients;

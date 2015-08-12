@@ -31,6 +31,7 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
+    /// minimum number of MPI proccess needed to run.
     constexpr int MIN_MPI_PROCS = 3;
 
     //--------------------------------------------------------------------------

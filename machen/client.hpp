@@ -50,6 +50,9 @@ namespace Engine{
             @param seed initial seed for the client.
          */
         virtual void setRandomSeed( const int32_t seed )=0;
+        /** Create a Raster object.
+            @param raster Raster creation parameters.
+         */
         virtual void createRaster( const Data::RasterNewData & raster )=0;
 
         /** Create a AgentClass and save it.

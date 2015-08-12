@@ -33,6 +33,10 @@ namespace Engine {
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** Execute a Create Raster command.
+        @param src caller id.
+        @param w raster width.
+    */
     void runCreateRaster( int src, const int w ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -69,6 +73,10 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Get Raster Value command.
+        @param src caller id.
+        @param layer layer to use.
+    */
     void runGetRasterValue( int src, const int layer ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -105,6 +113,10 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Set Raster Value command.
+        @param src caller id.
+        @param layer layer to use.
+    */
     void runSetRasterValue( int src, const int layer ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -135,6 +147,10 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Increment Raster Value command.
+        @param src caller id.
+        @param layer layer to use.
+    */
     void runIncRasterValue( int src, const int layer ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -165,6 +181,9 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Save Raster command.
+        @param src caller id.
+    */
     void runSaveRaster( int src ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -200,6 +219,9 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Load Raster command.
+        @param src caller id.
+    */
     void runLoadRaster( int src ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -238,6 +260,9 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Set Raster Update command.
+        @param src caller id.
+    */
     void runSetRasterUpdate( int src ){
         char ckey[MAX_CLASS_NAME+1];
         MPI_Status status;
@@ -268,6 +293,9 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Update Layers command.
+        @param src caller id.
+    */
     void runUpdateLayers( int src ){
         double val;
         MPI_Status status;
