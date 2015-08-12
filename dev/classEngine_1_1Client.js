@@ -7,6 +7,6 @@ var classEngine_1_1Client =
     [ "createRaster", "classEngine_1_1Client.html#a79ebf7e79b058fd98864f3245e90d97e", null ],
     [ "numAgents", "classEngine_1_1Client.html#a6dbbb18825c92b0d987490b00d3c361c", null ],
     [ "runAgents", "classEngine_1_1Client.html#a226c55bf89876f592b097fbc8ebedcdf", null ],
-    [ "setDataStore", "classEngine_1_1Client.html#a979e1b4c39d3f0bff1f4bd24fd8963fd", null ],
+    [ "setRandomSeed", "classEngine_1_1Client.html#af7514c68d9f8754667ba78bfcbaf608a", null ],
     [ "setStartTime", "classEngine_1_1Client.html#a6bdc3ad131ac0674776ef76a9cf9d65c", null ]
 ];

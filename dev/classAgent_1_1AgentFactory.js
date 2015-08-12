@@ -1,6 +1,7 @@
 var classAgent_1_1AgentFactory =
 [
-    [ "createClass", "classAgent_1_1AgentFactory.html#a12a47ce13d36313a4316560f117b5eb1", null ],
-    [ "getClass", "classAgent_1_1AgentFactory.html#a4d2d4d8228d502319e039e534694fb42", null ],
-    [ "m_classes", "classAgent_1_1AgentFactory.html#a8226c0824c6812686d72dbfe4f52e4e1", null ]
+    [ "createClass", "classAgent_1_1AgentFactory.html#ad07f0a79c2839e0803c353e6050828f8", null ],
+    [ "createInstance", "classAgent_1_1AgentFactory.html#a3b2ec57c192dcf52c6900b7620065534", null ],
+    [ "getClass", "classAgent_1_1AgentFactory.html#a37442fa8a81636bfc5b7bd1fe06c9554", null ],
+    [ "m_classes", "classAgent_1_1AgentFactory.html#a812b0279a71a209e8c140cf7ba4bfb0e", null ]
 ];

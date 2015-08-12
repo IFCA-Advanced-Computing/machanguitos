@@ -33,8 +33,13 @@ var group__Util =
       [ "m_val", "classUtil_1_1ScriptValue.html#aa545e5f58031b3d2a1013f7d6c95100a", null ]
     ] ],
     [ "Singleton", "classSingleton.html", [
+      [ "~Singleton", "classSingleton.html#ac6e7af82cba33f561bd64e5e0243e7f8", null ],
       [ "instance", "classSingleton.html#a338dec8fedb58c61f7a828e76a4568cf", null ],
       [ "s_singleton", "classSingleton.html#aca4137fef8fc52b2eef3409e782f1fd4", null ]
+    ] ],
+    [ "DriverInfo", "group__Util.html#classUtil_1_1DriverInfo", [
+      [ "driverExts", "group__Util.html#add77f55cf3670e7d1f1c689cc07d9c22", null ],
+      [ "driverName", "group__Util.html#aeb6711bd6623989f04c34154aab9fa3d", null ]
     ] ],
     [ "LogLevel", "group__Util.html#ga6a98cf2a4612f5e3596d66fc36f55598", [
       [ "LOG_ERROR", "group__Util.html#gga6a98cf2a4612f5e3596d66fc36f55598a4490aa3d29644e716440fada68f54032", null ],
@@ -51,11 +56,12 @@ var group__Util =
     [ "LOGI", "group__Util.html#ga6e62554303297c22706edf9eb7d09b7b", null ],
     [ "LOGV", "group__Util.html#ga4b297a8064e51a5a5adf0229b7199922", null ],
     [ "LOGW", "group__Util.html#ga8510d7d6e09b5c06559b95874ba85162", null ],
-    [ "printLog", "group__Util.html#ga5635425bcf35c57c888567fbed79d824", null ],
-    [ "printLog", "group__Util.html#ga797993c9bf02652220b99287f847d1c7", null ],
-    [ "printLogStamp", "group__Util.html#gae5b466c59f3b49fbd764a86ee9770b98", null ],
+    [ "printLog", "group__Util.html#gac0b935b193223c0acd22a1583efbf51c", null ],
+    [ "printLog", "group__Util.html#gaeb27ab61cbeac86c5bb1fd36a18b6057", null ],
+    [ "printLogStamp", "group__Util.html#gaef59a2f16817b9412ea94c0820fca833", null ],
     [ "setLogLevel", "group__Util.html#ga1799315a007c8c623e67bb33257e12aa", null ],
     [ "setLogLevel", "group__Util.html#gaa2d9faed19c18dd01fd57ef454edf2d7", null ],
     [ "s_currentLevel", "group__Util.html#ga09eda7691b85f1f6cab9190a1f9a1828", null ],
+    [ "s_driverNames", "group__Util.html#ga3c21af7c06ab6744889d66a37813d179", null ],
     [ "s_tags", "group__Util.html#gaf7e6d48e603abcf11fd8664ccdfc81eb", null ]
 ];

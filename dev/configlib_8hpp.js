@@ -1,4 +1,4 @@
 var configlib_8hpp =
 [
-    [ "load", "configlib_8hpp.html#ga5e3336e5f83b8cea516039537861e9e6", null ]
+    [ "openlib", "configlib_8hpp.html#gaadf2879127c849e5d100bd1858e1d351", null ]
 ];

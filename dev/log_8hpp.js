@@ -15,9 +15,9 @@ var log_8hpp =
     [ "LOGI", "log_8hpp.html#ga6e62554303297c22706edf9eb7d09b7b", null ],
     [ "LOGV", "log_8hpp.html#ga4b297a8064e51a5a5adf0229b7199922", null ],
     [ "LOGW", "log_8hpp.html#ga8510d7d6e09b5c06559b95874ba85162", null ],
-    [ "printLog", "log_8hpp.html#ga5635425bcf35c57c888567fbed79d824", null ],
-    [ "printLog", "log_8hpp.html#ga797993c9bf02652220b99287f847d1c7", null ],
-    [ "printLogStamp", "log_8hpp.html#gae5b466c59f3b49fbd764a86ee9770b98", null ],
+    [ "printLog", "log_8hpp.html#gac0b935b193223c0acd22a1583efbf51c", null ],
+    [ "printLog", "log_8hpp.html#gaeb27ab61cbeac86c5bb1fd36a18b6057", null ],
+    [ "printLogStamp", "log_8hpp.html#gaef59a2f16817b9412ea94c0820fca833", null ],
     [ "setLogLevel", "log_8hpp.html#ga1799315a007c8c623e67bb33257e12aa", null ],
     [ "setLogLevel", "log_8hpp.html#gaa2d9faed19c18dd01fd57ef454edf2d7", null ]
 ];
