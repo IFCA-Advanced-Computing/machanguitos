@@ -83,9 +83,6 @@ GENERATE_TESTLIST      = YES
 GENERATE_BUGLIST       = YES
 GENERATE_DEPRECATEDLIST= YES
 
-# The ENABLED_SECTIONS tag can be used to enable conditional
-# documentation sections, marked by \if sectionname ... \endif.
-
 ENABLED_SECTIONS       =
 MAX_INITIALIZER_LINES  = 30
 SHOW_USED_FILES        = YES
@@ -96,7 +93,7 @@ FILE_VERSION_FILTER    =
 LAYOUT_FILE            =
 
 #---------------------------------------------------------------------------
-# configuration options related to warning and progress messages
+# Configuration options related to warning and progress messages
 #---------------------------------------------------------------------------
 
 QUIET                  = NO
@@ -108,7 +105,7 @@ WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
 
 #---------------------------------------------------------------------------
-# configuration options related to the input files
+# Configuration options related to the input files
 #---------------------------------------------------------------------------
 
 INPUT                  = @DOXYGEN_INPUTS@
@@ -135,7 +132,7 @@ FILTER_SOURCE_FILES    = NO
 FILTER_SOURCE_PATTERNS =
 
 #---------------------------------------------------------------------------
-# configuration options related to source browsing
+# Configuration options related to source browsing
 #---------------------------------------------------------------------------
 
 SOURCE_BROWSER         = YES
@@ -148,7 +145,7 @@ USE_HTAGS              = NO
 VERBATIM_HEADERS       = YES
 
 #---------------------------------------------------------------------------
-# configuration options related to the alphabetical class index
+# Configuration options related to the alphabetical class index
 #---------------------------------------------------------------------------
 
 ALPHABETICAL_INDEX     = YES
@@ -156,7 +153,7 @@ COLS_IN_ALPHA_INDEX    = 4
 IGNORE_PREFIX          =
 
 #---------------------------------------------------------------------------
-# configuration options related to the HTML output
+# Configuration options related to the HTML output
 #---------------------------------------------------------------------------
 
 GENERATE_HTML          = YES
@@ -214,7 +211,7 @@ SEARCHENGINE           = YES
 SERVER_BASED_SEARCH    = NO
 
 #---------------------------------------------------------------------------
-# configuration options related to the LaTeX output
+# Configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
 
 GENERATE_LATEX         = NO
@@ -232,7 +229,7 @@ LATEX_HIDE_INDICES     = NO
 LATEX_SOURCE_CODE      = NO
 
 #---------------------------------------------------------------------------
-# configuration options related to the RTF output
+# Configuration options related to the RTF output
 #---------------------------------------------------------------------------
 
 GENERATE_RTF           = NO
@@ -243,7 +240,7 @@ RTF_STYLESHEET_FILE    =
 RTF_EXTENSIONS_FILE    =
 
 #---------------------------------------------------------------------------
-# configuration options related to the man page output
+# Configuration options related to the man page output
 #---------------------------------------------------------------------------
 
 GENERATE_MAN           = NO
@@ -252,7 +249,7 @@ MAN_EXTENSION          = .3
 MAN_LINKS              = NO
 
 #---------------------------------------------------------------------------
-# configuration options related to the XML output
+# Configuration options related to the XML output
 #---------------------------------------------------------------------------
 
 GENERATE_XML           = NO
@@ -262,13 +259,13 @@ XML_DTD                =
 XML_PROGRAMLISTING     = YES
 
 #---------------------------------------------------------------------------
-# configuration options for the AutoGen Definitions output
+# Configuration options for the AutoGen Definitions output
 #---------------------------------------------------------------------------
 
 GENERATE_AUTOGEN_DEF   = NO
 
 #---------------------------------------------------------------------------
-# configuration options related to the Perl module output
+# Configuration options related to the Perl module output
 #---------------------------------------------------------------------------
 
 GENERATE_PERLMOD       = NO
@@ -291,7 +288,7 @@ EXPAND_AS_DEFINED      =
 SKIP_FUNCTION_MACROS   = YES
 
 #---------------------------------------------------------------------------
-# Configuration::additions related to external references
+# Configuration options related to external references
 #---------------------------------------------------------------------------
 
 TAGFILES               =
