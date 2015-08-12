@@ -11,19 +11,43 @@ Work done at The Institute of Physics of Cantabria (<a href="http://www.ifca.es"
 @section inst_sec Install
 @subsection inst_pre_ssec Prerequisites
 
-MPI library
+You need the next libraries installed: Boost, MPI and GDAL
 
-GDAL
+Also it is needed a Mongo database to output agents values during execution.
 
 @subsection inst_com_ssec Compile
 
-mkdir build
-cd build
-cmake -DCMAKE_PREFIX_PATH=[install_path] ..
-make
-[sudo] make install
+    mkdir build
+    cd build
+    cmake -DCMAKE_PREFIX_PATH=[install_path] ..
+    make
+    [sudo] make install
 
-@subsection inst_test_ssec Test Example
+@subsection inst_test_ssec Fire Example
+
+@image html fire.gif "Fire simulation output"
+
+Fire Example is a unrealistic example of what can be done with
+Machanguitos. Fire simulate a 2D fire demo using agents as Fire spots and a
+image that is update to simulate the fire smoke.
+
+The main file is in charge of create the fire spots and a 2d image to be
+updated:
+
+@include ex03.lua
+
+This simulation as presented always generate the same output. To make variations
+you should set a different randomseed on 'config.setvars'.
+
+The fire agents initialized themselves on a random position at the bottom of the
+2D area. Then during the simulation they move linearly at the bottom generating
+heat (writing 255 on the layer):
+
+@include fire.lua
+
+The Fire layer simulates the smoke with a sort-of average of neighbors pixels:
+
+@include fireupdate.lua
 
  */
 

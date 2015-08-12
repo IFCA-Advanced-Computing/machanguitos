@@ -116,15 +116,11 @@ EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
 EXCLUDE_SYMBOLS        =
-EXAMPLE_PATH           =
-EXAMPLE_PATTERNS       =
+EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/examples
+EXAMPLE_PATTERNS       = *.lua
 EXAMPLE_RECURSIVE      = NO
 
-# The IMAGE_PATH tag can be used to specify one or more files or
-# directories that contain image that are included in the documentation (see
-# the \image command).
-
-IMAGE_PATH             =
+IMAGE_PATH             = @PROJECT_SOURCE_DIR@/doc/imgs
 
 INPUT_FILTER           =
 FILTER_PATTERNS        =
