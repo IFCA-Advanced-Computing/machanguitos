@@ -30,8 +30,9 @@ function Agent:update( delta )
    end
 
    local rst = raster.grass;
-   local grass = rst:get( 0, self.x, self.y );
-   rst:set( 0, self.x, self.y, grass - 1 );
+   -- local grass = rst:get( 0, self.x, self.y );
+   -- rst:set( 0, self.x, self.y, grass - 10 );
+   rst:increment( 0, self.x, self.y, -10 );
    io.write( " cow state = (" .. self.x .. "," .. self.y .. ") " .. grass .. "\n" );
 end
 
