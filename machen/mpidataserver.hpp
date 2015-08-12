@@ -15,29 +15,37 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file mpidataserver.hpp
+    @brief Engine::MPIDataServer declaration.
+    @author Luis Cabellos
+*/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#ifndef MPIDATASERVER_H
+#define MPIDATASERVER_H
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+#include "mpiworker.hpp"
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
-    }
-    strval << std::ends;
+//------------------------------------------------------------------------------
+namespace Engine{
+    //--------------------------------------------------------------------------
+    /** Define a MPI Process main loop to run as a Data Server in a MPI program.
 
-    std::cout << strval.str() << std::endl;
+        @ingroup Engine
+     */
+    class MPIDataServer final : public MPIWorker {
+    public:
+        /// Construct a MPI Data Server
+        MPIDataServer();
 
-    return EXIT_SUCCESS;
-}
+    private:
+        bool doTags( int tag, int src, int32_t val  ) override;
+    };
+
+}//namespace Engine
+
+
+//------------------------------------------------------------------------------
+#endif//MPIDATASERVER_H
 
 //------------------------------------------------------------------------------

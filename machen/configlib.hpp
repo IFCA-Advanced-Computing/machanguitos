@@ -15,29 +15,28 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file configlib.hpp
+    @brief Configuration Lua functions.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#ifndef CONFIGLIB_HPP
+#define CONFIGLIB_HPP
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+struct lua_State;
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
-    }
-    strval << std::ends;
-
-    std::cout << strval.str() << std::endl;
-
-    return EXIT_SUCCESS;
+//------------------------------------------------------------------------------
+namespace Config{
+    /** Load config lib in Lua State
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
+    int openlib( lua_State *L );
 }
+
+//------------------------------------------------------------------------------
+#endif//CONFIGLIB_HPP
 
 //------------------------------------------------------------------------------

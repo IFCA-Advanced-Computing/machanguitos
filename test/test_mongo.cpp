@@ -24,7 +24,7 @@ constexpr const char * TEST_SERVER = "localhost";
 constexpr int TEST_PORT = 27017;
 
 //------------------------------------------------------------------------------
-int main( int argc, char * argv[] ){
+int main( int /*argc*/, char * /*argv*/[] ){
     mongo conn;
 
     if( mongo_client( &conn , TEST_SERVER, TEST_PORT ) != MONGO_OK ) {

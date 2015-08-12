@@ -15,29 +15,28 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file rasterlib.hpp
+    @brief Raster Lua library.
+    @author Luis Cabellos
+*/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#ifndef RASTERLIB_H
+#define RASTERLIB_H
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+struct lua_State;
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
-    }
-    strval << std::ends;
+//------------------------------------------------------------------------------
+namespace Raster {
+    /** Load raster lib in Lua State
+        @param L lua_State.
+        @ingroup Raster
+        @retval 0 No return values to Lua.
+     */
+    int openlib( lua_State *L );
+}//namespace Raster
 
-    std::cout << strval.str() << std::endl;
-
-    return EXIT_SUCCESS;
-}
+//------------------------------------------------------------------------------
+#endif//RASTERLIB_H
 
 //------------------------------------------------------------------------------

@@ -15,27 +15,47 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file main.cpp
+    @brief Main function of machen-outcsv application.
+    @author Luis Cabellos
+*/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
 #include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#include <iostream>
+#include <getopt.h>
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+int main( int argc, char * argv[] ){
+    constexpr const char * params = "h:p:";
+    std::string hoststr{"localhost"};
+    std::string portstr{"27017"};
+    std::string datastr{""};
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
+    int c;
+    while( (c = getopt( argc, argv, params )) != -1 ){
+        switch( c ){
+        case 'h':
+            hoststr = optarg;
+            break;
+
+        case 'p':
+            portstr = optarg;
+            break;
+
+        default:
+            std::cerr << "Unknown options\n";
+            return EXIT_FAILURE;
+        }
     }
-    strval << std::ends;
 
-    std::cout << strval.str() << std::endl;
+    if( argc > optind ){
+        datastr = argv[optind];
+    }else{
+        std::cerr << "There is not namespace name\n";
+        return EXIT_FAILURE;
+    }
+
+    std::cout << hoststr << ":" << portstr << " " << datastr << std::endl;
 
     return EXIT_SUCCESS;
 }

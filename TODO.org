@@ -1,0 +1,18 @@
+#+STARTUP: showall
+
+* Modelado de vacas
+
+** Movimiento de vacas en el terreno y generar capa de abono.
+** Estres termico -> determina si la vaca se acerca al agua
+** Busqueda de articulos
+*** Movimiendo de vacas
+*** generacion de abono
+*** Maduracion de abono
+
+** Datos
+*** Input: Cotos ganaderos
+*** Input: orografia
+*** Output: capa de abono
+
+** Bañistas
+*** Monitorizar turismo de lujo

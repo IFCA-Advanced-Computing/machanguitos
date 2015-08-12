@@ -16,26 +16,21 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
 #include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#include <memory>
+#include <iostream>
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+int main( int /*argc*/, char */*argv*/[] ){
+    std::cout << "unique_ptr checks\n";
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
+    std::unique_ptr<int> ap = std::unique_ptr<int>( nullptr );
+    
+    if( ap ){
+        std::cout << "ptr = " << *ap << "(" << ap.get() << ")\n";
+    }else{
+        std::cout << "no ptr\n";
     }
-    strval << std::ends;
-
-    std::cout << strval.str() << std::endl;
 
     return EXIT_SUCCESS;
 }

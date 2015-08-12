@@ -16,28 +16,23 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#ifndef MPI_HPP
+#define MPI_HPP
+
+#if defined(__GNUC__)
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#include <mpi.h>
+#pragma GCC diagnostic pop
+
+#else
+
+#include <mpi.h>
+
+#endif
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
-
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
-    }
-    strval << std::ends;
-
-    std::cout << strval.str() << std::endl;
-
-    return EXIT_SUCCESS;
-}
+#endif//MPI_HPP
 
 //------------------------------------------------------------------------------

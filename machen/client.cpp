@@ -15,29 +15,22 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file client.cpp
+    @brief Engine::Client Definition.
+    @author Luis Cabellos
+ */
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#include "client.hpp"
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
-
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
+namespace Engine{
+    Client::Client(){ 
+        // empty
     }
-    strval << std::ends;
 
-    std::cout << strval.str() << std::endl;
-
-    return EXIT_SUCCESS;
+    Client::~Client(){ 
+        // empty
+    }
 }
 
 //------------------------------------------------------------------------------

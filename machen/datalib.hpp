@@ -15,29 +15,29 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
+/** @file datalib.hpp
+    @brief Data Library functions.
+    @author Luis Cabellos
+*/
 //------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <cstdlib>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#ifndef DATALIB_HPP
+#define DATALIB_HPP
 
 //------------------------------------------------------------------------------
-int main( int /*argc*/, char * /*argv*/[] ){
-    boost::uuids::random_generator gen;
-    boost::uuids::uuid u = gen();
+struct lua_State;
 
-    std::ostringstream strval;
-    for( auto i: u ){
-        strval.fill('0');
-        strval.width(2);
-        strval << std::uppercase << std::hex << static_cast<unsigned>(i);
-    }
-    strval << std::ends;
+//------------------------------------------------------------------------------
+namespace Data {
+    /** Load data lib in Lua State
+        @param L lua_State.
+        @ingroup Config
+        @retval 0 No return values to Lua.
+     */
+    int openlib( lua_State * L );
 
-    std::cout << strval.str() << std::endl;
+}//namespace Data
 
-    return EXIT_SUCCESS;
-}
+//------------------------------------------------------------------------------
+#endif//DATALIB_HPP
 
 //------------------------------------------------------------------------------
