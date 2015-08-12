@@ -147,7 +147,7 @@ namespace Agent{
     void AgentInstance::outVars( const double t ) const{
         auto outKeys = m_class->getOutVars();
 
-        auto db = IO::DataStore::instance();
+        auto db = Data::DataStore::instance();
 
         map<string, const ScriptValue *> ovars;
         for( const auto& key: outKeys ){

@@ -34,17 +34,20 @@ class GDALDataset;
 namespace Data {
     //--------------------------------------------------------------------------
     /** Raster Table Name for Lua files.
-        @ingroup Agent
+        @ingroup Data
      */
     constexpr const char * SCRIPT_RASTER_NAME = "Raster";
 
     //--------------------------------------------------------------------------
     /** private name of RasterGDAL objects in Lua tables.
-        @ingroup Agent
+        @ingroup Data
      */
     constexpr const char * SCRIPT_RASTER_OBJ = "__ro";
 
     //--------------------------------------------------------------------------
+    /** Raster data using GDAL library.
+        @ingroup Data
+     */
     class RasterGDAL final : public Raster {
     public:
         RasterGDAL( const std::string & key, int l, int w, int h,

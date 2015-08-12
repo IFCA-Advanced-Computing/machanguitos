@@ -86,8 +86,8 @@ namespace Data {
         that don't allow Float types (like png, or jpeg). You can use TIFF files
         to save them with Float numbers.
 
+        @ingroup Data
         @param L lua_State.
-        @ingroup Config
         @retval 0 No return values to Lua.
      */
     int data_createLayer( lua_State *L ){
@@ -159,8 +159,8 @@ namespace Data {
                   } );
         @endcode
 
+        @ingroup Data
         @param L lua_State.
-        @ingroup Config
         @retval 0 No return values to Lua.
      */
     int data_loadLayer( lua_State *L ){
@@ -202,8 +202,8 @@ namespace Data {
         data.setLayerUpdate( "area", "areascript" );
         @endcode
 
+        @ingroup Data
         @param L lua_State.
-        @ingroup Config
         @retval 0 No return values to Lua.
      */
     int data_setLayerUpdate( lua_State *L ){
@@ -218,7 +218,8 @@ namespace Data {
 
     //--------------------------------------------------------------------------
     /** List of functions of data lua library for Agent Config file.
-        @ingroup Config
+
+        @ingroup Data
      */
     const luaL_Reg datalib[] = {
         {"createLayer",   data_createLayer},

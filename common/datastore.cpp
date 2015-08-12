@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 /** @file datastore.cpp
-    @brief IO::DataStore Definition.
+    @brief Data::DataStore Definition.
     @author Luis Cabellos
 */
 //------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "log.hpp"
 
 //------------------------------------------------------------------------------
-namespace IO {
+namespace Data {
     using namespace std;
     using namespace Agent;
     using namespace Util;
@@ -39,7 +39,7 @@ namespace IO {
 
     //--------------------------------------------------------------------------
     /** private prefix of agent collections in mongo.
-        @ingroup IO
+        @ingroup Data
      */
     constexpr const char * AGENT_COLL_PREFIX = ".ins.";
 
@@ -167,6 +167,6 @@ namespace IO {
         bson_destroy( &b );
     }
 
-}//namespace IO
+}//namespace Data
 
 //------------------------------------------------------------------------------

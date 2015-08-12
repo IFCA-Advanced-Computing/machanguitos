@@ -146,9 +146,9 @@ namespace Engine{
         initializeScript();
         createClients();
 
-        auto db = IO::DataStore::instance();
-        auto host = getConfigString( "dbhost", IO::DataStore::DEFAULT_HOSTNAME );
-        auto port = getConfigInt( "dbport", IO::DataStore::DEFAULT_PORT );
+        auto db = Data::DataStore::instance();
+        auto host = getConfigString( "dbhost", Data::DataStore::DEFAULT_HOSTNAME );
+        auto port = getConfigInt( "dbport", Data::DataStore::DEFAULT_PORT );
         db->setDataStoreHost( host );
         db->setDataStorePort( port );
 

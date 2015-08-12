@@ -101,7 +101,7 @@ namespace Engine{
 
         m_totalTime += delta;
 
-        auto db = IO::DataStore::instance();
+        auto db = Data::DataStore::instance();
 
         if( db->connect() ){
             for( auto & obj: m_objects ){
