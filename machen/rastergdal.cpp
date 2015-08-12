@@ -38,6 +38,11 @@ namespace Data {
     using namespace Util;
 
     //--------------------------------------------------------------------------
+    /** Define the pixel getter of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int rastergdal_getpixel( lua_State *L ){
         auto l = luaL_checknumber( L, -3 );
         auto x = luaL_checknumber( L, -2 );
@@ -59,6 +64,11 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    /** Define the pixel setter of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int rastergdal_setpixel( lua_State *L ){
         auto l = luaL_checknumber( L, -4 );
         auto x = luaL_checknumber( L, -3 );
@@ -79,6 +89,11 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
+    /** Define the load of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int rastergdal_load( lua_State *L ){
         auto filename = luaL_checkstring( L, -1 );
 

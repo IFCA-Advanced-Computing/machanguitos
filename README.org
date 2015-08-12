@@ -1,0 +1,5 @@
+The Easiest <b>Multi-Agent System</b> in the world.
+
+Work done at The Institute of Physics of Cantabria ([[http://www.ifca.es][IFCA web]])
+
+[[https://ifca.github.io/machanguitos/][Documentation]]

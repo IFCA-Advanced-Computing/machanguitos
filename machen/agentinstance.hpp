@@ -55,6 +55,10 @@ namespace Agent{
         /// initialize the Agent calling its 'init' function on Lua.
         void init();
         /** Update the Agent calling its 'update' fuction on Lua.
+
+            An example of 'update' usage in a Agent definition is:
+            @include cat.lua
+
             @param delta time increment in seconds between updates.
          */
         void update( const double delta );

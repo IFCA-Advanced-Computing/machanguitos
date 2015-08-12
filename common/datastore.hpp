@@ -36,10 +36,10 @@ namespace Util {
 }
 
 //------------------------------------------------------------------------------
-namespace IO {
+namespace Data {
     //--------------------------------------------------------------------------
     /** Singleton Class that servers as proxy of Data Store.
-        @ingroup IO
+        @ingroup Data
      */
     class DataStore final : public Singleton<DataStore> {
     public:
@@ -112,7 +112,7 @@ namespace IO {
         m_dbport = port;
     }
 
-}//namespace IO
+}//namespace Data
 
 //------------------------------------------------------------------------------
 #endif//DATASTORE_HPP

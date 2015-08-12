@@ -133,7 +133,7 @@ namespace Engine {
         MPI_Get_count( &status, MPI_CHAR, &count );
         chost[count] = 0;
 
-        auto db = IO::DataStore::instance();
+        auto db = Data::DataStore::instance();
 
         db->setDataStoreName( cname );
         db->setDataStoreHost( chost );

@@ -27,10 +27,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 struct lua_State;
 
 //------------------------------------------------------------------------------
+/** @ingroup Data
+*/
 namespace Data {
     /** Load data lib in Lua State
         @param L lua_State.
-        @ingroup Config
+        @ingroup Data
         @retval 0 No return values to Lua.
      */
     int openlib( lua_State * L );
