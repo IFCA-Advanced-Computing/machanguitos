@@ -50,8 +50,28 @@ namespace Data {
      */
     class RasterGDAL final : public Raster {
     public:
+        /** RasterGDAL constructor for memory Raster.
+            @param key name of the Raster object.
+            @param l number of layers.
+            @param w width in pixels.
+            @param h height in pixels.
+            @param x0 left value of the Raster area.
+            @param x1 rigth value of the Raster area.
+            @param y0 top value of the Raster area.
+            @param y1 bottom value of the Raster area.
+            @param d default value of layer.
+            @param isFloat true if layer values are Float32, else they will be Bytes.
+         */
         RasterGDAL( const std::string & key, int l, int w, int h,
                     double x0, double x1, double y0, double y1, double d, bool isFloat );
+        /** RasterGDAL constructor for file Raster.
+            @param key name of the Raster object.
+            @param filename filename.
+            @param x0 left value of the Raster area.
+            @param x1 rigth value of the Raster area.
+            @param y0 top value of the Raster area.
+            @param y1 bottom value of the Raster area.
+         */
         RasterGDAL( const std::string & key, const std::string & filename,
                     double x0, double x1, double y0, double y1 );
         ~RasterGDAL();
@@ -69,9 +89,10 @@ namespace Data {
         void loadImage( const std::string & filename ) override;
 
     private:
+        /// GDAL raster data handler.
         GDALDataset * m_data;
 
-        /// Lua State
+        /// Lua State.
         lua_State * m_L = nullptr;
     };
 

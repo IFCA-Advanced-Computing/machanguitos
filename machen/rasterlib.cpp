@@ -31,9 +31,17 @@ namespace Raster {
     using namespace std;
     using namespace Util;
 
+    /** private name of RasterGDAL objects in Lua tables.
+        @ingroup Data
+     */
     constexpr const char * RASTER_OBJ = "__rt";
 
     //--------------------------------------------------------------------------
+    /** Define the save of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int raster_save( lua_State *L ){
         string name = luaL_checkstring( L, -1 );
         LOGI( "saving raster into '", name, "'" );
