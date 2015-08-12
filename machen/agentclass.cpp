@@ -31,6 +31,10 @@ namespace Agent{
     using namespace std;
     using namespace Util;
 
+    //--------------------------------------------------------------------------
+    /** private name of RasterGDAL objects in Lua tables.
+        @ingroup Data
+     */
     constexpr const char * RASTER_OBJ = "__rt";
 
     //--------------------------------------------------------------------------
@@ -58,6 +62,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define the getter of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int raster_get( lua_State *L ){
         auto l = luaL_checknumber( L, -3 );
         auto x = luaL_checknumber( L, -2 );
@@ -79,6 +88,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define the setter of Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int raster_set( lua_State *L ){
         auto l = luaL_checknumber( L, -4 );
         auto x = luaL_checknumber( L, -3 );
@@ -103,6 +117,11 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
+    /** Define a increment function for Raster data.
+        @param L lua_State.
+        @ingroup Data
+        @retval 0 No return values to Lua.
+     */
     int raster_inc( lua_State *L ){
         auto l = luaL_checknumber( L, -4 );
         auto x = luaL_checknumber( L, -3 );
