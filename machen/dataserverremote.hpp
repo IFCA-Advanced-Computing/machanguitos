@@ -30,6 +30,12 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //------------------------------------------------------------------------------
 namespace Engine {
+
+    //--------------------------------------------------------------------------
+    /** Class for a DataServer proxy.
+
+       @ingroup Data
+     */
     class DataServerRemote final : public DataServer{
     public:
         void createRaster( const std::string & key, int l, int w, int h,
