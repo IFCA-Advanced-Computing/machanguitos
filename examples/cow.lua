@@ -33,7 +33,7 @@ function Agent:update( delta )
    -- local grass = rst:get( 0, self.x, self.y );
    -- rst:set( 0, self.x, self.y, grass - 10 );
    rst:increment( 0, self.x, self.y, -10 );
-   io.write( " cow state = (" .. self.x .. "," .. self.y .. ") " .. grass .. "\n" );
+   io.write( " cow state = (" .. self.x .. "," .. self.y .. ")\n" );
 end
 
 function Agent:test()
