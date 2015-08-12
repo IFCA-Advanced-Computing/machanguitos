@@ -16,6 +16,7 @@ cp -r $SOURCEDIR/search dev/
 cp $SOURCEDIR/*.html dev/
 cp $SOURCEDIR/*.png dev/
 cp $SOURCEDIR/*.svg dev/
+cp $SOURCEDIR/*.gif dev/
 cp $SOURCEDIR/*.css dev/
 cp $SOURCEDIR/*.js dev/
 
