@@ -71,6 +71,7 @@ namespace Util{
     //--------------------------------------------------------------------------
     /** Print a type in the log.
         @param buf stream where the log is writed.
+        @param x data to print.
         @ingroup Util
      */
     template<class S, typename X> void printLog( S & buf, const X & x ){
@@ -80,6 +81,8 @@ namespace Util{
     //--------------------------------------------------------------------------
     /** print a type list in the log.
         @param buf stream where the log is writed.
+        @param x data to print.
+        @param xs list of more data to print.
         @ingroup Util
      */
     template<class S, typename X, typename... XS>
