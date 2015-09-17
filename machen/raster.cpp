@@ -40,11 +40,6 @@ namespace Data {
         }
         m_hx = (m_x1 - m_x0) / m_w;
         m_hy = (m_y1 - m_y0) / m_h;
-
-        if( m_hx == 0 or m_hy == 0 ){
-            Util::LOGW( "Invalid Raster dimensions ", w, ", ", h );
-            std::terminate();
-        }
     }
 
     //--------------------------------------------------------------------------
