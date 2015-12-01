@@ -155,6 +155,8 @@ namespace Data {
 
         m_w = m_data->GetRasterXSize();
         m_h = m_data->GetRasterYSize();
+        m_hx = (m_x1 - m_x0) / m_w;
+        m_hy = (m_y1 - m_y0) / m_h;
 
         m_layers = m_data->GetRasterCount();
     }
@@ -552,6 +554,8 @@ namespace Data {
 
         m_w = m_data->GetRasterXSize();
         m_h = m_data->GetRasterYSize();
+        m_hx = (m_x1 - m_x0) / m_w;
+        m_hy = (m_y1 - m_y0) / m_h;
 
         m_layers = m_data->GetRasterCount();
 
