@@ -76,7 +76,7 @@ add_subdirectory(outcsv)
 add_subdirectory(test)
 
 #data files
-install(DIRECTORY "example" DESTINATION ${DATADIR})
+install(DIRECTORY "examples" DESTINATION ${DATADIR})
 install(DIRECTORY "data" DESTINATION ${DATADIR})
 
 # documentation
