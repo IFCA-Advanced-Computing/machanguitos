@@ -25,6 +25,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <map>
 #include <algorithm>
 #include <cctype>
+#include <iomanip>
 
 //------------------------------------------------------------------------------
 namespace Util{
@@ -55,9 +56,10 @@ namespace Util{
         timeinfo = localtime( &rawtime );
 
         buf << s_tags[static_cast<unsigned char>(ll)];
-        buf << to_string(timeinfo->tm_mday);
-        buf << " " << to_string(timeinfo->tm_hour) << ":"
-            << to_string(timeinfo->tm_min) << ":" << to_string(timeinfo->tm_sec)
+        buf << setfill(' ') << setw(2) << timeinfo->tm_mday;
+        buf << " " << setfill('0') << setw(2) << timeinfo->tm_hour
+            << ":" << setfill('0') << setw(2) << timeinfo->tm_min
+            << ":" << setfill('0') << setw(2) << timeinfo->tm_sec
             << " - ";
     }
 
