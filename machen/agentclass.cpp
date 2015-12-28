@@ -107,7 +107,7 @@ namespace Agent{
                 if( raster->validPosition( x, y ) ){
                     raster->setValue( l, x, y, v );
                 }else{
-                    luaL_error( L, "Can't SET Raster value" );
+                    luaL_debug( L, "Can't SET Raster value" );
                 }
             }else{
                 luaL_error( L, "Invalid raster object" );
@@ -136,7 +136,7 @@ namespace Agent{
                 if( raster->validPosition( x, y ) ){
                     raster->incrementValue( l, x, y, v );
                 }else{
-                    luaL_error( L, "Can't SET Raster value" );
+                    luaL_debug( L, "Can't SET Raster value" );
                 }
             }else{
                 luaL_error( L, "Invalid raster object" );
