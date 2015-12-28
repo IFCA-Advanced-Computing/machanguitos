@@ -2,7 +2,7 @@ project(MACHANGUITOS)
 cmake_minimum_required(VERSION 2.6)
 set(MACHANGUITOS_VERSION_MAJOR 0)
 set(MACHANGUITOS_VERSION_MINOR 7)
-set(MACHANGUITOS_VERSION_RELEASE 1)
+set(MACHANGUITOS_VERSION_RELEASE 2)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules" )
 
@@ -76,7 +76,7 @@ add_subdirectory(outcsv)
 add_subdirectory(test)
 
 #data files
-install(DIRECTORY "example" DESTINATION ${DATADIR})
+install(DIRECTORY "examples" DESTINATION ${DATADIR})
 install(DIRECTORY "data" DESTINATION ${DATADIR})
 
 # documentation
