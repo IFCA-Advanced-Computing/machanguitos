@@ -65,6 +65,8 @@ namespace Engine{
         int m_ID;
         /// next minor id to use in object creation.
         int m_nextID;
+        /// flag to indicate if we had instances to save
+        bool m_outvars;
     };
 
     //--------------------------------------------------------------------------

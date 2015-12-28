@@ -36,7 +36,7 @@ namespace Engine{
 
     //--------------------------------------------------------------------------
     ClientLocal::ClientLocal( const int id )
-        : m_startTime{0}, m_totalTime{0}, m_ID{id}, m_nextID{0}
+        : m_startTime{0}, m_totalTime{0}, m_ID{id}, m_nextID{0}, m_outvars{false}
     {
         // empty
     }
@@ -77,6 +77,8 @@ namespace Engine{
         auto factory = Agent::AgentFactory::instance();
         auto agentClass = factory->getClass( name );
         if( agentClass ){
+            auto outKeys = agentClass->getOutVars();
+            m_outvars = m_outvars or ( outKeys.size() > 0 );
             for( int i = 0 ; i < n ; ++i ){
                 auto obj = factory->createInstance( agentClass, Agent::AgentId{m_ID, m_nextID} );
                 if( obj ){
@@ -101,15 +103,16 @@ namespace Engine{
 
         m_totalTime += delta;
 
-        auto db = Data::DataStore::instance();
-
-        if( db->connect() ){
-            for( auto & obj: m_objects ){
-                obj->outVars( m_startTime + m_totalTime );
+        if( m_outvars ){
+            auto db = Data::DataStore::instance();
+            if( db->connect() ){
+                for( auto & obj: m_objects ){
+                    obj->outVars( m_startTime + m_totalTime );
+                }
+                db->disconnect();
+            }else{
+                LOGE( "Can't save client agent instances" );
             }
-            db->disconnect();
-        }else{
-            LOGE( "Can't save client agent instances" );
         }
     }
 
