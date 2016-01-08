@@ -293,7 +293,7 @@ namespace Engine{
         auto endt = getConfigNumber( "endtime", 10 );
         auto ds = Engine::DataServer::instance();
 
-        double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters) : 0;
+        double delta = iters > 0 ? (endt - startt) / static_cast<double>(iters - 1) : 0;
 
         LOGI( "SERVER: Start Simulation\n" );
         for( auto i = 0 ; i < iters ; ++i ){
