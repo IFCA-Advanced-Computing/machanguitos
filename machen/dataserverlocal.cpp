@@ -100,7 +100,7 @@ namespace Engine {
     void DataServerLocal::updateLayers( const double delta ){
         Util::LOGD( "DataServerLocal::updateLayers" );
         for( auto r: m_rasters ){
-            r.second->update( delta );
+            r.second->update( delta, m_startTime + m_totalTime );
         }
 
         m_totalTime += delta;

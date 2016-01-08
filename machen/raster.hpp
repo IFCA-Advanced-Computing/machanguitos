@@ -185,8 +185,9 @@ namespace Data {
         virtual void setRasterUpdate( const std::string & filename )=0;
         /** Call update raster function for current step.
             @param delta increment of current simulation step.
+            @param current actual time of the simulation.
         */
-        virtual void update( const double delta )=0;
+        virtual void update( const double delta, const double current )=0;
         /** Raster getter from a pixel position.
             @param layer layer to use.
             @param i horizontal position.
