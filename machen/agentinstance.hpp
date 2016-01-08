@@ -60,8 +60,9 @@ namespace Agent{
             @include cat.lua
 
             @param delta time increment in seconds between updates.
+            @param current actual time of the simulation.
          */
-        void update( const double delta );
+        void update( const double delta, const double current );
         /** Output the variables.
            @param t is the simulation time.
          */

@@ -98,7 +98,7 @@ namespace Engine{
     //--------------------------------------------------------------------------
     void ClientLocal::runAgents( const double delta ){
         for( auto & obj: m_objects ){
-            obj->update( delta );
+            obj->update( delta, m_startTime + m_totalTime );
         }
 
         m_totalTime += delta;
