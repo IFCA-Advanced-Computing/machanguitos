@@ -1,5 +1,5 @@
-function Raster:update( delta )
-   io.write( "RASTER update " .. delta .. "\n" )
+function Raster:update( delta, time )
+   io.write( "RASTER update " .. delta .. " " .. time .. "\n" )
 
    for j = 0, self.height - 1 do
       for i = 0, self.width - 1 do
