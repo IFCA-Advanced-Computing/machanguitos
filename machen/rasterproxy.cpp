@@ -130,7 +130,7 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterProxy::update( const double /*delta*/ ){
+    void RasterProxy::update( const double /*delta*/, const double /*current*/ ){
         // empty
     }
 

@@ -64,7 +64,7 @@ namespace Agent{
     }
 
     //--------------------------------------------------------------------------
-    void AgentInstance::update( const double delta ){
+    void AgentInstance::update( const double delta, const double current ){
         m_state = AgentState::AS_UPDATE;
         auto L = m_class->getLua();
         if( L ){
@@ -75,7 +75,8 @@ namespace Agent{
                 lua_pushlightuserdata( L, (void*)this );                // 4
                 lua_setglobal( L, SCRIPT_GLOBAL_AGENT_OBJ );            // 3
                 lua_pushnumber( L, delta );                             // 4
-                auto ret = lua_pcall( L, 2, 0, 0 );                     // 1
+                lua_pushnumber( L, current );                           // 5
+                auto ret = lua_pcall( L, 3, 0, 0 );                     // 1
                 checkLuaReturn( L, ret );
                 lua_pop( L, 1 );                                        // 0
             }else{

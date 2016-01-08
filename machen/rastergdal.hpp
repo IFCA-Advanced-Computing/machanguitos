@@ -81,7 +81,7 @@ namespace Data {
         void incrementValue( int layer, double x, double y, double val ) override;
         void save( const std::string & filename ) override;
         void setRasterUpdate( const std::string & filename ) override;
-        void update( const double delta ) override;
+        void update( const double delta, const double current ) override;
 
         double getPixelValue( int layer, int i, int j ) override;
         void setPixelValue( int layer, int i, int j, double val ) override;

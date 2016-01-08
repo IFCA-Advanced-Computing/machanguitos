@@ -31,7 +31,7 @@ namespace Engine {
     using namespace std;
 
     //--------------------------------------------------------------------------
-    DataServerLocal::DataServerLocal(){
+    DataServerLocal::DataServerLocal() : m_startTime{0}, m_totalTime{0} {
         GDALAllRegister();
         auto driver = GetGDALDriverManager()->GetDriverByName( "MEM" );
         if( ! driver ){
@@ -100,8 +100,10 @@ namespace Engine {
     void DataServerLocal::updateLayers( const double delta ){
         Util::LOGD( "DataServerLocal::updateLayers" );
         for( auto r: m_rasters ){
-            r.second->update( delta );
+            r.second->update( delta, m_startTime + m_totalTime );
         }
+
+        m_totalTime += delta;
     }
 
 }//namespace Engine

@@ -9,7 +9,7 @@ function Agent:init()
    self:test()
 end
 
-function Agent:update( delta )
+function Agent:update( delta, time )
    self.x = self.x + self.dx*delta;
    self.y = self.y + self.dy*delta;
    if self.x > 19.5 then
@@ -33,7 +33,7 @@ function Agent:update( delta )
    -- local grass = rst:get( 0, self.x, self.y );
    -- rst:set( 0, self.x, self.y, grass - 10 );
    rst:increment( 0, self.x, self.y, -10 );
-   io.write( " cow state = (" .. self.x .. "," .. self.y .. ")\n" );
+   io.write( " cow state = (" .. self.x .. "," .. self.y .. ") at " .. time .. "\n" );
 end
 
 function Agent:test()

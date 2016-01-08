@@ -111,6 +111,10 @@ namespace Engine {
          */
         virtual void setRasterUpdate( const std::string & key,
                                       const std::string & filename )=0;
+        /** Set the simulation start time.
+            @param time start time in seconds.
+         */
+        virtual void setStartTime( const double time ) = 0;
         /** Call update layers functions for current step.
             @param delta increment of current simulation step.
         */

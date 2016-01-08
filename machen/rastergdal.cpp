@@ -652,7 +652,7 @@ namespace Data {
     }
 
     //--------------------------------------------------------------------------
-    void RasterGDAL::update( const double delta ){
+    void RasterGDAL::update( const double delta, const double current ){
         LOGD( "RasterGDAL::update(", delta, ")" );
         if( m_L ){
             lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );    // 1
@@ -660,7 +660,8 @@ namespace Data {
             if( lua_isfunction( m_L, -1 ) ){
                 lua_getfield( m_L, LUA_GLOBALSINDEX, SCRIPT_RASTER_NAME );// 3
                 lua_pushnumber( m_L, delta );                             // 4
-                auto ret = lua_pcall( m_L, 2, 0, 0 );                     // 1
+                lua_pushnumber( m_L, current );                           // 5
+                auto ret = lua_pcall( m_L, 3, 0, 0 );                     // 1
                 checkLuaReturn( m_L, ret );
                 lua_pop( m_L, 1 );                                        // 0
             }else{

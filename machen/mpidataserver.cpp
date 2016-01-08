@@ -315,6 +315,24 @@ namespace Engine {
     }
 
     //--------------------------------------------------------------------------
+    /** Execute a Set Start Time command.
+        @param src caller id.
+    */
+    void runSetStartTime( int src ){
+        double val;
+        MPI_Status status;
+        MPI_Recv( &val, 1, MPI_DOUBLE, src,
+                  MpiTagDS::SETSTARTTIMEDATASERVER, MPI_COMM_WORLD, &status );
+        if( status.MPI_ERROR != MPI_SUCCESS ){
+            LOGE( "Received on data server" );
+            Engine::abort();
+        }
+
+        auto ds = Engine::DataServer::instance();
+        ds->setStartTime( val );
+    }
+
+    //--------------------------------------------------------------------------
     MPIDataServer::MPIDataServer() {
         LOGV( "Creating Data Server ", m_rank );
     }
@@ -352,6 +370,10 @@ namespace Engine {
 
         case MpiTagDS::UPDATELAYERS:
             runUpdateLayers( src );
+            break;
+
+        case MpiTagDS::SETSTARTTIMEDATASERVER:
+            runSetStartTime( src );
             break;
 
         default:

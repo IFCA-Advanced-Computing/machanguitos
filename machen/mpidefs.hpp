@@ -82,6 +82,8 @@ namespace Engine{
         SETRASTERUPDATE = 47,
         /// update layers Message Tag.
         UPDATELAYERS = 48,
+        /// Set Start Time Message Tag.
+        SETSTARTTIMEDATASERVER = 49,
     };
 
     /// MPI Rank identifier of server.
