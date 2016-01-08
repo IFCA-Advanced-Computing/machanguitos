@@ -182,6 +182,7 @@ namespace Engine{
         }
 
         auto ds = Engine::DataServer::instance();
+        ds->setStartTime( startt );
         for( const auto nr: m_newRaster ){
             switch( nr.rasterType ){
             case Data::RasterNewType::RNT_EMPTY:

@@ -50,9 +50,20 @@ namespace Engine {
                                 double y0, double y1 ) override;
         void setRasterUpdate( const std::string & key,
                               const std::string & filename ) override;
+        void setStartTime( const double time ) override;
         void updateLayers( const double delta ) override;
 
+    private:
+        /// simulation start time
+        double m_startTime;
+        /// actual simulation time
+        double m_totalTime;
     };
+
+    //--------------------------------------------------------------------------
+    inline void DataServerLocal::setStartTime( const double time ){
+        m_startTime = time;
+    }
 
 }//namespace Engine
 
